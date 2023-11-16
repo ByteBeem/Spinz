@@ -56,7 +56,7 @@ function Profile() {
         alert("Token Expired Login again!");
       } else {
         setActivities(response.data);
-        // Format each date individually
+        
         const formattedDates = response.data.map((activity) => {
           const date = activity.date_time;
           const originalDate = new Date(date);
@@ -144,7 +144,7 @@ function Profile() {
               </tr>
             </thead>
             <tbody>
-              {activities.map((activity, index) => (
+            {activities.reverse().map((activity, index) => (
                 <tr key={index}>
                   <td>{activity.activity_description}</td>
                   <td>{activity.activity_details}</td>

@@ -9,6 +9,7 @@ function WordSearchScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [balance, setBalance] = useState('0.00');
   const [activities, setActivities] = useState([]); 
+  const [dates , setdates] = useState([]);
 
   const navigate = useNavigate();
 
@@ -59,7 +60,22 @@ function WordSearchScreen() {
         alert("Token Expired Login again!");
       } else {
         setActivities(response.data);
-        console.log(response.data)
+        const formattedDates = response.data.map((activity) => {
+          const date = activity.date_time;
+          const originalDate = new Date(date);
+          return originalDate.toLocaleString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            
+          });
+        });
+        setdates(formattedDates);
+      
       }
     } catch (error) {
       console.error('Error fetching balance:', error);
@@ -108,11 +124,11 @@ function WordSearchScreen() {
               </tr>
             </thead>
             <tbody>
-              {activities.map((activity, index) => (
+            {activities.reverse().map((activity, index) => (
                 <tr key={index}>
                   <td>{activity.activity_description}</td>
                   <td>{activity.activity_details}</td>
-                  <td>{ activity.date}</td>
+                  <td>{ dates[index]}</td>
                 </tr>
               ))}
             </tbody>
