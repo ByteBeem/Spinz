@@ -1,65 +1,134 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './styles/Deposit.css';
+import './styles/Withdraw.css';
+import logo from '../assets/new.png';
 
-const PAYFAST_MERCHANT_ID = '10030487';
-const PAYFAST_MERCHANT_KEY = 'fojcf3dzm5pe0';
+function Withdraw() {
+  const [amount, setAmount] = useState('');
+  const [account, setAccount] = useState('');
+  const [bank, setBank] = useState('');
+  const [balance, setBalance] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const [Currentbalance, setCurrentBalance] = useState('0.00');
 
-function DepositScreen() {
-  const [amount, setAmount] = useState(0);
-  const [paymentPageUrl, setPaymentPageUrl] = useState('');
-  const [error, setError] = useState(null);
+  const token = localStorage.getItem('token');
 
-  const initiatePayment = async () => {
+  const fetchBalance = async () => {
     try {
-     
-      const paymentData = {
-        merchant_id: PAYFAST_MERCHANT_ID,
-        merchant_key: PAYFAST_MERCHANT_KEY,
-        amount: amount,
-        
-      };
+      
 
-     
-      const response = await axios.post('/initiate-payment2', paymentData);
+      // Send the token as an Authorization header to the server
+      const response = await axios.get('https://heavenly-onyx-bun.glitch.me/getBalance2', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      if (response.data.success) {
-        
-        setPaymentPageUrl(response.data.paymentPageUrl);
+      if (response.status === 206) {
+        alert("Token Expired Login again!");
       } else {
-        setError('Payment initiation failed');
+        setCurrentBalance(response.data.balance);
       }
     } catch (error) {
-      console.error('Error initiating payment:', error);
-      setError('Error initiating payment');
+      console.error('Error fetching balance:', error);
+    } finally {
+      
     }
   };
 
+  useEffect(() => {
+    fetchBalance();
+    
+  }, [token  ]);
+
+  useEffect(() => {
+    // Fetch user's balance when the component mounts
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios.get('https://heavenly-onyx-bun.glitch.me/getBalance2', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setBalance(response.data.balance);
+        setCurrentBalance(response.data.balance);
+      })
+      .catch((error) => {
+        console.error('Error fetching balance:', error);
+      });
+    }
+  }, []);
+
+  const handleDeposit = () => {
+    setError('');
+    setMessage('');
+    setLoading(true);
+  
+   
+    const token = localStorage.getItem('token');
+  
+    
+    if (isNaN(amount) || amount <= 0) {
+      setError('Invalid amount');
+      setLoading(false);
+      return;
+    }
+  
+    
+    
+    const requestBody = {
+      amount: parseFloat(amount),
+      
+      
+    };
+  
+    axios
+      .post('https://heavenly-onyx-bun.glitch.me/withdraw', requestBody, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setMessage(`Withdrawal successful. New balance: R ${response.data.newBalance}`);
+        setAmount('');
+        setAccount('');
+        setBank('');
+      })
+      .catch((error) => {
+        setError('Withdrawal failed. ' + error.response.data.error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+  
+
   return (
-    <div>
-      <h2>Deposit Screen</h2>
-      <div>
-        <label>Amount:</label>
+    <div className="withdraw">
+        <img src={logo} className="small-logo" alt="logo" />
+      <h1>Deposit Funds</h1>
+      <div className="balance-info">
+        <p>Your current balance: R {balance}</p>
+      </div>
+      <div className="withdraw-form">
         <input
           type="number"
+          placeholder="Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
+          inputMode="numeric" 
         />
+       
+      
+        <button onClick={handleDeposit} disabled={loading}>
+          {loading ? 'Processing...' : 'Deposit'}
+        </button>
       </div>
-      <button onClick={initiatePayment}>Initiate Payment</button>
-
-      {paymentPageUrl && (
-        <div>
-          <p>Payment initiation successful. Redirect to PayFast:</p>
-          <a href={paymentPageUrl} target="_blank" rel="noopener noreferrer">
-            Pay Now
-          </a>
-        </div>
-      )}
-
-      {error && <p>{error}</p>}
+      {message && <p className="success-message">{message}</p>}
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 }
 
-export default DepositScreen;
+export default Withdraw;

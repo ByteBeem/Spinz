@@ -124,7 +124,7 @@ function WordSearchScreen() {
               </tr>
             </thead>
             <tbody>
-            {activities.reverse().map((activity, index) => (
+            {activities.reverse().map((activity, index)=> (
                 <tr key={index}>
                   <td>{activity.activity_description}</td>
                   <td>{activity.activity_details}</td>
