@@ -131,7 +131,7 @@ function Profile() {
                 <tr key={index}>
                   <td>{activity.activity_description}</td>
                   <td>{activity.activity_details}</td>
-                  <td>{ activity.date}</td>
+                  <td>{ activity.date_time}</td>
                 </tr>
               ))}
             </tbody>

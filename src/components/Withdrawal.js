@@ -77,12 +77,7 @@ function Withdraw() {
       return;
     }
   
-    if (amount < 10 || amount > 5000) {
-      setError('Minimum Amount is R50 and Max: R5000');
-      setLoading(false);
-      return;
-    }
-  
+    
     
     const requestBody = {
       amount: parseFloat(amount),
