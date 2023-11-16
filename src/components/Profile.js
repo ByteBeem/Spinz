@@ -8,6 +8,7 @@ function Profile() {
   const { setToken } = useAuth();
   const [userData, setUserData] = useState({}); 
   const [activities, setActivities] = useState([]);
+  const [Dates , setDates] = useState([]);
   
   const navigate = useNavigate();
 
@@ -55,7 +56,22 @@ function Profile() {
         alert("Token Expired Login again!");
       } else {
         setActivities(response.data);
-    
+        // Format each date individually
+        const formattedDates = response.data.map((activity) => {
+          const date = activity.date_time;
+          const originalDate = new Date(date);
+          return originalDate.toLocaleString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            
+          });
+        });
+        setDates(formattedDates);
       }
     } catch (error) {
       
@@ -78,6 +94,7 @@ function Profile() {
         
       });
   };
+
 
   
   return (
@@ -131,7 +148,7 @@ function Profile() {
                 <tr key={index}>
                   <td>{activity.activity_description}</td>
                   <td>{activity.activity_details}</td>
-                  <td>{ activity.date_time}</td>
+                  <td>{ Dates[index]}</td>
                 </tr>
               ))}
             </tbody>
