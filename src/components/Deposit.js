@@ -5,8 +5,6 @@ import logo from '../assets/new.png';
 
 function Withdraw() {
   const [amount, setAmount] = useState('');
-  const [account, setAccount] = useState('');
-  const [bank, setBank] = useState('');
   const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -81,22 +79,23 @@ function Withdraw() {
     
     const requestBody = {
       amount: parseFloat(amount),
-      
-      
     };
-  
+   
     axios
-      .post('https://heavenly-onyx-bun.glitch.me/withdraw', requestBody, {
+      .post('https://heavenly-onyx-bun.glitch.me/initiate-payment2', requestBody, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setMessage(`Withdrawal successful. New balance: R ${response.data.newBalance}`);
+        setMessage(`Desposit successful. New balance: R `);
+        
+        page= response.data.paymentPageUrl;
+        window.location.href.page;
         setAmount('');
-        setAccount('');
-        setBank('');
+        
+        
       })
       .catch((error) => {
-        setError('Withdrawal failed. ' + error.response.data.error);
+        setError('Deposit failed. ' + error.response.data.error);
       })
       .finally(() => {
         setLoading(false);
