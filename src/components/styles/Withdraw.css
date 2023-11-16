@@ -1,0 +1,93 @@
+.withdraw {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  height: 890px;
+    
+  }
+  .small-logo {
+    width: 30px;
+    height: auto;
+    position: absolute;
+    top: 10px;
+    border-radius: 30px;
+    left: 90%;
+    transform: translateX(-50%);
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin: 20px 0;
+  }
+  
+  .balance-info {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  
+  .withdraw-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .success-message {
+    margin-top: 20px;
+    color: #009944;
+    font-size: 18px;
+  }
+  
+  .error-message {
+    margin-top: 20px;
+    color: #FF0000;
+    font-size: 18px;
+  }
+  
+
+
+
+.dropdown-container {
+  margin: 20px;
+}
+
+.dropdown {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  outline: none;
+  cursor: pointer;
+}
+
+
+.dropdown option:checked {
+  background-color: #e0e0e0;
+  color: #333;
+}

@@ -1,0 +1,26 @@
+/* Logo.css */
+
+.logo-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff; /* Set the background color to match your page's background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s;
+  }
+  
+  .logo-container.hide {
+    opacity: 0;
+    pointer-events: none; /* Prevent interactions with the logo */
+  }
+  
+  .logo {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  

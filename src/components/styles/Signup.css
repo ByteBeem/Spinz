@@ -1,0 +1,80 @@
+
+
+.signup-container {
+  background-color: #c0e2f2;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  height: 890px;
+  }
+  
+  /* Style form labels */
+  .signup-container label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  /* Style form input fields */
+  .signup-container input {
+    width: 70%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 28px;
+  }
+  
+  /* Style the "Sign Up" button */
+  .signup-container button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  
+  /* Style the small logo at the top */
+  .small-logo {
+    width: 30px;
+    height: auto;
+    position: absolute;
+    top: 10px;
+    border-radius: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Center the form within the container */
+  .signup-form {
+    text-align: center;
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+ 
+.error-message {
+  color: red;
+}
+
+
+  .loading-indicator {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .loading-indicator::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 15px solid #3498db;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+  }
+  

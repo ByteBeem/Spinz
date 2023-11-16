@@ -1,0 +1,100 @@
+/* WordSearchScreen.css */
+
+.wordSearchScreen {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navbar li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.balance {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.bellIcon, .startButton {
+  cursor: pointer;
+  background-color: #0077cc;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.bellIcon:hover, .startButton:hover {
+  background-color: #005599;
+}
+
+.small-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.loadingIndicator {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.activities {
+  margin-top: 20px;
+}
+
+.activities h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.activities table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.activities th, .activities td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.activities th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.activities tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.activities tr:hover {
+  background-color: #e0e0e0;
+}
