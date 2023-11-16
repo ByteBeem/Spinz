@@ -66,56 +66,48 @@ function Withdraw() {
     setError('');
     setMessage('');
     setLoading(true);
-
-    // Fetch user's token from local storage
+  
+   
     const token = localStorage.getItem('token');
-
-    // Validate the withdrawal amount
+  
+    
     if (isNaN(amount) || amount <= 0) {
       setError('Invalid withdrawal amount');
       setLoading(false);
       return;
     }
-
-    if ( amount > Currentbalance ) {
-        setError('Insufficient Funds');
-        setLoading(false);
-        return;
-      }
-
-      if ( amount < 50 || amount > 5000  ) {
-        setError('Minimum Amount is R50 and Max: R5000');
-        setLoading(false);
-        return;
-      }
-
-    // Request body for the /withdraw endpoint
-    const requestBody = {
-      userId: localStorage.getItem('userId'),
-      amount: parseFloat(amount),
-      name: localStorage.getItem('fullName'),
-      Account: account,
-      bank: bank,
-    };
-
-    axios.post('https://heavenly-onyx-bun.glitch.me/withdraw', requestBody, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      setMessage(`Withdrawal successful. New balance: R ${response.data.newBalance}`);
-      setAmount('');
-      setAccount('');
-      setBank('');
-    })
-    .catch((error) => {
-      setError('Withdrawal failed. ' + error.response.data.error);
-    })
-    .finally(() => {
+  
+    if (amount < 10 || amount > 5000) {
+      setError('Minimum Amount is R50 and Max: R5000');
       setLoading(false);
-    });
+      return;
+    }
+  
+    
+    const requestBody = {
+      amount: parseFloat(amount),
+      Account: account, 
+      bank: bank, 
+    };
+  
+    axios
+      .post('https://heavenly-onyx-bun.glitch.me/withdraw', requestBody, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setMessage(`Withdrawal successful. New balance: R ${response.data.newBalance}`);
+        setAmount('');
+        setAccount('');
+        setBank('');
+      })
+      .catch((error) => {
+        setError('Withdrawal failed. ' + error.response.data.error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
+  
 
   return (
     <div className="withdraw">
