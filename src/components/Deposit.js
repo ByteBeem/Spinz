@@ -87,9 +87,7 @@ function Withdraw() {
       })
       .then((response) => {
         setMessage(`Desposit successful. New balance: R `);
-        
-        page= response.data.paymentPageUrl;
-        window.location.href.page;
+        window.location.href= response.data.paymentPageUrl;
         setAmount('');
         
         
