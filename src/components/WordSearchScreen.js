@@ -96,7 +96,7 @@ function WordSearchScreen() {
       <div className="navbar">
         <ul>
           <li><a href="/dashboard">Home</a></li>
-          <li><a href="#">Games</a></li>
+          <li><Link to="/games">Games</Link></li>
           <li><Link to="/profile">Profile</Link></li>
           <li><a href="#" onClick={logout}>Log Out</a></li>
         </ul>
