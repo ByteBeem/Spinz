@@ -86,7 +86,7 @@ function Withdraw() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setMessage(`Desposit successful. New balance: R `);
+        setMessage(`Redirecting ..... `);
         window.location.href= response.data.paymentPageUrl;
         setAmount('');
         

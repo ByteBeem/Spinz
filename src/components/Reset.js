@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-//import './styles/PasswordReset.css';
+import './styles/PasswordReset.css';
 
 
 function PasswordReset() {
@@ -36,7 +36,7 @@ function PasswordReset() {
   };
 
   return (
-    <div>
+    <div className='reset'>
       <h1>Password Reset</h1>
       <button onClick={handleResetPassword} disabled={isLoading}>
         {isLoading ? 'Resetting Password...' : 'Reset Password'}
