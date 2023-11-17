@@ -7,6 +7,7 @@ import Home from './components/WordSearchScreen';
 import Profile from './components/Profile'; 
 import Reset from './components/Reset'; 
 import Deposit from './components/Deposit'; 
+import Games from './components/games'; 
 import Withdraw from './components/Withdrawal'; 
 import { AuthProvider } from './components/AuthContext';
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/deposit" element={<Deposit />} />
+        <Route path="/games" element={<Games />} />
         <Route path="/withdraw" element={<Withdraw />} />
       </Routes>
     </Router>
