@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import './styles/Withdraw.css';
 
 const VideoComponent = () => {
   const [betAmount, setBetAmount] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const videoUrl = 'https://www.youtube.com/embed/r4Fqa3PdHjU';
 
   const handleInputChange = (event) => {
@@ -9,14 +13,20 @@ const VideoComponent = () => {
   };
 
   const handleStartClick = () => {
+    if (isNaN(betAmount) || betAmount <= 0) {
+      setError('Invalid bet amount');
+      setLoading(false);
+      return;
+    }
     // Add logic to handle starting the bet
     console.log('Bet started with amount:', betAmount);
   };
 
   return (
+    <div className='withdraw'>
     <div>
       <iframe
-        width="560"
+        width="360"
         height="315"
         src={videoUrl}
         title="YouTube Video"
@@ -24,16 +34,21 @@ const VideoComponent = () => {
         allowFullScreen
       ></iframe>
 
-      <div style={{ marginTop: '20px' }}>
+      
         <label htmlFor="betAmount">Enter Bet Amount:</label>
         <input
-          type="text"
+          type="number"
           id="betAmount"
           value={betAmount}
           onChange={handleInputChange}
+          inputMode="numeric" 
         />
-        <button onClick={handleStartClick}>Start</button>
+         <button onClick={handleStartClick} disabled={loading}>
+          {loading ? 'Processing...' : 'Start'}
+        </button>
       </div>
+      {message && <p className="success-message">{message}</p>}
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };

@@ -86,8 +86,9 @@ function Withdraw() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setMessage(`Redirecting ..... `);
-        window.location.href= response.data.paymentPageUrl;
+        setMessage(`Redirecting...`);
+        window.location.href = response.data.redirectUrl;
+      
         setAmount('');
         
         
