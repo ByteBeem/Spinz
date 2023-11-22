@@ -35,11 +35,13 @@ const VideoComponent = () => {
 
       if (response.ok) {
         setMessage(data.message);
+        window.location.href = data.gameLink;
+
       } else {
         setError(data.error);
       }
     } catch (error) {
-      console.error('Error starting game:', error);
+     
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);
