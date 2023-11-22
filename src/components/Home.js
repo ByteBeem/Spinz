@@ -51,7 +51,9 @@ const WordSearchScreen = ({ navigation }) => {
   }, []);
   
 
-   
+   if (balance <= 10){
+    alert("Low balance , Deposit!!")
+   }
 
 
   const onRefresh = () => {
