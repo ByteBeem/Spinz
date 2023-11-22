@@ -12,29 +12,52 @@ const VideoComponent = () => {
     setBetAmount(event.target.value);
   };
 
-  const handleStartClick = () => {
+  const handleStartClick = async () => {
+    const storedToken = localStorage.getItem('token');
     if (isNaN(betAmount) || betAmount <= 0) {
       setError('Invalid bet amount');
-      setLoading(false);
       return;
     }
-    // Add logic to handle starting the bet
-    console.log('Bet started with amount:', betAmount);
+
+    setLoading(true);
+
+    try {
+      const response = await fetch('https://heavenly-onyx-bun.glitch.me/startGame', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${storedToken}`,
+        },
+        body: JSON.stringify({ betAmount: parseFloat(betAmount) }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.message);
+      } else {
+        setError(data.error);
+      }
+    } catch (error) {
+      console.error('Error starting game:', error);
+      setError('An unexpected error occurred');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className='withdraw'>
-    <div>
-      <iframe
-        width="360"
-        height="315"
-        src={videoUrl}
-        title="YouTube Video"
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
+      <div>
+        <iframe
+          width="360"
+          height="315"
+          src={videoUrl}
+          title="YouTube Video"
+          frameBorder="0"
+          allowFullScreen
+        ></iframe>
 
-      
         <label htmlFor="betAmount">Enter Bet Amount:</label>
         <input
           type="number"
@@ -43,7 +66,7 @@ const VideoComponent = () => {
           onChange={handleInputChange}
           inputMode="numeric" 
         />
-         <button onClick={handleStartClick} disabled={loading}>
+        <button onClick={handleStartClick} disabled={loading}>
           {loading ? 'Processing...' : 'Start'}
         </button>
       </div>
