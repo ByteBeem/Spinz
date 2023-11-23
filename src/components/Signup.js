@@ -137,6 +137,9 @@ function Signup() {
         } else if (response.status === 201) { 
           setErrors((prevErrors) => ({ ...prevErrors, cellphone: 'Cellphone Already registered!' }));
         }
+        else if (response.status === 208) { 
+          setErrors((prevErrors) => ({ ...prevErrors, ID: 'ID number Already registered!' }));
+        }
       } catch (error) {
         setIsLoading(false);
         console.error('Registration error:', error);
