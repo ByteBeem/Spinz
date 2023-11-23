@@ -40,6 +40,12 @@ function Signup() {
     return phoneRegex.test(cellphone);
   };
 
+  const validateID= (ID) => {
+  
+    const phoneRegex = /^[0-9]{13}$/;
+    return phoneRegex.test(ID);
+  };
+
   const validatePassword = (password, confirmPassword) => {
     if (password !== confirmPassword) {
       return 'Passwords do not match';
@@ -70,6 +76,12 @@ function Signup() {
     // Validate the cellphone number
     if (!validateCellphone(formData.cellphone)) {
       setErrors((prevErrors) => ({ ...prevErrors, cellphone: 'Invalid cellphone number' }));
+      setIsLoading(false);
+      return;
+    }
+
+    if (!validateID(formData.ID)) {
+      setErrors((prevErrors) => ({ ...prevErrors, ID: 'Invalid ID number' }));
       setIsLoading(false);
       return;
     }
@@ -197,6 +209,7 @@ function Signup() {
             required
             inputMode="numeric"
           />
+          {errors.ID && <p className="error-message">{errors.ID}</p>}
         </div>
         <div className="input-group">
           <label htmlFor="password">Password</label>
