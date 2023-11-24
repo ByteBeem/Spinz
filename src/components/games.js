@@ -7,7 +7,7 @@ const VideoComponent = () => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const videoUrl = 'https://husky-shimmer-shame.glitch.me';
+  const videoUrl = 'https://youtu.be/r4Fqa3PdHjU';
 
   const startGame = async () => {
     try {
@@ -45,7 +45,7 @@ const VideoComponent = () => {
       <div>
         <iframe
           width="330"
-          height="415"
+          height="215"
           src={videoUrl}
           title="YouTube Video"
           frameBorder="0"
