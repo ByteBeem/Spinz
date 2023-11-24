@@ -46,8 +46,8 @@ const VideoComponent = () => {
     <div className='withdraw'>
       <div>
         <iframe
-          width="360"
-          height="615"
+          width="430"
+          height="715"
           src={videoUrl}
           title="YouTube Video"
           frameBorder="0"
