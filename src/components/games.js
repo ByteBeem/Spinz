@@ -32,7 +32,7 @@ const VideoComponent = () => {
       window.location.href = response.data.gameLink;
     } catch (err) {
       
-      setMessage(response.data.message);
+      setMessage('something went wrong try again later.');
       
     } finally {
       setLoading(false);
