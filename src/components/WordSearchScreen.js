@@ -28,6 +28,10 @@ function WordSearchScreen() {
     navigate('/games');
   };
 
+  const storeTokenInLocalStorage = (token) => {
+    localStorage.setItem('token', token);
+  };
+
   
   const fetchBalance = async () => {
     try {
@@ -44,6 +48,7 @@ function WordSearchScreen() {
         alert("Token Expired Login again!");
       } else {
         setBalance(response.data.balance);
+        storeTokenInLocalStorage(token);
       }
     } catch (error) {
       console.error('Error fetching balance:', error);
