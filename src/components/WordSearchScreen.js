@@ -21,6 +21,13 @@ function WordSearchScreen() {
     navigate('/login');
   };
 
+  const games = () => {
+    
+    localStorage.clear();
+
+    navigate('/games');
+  };
+
   
   const fetchBalance = async () => {
     try {
@@ -104,7 +111,7 @@ function WordSearchScreen() {
       <div className="container">
         <p className="balance">{'R ' + balance}</p>
 
-        <div className="startButton">
+        <div className="startButton" onClick={games}>
           {isLoading ? (
             <div className="loadingIndicator">Loading...</div>
           ) : (

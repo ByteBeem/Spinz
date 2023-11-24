@@ -8,41 +8,35 @@ const VideoComponent = () => {
   const [error, setError] = useState('');
   const videoUrl = 'https://www.youtube.com/embed/r4Fqa3PdHjU';
 
-  const handleInputChange = (event) => {
-    setBetAmount(event.target.value);
-  };
-
   const handleStartClick = async () => {
-    const storedToken = localStorage.getItem('token');
-    if (isNaN(betAmount) || betAmount <= 0) {
-      setError('Invalid bet amount');
-      return;
-    }
-
-    setLoading(true);
-
     try {
-      const response = await fetch('https://heavenly-onyx-bun.glitch.me/startGame', {
+      setLoading(true);
+
+      // Your API endpoint
+      const apiUrl = 'https://husky-shimmer-shame.glitch.me/startGame';
+
+      // Token logic goes here, replace with your actual token logic
+      const token = localStorage.getItem('token');
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${storedToken}`,
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ betAmount: parseFloat(betAmount) }),
+        
       });
 
       const data = await response.json();
 
       if (response.ok) {
         setMessage(data.message);
-        window.location.href = data.gameLink;
-
       } else {
-        setError(data.error);
+        setError(data.error || 'Something went wrong');
       }
-    } catch (error) {
-     
-      setError('An unexpected error occurred');
+    } catch (err) {
+      console.error('Error:', err);
+      setError('An error occurred while processing your request');
     } finally {
       setLoading(false);
     }
@@ -60,14 +54,6 @@ const VideoComponent = () => {
           allowFullScreen
         ></iframe>
 
-        <label htmlFor="betAmount">Enter Bet Amount:</label>
-        <input
-          type="number"
-          id="betAmount"
-          value={betAmount}
-          onChange={handleInputChange}
-          inputMode="numeric" 
-        />
         <button onClick={handleStartClick} disabled={loading}>
           {loading ? 'Processing...' : 'Start'}
         </button>
