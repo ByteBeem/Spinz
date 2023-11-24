@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './styles/Withdraw.css';
 
 const VideoComponent = () => {
-  const [betAmount, setBetAmount] = useState('');
+  const [cellphoneNumber, setCellphoneNumber] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const videoUrl = 'https://www.youtube.com/embed/r4Fqa3PdHjU';
+  const videoUrl = 'https://husky-shimmer-shame.glitch.me';
 
   const handleStartClick = async () => {
     try {
@@ -15,22 +15,22 @@ const VideoComponent = () => {
       // Your API endpoint
       const apiUrl = 'https://husky-shimmer-shame.glitch.me/startGame';
 
-      // Token logic goes here, replace with your actual token logic
-      const token = localStorage.getItem('token');
+      
 
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+         
         },
-        
+        body: JSON.stringify({ cellphoneNumber }), // Send cellphoneNumber in the request body
       });
 
       const data = await response.json();
 
       if (response.ok) {
         setMessage(data.message);
+        window.location.href = data.gameLink;
       } else {
         setError(data.error || 'Something went wrong');
       }
@@ -47,16 +47,14 @@ const VideoComponent = () => {
       <div>
         <iframe
           width="360"
-          height="315"
+          height="615"
           src={videoUrl}
           title="YouTube Video"
           frameBorder="0"
           allowFullScreen
         ></iframe>
 
-        <button onClick={handleStartClick} disabled={loading}>
-          {loading ? 'Processing...' : 'Start'}
-        </button>
+        
       </div>
       {message && <p className="success-message">{message}</p>}
       {error && <p className="error-message">{error}</p>}
