@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './styles/Withdraw.css';
 
 const VideoComponent = () => {
@@ -8,39 +9,25 @@ const VideoComponent = () => {
   const [error, setError] = useState('');
   const videoUrl = 'https://husky-shimmer-shame.glitch.me';
 
-  const handleStartClick = async () => {
+  const startGame = async () => {
     try {
       setLoading(true);
-
-      // Your API endpoint
-      const apiUrl = 'https://husky-shimmer-shame.glitch.me/startGame';
-
-      
-
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-         
-        },
-        body: JSON.stringify({ cellphoneNumber }), // Send cellphoneNumber in the request body
+  
+      // Send a request to the /startGame endpoint with the cellphoneNumber
+      const response = await axios.post('https://husky-shimmer-shame.glitch.me/startGame', {
+        cellphoneNumber: cellphoneNumber,
+       
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage(data.message);
-        window.location.href = data.gameLink;
-      } else {
-        setError(data.error || 'Something went wrong');
-      }
+  
+      setMessage(response.data.message);
+      window.location.href = response.data.gameLink;
+      setLoading(false);
     } catch (err) {
-      console.error('Error:', err);
-      setError('An error occurred while processing your request');
-    } finally {
+      setError('Error starting the game',err);
       setLoading(false);
     }
   };
+  
 
   return (
     <div className='withdraw'>
@@ -53,9 +40,24 @@ const VideoComponent = () => {
           frameBorder="0"
           allowFullScreen
         ></iframe>
-
-        
       </div>
+
+      <div>
+        <label htmlFor="cellphoneNumber">Cellphone Number:</label>
+        <input
+          type="text"
+          id="cellphoneNumber"
+          value={cellphoneNumber}
+          onChange={(e) => setCellphoneNumber(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <button onClick={startGame} disabled={loading}>
+          {loading ? 'Loading...' : 'Start Game'}
+        </button>
+      </div>
+
       {message && <p className="success-message">{message}</p>}
       {error && <p className="error-message">{error}</p>}
     </div>
