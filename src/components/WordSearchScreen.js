@@ -120,7 +120,7 @@ function WordSearchScreen() {
           {isLoading ? (
             <div className="loadingIndicator">Loading...</div>
           ) : (
-            <p className="startButtonText">Start Game</p>
+            <p className="startButtonText">Welcome to Spinz</p>
           )}
         </div>
       </div>
