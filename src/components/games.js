@@ -7,7 +7,7 @@ const VideoComponent = () => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const videoUrl = 'https://youtu.be/r4Fqa3PdHjU';
+  const videoUrl = 'https://www.youtube.com/watch?v=r4Fqa3PdHjU&feature=youtu.be';
 
   const startGame = async () => {
     try {
