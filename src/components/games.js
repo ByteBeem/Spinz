@@ -14,7 +14,7 @@ const VideoComponent = () => {
       setLoading(true);
       const betAmount = parseFloat(cellphoneNumber);
       const storedToken = localStorage.getItem('token');
-      alert(storedToken);
+      
       // Send a request to the /startGame endpoint with the cellphoneNumber
       const response = await axios.post(
         'https://heavenly-onyx-bun.glitch.me/startGame',

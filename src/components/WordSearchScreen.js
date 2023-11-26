@@ -23,7 +23,7 @@ function WordSearchScreen() {
 
   const games = () => {
     
-    localStorage.clear();
+    
 
     navigate('/games');
   };
