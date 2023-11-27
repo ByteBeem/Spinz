@@ -1,80 +1,143 @@
-
-
-.signup-container {
-  background-color: #c0e2f2;
-  font-family: Arial, sans-serif;
+.login-background {
+  background-image: url('/src/assets/bckj.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Arial', sans-serif;
   text-align: center;
   padding: 20px;
-  height: 890px;
-  }
-  
-  /* Style form labels */
-  .signup-container label {
-    display: block;
-    font-weight: bold;
-  }
-  
-  /* Style form input fields */
-  .signup-container input {
-    width: 70%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 28px;
-  }
-  
-  /* Style the "Sign Up" button */
-  .signup-container button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-  }
-  
-  /* Style the small logo at the top */
-  .small-logo {
-    width: 30px;
-    height: auto;
-    position: absolute;
-    top: 10px;
-    border-radius: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  /* Center the form within the container */
-  .signup-form {
-    text-align: center;
-  }
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
- 
-.error-message {
-  color: red;
+  height: 95vh; /* Use viewport height for full-screen appearance */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+.signup-container {
+  background-color: #5a5959;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 20px;
+  height: 50vh; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+}
 
-  .loading-indicator {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .loading-indicator::after {
-    content: '';
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 15px solid #3498db;
-    border-top: 2px solid transparent;
-    border-radius: 50%;
-    animation: spin 2s linear infinite;
-  }
-  
+.signup-container2 {
+  background-color: #5a5959;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 20px;
+  height: 70vh; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+}
+/* Style form labels */
+.signup-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #fff; /* Text color for labels */
+}
+
+/* Style form input fields */
+.signup-container input {
+  width: 70%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #fff; /* White border */
+  border-radius: 28px;
+  transition: border-color 0.3s ease-in-out;
+  color: #333; /* Text color for input */
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+}
+
+.signup-container2 input {
+  width: 70%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #fff; /* White border */
+  border-radius: 28px;
+  transition: border-color 0.3s ease-in-out;
+  color: #333; /* Text color for input */
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+}
+
+.signup-container input:focus {
+  border-color: #4caf50; /* Highlight border on focus */
+}
+
+.signup-container2 input:focus {
+  border-color: #4caf50; /* Highlight border on focus */
+}
+
+/* Style the "Sign Up" button */
+.signup-container button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Style the "Sign Up" button */
+.signup-container2 button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.signup-container button:hover {
+  background-color: #45a049; /* Darken button on hover */
+}
+
+/* Style the small logo at the top */
+.small-logo {
+  width: 30px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+/* Center the form within the container */
+.signup-form {
+  text-align: center;
+  background-color: #6d6b6b; /* Grey background color for the sign-up box */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+/* Loading indicator styling */
+.loading-indicator {
+  margin-top: 20px;
+}
+
+.loading-indicator::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 15px solid #fff; /* White border for the spinner */
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}

@@ -96,51 +96,53 @@ function Login() {
       }
     }   
 
-  return (
-    <div className="signup-container">
-      <h2>Log In</h2>
-      <img src={logo} className="small-logo" alt="logo" />
-      <form onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label htmlFor="cellphone">Cellphone</label>
-          <input
-            type="text"
-            id="cellphone"
-            name="cellphone"
-            value={formData.cellphone}
-            onChange={handleChange}
-            required
-            inputMode="numeric" 
-          />
-          {errors.cellphone && <p className="error-message">{errors.cellphone}</p>}
+    return (
+      <div className="login-background">
+        {/* Adjust the background image styling in your CSS */}
+        <div className="signup-container">
+          <h2>Log In</h2>
+          <img src={logo} className="small-logo" alt="logo" />
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label htmlFor="cellphone">Cellphone</label>
+              <input
+                type="text"
+                id="cellphone"
+                name="cellphone"
+                value={formData.cellphone}
+                onChange={handleChange}
+                required
+                inputMode="numeric"
+              />
+              {errors.cellphone && <p className="error-message">{errors.cellphone}</p>}
+            </div>
+            <div className="input-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              {errors.password && <p className="error-message">{errors.password}</p>}
+            </div>
+            <button type="submit" className="button" disabled={isLoading}>
+              {isLoading ? 'Logging In...' : 'Log In'}
+            </button>
+  
+            {isLoading && <div className="loading-spinner" />}
+          </form>
+          <p>
+            Don't have an account? <Link to="/signup">Signup</Link>
+          </p>
+          <p>
+            Forgot Password? <Link to="/reset">Reset</Link>
+          </p>
         </div>
-        <div className="input-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-          {errors.password && <p className="error-message">{errors.password}</p>}
-        </div>
-        <button type="submit" className="button" disabled={isLoading}>
-          {isLoading ? 'Logging In...' : 'Log In'}
-        </button>
-
-        {isLoading && <div className="loading-spinner" />}
-
-      </form>
-      <p>
-        Don't have an account? <Link to="/signup">Signup</Link>
-      </p>
-      <p>
-       Forgot Password? <Link to="/reset">Reset</Link>
-      </p>
-    </div>
-  );
-}
-
-export default Login;
+      </div>
+    );
+  }
+  
+  export default Login;

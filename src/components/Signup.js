@@ -301,12 +301,13 @@ function Signup() {
     }      
 
   return (
-    <div className="signup-container">
+    <div className="login-background">
+    <div className="signup-container2">
       <h2>Sign Up</h2>
       <img src={logo} className="small-logo" alt="logo" />
       <form onSubmit={handleSubmit}>
         <div className="input-group">
-          <label htmlFor="full">Full Name(s)</label>
+          <label htmlFor="full">Full Name(s): </label>
           <input
             type="text"
             id="full"
@@ -318,7 +319,7 @@ function Signup() {
           {errors.full && <p className="error-message">{errors.full}</p>}
         </div>
         <div className="input-group">
-          <label htmlFor="surname">Surname</label>
+          <label htmlFor="surname">Surname: </label>
           <input
             type="text"
             id="surname"
@@ -330,7 +331,7 @@ function Signup() {
           {errors.surname && <p className="error-message">{errors.surname}</p>}
         </div>
         <div className="input-group">
-          <label htmlFor="cellphone">Cellphone</label>
+          <label htmlFor="cellphone">Cellphone: </label>
           <input
             type="text"
             id="cellphone"
@@ -343,7 +344,7 @@ function Signup() {
           {errors.cellphone && <p className="error-message">{errors.cellphone}</p>}
         </div>
         <div className="input-group">
-          <label htmlFor="ID">ID number</label>
+          <label htmlFor="ID">ID number: </label>
           <input
             type="numeric"
             id="ID"
@@ -356,7 +357,7 @@ function Signup() {
           {errors.ID && <p className="error-message">{errors.ID}</p>}
         </div>
         <div className="input-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password: </label>
           <input
             type="password"
             id="password"
@@ -368,7 +369,7 @@ function Signup() {
           {errors.password && <p className="error-message">{errors.password}</p>}
         </div>
         <div className="input-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirm Password: </label>
           <input
             type="password"
             id="confirmPassword"
@@ -384,6 +385,7 @@ function Signup() {
         {isLoading && <div className="loading-spinner" />}
       </form>
       <p>Already have an account? <Link to="/login">Log In</Link></p>
+    </div>
     </div>
   );
 }
