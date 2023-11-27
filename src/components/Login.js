@@ -126,15 +126,11 @@ function Login() {
           />
           {errors.password && <p className="error-message">{errors.password}</p>}
         </div>
-        <button type="submit" className="button">
-        Log In
+        <button type="submit" className="button" disabled={isLoading}>
+          {isLoading ? 'Logging In...' : 'Log In'}
         </button>
 
-        {isLoading && (
-          <div id="loading-indicator" className="loading-indicator">
-            
-          </div>
-        )}
+        {isLoading && <div className="loading-spinner" />}
 
       </form>
       <p>

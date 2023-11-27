@@ -7,7 +7,7 @@ import moment from 'moment';
 
 function Signup() {
   const [formData, setFormData] = useState({
-    username: '',
+   
     full: '',
     surname: '',
     cellphone: '',
@@ -18,7 +18,7 @@ function Signup() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({
-    username: '',
+    
     full: '',
     surname: '',
     cellphone: '',
@@ -247,12 +247,7 @@ function Signup() {
     }
     
 
-    // Validate the username
-    if (!validateName(formData.username)) {
-      setErrors((prevErrors) => ({ ...prevErrors, username: 'Invalid username. Use letters and spaces only' }));
-      setIsLoading(false);
-      return;
-    }
+
 
     // Validate the full name
     if (!validateName(formData.full)) {
@@ -287,9 +282,6 @@ function Signup() {
           password: password,
         });
       
-        console.log(response.status);
-        console.log(response.data.error); // Use response.data.error
-      
         setIsLoading(false);
       
         if (response.status === 200) {
@@ -303,7 +295,7 @@ function Signup() {
         }
       } catch (error) {
         setIsLoading(false);
-        console.error('Registration error:', error);
+        
         setErrors('Registration Error. Please try again later.');
       }
     }      
@@ -313,18 +305,6 @@ function Signup() {
       <h2>Sign Up</h2>
       <img src={logo} className="small-logo" alt="logo" />
       <form onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-          {errors.username && <p className="error-message">{errors.username}</p>}
-        </div>
         <div className="input-group">
           <label htmlFor="full">Full Name(s)</label>
           <input
@@ -398,10 +378,10 @@ function Signup() {
             required
           />
         </div>
-        <button type="submit" className="button">
-          Sign Up
+        <button type="submit" className="button" disabled={isLoading}>
+          {isLoading ? 'Registering...' : 'Register'}
         </button>
-        {isLoading && <div id="loading-indicator" className="loading-indicator"></div>}
+        {isLoading && <div className="loading-spinner" />}
       </form>
       <p>Already have an account? <Link to="/login">Log In</Link></p>
     </div>
