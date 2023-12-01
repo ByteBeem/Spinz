@@ -4,6 +4,16 @@ import axios from 'axios';
 import { useAuth } from './AuthContext';
 import { useNavigate  } from 'react-router-dom';
 
+const backgroundStyle = {
+  backgroundImage: 'url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4041567.jpg&f=1&nofb=1&ipt=18445b79bbb2c0f9c4b98c98dd83e88424ac79daf3b1721f6d802f092d369b4b&ipo=images")',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  minHeight: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+
 function Profile() {
   const { setToken } = useAuth();
   const [userData, setUserData] = useState({}); 
@@ -98,7 +108,7 @@ function Profile() {
 
   
   return (
-    <div className="profile">
+    <div className="profile" style={backgroundStyle}>
       <h1>Profile</h1>
       <div className="profile-info">
         <div>

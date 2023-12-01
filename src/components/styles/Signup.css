@@ -1,5 +1,5 @@
 .login-background {
-  background-image: url('/src/assets/bckj.jpg');
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4041567.jpg&f=1&nofb=1&ipt=18445b79bbb2c0f9c4b98c98dd83e88424ac79daf3b1721f6d802f092d369b4b&ipo=images');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,7 +14,7 @@
 }
 
 .signup-container {
-  background-color: #5a5959;
+  background-color: #ADD8E6;
   font-family: 'Arial', sans-serif;
   text-align: center;
   padding: 20px;
@@ -27,7 +27,7 @@
 }
 
 .signup-container2 {
-  background-color: #5a5959;
+  background-color: #ADD8E6;
   font-family: 'Arial', sans-serif;
   text-align: center;
   padding: 20px;

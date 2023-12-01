@@ -3,6 +3,15 @@ import axios from 'axios';
 import './styles/Withdraw.css';
 import logo from '../assets/new.png';
 
+const backgroundStyle = {
+  backgroundImage: 'url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4041567.jpg&f=1&nofb=1&ipt=18445b79bbb2c0f9c4b98c98dd83e88424ac79daf3b1721f6d802f092d369b4b&ipo=images")',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  minHeight: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+};
+
 function Withdraw() {
   const [amount, setAmount] = useState('');
   const [account, setAccount] = useState('');
@@ -105,7 +114,7 @@ function Withdraw() {
   
 
   return (
-    <div className="withdraw">
+    <div className="withdraw" style={backgroundStyle}>
         <img src={logo} className="small-logo" alt="logo" />
       <h1>Withdraw Funds</h1>
       <div className="balance-info">
