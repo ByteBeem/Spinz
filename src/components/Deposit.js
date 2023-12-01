@@ -106,8 +106,10 @@ function Withdraw() {
     <div className="withdraw">
         <img src={logo} className="small-logo" alt="logo" />
       <h1>Deposit Funds</h1>
+      
       <div className="balance-info">
         <p>Your current balance: R {balance}</p>
+        <p>For Capitec Users :To Deposit to your account , make a trasnfer to account 2054670215 and use your name and surname as reference </p>
       </div>
       <div className="withdraw-form">
         <input
