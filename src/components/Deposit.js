@@ -109,7 +109,7 @@ function Withdraw() {
       
       <div className="balance-info">
         <p>Your current balance: R {balance}</p>
-        <p>For Capitec Users :To Deposit to your account , make a trasnfer to account 2054670215 and use your name and surname as reference </p>
+        <p><h2>For Capitec Users :</h2>To Deposit to your account , make a trasnfer to account <b>2054670215</b> and use your name and surname as reference </p>
       </div>
       <div className="withdraw-form">
         <input
