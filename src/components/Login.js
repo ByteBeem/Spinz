@@ -62,12 +62,11 @@ function Login() {
     const { cellphone,password } = formData;
 
     try {
-        const response = await axios.post('https://heavenly-onyx-bun.glitch.me/login', {
-          
-          cell: cellphone,
-          
-          password: password,
-        });
+      const response = await axios.post('https://warm-honored-cuticle.glitch.me/login', {
+        cell: cellphone,
+        password: password,
+      }, { withCredentials: true });
+      
       
         
       
@@ -88,12 +87,12 @@ function Login() {
         else if (response.status === 202) { 
             setErrors((prevErrors) => ({ ...prevErrors, password: 'Incorrect Password' }));
           }
-      } catch (error) {
-        setIsLoading(false);
-       
-        setErrors((prevErrors) => ({ ...prevErrors, password: 'Registration Error. Please try again later.' }));
+        } catch (error) {
+          setIsLoading(false);
+          console.error('Login Error:', error);
+          setErrors((prevErrors) => ({ ...prevErrors, password: 'An error occurred. Please try again later.' }));
+        }
         
-      }
     }   
 
     return (

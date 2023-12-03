@@ -274,13 +274,17 @@ function Signup() {
     const { username, full, surname, cellphone, ID, password } = formData;
 
     try {
-        const response = await axios.post('https://heavenly-onyx-bun.glitch.me/signup', {
+      const response = await axios.post(
+        'https://warm-honored-cuticle.glitch.me/signup',
+        {
           fullName: full,
           surname: surname,
           cell: cellphone,
           idNumber: ID,
           password: password,
-        });
+        },
+        { withCredentials: true } 
+      );
       
         setIsLoading(false);
       

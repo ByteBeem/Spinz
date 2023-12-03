@@ -1,0 +1,62 @@
+/* Home.css */
+
+.home-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-radius:17px;
+    background-color: lightgreen;
+    font-family: Arial, sans-serif;
+  }
+  
+  .user-info {
+    text-align: left;
+  }
+
+  .balance {
+    text-align: center;
+  }
+  
+  
+  .user-label {
+    font-weight: bold;
+  }
+  .balance-label {
+    font-weight: bold;
+  }
+
+  .startButtonText{
+    text-align: center;
+  }
+  
+  .balance {
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .deposit {
+    text-align: right;
+  }
+  
+  /* Media query for larger screens */
+@media (min-width: 600px) {
+    .home-container {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+}
+
+  .deposit-button {
+    background-color: lightcoral;
+    color: white;
+    padding: 5px 16px;
+    border: none;
+    border-radius: 8px;
+    padding-bottom:10px;
+    cursor: pointer;
+  }
+  
+  .deposit-button:hover {
+    background-color: darkred;
+  }
