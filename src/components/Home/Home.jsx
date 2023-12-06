@@ -1,17 +1,18 @@
 // Home.js
 
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import './styles/Home.css';
-import Typed from 'typed.js';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import "./Home.css";
+import Typed from "typed.js";
 
 const backgroundStyle = {
-  backgroundImage: 'url("https://www.elegantthemes.com/blog/wp-content/uploads/2013/09/bg-10-full.jpg")',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  minHeight: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
+  backgroundImage:
+    'url("https://www.elegantthemes.com/blog/wp-content/uploads/2013/09/bg-10-full.jpg")',
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
 };
 
 const Home = () => {
@@ -21,7 +22,7 @@ const Home = () => {
       strings: ["Welcome", "Play & Win", "Deposit Now", "Instant Withdrawals"],
       typeSpeed: 100,
       backSpeed: 60,
-      loop: true
+      loop: true,
     });
 
     return () => {
@@ -53,32 +54,26 @@ const Home = () => {
         </h3>
       </div>
       <div className="home-info">
-        <section className="section" style={{ backgroundColor: 'darkgrey' }}>
+        <section className="section" style={{ backgroundColor: "darkgrey" }}>
           <h2>Slot machine game</h2>
-          
         </section>
-        <section className="section" style={{ backgroundColor: 'darkgrey' }}>
+        <section className="section" style={{ backgroundColor: "darkgrey" }}>
           <h2>Word Puzzzle game</h2>
-         
         </section>
-        <section className="section" style={{ backgroundColor: 'darkgrey' }}>
+        <section className="section" style={{ backgroundColor: "darkgrey" }}>
           <h2>Profile</h2>
-          
         </section>
 
-        <section className="section" style={{ backgroundColor: 'darkgrey' }}>
+        <section className="section" style={{ backgroundColor: "darkgrey" }}>
           <h2>Activities</h2>
-          
         </section>
 
-        <section className="section" style={{ backgroundColor: 'darkgrey' }}>
+        <section className="section" style={{ backgroundColor: "darkgrey" }}>
           <h2>Withdraw</h2>
-          
         </section>
 
-        <section className="section" style={{ backgroundColor: 'darkgrey' }}>
+        <section className="section" style={{ backgroundColor: "darkgrey" }}>
           <h2>Log Out</h2>
-          
         </section>
       </div>
     </div>

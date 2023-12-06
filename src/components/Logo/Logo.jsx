@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import logo from '../assets/new.png'; 
-import './styles/Logo.css'; 
+import React, { useState, useEffect } from "react";
+import logo from "../../assets/new.png";
+import "./Logo.css";
 
 function Logo() {
   const [showLogo, setShowLogo] = useState(true);
@@ -8,13 +8,13 @@ function Logo() {
   useEffect(() => {
     const logoTimer = setTimeout(() => {
       setShowLogo(false);
-    }, 3000); 
+    }, 3000);
 
     return () => clearTimeout(logoTimer);
   }, []);
 
   return (
-    <div className={`logo-container ${showLogo ? 'show' : 'hide'}`}>
+    <div className={`logo-container ${showLogo ? "show" : "hide"}`}>
       <img src={logo} className="logo" alt="Logo" />
     </div>
   );
