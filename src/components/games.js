@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './styles/Withdraw.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "../components/Withdrawal/Withdraw.css";
 
 const VideoComponent = () => {
-  const [cellphoneNumber, setCellphoneNumber] = useState('');
-  const [message, setMessage] = useState('');
+  const [cellphoneNumber, setCellphoneNumber] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showBetInfo, setShowBetInfo] = useState(true);
-  const videoUrl = 'https://www.youtube.com/watch?v=r4Fqa3PdHjU&feature=youtu.be';
+  const videoUrl =
+    "https://www.youtube.com/watch?v=r4Fqa3PdHjU&feature=youtu.be";
 
   const startGame = async () => {
     try {
       setLoading(true);
       const betAmount = parseFloat(cellphoneNumber);
-      const storedToken = localStorage.getItem('token');
+      const storedToken = localStorage.getItem("token");
 
       const response = await axios.post(
-        'https://heavenly-onyx-bun.glitch.me/startGame',
+        "https://heavenly-onyx-bun.glitch.me/startGame",
         {
           betAmount: betAmount,
         },
@@ -31,7 +32,7 @@ const VideoComponent = () => {
       setMessage(response.data.message);
       window.location.href = response.data.gameLink;
     } catch (err) {
-      setMessage('Something went wrong, please try again later.');
+      setMessage("Something went wrong, please try again later.");
     } finally {
       setLoading(false);
     }
@@ -42,7 +43,7 @@ const VideoComponent = () => {
   };
 
   return (
-    <div className='withdraw'>
+    <div className="withdraw">
       {showBetInfo && (
         <div className="bet-info-box">
           <h2>Winning Information</h2>
@@ -58,15 +59,14 @@ const VideoComponent = () => {
       )}
 
       <div className="video-container">
-      <iframe
-  width="330"
-  height="215"
-  src="https://www.youtube.com/embed/r4Fqa3PdHjU"
-  title="YouTube Video"
-  frameBorder="0"
-  allowFullScreen
-></iframe>
-
+        <iframe
+          width="330"
+          height="215"
+          src="https://www.youtube.com/embed/r4Fqa3PdHjU"
+          title="YouTube Video"
+          frameBorder="0"
+          allowFullScreen
+        ></iframe>
       </div>
 
       <div>
@@ -81,7 +81,7 @@ const VideoComponent = () => {
 
       <div>
         <button onClick={startGame} disabled={loading}>
-          {loading ? 'Loading...' : 'Start Game'}
+          {loading ? "Loading..." : "Start Game"}
         </button>
       </div>
 

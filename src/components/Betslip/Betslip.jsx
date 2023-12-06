@@ -1,7 +1,5 @@
-// Betslip.js
-
-import React, { useState } from 'react';
-import './styles/Betslip.css';
+import React, { useState } from "react";
+import "./Betslip.css";
 
 const Betslip = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +26,7 @@ const Betslip = () => {
   const handleSubmitBet = () => {
     // Implement your logic to submit the bet
     console.log(`Submitting bet with amount: ${betAmount}`);
-    console.log('Selected Bets:', selectedBets);
+    console.log("Selected Bets:", selectedBets);
   };
 
   return (
