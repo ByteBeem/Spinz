@@ -1,0 +1,55 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--white);
+  box-shadow: var(--box-shadow);
+  height: 4rem;
+
+  li {
+    list-style: none;
+  }
+
+  .games_filter {
+    margin-left: 5%;
+    display: flex;
+    align-items: center;
+
+    li {
+      margin-right: 2rem;
+      font-weight: 100;
+      position: relative;
+      cursor: pointer;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 2rem;
+        height: 3px;
+        background: var(--primary-color);
+        bottom: -7px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+      }
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-right: 10%;
+
+    .profile {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--primary-dark);
+    }
+  }
+}

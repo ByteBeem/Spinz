@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../assets/new.png";
-import "../Signup/Signup.css";
+import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../components/AuthContext";
 
 function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -103,13 +102,12 @@ function Login() {
   };
 
   return (
-    <div className="login-background">
-      {/* Adjust the background image styling in your CSS */}
-      <div className="signup-container">
-        <h2>Log In</h2>
-        <img src={logo} className="small-logo" alt="logo" />
+    <div className="login">
+      <h1>Login to your Spinz Account</h1>
+
+      <div className="login_container">
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
+          <div>
             <label htmlFor="cellphone">Cellphone</label>
             <input
               type="text"
@@ -124,7 +122,7 @@ function Login() {
               <p className="error-message">{errors.cellphone}</p>
             )}
           </div>
-          <div className="input-group">
+          <div>
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -138,18 +136,28 @@ function Login() {
               <p className="error-message">{errors.password}</p>
             )}
           </div>
-          <button type="submit" className="button" disabled={isLoading}>
+          <button type="submit" className="login_btn" disabled={isLoading}>
             {isLoading ? "Logging In..." : "Log In"}
           </button>
 
           {isLoading && <div className="loading-spinner" />}
         </form>
-        <p>
-          Don't have an account? <Link to="/signup">Signup</Link>
-        </p>
-        <p>
-          Forgot Password? <Link to="/reset">Reset</Link>
-        </p>
+
+        <div className="bottom">
+          <span>
+            Don't have an account?{" "}
+            <Link className="link" to="/signup">
+              Signup
+            </Link>
+          </span>
+
+          <span>
+            Forgot Password?{" "}
+            <Link className="link" to="/reset">
+              Reset
+            </Link>
+          </span>
+        </div>
       </div>
     </div>
   );
