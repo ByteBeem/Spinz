@@ -20,9 +20,10 @@ const Sidebar = ({ active, closeSidebar }) => {
         <Link className="link" to="/dashboard">
           <IoGameController className="icon" />
           <span>Games</span>
+          
         </Link>
 
-        <Link className="link" to="/profile">
+        <Link className="link" to="/profile" onClick={() => closeSidebar()}>
           <FaUser className="icon" />
           <span>Profile</span>
         </Link>
