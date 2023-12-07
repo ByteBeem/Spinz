@@ -1,7 +1,35 @@
 import "./Navbar.scss";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useAuth } from "../../components/AuthContext";
 import { IoNotifications } from "react-icons/io5";
 
 const Navbar = ({ showSidebar }) => {
+  const [userData, setUserData] = useState({});
+  const { setToken } = useAuth();
+  
+
+  const balance = userData.balance;
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      setToken(storedToken);
+      fetchUserData(storedToken);
+    }
+  }, [setToken]);
+
+  const fetchUserData = (token) => {
+    axios
+      .get("https://heavenly-onyx-bun.glitch.me/getUserData", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setUserData(response.data);
+      })
+      .catch((error) => {});
+  };
   return (
     <header>
       <div className="menu_btn" onClick={() => showSidebar()}>
@@ -11,6 +39,9 @@ const Navbar = ({ showSidebar }) => {
         <li className="active">Soccer</li>
         <li>Slot</li>
         <li>WordSearch</li>
+        <li>
+            <div className="balance">{`R${balance}`}</div>
+            </li>
       </ul>
 
       <ul className="right">

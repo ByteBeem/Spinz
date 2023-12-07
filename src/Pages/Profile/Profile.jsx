@@ -118,7 +118,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
               <span>Fullname:</span>
               <div className="text_item">{fullName}</div>
 
-              <span>UserName:</span>
+              <span>Surname:</span>
               <div className="text_item">{surname}</div>
 
               <span>ID Number:</span>
@@ -134,7 +134,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
             <div className="balance">{`R${balance}`}</div>
 
             <Link className="btn" to="/withdraw">
-              CashOut
+              Withdraw
             </Link>
             <Link className="btn" to="/deposit">
               Deposit
