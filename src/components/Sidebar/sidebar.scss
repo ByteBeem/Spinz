@@ -3,6 +3,7 @@
   background: var(--primary-dark);
   box-shadow: var(--box-shadow);
   height: 100vh;
+  transition: var(--transition);
 
   .top {
     width: 100%;
@@ -12,6 +13,10 @@
     padding: 1rem;
     border-bottom: 1px solid rgb(191, 189, 189);
     color: var(--white);
+
+    .close_btn {
+      display: none;
+    }
   }
 
   .middle {
@@ -37,6 +42,56 @@
 
       .icon {
         font-size: 1.5rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .link {
+      gap: 0;
+      justify-content: center;
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 999;
+    width: 40%;
+
+    &.active {
+      left: 0;
+    }
+
+    .top {
+      position: relative;
+
+      .close_btn {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        cursor: pointer;
+
+        &:hover {
+          color: crimson;
+        }
+      }
+    }
+
+    .link {
+      gap: 0.6rem;
+      justify-content: flex-start;
+
+      span {
+        display: block;
       }
     }
   }

@@ -21,7 +21,7 @@ const backgroundStyle = {
   flexDirection: "column",
 };
 
-function Profile() {
+function Profile({ showSidebar, active, closeSidebar }) {
   const { setToken } = useAuth();
   const [userData, setUserData] = useState({});
   const [activities, setActivities] = useState([]);
@@ -103,10 +103,10 @@ function Profile() {
 
   return (
     <div className="profile">
-      <Sidebar />
+      <Sidebar active={active} closeSidebar={closeSidebar} />
 
       <div className="profile_container">
-        <Navbar />
+        <Navbar showSidebar={showSidebar} />
 
         <div className="top">
           <div className="user_info">

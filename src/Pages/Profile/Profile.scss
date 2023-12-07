@@ -11,6 +11,7 @@
       align-items: flex-start;
       padding: 2rem;
       gap: 2rem;
+      padding-top: 5rem;
 
       .user_info {
         flex: 1;
@@ -81,11 +82,44 @@
 
     .activity {
       padding: 2rem;
+      background: var(--white);
+      margin: 0 2rem 1rem 2rem;
+      height: max-content;
 
       span {
         color: var(--primary-color);
         font-size: 15px;
         margin-bottom: 2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .profile_container {
+      .top {
+        width: 100%;
+
+        .user_info {
+          flex: 2;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .top {
+      flex-direction: column;
+      gap: 1rem;
+
+      .user_info,
+      .account_info {
+        width: 100%;
+
+        // .profile_pic {
+        //   img {
+        //     width: 1rem;
+        //   }
+        // }
       }
     }
   }

@@ -83,13 +83,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./Home.scss";
 
-const Home = () => {
+const Home = ({ showSidebar, active, closeSidebar }) => {
   return (
     <div className="home">
-      <Sidebar />
+      <Sidebar active={active} closeSidebar={closeSidebar} />
 
       <div className="home_container">
-        <Navbar />
+        <Navbar showSidebar={showSidebar} />
 
         <h1>HomePage</h1>
       </div>
