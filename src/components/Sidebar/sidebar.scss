@@ -1,0 +1,43 @@
+.sidebar {
+  flex: 1;
+  background: var(--primary-dark);
+  box-shadow: var(--box-shadow);
+  height: 100vh;
+
+  .top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(191, 189, 189);
+    color: var(--white);
+  }
+
+  .middle {
+    width: 100%;
+    padding: 2rem 1rem;
+
+    .link {
+      padding: 0.7rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      gap: 0.6rem;
+      cursor: pointer;
+
+      &:hover,
+      &.active {
+        background: var(--white);
+        color: var(--primary-dark);
+      }
+
+      .icon {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Signup.css";
+import "./Signup.scss";
 import logo from "../../assets/new.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -328,10 +328,10 @@ function Signup() {
   };
 
   return (
-    <div className="login-background">
-      <div className="signup-container2">
-        <h2>Sign Up</h2>
-        <img src={logo} className="small-logo" alt="logo" />
+    <div className="form">
+      <h1>SignUp with Spinz</h1>
+
+      <div className="form_container">
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="full">Full Name(s): </label>
@@ -412,14 +412,20 @@ function Signup() {
               required
             />
           </div>
-          <button type="submit" className="button" disabled={isLoading}>
+          <button type="submit" className="btn" disabled={isLoading}>
             {isLoading ? "Registering..." : "Register"}
           </button>
           {isLoading && <div className="loading-spinner" />}
         </form>
-        <p>
-          Already have an account? <Link to="/login">Log In</Link>
-        </p>
+
+        <div className="bottom">
+          <span>
+            Already have an account?{" "}
+            <Link className="link" to="/login">
+              Log In
+            </Link>
+          </span>
+        </div>
       </div>
     </div>
   );

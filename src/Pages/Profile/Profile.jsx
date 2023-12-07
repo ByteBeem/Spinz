@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
-import "./Profile.css";
+import "./Profile.scss";
+import "../../App.scss";
 import axios from "axios";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../components/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import UserProfile from "../../assets/user.png";
+import { Link } from "react-router-dom";
+import { BiMoneyWithdraw } from "react-icons/bi";
+import { MdOutlinePayments } from "react-icons/md";
 
 const backgroundStyle = {
   backgroundImage:
@@ -95,66 +102,78 @@ function Profile() {
   };
 
   return (
-    <div className="profile" style={backgroundStyle}>
-      <h1>Profile</h1>
-      <div className="profile-info">
-        <div>
-          <label>Full Names:</label>
-          <span>{fullName}</span>
-        </div>
-        <div>
-          <label>Surname:</label>
-          <span>{surname}</span>
+    <div className="profile">
+      <Sidebar />
+
+      <div className="profile_container">
+        <Navbar />
+
+        <div className="top">
+          <div className="user_info">
+            <div className="profile_pic">
+              <img src={UserProfile} alt="" />
+            </div>
+
+            <div className="text">
+              <span>Fullname:</span>
+              <div className="text_item">Dori Codes{fullName}</div>
+
+              <span>UserName:</span>
+              <div className="text_item">Dorix26{surname}</div>
+
+              <span>User ID:</span>
+              <div className="text_item">{ID}</div>
+
+              <span>Phone:</span>
+              <div className="text_item">+555 {cellphone}</div>
+            </div>
+          </div>
+
+          <div className="account_info">
+            <span>Account Blanace:</span>
+            <div className="balance">{`$${balance}`}</div>
+
+            <Link className="btn" to="/withdraw">
+              CashOut
+            </Link>
+            <Link className="btn" to="/deposit">
+              Deposit
+            </Link>
+          </div>
         </div>
 
-        <div>
-          <label>ID number:</label>
-          <span>{ID}</span>
+        <div className="activity">
+          <span>Activity</span>
         </div>
-        <div>
-          <label>Cellphone:</label>
-          <span>{cellphone}</span>
-        </div>
-
-        <div>
-          <label>Balance:</label>
-          <span>{`R ${balance}`}</span>
-        </div>
-      </div>
-      <div className="buttons">
-        <button className="withdraw-button" onClick={handleWithdraw}>
-          Withdraw
-        </button>
-        <button className="deposit-button" onClick={handleDeposit}>
-          Deposit
-        </button>
-      </div>
-      <div className="activities">
-        <h2>Activities</h2>
-        {activities.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Type</th>
-                <th>Info</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {activities.reverse().map((activity, index) => (
-                <tr key={index}>
-                  <td>{activity.activity_description}</td>
-                  <td>{activity.activity_details}</td>
-                  <td>{Dates[index]}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No Activities Yet</p>
-        )}
       </div>
     </div>
+
+    //   <div className="activities">
+    //     <h2>Activities</h2>
+    //     {activities.length > 0 ? (
+    //       <table>
+    //         <thead>
+    //           <tr>
+    //             <th>Type</th>
+    //             <th>Info</th>
+    //             <th>Date</th>
+    //           </tr>
+    //         </thead>
+    //         <tbody>
+    //           {activities.reverse().map((activity, index) => (
+    //             <tr key={index}>
+    //               <td>{activity.activity_description}</td>
+    //               <td>{activity.activity_details}</td>
+    //               <td>{Dates[index]}</td>
+    //             </tr>
+    //           ))}
+    //         </tbody>
+    //       </table>
+    //     ) : (
+    //       <p>No Activities Yet</p>
+    //     )}
+    //   </div>
+    // </div>
   );
 }
 

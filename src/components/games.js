@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../components/Withdrawal/Withdraw.css";
+// import "../components/Withdrawal/Withdraw.css";
 
 const VideoComponent = () => {
   const [cellphoneNumber, setCellphoneNumber] = useState("");

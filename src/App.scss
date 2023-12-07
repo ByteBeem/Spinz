@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background: rgba(236, 235, 236);
+}
+
+:root {
+  --primary-color: rgb(157, 0, 255);
+  --primary-dark: rgb(56, 4, 88);
+  --white: #fff;
+
+  --box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}

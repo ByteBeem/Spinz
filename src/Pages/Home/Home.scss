@@ -1,0 +1,9 @@
+.home {
+  display: flex;
+  align-items: flex-start;
+
+  .home_container {
+    flex: 6;
+    height: 100vh;
+  }
+}
