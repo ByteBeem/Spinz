@@ -6,7 +6,13 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
-
+.typing {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #007bff;
+  font-size: 20px;
+  font-weight: bold;
+}
 :root {
   --primary-color: rgb(157, 0, 255);
 
@@ -47,13 +53,13 @@
       outline: 0;
       border: 2px solid gray;
       width: 100%;
-      border-radius: 5px;
+      border-radius: 20px;
       margin-bottom: 1rem;
     }
 
     .login_btn {
       width: 100%;
-      border-radius: 5px;
+      border-radius: 35px 0px 35px;
       color: white;
       background: var(--primary-color);
       margin-bottom: 2rem;
