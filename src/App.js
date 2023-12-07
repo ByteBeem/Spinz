@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Signup/Signup";
@@ -13,6 +13,16 @@ import Withdraw from "./Pages/Withdrawal/Withdrawal";
 import { AuthProvider } from "./components/AuthContext";
 
 function App() {
+  const [active, setActive] = useState("");
+
+  const showSidebar = () => {
+    setActive("active");
+  };
+
+  const closeSidebar = () => {
+    setActive("");
+  };
+
   return (
     <AuthProvider>
       <Router>
@@ -23,8 +33,26 @@ function App() {
 
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
-            <Route path="dashboard" element={<Home />} />
-            <Route path="profile" element={<Profile />} />
+            <Route
+              path="dashboard"
+              element={
+                <Home
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
+            <Route
+              path="profile"
+              element={
+                <Profile
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
             <Route path="reset" element={<Reset />} />
             <Route path="deposit" element={<Deposit />} />
             <Route path="choose" element={<Choice />} />
