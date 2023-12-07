@@ -116,22 +116,22 @@ function Profile() {
 
             <div className="text">
               <span>Fullname:</span>
-              <div className="text_item">Dori Codes{fullName}</div>
+              <div className="text_item">{fullName}</div>
 
               <span>UserName:</span>
-              <div className="text_item">Dorix26{surname}</div>
+              <div className="text_item">{surname}</div>
 
-              <span>User ID:</span>
+              <span>ID Number:</span>
               <div className="text_item">{ID}</div>
 
               <span>Phone:</span>
-              <div className="text_item">+555 {cellphone}</div>
+              <div className="text_item">{cellphone}</div>
             </div>
           </div>
 
           <div className="account_info">
             <span>Account Blanace:</span>
-            <div className="balance">{`$${balance}`}</div>
+            <div className="balance">{`R${balance}`}</div>
 
             <Link className="btn" to="/withdraw">
               CashOut

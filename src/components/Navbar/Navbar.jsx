@@ -6,8 +6,8 @@ const Navbar = () => {
     <header>
       <ul className="games_filter">
         <li className="active">Soccer</li>
-        <li>Pong</li>
-        <li>Solitaire</li>
+        <li>Slot</li>
+        <li>WordSearch</li>
       </ul>
 
       <ul className="right">
