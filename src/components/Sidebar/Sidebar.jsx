@@ -45,7 +45,7 @@ const Sidebar = ({ active, closeSidebar }) => {
           <span>Home</span>
         </Link>
 
-        <Link className="link" to="/wallet" onClick={() => closeSidebar()}>
+        <Link className="link" to="/wallets" onClick={() => closeSidebar()}>
           <GiWallet className="icon" />
           <span>Wallet</span>
         </Link>

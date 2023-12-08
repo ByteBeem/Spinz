@@ -7,7 +7,7 @@ import Home from "./Pages/Home/Home";
 import Profile from "./Pages/Profile/Profile";
 import Reset from "./components/Reset";
 import Deposit from "./Pages/Deposit/Deposit";
-import Wallet from "./Pages/wallet/wallet";
+import Wallet from "./Pages/wallet/Wallet";
 import Choice from "./components/choose";
 import Games from "./components/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
@@ -66,7 +66,7 @@ function App() {
               }
             />
             <Route
-              path="wallet"
+              path="wallets"
               element={
                 <Wallet
                   showSidebar={showSidebar}
@@ -75,6 +75,7 @@ function App() {
                 />
               }
             />
+            
             <Route path="choose" element={<Choice />} />
             <Route path="games" element={<Games />} />
             <Route

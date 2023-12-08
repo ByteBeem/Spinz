@@ -3,7 +3,7 @@ import "../../App.scss";
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 
-const wallet = ({ balance }) => {
+const Wallet = ({ balance }) => {
   return (
     <div className="account_info">
       <span>Account Balance:</span>
@@ -19,4 +19,4 @@ const wallet = ({ balance }) => {
   );
 };
 
-export default wallet;
+export default Wallet;
