@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import { FiLoader } from "react-icons/fi";
-import React from 'react';
+import React, {useState , useEffect} from 'react';
 import { Link } from 'react-router-dom'; 
 
 function Wallet  ({ showSidebar, active, closeSidebar }) {
