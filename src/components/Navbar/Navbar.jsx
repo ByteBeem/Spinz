@@ -49,8 +49,8 @@ const Navbar = ({ showSidebar }) => {
         </li>
 
         <li>
-          <div className="deposits">Deposit</div>
-        </li>
+      <button className="deposits-button">Deposit</button>
+    </li>
 
         
       </ul>
