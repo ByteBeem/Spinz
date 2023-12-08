@@ -35,7 +35,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const cellphone = userData.cell;
   const balance = userData.balance;
   const surname = userData.surname;
-  const ID = "Protected";
+  const ID = "*********";
 
   const handleWithdraw = () => {
     navigate("/withdraw");
