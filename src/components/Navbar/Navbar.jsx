@@ -6,8 +6,8 @@ import { IoNotifications } from "react-icons/io5";
 
 const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(true);
   const { setToken } = useAuth();
-  
 
   const balance = userData.balance;
 
@@ -21,6 +21,7 @@ const Navbar = ({ showSidebar }) => {
   }, [setToken]);
 
   const fetchUserData = (token) => {
+    setLoading(true); 
     axios
       .get("https://heavenly-onyx-bun.glitch.me/getUserData", {
         headers: { Authorization: `Bearer ${token}` },
@@ -28,8 +29,12 @@ const Navbar = ({ showSidebar }) => {
       .then((response) => {
         setUserData(response.data);
       })
-      .catch((error) => {});
+      .catch((error) => {})
+      .finally(() => {
+        setLoading(false);
+      });
   };
+
   return (
     <header>
       <div className="menu_btn" onClick={() => showSidebar()}>
@@ -40,8 +45,8 @@ const Navbar = ({ showSidebar }) => {
         <li>Slot</li>
         <li>WordSearch</li>
         <li>
-            <div className="balance">{`R${balance}`}</div>
-            </li>
+          <div className="balance">{loading ? "Loading..." : `R${balance}`}</div>
+        </li>
       </ul>
 
       <ul className="right">
