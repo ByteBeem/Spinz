@@ -65,6 +65,7 @@ function App() {
                   active={active}
                 />
               }
+              
             />
             <Route
               path="wallets"
