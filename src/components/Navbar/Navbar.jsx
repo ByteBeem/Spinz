@@ -47,6 +47,8 @@ const Navbar = ({ showSidebar }) => {
         <li>
           <div className="balance">{loading ? "Loading..." : `R${balance}`}</div>
         </li>
+
+        <li>Deposit </li>
       </ul>
 
       <ul className="right">
