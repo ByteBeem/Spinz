@@ -3,7 +3,7 @@ import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
-import Typed from 'typed.js';
+import Typed from "typed.js";
 
 function Login() {
   useEffect(() => {
@@ -11,10 +11,9 @@ function Login() {
       strings: ["Login Now!", "Welcome to Spinz"],
       typeSpeed: 90,
       backSpeed: 50,
-      loop: true
+      loop: true,
     });
   }, []);
-  
 
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -114,8 +113,7 @@ function Login() {
 
   return (
     <div className="login">
-    <div className="typing"></div>
-
+      <div className="typing"></div>
 
       <div className="login_container">
         <form onSubmit={handleSubmit}>
@@ -172,7 +170,6 @@ function Login() {
         </div>
       </div>
     </div>
-    
   );
 }
 

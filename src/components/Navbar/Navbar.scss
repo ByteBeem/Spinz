@@ -18,22 +18,7 @@ header {
     font-weight: 100;
     margin-top: 8px;
   }
-  
-.deposits-button {
-  padding: 8px 16px; 
-  background-color: #3498db; 
-  color: #fff; 
-  border: none;
-  border-radius: 30px; 
-  cursor: pointer;
-  font-size: 17px;
-  font-weight: 100;
-  margin-top: 8px;
 
-  &:hover {
-    background-color: #2980b9; 
-  }
-}
   li {
     list-style: none;
   }
@@ -42,6 +27,21 @@ header {
     // margin-left: 5%;
     display: flex;
     align-items: center;
+
+    .deposits-button {
+      padding: 10px;
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 100;
+
+      &:hover {
+        background-color: var(--primary-dark);
+      }
+    }
 
     li {
       margin-right: 2rem;
