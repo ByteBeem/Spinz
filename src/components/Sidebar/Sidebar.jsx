@@ -14,12 +14,12 @@ const Sidebar = ({ active, closeSidebar }) => {
 
   const handleLogout = () => {
     setLoading(true);
-    
+    localStorage.clear();
     setTimeout(() => {
-      window.location.href = "/login";
-      localStorage.clear();
-      setLoading(false);
       
+      
+      setLoading(false);
+      window.location.href = "/login";
       closeSidebar();
     }, 5000);
   };

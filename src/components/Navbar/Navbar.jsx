@@ -1,5 +1,6 @@
 import "./Navbar.scss";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 import { IoNotifications } from "react-icons/io5";
