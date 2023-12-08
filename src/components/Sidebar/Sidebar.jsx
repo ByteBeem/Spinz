@@ -55,7 +55,7 @@ const Sidebar = ({ active, closeSidebar }) => {
         </Link>
       
 
-        <Link className="link" to="/login" onClick={() => { closeSidebar(); handleLogout(); }}>
+        <Link className="link" to="" onClick={() => { closeSidebar(); handleLogout(); }}>
   <IoLogOut className="icon" />
   <span>Logout</span>
 </Link>
