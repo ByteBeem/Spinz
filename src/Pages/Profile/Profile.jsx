@@ -10,6 +10,7 @@ import UserProfile from "../../assets/user.png";
 import { Link } from "react-router-dom";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { MdOutlinePayments } from "react-icons/md";
+import { FiLoader } from "react-icons/fi";
 
 const backgroundStyle = {
   backgroundImage:
@@ -26,6 +27,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const [userData, setUserData] = useState({});
   const [activities, setActivities] = useState([]);
   const [Dates, setDates] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -56,6 +58,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
 
   const fetchActivities = async (token) => {
     try {
+      setLoading(true);
       const response = await axios.get(
         "https://heavenly-onyx-bun.glitch.me/activities",
         {
@@ -67,6 +70,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
 
       if (response.status === 206) {
         alert("Token Expired Login again!");
+        setLoading(false);
       } else {
         setActivities(response.data);
 
@@ -82,27 +86,37 @@ function Profile({ showSidebar, active, closeSidebar }) {
             minute: "numeric",
             second: "numeric",
           });
+          setLoading(false);
         });
         setDates(formattedDates);
       }
     } catch (error) {
     } finally {
+      setLoading(false);
     }
   };
 
   const fetchUserData = (token) => {
+    setLoading(true);
     axios
       .get("https://heavenly-onyx-bun.glitch.me/getUserData", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         setUserData(response.data);
+        setLoading(false);
       })
       .catch((error) => {});
   };
 
   return (
     <div className="profile">
+      {loading && (
+        <div className="overlay">
+          <FiLoader className="loading-spinner" />
+          <p className="loading-text">Logging out...</p>
+        </div>
+      )}
       <Sidebar active={active} closeSidebar={closeSidebar} />
 
       <div className="profile_container">
