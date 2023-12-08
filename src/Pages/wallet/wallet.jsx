@@ -15,6 +15,6 @@ import { Link } from 'react-router-dom';
       </Link>
     </div>
   );
-};
 
-export default YourComponent;
+
+export default wallet;
