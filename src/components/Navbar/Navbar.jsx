@@ -41,7 +41,7 @@ const Navbar = ({ showSidebar }) => {
         &#9776;
       </div>
       <ul className="games_filter">
-        <li className="active">Soccer</li>
+        
         
         
         <li>
