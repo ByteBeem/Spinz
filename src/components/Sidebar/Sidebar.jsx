@@ -1,7 +1,7 @@
 import "./sidebar.scss";
 import "../../App.scss";
 import { Link } from "react-router-dom";
-import { IoGameController } from "react-icons/io5";
+import { IoHome  } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
@@ -17,9 +17,9 @@ const Sidebar = ({ active, closeSidebar }) => {
       </div>
 
       <div className="middle">
-        <Link className="link" to="/dashboard">
-          <IoGameController className="icon" />
-          <span>Games</span>
+        <Link className="link" to="/dashboard" onClick={() => closeSidebar()}>
+          <IoHome  className="icon" />
+          <span>Home</span>
           
         </Link>
 
@@ -28,12 +28,12 @@ const Sidebar = ({ active, closeSidebar }) => {
           <span>Profile</span>
         </Link>
 
-        <Link className="link" to="/reset">
+        <Link className="link" to="/reset" onClick={() => closeSidebar()}>
           <IoSettingsSharp className="icon" />
           <span>Settings</span>
         </Link>
 
-        <Link className="link" to="">
+        <Link className="link" to="" onClick={() => closeSidebar()}>
           <IoLogOut className="icon" />
           <span>Logout</span>
         </Link>
