@@ -107,10 +107,10 @@ function Profile({ showSidebar, active, closeSidebar }) {
         </div>
       )}
       <Sidebar active={active} closeSidebar={closeSidebar} />
-  
+
       <div className="profile_container">
         <Navbar showSidebar={showSidebar} />
-  
+
         <div className="top">
           <div className="user_info">
             <div className="profile_pic">
@@ -131,40 +131,25 @@ function Profile({ showSidebar, active, closeSidebar }) {
               <div className="text_item">{cellphone}</div>
             </div>
           </div>
+
+          <div className="account_info">
+            <span>Account Blanace:</span>
+            <div className="balance">{`R${balance}`}</div>
+
+            <Link className="form_btn" to="/withdraw">
+              Withdraw
+            </Link>
+            <Link className="form_btn" to="/deposit">
+              Deposit
+            </Link>
           </div>
-  
+        </div>
+
         <div className="activity">
           <span>Activity</span>
         </div>
-  
-        <div className="activities">
-          <h2>Activities</h2>
-          {activities.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Info</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {activities.reverse().map((activity, index) => (
-                  <tr key={index}>
-                    <td>{activity.activity_description}</td>
-                    <td>{activity.activity_details}</td>
-                    <td>{Dates[index]}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>No Activities Yet</p>
-          )}
-        </div>
       </div>
     </div>
-  );
 
     //   <div className="activities">
     //     <h2>Activities</h2>
@@ -192,7 +177,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
     //     )}
     //   </div>
     // </div>
-  
+  );
 }
 
 export default Profile;
