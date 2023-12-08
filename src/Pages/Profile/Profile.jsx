@@ -114,7 +114,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
       {loading && (
         <div className="overlay">
           <FiLoader className="loading-spinner" />
-          <p className="loading-text">Logging out...</p>
+          
         </div>
       )}
       <Sidebar active={active} closeSidebar={closeSidebar} />
