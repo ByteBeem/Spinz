@@ -9,11 +9,11 @@ import Navbar from '../../components/Navbar/Navbar';
 import './wallet.scss';
 import '../../App.scss';
 
-// Functional component Wallet
+
 const Wallet = ({ showSidebar, active, closeSidebar }) => {
   const { setToken } = useAuth();
   const [userData, setUserData] = useState({});
-  const [loading, setLoading] = useState(false); // Add state for loading
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -35,7 +35,7 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
         setLoading(false);
       })
       .catch((error) => {
-        setLoading(false); // Set loading to false in case of an error
+        setLoading(false); 
       });
   };
 
