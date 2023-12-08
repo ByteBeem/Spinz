@@ -54,10 +54,28 @@ function App() {
               }
             />
             <Route path="reset" element={<Reset />} />
-            <Route path="deposit" element={<Deposit />} />
+            <Route
+              path="deposit"
+              element={
+                <Deposit
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
             <Route path="choose" element={<Choice />} />
             <Route path="games" element={<Games />} />
-            <Route path="withdraw" element={<Withdraw />} />
+            <Route
+              path="withdraw"
+              element={
+                <Withdraw
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
           </Route>
         </Routes>
       </Router>

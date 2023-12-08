@@ -136,7 +136,7 @@ function Login() {
               <p className="error-message">{errors.password}</p>
             )}
           </div>
-          <button type="submit" className="login_btn" disabled={isLoading}>
+          <button type="submit" className="form_btn" disabled={isLoading}>
             {isLoading ? "Logging In..." : "Log In"}
           </button>
 

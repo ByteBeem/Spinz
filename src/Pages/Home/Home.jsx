@@ -91,7 +91,14 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
       <div className="home_container">
         <Navbar showSidebar={showSidebar} />
 
-        <h1>HomePage</h1>
+        <div className="content">
+          <div className="games_slider">
+            <div className="game_box"></div>
+            <div className="game_box"></div>
+            <div className="game_box"></div>
+            <div className="game_box"></div>
+          </div>
+        </div>
       </div>
     </div>
   );

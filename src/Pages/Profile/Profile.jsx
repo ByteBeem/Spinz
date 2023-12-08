@@ -11,16 +11,6 @@ import { Link } from "react-router-dom";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { MdOutlinePayments } from "react-icons/md";
 
-const backgroundStyle = {
-  backgroundImage:
-    'url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4041567.jpg&f=1&nofb=1&ipt=18445b79bbb2c0f9c4b98c98dd83e88424ac79daf3b1721f6d802f092d369b4b&ipo=images")',
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  minHeight: "100vh",
-  display: "flex",
-  flexDirection: "column",
-};
-
 function Profile({ showSidebar, active, closeSidebar }) {
   const { setToken } = useAuth();
   const [userData, setUserData] = useState({});
@@ -133,10 +123,10 @@ function Profile({ showSidebar, active, closeSidebar }) {
             <span>Account Blanace:</span>
             <div className="balance">{`$${balance}`}</div>
 
-            <Link className="btn" to="/withdraw">
+            <Link className="form_btn" to="/withdraw">
               CashOut
             </Link>
-            <Link className="btn" to="/deposit">
+            <Link className="form_btn" to="/deposit">
               Deposit
             </Link>
           </div>
