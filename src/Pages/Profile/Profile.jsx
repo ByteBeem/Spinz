@@ -133,17 +133,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
             </div>
           </div>
 
-          <div className="account_info">
-            <span>Account Blanace:</span>
-            <div className="balance">{`R${balance}`}</div>
-
-            <Link className="form_btn" to="/withdraw">
-              Withdraw
-            </Link>
-            <Link className="form_btn" to="/deposit">
-              Deposit
-            </Link>
-          </div>
+          
         </div>
 
         <div className="activity">
