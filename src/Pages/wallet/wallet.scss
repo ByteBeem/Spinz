@@ -1,0 +1,29 @@
+.account_info {
+    flex: 1;
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    padding: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    span {
+      color: var(--primary-color);
+      font-size: 15px;
+    }
+
+    .balance {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .form_btn {
+      text-decoration: none;
+      text-align: center;
+      margin-bottom: 7px;
+    }
+  }

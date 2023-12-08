@@ -7,6 +7,7 @@ import Home from "./Pages/Home/Home";
 import Profile from "./Pages/Profile/Profile";
 import Reset from "./components/Reset";
 import Deposit from "./Pages/Deposit/Deposit";
+import Wallet from "./Pages/wallet/wallet";
 import Choice from "./components/choose";
 import Games from "./components/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
@@ -58,6 +59,16 @@ function App() {
               path="deposit"
               element={
                 <Deposit
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
+            <Route
+              path="wallet"
+              element={
+                <Wallet
                   showSidebar={showSidebar}
                   closeSidebar={closeSidebar}
                   active={active}

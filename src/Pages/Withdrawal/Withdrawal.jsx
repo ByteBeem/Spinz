@@ -112,7 +112,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
         <div className="content">
           <div className="balance_info">
             <span>Current Balance:</span>
-            <h1>${balance}</h1>
+            <h1>R{balance}</h1>
           </div>
 
           <div className="middle">
@@ -141,7 +141,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
               </div>
 
               <div>
-                <label>Password</label>
+                <label>ID Number</label>
                 <br />
                 <input type="password" />
               </div>
