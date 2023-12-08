@@ -114,6 +114,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
         <div className="top">
           <div className="user_info">
             <div className="profile_pic">
+              
               <img src={UserProfile} alt="" />
             </div>
 
