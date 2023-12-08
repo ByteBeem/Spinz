@@ -38,6 +38,7 @@ const Sidebar = ({ active, closeSidebar }) => {
           &times;
         </div>
       </div>
+      
 
       <div className="middle">
         <Link className="link" to="/dashboard" onClick={() => closeSidebar()}>
