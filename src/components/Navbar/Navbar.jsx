@@ -43,7 +43,7 @@ const Navbar = ({ showSidebar }) => {
       <ul className="games_filter">
         <li className="active">Soccer</li>
         <li>Slot</li>
-        <li>WordSearch</li>
+        
         <li>
           <div className="balance">{loading ? "Loading..." : `R${balance}`}</div>
         </li>
