@@ -423,7 +423,7 @@ function Signup() {
               required
             />
           </div>
-          <button type="submit" className="btn" disabled={isLoading}>
+          <button type="submit" className="form_btn" disabled={isLoading}>
             {isLoading ? "Registering..." : "Register"}
           </button>
           {isLoading && <div className="loading-spinner" />}

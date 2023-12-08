@@ -1,0 +1,101 @@
+.deposit {
+  display: flex;
+  align-items: flex-start;
+
+  .deposit_container {
+    flex: 6;
+
+    .content {
+      width: 1005;
+      padding: 5rem 1rem 1rem 1rem;
+
+      .balance_info {
+        span {
+          color: var(--primary-color);
+        }
+
+        h1 {
+          font-size: 3rem;
+          font-weight: 600;
+        }
+      }
+
+      .middle {
+        .info {
+          width: 50%;
+          background: var(--white);
+          padding: 1rem;
+          border-radius: 5px;
+          margin-bottom: 2rem;
+
+          @media screen and (max-width: 1000px) {
+            width: 70%;
+          }
+          @media screen and (max-width: 700px) {
+            width: 100%;
+          }
+        }
+
+        .deposit_form {
+          width: 50%;
+          background: var(--white);
+          padding: 1rem;
+          border-radius: 5px;
+
+          @media screen and (max-width: 1000px) {
+            width: 70%;
+          }
+          @media screen and (max-width: 700px) {
+            width: 100%;
+          }
+
+          h3 {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+          }
+
+          label {
+            text-transform: capitalize;
+            font-size: 17px;
+            color: var(--primary-color);
+          }
+
+          input {
+            outline: 0;
+            border: 2px solid gray;
+            width: 100%;
+            border-radius: 5px;
+            margin: 0.5rem 0 1rem 0;
+            padding: 15px;
+            font-size: 15px;
+            background: transparent;
+          }
+
+          .form_btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+          }
+
+          .success-message {
+            margin-top: 20px;
+            color: #009944;
+            font-size: 16px;
+            text-align: center;
+          }
+
+          .error-message {
+            margin-top: 20px;
+            color: #ff002b;
+            font-size: 16px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+//   .error {
+//     color: #ff0000;
+//     margin-top: 10px;
+//   }

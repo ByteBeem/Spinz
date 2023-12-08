@@ -7,6 +7,8 @@ header {
   box-shadow: var(--box-shadow);
   height: 4rem;
   position: fixed;
+  top: 0;
+  padding: 0 10% 0 0;
 
   .menu_btn {
     display: none;
@@ -16,30 +18,30 @@ header {
     font-weight: 100;
     margin-top: 8px;
   }
-  
-.deposits-button {
-  padding: 8px 16px; 
-  background-color: #3498db; 
-  color: #fff; 
-  border: none;
-  border-radius: 30px; 
-  cursor: pointer;
-  font-size: 17px;
-  font-weight: 100;
-  margin-top: 8px;
 
-  &:hover {
-    background-color: #2980b9; 
-  }
-}
   li {
     list-style: none;
   }
 
   .games_filter {
-    margin-left: 5%;
+    // margin-left: 5%;
     display: flex;
     align-items: center;
+
+    .deposits-button {
+      padding: 10px;
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 100;
+
+      &:hover {
+        background-color: var(--primary-dark);
+      }
+    }
 
     li {
       margin-right: 2rem;
@@ -69,7 +71,7 @@ header {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-right: 10%;
+    // margin-right: 20%;
 
     .notification {
       position: relative;
@@ -125,5 +127,9 @@ header {
     li {
       margin-right: 1rem;
     }
+  }
+
+  .right {
+    margin-right: 10%;
   }
 }

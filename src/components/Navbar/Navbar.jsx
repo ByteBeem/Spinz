@@ -22,7 +22,7 @@ const Navbar = ({ showSidebar }) => {
   }, [setToken]);
 
   const fetchUserData = (token) => {
-    setLoading(true); 
+    setLoading(true);
     axios
       .get("https://heavenly-onyx-bun.glitch.me/getUserData", {
         headers: { Authorization: `Bearer ${token}` },
@@ -42,19 +42,17 @@ const Navbar = ({ showSidebar }) => {
         &#9776;
       </div>
       <ul className="games_filter">
-        
-        
-        
         <li>
-          <div className="balance">{loading ? "Loading..." : `R${balance}`}</div>
+          <div className="balance">
+            {loading ? "Loading..." : `R${balance}`}
+          </div>
         </li>
 
         <li>
-      <Link to="/deposit">
-        <button className="deposits-button">Deposit</button>
-      </Link>
-    </li>
-        
+          <Link to="/deposit">
+            <button className="deposits-button">Deposit</button>
+          </Link>
+        </li>
       </ul>
 
       <ul className="right">
