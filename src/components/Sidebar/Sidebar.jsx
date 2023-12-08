@@ -7,6 +7,7 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { FiLoader } from "react-icons/fi";
 import { IoLogOut } from "react-icons/io5";
 import {useState} from 'react';
+import { IoIosChatbubbles } from "react-icons/io";
 
 const Sidebar = ({ active, closeSidebar }) => {
   const [loading, setLoading] = useState(false);
@@ -15,9 +16,10 @@ const Sidebar = ({ active, closeSidebar }) => {
     setLoading(true);
     
     setTimeout(() => {
+      window.location.href = "/login";
+      localStorage.clear();
       setLoading(false);
-      // Implement actual logout logic here
-      // ...
+      
       closeSidebar();
     }, 5000);
   };
@@ -26,6 +28,7 @@ const Sidebar = ({ active, closeSidebar }) => {
       {loading && (
         <div className="overlay">
           <FiLoader className="loading-spinner" />
+          <p className="loading-text">Logging out...</p>
         </div>
       )}
       <div className="top">
@@ -46,15 +49,17 @@ const Sidebar = ({ active, closeSidebar }) => {
           <span>Profile</span>
         </Link>
 
-        <Link className="link" to="/reset" onClick={() => closeSidebar()}>
-          <IoSettingsSharp className="icon" />
-          <span>Settings</span>
+        <Link className="link" to="" onClick={() => closeSidebar()}>
+          <IoIosChatbubbles className="icon" />
+          <span>Support</span>
         </Link>
+      
 
-        <Link className="link" to="" onClick={handleLogout}>
-          <IoLogOut className="icon" />
-          <span>Logout</span>
-        </Link>
+        <Link className="link" to="/login" onClick={() => { closeSidebar(); handleLogout(); }}>
+  <IoLogOut className="icon" />
+  <span>Logout</span>
+</Link>
+
       </div>
     </aside>
   );
