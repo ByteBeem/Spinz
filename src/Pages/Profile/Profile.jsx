@@ -10,12 +10,14 @@ import UserProfile from "../../assets/user.png";
 import { Link } from "react-router-dom";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { MdOutlinePayments } from "react-icons/md";
+import { FiLoader } from "react-icons/fi";
 
 function Profile({ showSidebar, active, closeSidebar }) {
   const { setToken } = useAuth();
   const [userData, setUserData] = useState({});
   const [activities, setActivities] = useState([]);
   const [Dates, setDates] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const cellphone = userData.cell;
   const balance = userData.balance;
   const surname = userData.surname;
-  const ID = "Protected";
+  const ID = "*********";
 
   const handleWithdraw = () => {
     navigate("/withdraw");
@@ -46,6 +48,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
 
   const fetchActivities = async (token) => {
     try {
+      setLoading(true);
       const response = await axios.get(
         "https://heavenly-onyx-bun.glitch.me/activities",
         {
@@ -57,6 +60,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
 
       if (response.status === 206) {
         alert("Token Expired Login again!");
+        setLoading(false);
       } else {
         setActivities(response.data);
 
@@ -72,27 +76,36 @@ function Profile({ showSidebar, active, closeSidebar }) {
             minute: "numeric",
             second: "numeric",
           });
+          setLoading(false);
         });
         setDates(formattedDates);
       }
     } catch (error) {
     } finally {
+      setLoading(false);
     }
   };
 
   const fetchUserData = (token) => {
+    setLoading(true);
     axios
       .get("https://heavenly-onyx-bun.glitch.me/getUserData", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         setUserData(response.data);
+        setLoading(false);
       })
       .catch((error) => {});
   };
 
   return (
     <div className="profile">
+      {loading && (
+        <div className="overlay">
+          <FiLoader className="loading-spinner" />
+        </div>
+      )}
       <Sidebar active={active} closeSidebar={closeSidebar} />
 
       <div className="profile_container">
@@ -106,25 +119,25 @@ function Profile({ showSidebar, active, closeSidebar }) {
 
             <div className="text">
               <span>Fullname:</span>
-              <div className="text_item">Dori Codes{fullName}</div>
+              <div className="text_item">{fullName}</div>
 
-              <span>UserName:</span>
-              <div className="text_item">Dorix26{surname}</div>
+              <span>Surname:</span>
+              <div className="text_item">{surname}</div>
 
-              <span>User ID:</span>
+              <span>ID Number:</span>
               <div className="text_item">{ID}</div>
 
               <span>Phone:</span>
-              <div className="text_item">+555 {cellphone}</div>
+              <div className="text_item">{cellphone}</div>
             </div>
           </div>
 
           <div className="account_info">
             <span>Account Blanace:</span>
-            <div className="balance">{`$${balance}`}</div>
+            <div className="balance">{`R${balance}`}</div>
 
             <Link className="form_btn" to="/withdraw">
-              CashOut
+              Withdraw
             </Link>
             <Link className="form_btn" to="/deposit">
               Deposit

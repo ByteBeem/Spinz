@@ -13,7 +13,27 @@ header {
   .menu_btn {
     display: none;
   }
+  .balance {
+    font-size: 25px;
+    font-weight: 100;
+    margin-top: 8px;
+  }
+  
+.deposits-button {
+  padding: 8px 16px; 
+  background-color: #3498db; 
+  color: #fff; 
+  border: none;
+  border-radius: 30px; 
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 100;
+  margin-top: 8px;
 
+  &:hover {
+    background-color: #2980b9; 
+  }
+}
   li {
     list-style: none;
   }

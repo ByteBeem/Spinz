@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import "./Signup.scss";
 import logo from "../../assets/new.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
+import Typed from 'typed.js';
 
 function Signup() {
+
+  useEffect(() => {
+    var typed = new Typed(".typing", {
+      strings: ["Sign up Now!", "Welcome to Spinz"],
+      typeSpeed: 90,
+      backSpeed: 50,
+      loop: true
+    });
+  }, []);
+
   const [formData, setFormData] = useState({
     full: "",
     surname: "",
@@ -329,7 +340,7 @@ function Signup() {
 
   return (
     <div className="form">
-      <h1>SignUp with Spinz</h1>
+      <div className="typing"></div>
 
       <div className="form_container">
         <form onSubmit={handleSubmit}>
