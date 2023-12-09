@@ -47,12 +47,12 @@ const Navbar = ({ showSidebar }) => {
             {loading ? "Loading..." : `R${balance}`}
           </div>
         </li>
-
+{/* 
         <li>
           <Link to="/deposit">
             <button className="deposits-button">Deposit</button>
           </Link>
-        </li>
+        </li> */}
       </ul>
 
       <ul className="right">
