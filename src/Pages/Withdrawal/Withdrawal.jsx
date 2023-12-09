@@ -77,7 +77,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
       return;
     }
 
-    if (isNaN(password) || password < 13) {
+    if (isNaN(iD) || iD < 13) {
       setError("Invalid ID number");
       setLoading(false);
       return;
