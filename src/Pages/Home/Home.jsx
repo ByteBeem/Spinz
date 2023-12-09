@@ -3,51 +3,18 @@ import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Link } from 'react-router-dom';
 import "./Home.scss";
+import Games from "../../Data/Games";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = ({ showSidebar, active, closeSidebar }) => {
-  const gamesSliderRef = useRef(null);
-  const [touchStartX, setTouchStartX] = useState(0);
-
-  useEffect(() => {
-    const handleTouchStart = (e) => {
-      setTouchStartX(e.touches[0].clientX);
-    };
-
-    const handleTouchMove = (e) => {
-      if (touchStartX !== null) {
-        const touchCurrentX = e.touches[0].clientX;
-        const deltaX = touchCurrentX - touchStartX;
-
-        if (gamesSliderRef.current) {
-          gamesSliderRef.current.scrollLeft -= deltaX;
-        }
-
-        setTouchStartX(touchCurrentX);
-      }
-    };
-
-    const handleTouchEnd = () => {
-      setTouchStartX(null);
-    };
-
-    if (gamesSliderRef.current) {
-      gamesSliderRef.current.addEventListener("touchstart", handleTouchStart);
-      gamesSliderRef.current.addEventListener("touchmove", handleTouchMove);
-      gamesSliderRef.current.addEventListener("touchend", handleTouchEnd);
-    }
-
-    return () => {
-      if (gamesSliderRef.current) {
-        gamesSliderRef.current.removeEventListener("touchstart", handleTouchStart);
-        gamesSliderRef.current.removeEventListener("touchmove", handleTouchMove);
-        gamesSliderRef.current.removeEventListener("touchend", handleTouchEnd);
-      }
-    };
-  }, [touchStartX]);
-
-  const slot = () => {
-    
-    window.location.href = "https://spinz-spin.vercel.app/#";
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
   };
 
   return (
@@ -56,30 +23,18 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
       <div className="home_container">
         <Navbar showSidebar={showSidebar} />
-
         <div className="content">
-          <div className="games_slider" ref={gamesSliderRef}>
-            <div className="game_box1">
-              <div className="play_button">
-              <button onClick={slot}>Play</button>
-              </div>
-            </div>
-            <div className="game_box2">
-              <div className="play_button">
-                <Link to="/games">
-                  <button>Play</button>
-                </Link>
-              </div>
-            </div>
-            <div className="game_box3">
-              <div className="play_button">
-                <button>Play</button>
-              </div>
-            </div>
-            <div className="game_box4">
-              <div className="play_button">
-                <button>Play</button>
-              </div>
+          <div className="games_slider">
+            <div className="div">
+              <Slider {...settings}>
+                {Games.map(({ id, title, img }) => (
+                  <div key={id} className="game_box">
+                    <img src={img} alt="" className="game_img" />
+                    <div className="title">{title}</div>
+                    <div className="form_btn">Play</div>
+                  </div>
+                ))}
+              </Slider>
             </div>
           </div>
         </div>

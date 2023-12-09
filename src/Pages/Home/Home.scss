@@ -8,55 +8,42 @@
 
     .content {
       padding: 5rem 0 1rem 0;
-      background: red;
 
       .games_slider {
         width: 100%;
-        background: var(--white);
-        padding: 1rem;
+        margin: 0 auto;
+        padding: 0.6rem 3rem;
         display: flex;
         align-items: center;
-        gap: 1rem;
-        overflow-x: scroll;
 
-        .game_box1 {
-          width: 20rem;
-          height: 20rem;
-          background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.lifestylemirror.com%2Fwp-content%2Fuploads%2F2019%2F10%2F21C4CF86-1321-47A9-BB48-29412609D756.jpg&f=1&nofb=1&ipt=5fde5054b74b47569fab98bad07eddcaafcf4607ea903a638fade5de2b42c351&ipo=images") center/cover; 
+        @media screen and (max-width: 1000px) {
+          padding: 0.6rem 2rem;
         }
-
-        .game_box2 {
-          width: 20rem;
-          height: 20rem;
-          background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-eu.ssl-images-amazon.com%2Fimages%2FI%2F71R3yWhHGWL.jpg&f=1&nofb=1&ipt=b46bfecd22fdaa2b2f60150e929e28407dbad3e643071c6d86b5a82ec98f3dcc&ipo=images") center/cover; 
+        @media screen and (max-width: 700px) {
+          padding: 0.6rem 10px;
         }
 
-        .game_box3 {
-          width: 20rem;
-          height: 20rem;
-          background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fevoplay.games%2Fwp-content%2Fuploads%2F2021%2F03%2FHEADS-TAILS.jpg&f=1&nofb=1&ipt=194bb55c2dda8780beb268aedc71c5e5c3f3dc262f05485d773461925480491f&ipo=images") center/cover; 
+        .div {
+          width: 1200px;
+          // @media screen and (max-width: 1000px) {
+          //   width: 900px;
+          // }
         }
+        .game_box {
+          padding: 0 1rem;
+          img {
+            border-radius: 10px;
+            width: 20rem;
+            height: 15rem;
+          }
 
-        .game_box4 {
-          width: 20rem;
-          height: 20rem;
-          background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.alphacoders.com%2F473%2F473246.jpg&f=1&nofb=1&ipt=e8c64d2245c6ee833a7890a7fbdaa60e682076d94db4425cef775b4cc657f5ae&ipo=images") center/cover; 
-        }
-
-        .play_button {
-          font-size: 12px; 
-          color: blue;
-          cursor: pointer; 
-          border-radius: 10px;
-        }
-        
-        
-        .play_button:hover {
-          text-decoration: underline;
-        }
-        
+          .title {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            font-weight: bold;
+          }
         }
       }
     }
   }
-
+}
