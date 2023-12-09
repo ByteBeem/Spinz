@@ -19,10 +19,16 @@
         gap: 1rem;
         overflow-x: scroll;
 
-        .game_box {
+        .game_box1 {
           width: 20rem;
           height: 20rem;
           background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.lifestylemirror.com%2Fwp-content%2Fuploads%2F2019%2F10%2F21C4CF86-1321-47A9-BB48-29412609D756.jpg&f=1&nofb=1&ipt=5fde5054b74b47569fab98bad07eddcaafcf4607ea903a638fade5de2b42c351&ipo=images") center/cover; 
+        }
+
+        .game_box2 {
+          width: 20rem;
+          height: 20rem;
+          background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-eu.ssl-images-amazon.com%2Fimages%2FI%2F71R3yWhHGWL.jpg&f=1&nofb=1&ipt=b46bfecd22fdaa2b2f60150e929e28407dbad3e643071c6d86b5a82ec98f3dcc&ipo=images") center/cover; 
         }
         
         }
