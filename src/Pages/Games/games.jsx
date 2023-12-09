@@ -45,13 +45,18 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
   };
 
   return (
+    <div className="withdraw">
     <div>
       <Sidebar active={active} closeSidebar={closeSidebar} />
+
+      <div className="withdraw_container">
       <Navbar showSidebar={showSidebar} />
 
-      <div className="withdraw">
+      <div className="content">
+
+      
         {showBetInfo && (
-          <div className="bet-info-box">
+          <div className="balance_info">
             <h2>Winning Information</h2>
             <ul>
               <li>R10 bet wins R80</li>
@@ -64,7 +69,8 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
           </div>
         )}
 
-        <div className="video-container">
+<div className="middle">
+            <div className="left">
           <iframe
             width="330"
             height="215"
@@ -76,6 +82,8 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
         </div>
 
         <div>
+        <div className="right">
+              <div className="dropdown_container">
           <label htmlFor="cellphoneNumber">Bet Amount:</label>
           <input
             type="text"
@@ -94,6 +102,11 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
         {message && <p className="success-message">{message}</p>}
         {error && <p className="error-message">{error}</p>}
       </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
   );
 };
