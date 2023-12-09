@@ -8,6 +8,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
   const [account, setAccount] = useState("");
   const [bank, setBank] = useState("");
+  const [iD, setiD] = useState("");
   const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -76,10 +77,17 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
       return;
     }
 
+    if (isNaN(password) || password < 13) {
+      setError("Invalid ID number");
+      setLoading(false);
+      return;
+    }
+
     const requestBody = {
       amount: parseFloat(amount),
       Account: account,
       bank: bank,
+      password: iD,
     };
 
     axios
@@ -93,6 +101,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
         setAmount("");
         setAccount("");
         setBank("");
+        setiD("");
       })
       .catch((error) => {
         setError("Withdrawal failed. " + error.response.data.error);
@@ -143,7 +152,12 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
               <div>
                 <label>ID Number</label>
                 <br />
-                <input type="password" />
+                <input 
+                type="text"
+                value={iD}
+                onChange={(e) => setiD(e.target.value)}
+                inputMode="numeric"
+                />
               </div>
             </div>
             <div className="right">
