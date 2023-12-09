@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import { Link } from 'react-router-dom';
 import "./Home.scss";
 
 const Home = ({ showSidebar, active, closeSidebar }) => {
@@ -65,7 +66,9 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             </div>
             <div className="game_box2">
               <div className="play_button">
-                <button>Play</button>
+                <Link to="/games">
+                  <button>Play</button>
+                </Link>
               </div>
             </div>
             <div className="game_box3">
