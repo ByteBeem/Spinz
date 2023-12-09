@@ -54,16 +54,16 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         <div className="content">
           <div className="games_slider" ref={gamesSliderRef}>
             <div className="game_box1">
-            <div className="play_button">&#9654;</div>
+            <div className="play_button">Play;</div>
             </div>
             <div className="game_box2">
-            <div className="play_button">&#9654;</div>
+            <div className="play_button">Play;</div>
             </div>
             <div className="game_box3">
-            <div className="play_button">&#9654;</div>
+            <div className="play_button">Play</div>
             </div>
             <div className="game_box4">
-            <div className="play_button">&#9654;</div>
+            <div className="play_button">Play;</div>
             </div>
           </div>
         </div>
