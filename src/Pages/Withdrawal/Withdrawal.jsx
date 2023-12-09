@@ -82,6 +82,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
       setLoading(false);
       return;
     }
+    
 
     const requestBody = {
       amount: parseFloat(amount),

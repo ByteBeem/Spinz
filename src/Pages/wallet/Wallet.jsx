@@ -65,4 +65,5 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
   );
 };
 
+
 export default Wallet;
