@@ -1,0 +1,48 @@
+.account_info {
+    flex: 1;
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top:130px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    span {
+      color: var(--primary-color);
+      font-size: 15px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .loading-spinner {
+      font-size: 2em; 
+      color: #ffffff; 
+    }
+
+    .balance {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .form_btn {
+      text-decoration: none;
+      text-align: center;
+      margin-bottom: 7px;
+    }
+  }

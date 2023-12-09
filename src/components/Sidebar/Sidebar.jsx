@@ -6,6 +6,7 @@ import { FaUser } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 import { FiLoader } from "react-icons/fi";
 import { IoLogOut } from "react-icons/io5";
+import { GiWallet } from "react-icons/gi";
 import {useState} from 'react';
 import { IoIosChatbubbles } from "react-icons/io";
 
@@ -37,6 +38,7 @@ const Sidebar = ({ active, closeSidebar }) => {
           &times;
         </div>
       </div>
+      
 
       <div className="middle">
         <Link className="link" to="/dashboard" onClick={() => closeSidebar()}>
@@ -44,12 +46,17 @@ const Sidebar = ({ active, closeSidebar }) => {
           <span>Home</span>
         </Link>
 
+        <Link className="link" to="/wallets" onClick={() => closeSidebar()}>
+          <GiWallet className="icon" />
+          <span>Wallet</span>
+        </Link>
+
         <Link className="link" to="/profile" onClick={() => closeSidebar()}>
           <FaUser className="icon" />
           <span>Profile</span>
         </Link>
 
-        <Link className="link" to="" onClick={() => closeSidebar()}>
+        <Link className="link" to="/chat" onClick={() => closeSidebar()}>
           <IoIosChatbubbles className="icon" />
           <span>Support</span>
         </Link>

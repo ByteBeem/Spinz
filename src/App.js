@@ -7,8 +7,10 @@ import Home from "./Pages/Home/Home";
 import Profile from "./Pages/Profile/Profile";
 import Reset from "./components/Reset";
 import Deposit from "./Pages/Deposit/Deposit";
+import Chatbot from "./Pages/chatbot/Chatbot";
+import Wallet from "./Pages/wallet/Wallet";
 import Choice from "./components/choose";
-import Games from "./components/games";
+import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
 import { AuthProvider } from "./components/AuthContext";
 
@@ -63,9 +65,40 @@ function App() {
                   active={active}
                 />
               }
+              
             />
+            <Route
+              path="wallets"
+              element={
+                <Wallet
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
+
+            <Route
+              path="chat"
+              element={
+                <Chatbot
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
+            
             <Route path="choose" element={<Choice />} />
-            <Route path="games" element={<Games />} />
+            <Route path="games"
+             element={
+            <Games
+            showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+            />
+          } 
+            />
             <Route
               path="withdraw"
               element={
