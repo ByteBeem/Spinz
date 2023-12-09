@@ -114,7 +114,6 @@ function Profile({ showSidebar, active, closeSidebar }) {
         <div className="top">
           <div className="user_info">
             <div className="profile_pic">
-              
               <img src={UserProfile} alt="" />
             </div>
 
@@ -132,9 +131,11 @@ function Profile({ showSidebar, active, closeSidebar }) {
               <div className="text_item">{cellphone}</div>
             </div>
           </div>
-
-          
         </div>
+
+        <Link className="form_btn" to="/reset">
+          Reset Password
+        </Link>
 
         <div className="activity">
           <span>Activity</span>

@@ -34,7 +34,6 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
       setMessage(response.data.message);
       window.location.href = response.data.gameLink;
     } catch (err) {
-      
       setError("Something went wrong, please try again later.");
     } finally {
       setLoading(false);
@@ -47,62 +46,55 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
 
   return (
     <div className="withdraw">
-    <div>
-      <Sidebar active={active} closeSidebar={closeSidebar} />
+      <div>
+        <Sidebar active={active} closeSidebar={closeSidebar} />
 
-      <div className="withdraw_container">
-      <Navbar showSidebar={showSidebar} />
+        <div className="withdraw_container">
+          <Navbar showSidebar={showSidebar} />
 
-      <div className="content">
+          <div className="content">
+            {showBetInfo && <div className="balance_info"></div>}
 
-      
-        {showBetInfo && (
-          <div className="balance_info">
-            
+            <div className="middle">
+              <div className="left">
+                <iframe
+                  width="330"
+                  height="215"
+                  src="https://www.youtube.com/embed/r4Fqa3PdHjU"
+                  title="YouTube Video"
+                  frameBorder="0"
+                  allowFullScreen
+                ></iframe>
+              </div>
+
+              <div>
+                <div className="right">
+                  <div className="dropdown_container">
+                    <label htmlFor="cellphoneNumber">Bet Amount:</label>
+                    <br />
+                    <input
+                      type="text"
+                      id="cellphoneNumber"
+                      value={cellphoneNumber}
+                      onChange={(e) => setCellphoneNumber(e.target.value)}
+                      inputMode="numeric"
+                    />
+                  </div>
+
+                  <div>
+                    <button onClick={startGame} disabled={loading}>
+                      {loading ? "Loading..." : "Start Game"}
+                    </button>
+                  </div>
+
+                  {message && <p className="success-message">{message}</p>}
+                  {error && <p className="error-message">{error}</p>}
+                </div>
+              </div>
+            </div>
           </div>
-        )}
-
-<div className="middle">
-            <div className="left">
-          <iframe
-            width="330"
-            height="215"
-            src="https://www.youtube.com/embed/r4Fqa3PdHjU"
-            title="YouTube Video"
-            frameBorder="0"
-            allowFullScreen
-          ></iframe>
         </div>
-
-        <div>
-        <div className="right">
-              <div className="dropdown_container">
-          <label htmlFor="cellphoneNumber">Bet Amount:</label>
-          <br />
-          <input
-          
-            type="text"
-            id="cellphoneNumber"
-            value={cellphoneNumber}
-            onChange={(e) => setCellphoneNumber(e.target.value)}
-            inputMode="numeric"
-          />
-        </div>
-
-        <div>
-          <button onClick={startGame} disabled={loading}>
-            {loading ? "Loading..." : "Start Game"}
-          </button>
-        </div>
-
-        {message && <p className="success-message">{message}</p>}
-        {error && <p className="error-message">{error}</p>}
       </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
   );
 };

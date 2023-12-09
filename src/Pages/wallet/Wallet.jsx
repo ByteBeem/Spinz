@@ -1,22 +1,21 @@
 // Import statements
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useAuth } from '../../components/AuthContext';
-import { FiLoader } from 'react-icons/fi';
-import Sidebar from '../../components/Sidebar/Sidebar';
-import Navbar from '../../components/Navbar/Navbar';
-import './wallet.scss';
-import '../../App.scss';
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../../components/AuthContext";
+import { FiLoader } from "react-icons/fi";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Navbar/Navbar";
+import "./wallet.scss";
+import "../../App.scss";
 
 const Wallet = ({ showSidebar, active, closeSidebar }) => {
   const { setToken } = useAuth();
   const [userData, setUserData] = useState({});
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
+    const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
       setToken(storedToken);
@@ -27,7 +26,7 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
   const fetchUserData = (token) => {
     setLoading(true);
     axios
-      .get('https://changeable-pinnate-soursop.glitch.me/getUserData', {
+      .get("https://changeable-pinnate-soursop.glitch.me/getUserData", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -35,35 +34,37 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
         setLoading(false);
       })
       .catch((error) => {
-        setLoading(false); 
+        setLoading(false);
       });
   };
 
   return (
-    <div>
+    <div className="wallet">
       <Sidebar active={active} closeSidebar={closeSidebar} />
-      <Navbar showSidebar={showSidebar} />
 
-      <div className="account_info">
-        {loading && (
-          <div className="overlay">
-            <FiLoader className="loading-spinner" />
-          </div>
-        )}
+      <div className="wallet_container">
+        <Navbar showSidebar={showSidebar} />
 
-        <span>Account Balance:</span>
-        <div className="balance">{`R${userData.balance}`}</div>
+        <div className="account_info">
+          {loading && (
+            <div className="overlay">
+              <FiLoader className="loading-spinner" />
+            </div>
+          )}
 
-        <Link className="form_btn" to="/withdraw">
-          Withdraw
-        </Link>
-        <Link className="form_btn" to="/deposit">
-          Deposit
-        </Link>
+          <span>Account Balance:</span>
+          <div className="balance">{`R${userData.balance}`}</div>
+
+          <Link className="form_btn" to="/withdraw">
+            Withdraw
+          </Link>
+          <Link className="form_btn" to="/deposit">
+            Deposit
+          </Link>
+        </div>
       </div>
     </div>
   );
 };
-
 
 export default Wallet;

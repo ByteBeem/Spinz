@@ -14,10 +14,10 @@
     justify-content: center;
     z-index: 1000;
   }
-  
+
   .loading-spinner {
-    font-size: 2em; 
-    color: #ffffff; 
+    font-size: 2em;
+    color: #ffffff;
   }
 
   .profile_container {
@@ -35,7 +35,6 @@
         background: var(--white);
         box-shadow: var(--box-shadow);
         border-radius: 5px;
-
         display: flex;
         align-items: flex-start;
         gap: 2rem;
@@ -59,8 +58,6 @@
           }
         }
       }
-
-     
 
       .account_info {
         flex: 1;
@@ -93,10 +90,16 @@
       }
     }
 
+    .form_btn {
+      text-decoration: none;
+      padding: 1rem 0.6rem;
+      margin: 0 2rem 1rem 2rem;
+    }
+
     .activity {
       padding: 2rem;
       background: var(--white);
-      margin: 0 2rem 1rem 2rem;
+      margin: 2rem 2rem 1rem 2rem;
       height: max-content;
 
       span {
