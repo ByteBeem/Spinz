@@ -44,6 +44,11 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     };
   }, [touchStartX]);
 
+  const slot = () => {
+    
+    window.location.href = "https://spinz-spin.vercel.app/#";
+  };
+
   return (
     <div className="home">
       <Sidebar active={active} closeSidebar={closeSidebar} />
@@ -55,7 +60,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
           <div className="games_slider" ref={gamesSliderRef}>
             <div className="game_box1">
               <div className="play_button">
-                <button>Play</button>
+              <button onClick={slot}>Play</button>
               </div>
             </div>
             <div className="game_box2">
