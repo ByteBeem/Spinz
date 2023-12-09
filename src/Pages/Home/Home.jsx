@@ -27,9 +27,9 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         
       
         break;
-      // Add more cases as needed
+      
       default:
-        // Default case
+        
         console.log('Unknown game id');
     }
   };
