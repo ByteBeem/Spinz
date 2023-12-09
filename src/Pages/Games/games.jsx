@@ -34,7 +34,7 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
       setMessage(response.data.message);
       window.location.href = response.data.gameLink;
     } catch (err) {
-      console.log(err)
+      
       setError("Something went wrong, please try again later.");
     } finally {
       setLoading(false);
