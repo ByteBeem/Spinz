@@ -6,7 +6,7 @@ import Pic4 from "../assets/back.jpg";
 const Games = [
   {
     id: 1,
-    title: "Game One",
+    title: "Slot Machine",
     img: Pic1,
   },
   {
