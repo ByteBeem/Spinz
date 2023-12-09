@@ -53,35 +53,17 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   return (
     <div className="home">
       <Sidebar active={active} closeSidebar={closeSidebar} />
-  
+
       <div className="home_container">
         <Navbar showSidebar={showSidebar} />
-  
+
         <div className="content">
           <div className="games_slider" ref={gamesSliderRef}>
-            
-            <div className="game_box">
-              <div className="play_button">▶️</div>
-              <div className="game_image"></div>
-            </div>
-  
-            
-            <div className="game_box">
-              <div className="play_button">▶️</div>
-              <div className="game_image"></div>
-            </div>
-  
-            
-            <div className="game_box">
-              <div className="play_button">▶️</div>
-              <div className="game_image"></div>
-            </div>
-  
-            
-            <div className="game_box">
-              <div className="play_button">▶️</div>
-              <div className="game_image"></div>
-            </div>
+           
+            <div className="game_box1"></div>
+            <div className="game_box2"></div>
+            <div className="game_box3"></div>
+            <div className="game_box4"></div>
           </div>
         </div>
       </div>
