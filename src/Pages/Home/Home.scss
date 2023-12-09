@@ -8,21 +8,41 @@
 
     .content {
       padding: 5rem 0 1rem 0;
-      background: red;
 
       .games_slider {
         width: 100%;
-        background: var(--white);
-        padding: 1rem;
+        margin: 0 auto;
+        padding: 0.6rem 3rem;
         display: flex;
         align-items: center;
-        gap: 1rem;
-        overflow-x: scroll;
+
+        @media screen and (max-width: 1000px) {
+          padding: 0.6rem 2rem;
+        }
+        @media screen and (max-width: 700px) {
+          padding: 0.6rem 10px;
+        }
+
+        .div {
+          width: 1200px;
+          // @media screen and (max-width: 1000px) {
+          //   width: 900px;
+          // }
+        }
 
         .game_box {
-          width: 20rem;
-          height: 20rem;
-          background: var(--primary-color);
+          padding: 0 1rem;
+          img {
+            border-radius: 10px;
+            width: 20rem;
+            height: 15rem;
+          }
+
+          .title {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            font-weight: bold;
+          }
         }
       }
     }

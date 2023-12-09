@@ -82,21 +82,39 @@
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./Home.scss";
+import Games from "../../Data/Games";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = ({ showSidebar, active, closeSidebar }) => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+  };
+
   return (
     <div className="home">
       <Sidebar active={active} closeSidebar={closeSidebar} />
 
       <div className="home_container">
         <Navbar showSidebar={showSidebar} />
-
         <div className="content">
           <div className="games_slider">
-            <div className="game_box"></div>
-            <div className="game_box"></div>
-            <div className="game_box"></div>
-            <div className="game_box"></div>
+            <div className="div">
+              <Slider {...settings}>
+                {Games.map(({ id, title, img }) => (
+                  <div key={id} className="game_box">
+                    <img src={img} alt="" className="game_img" />
+                    <div className="title">{title}</div>
+                    <div className="form_btn">Play</div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
           </div>
         </div>
       </div>

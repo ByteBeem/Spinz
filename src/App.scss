@@ -21,10 +21,12 @@ body {
 .form_btn {
   padding: 1rem 0;
   width: 100%;
+  text-align: center;
   border-radius: 5px;
   color: white;
   background: var(--primary-color);
   transition: var(--transition);
+  cursor: pointer;
 }
 
 .form_btn:active {

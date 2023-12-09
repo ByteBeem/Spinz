@@ -110,7 +110,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
         <div className="content">
           <div className="balance_info">
             <span>Current Balance:</span>
-            <h1>${balance}</h1>
+            <h1>R{balance}</h1>
           </div>
 
           <div className="middle">
