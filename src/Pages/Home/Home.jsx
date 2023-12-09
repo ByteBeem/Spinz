@@ -8,16 +8,19 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   const [touchStartX, setTouchStartX] = useState(0);
 
   useEffect(() => {
+    
     const handleTouchStart = (e) => {
       setTouchStartX(e.touches[0].clientX);
     };
 
+    
     const handleTouchMove = (e) => {
       if (touchStartX !== null) {
         const touchCurrentX = e.touches[0].clientX;
         const deltaX = touchCurrentX - touchStartX;
 
         if (gamesSliderRef.current) {
+          
           gamesSliderRef.current.scrollLeft -= deltaX;
         }
 
@@ -25,16 +28,19 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
       }
     };
 
+    
     const handleTouchEnd = () => {
       setTouchStartX(null);
     };
 
+    
     if (gamesSliderRef.current) {
       gamesSliderRef.current.addEventListener("touchstart", handleTouchStart);
       gamesSliderRef.current.addEventListener("touchmove", handleTouchMove);
       gamesSliderRef.current.addEventListener("touchend", handleTouchEnd);
     }
 
+    
     return () => {
       if (gamesSliderRef.current) {
         gamesSliderRef.current.removeEventListener("touchstart", handleTouchStart);
@@ -53,10 +59,11 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
         <div className="content">
           <div className="games_slider" ref={gamesSliderRef}>
+           
             <div className="game_box1"></div>
             <div className="game_box2"></div>
-            <div className="game_box2"></div>
-            <div className="game_box2"></div>
+            <div className="game_box3"></div>
+            <div className="game_box4"></div>
           </div>
         </div>
       </div>
