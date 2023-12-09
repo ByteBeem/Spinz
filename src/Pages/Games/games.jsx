@@ -34,7 +34,7 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
       setMessage(response.data.message);
       window.location.href = response.data.gameLink;
     } catch (err) {
-      setMessage("Something went wrong, please try again later.");
+      setError("Something went wrong, please try again later.");
     } finally {
       setLoading(false);
     }
@@ -57,15 +57,7 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
       
         {showBetInfo && (
           <div className="balance_info">
-            <h2>Winning Information</h2>
-            <ul>
-              <li>R10 bet wins R80</li>
-              <li>R20 bet wins R150</li>
-              <li>R30 bet wins R200</li>
-              <li>R40 bet wins R230</li>
-              <li>R50 bet wins R290</li>
-            </ul>
-            <button onClick={handleOkClick}>OK</button>
+            
           </div>
         )}
 
@@ -85,11 +77,14 @@ const VideoComponent = ({ showSidebar, active, closeSidebar }) => {
         <div className="right">
               <div className="dropdown_container">
           <label htmlFor="cellphoneNumber">Bet Amount:</label>
+          <br />
           <input
+          
             type="text"
             id="cellphoneNumber"
             value={cellphoneNumber}
             onChange={(e) => setCellphoneNumber(e.target.value)}
+            inputMode="numeric"
           />
         </div>
 
