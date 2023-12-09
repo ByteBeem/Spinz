@@ -1,22 +1,48 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "./Home.scss";
 
 const Home = ({ showSidebar, active, closeSidebar }) => {
   const gamesSliderRef = useRef(null);
+  const [touchStartX, setTouchStartX] = useState(0);
 
-  const scrollLeft = () => {
-    if (gamesSliderRef.current) {
-      gamesSliderRef.current.scrollLeft -= 200;
-    }
-  };
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      setTouchStartX(e.touches[0].clientX);
+    };
 
-  const scrollRight = () => {
+    const handleTouchMove = (e) => {
+      if (touchStartX !== null) {
+        const touchCurrentX = e.touches[0].clientX;
+        const deltaX = touchCurrentX - touchStartX;
+
+        if (gamesSliderRef.current) {
+          gamesSliderRef.current.scrollLeft -= deltaX;
+        }
+
+        setTouchStartX(touchCurrentX);
+      }
+    };
+
+    const handleTouchEnd = () => {
+      setTouchStartX(null);
+    };
+
     if (gamesSliderRef.current) {
-      gamesSliderRef.current.scrollLeft += 200; 
+      gamesSliderRef.current.addEventListener("touchstart", handleTouchStart);
+      gamesSliderRef.current.addEventListener("touchmove", handleTouchMove);
+      gamesSliderRef.current.addEventListener("touchend", handleTouchEnd);
     }
-  };
+
+    return () => {
+      if (gamesSliderRef.current) {
+        gamesSliderRef.current.removeEventListener("touchstart", handleTouchStart);
+        gamesSliderRef.current.removeEventListener("touchmove", handleTouchMove);
+        gamesSliderRef.current.removeEventListener("touchend", handleTouchEnd);
+      }
+    };
+  }, [touchStartX]);
 
   return (
     <div className="home">
@@ -31,10 +57,6 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             <div className="game_box"></div>
             <div className="game_box"></div>
             <div className="game_box"></div>
-          </div>
-          <div className="scroll_buttons">
-            <button onClick={scrollLeft}>Scroll Left</button>
-            <button onClick={scrollRight}>Scroll Right</button>
           </div>
         </div>
       </div>
