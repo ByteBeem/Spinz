@@ -32,15 +32,11 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         
       
         break;
-
+    
         case 4:
-      return (
-        <Link to="/tacToe">
-          
-        </Link>
-      );
+          window.location.href = 'https://tac-game.vercel.app/';
 
-      
+      break;
 
         case 5:
         

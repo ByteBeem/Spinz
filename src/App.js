@@ -9,7 +9,6 @@ import Reset from "./components/Reset";
 import Deposit from "./Pages/Deposit/Deposit";
 import Chatbot from "./Pages/chatbot/Chatbot";
 import Wallet from "./Pages/wallet/Wallet";
-import Tac from "./Pages/Tic/tic";
 import Choice from "./components/choose";
 import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
@@ -79,16 +78,7 @@ function App() {
               }
             />
 
-          <Route
-              path="tacToe"
-              element={
-                <Tac
-                  showSidebar={showSidebar}
-                  closeSidebar={closeSidebar}
-                  active={active}
-                />
-              }
-            />
+            
          
             <Route
               path="chat"
