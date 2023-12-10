@@ -78,16 +78,7 @@ function App() {
                 />
               }
             />
-         <Route
-              path="ticGame"
-              element={
-                <Tac
-                  showSidebar={showSidebar}
-                  closeSidebar={closeSidebar}
-                  active={active}
-                />
-              }
-            />
+         
             <Route
               path="chat"
               element={
