@@ -25,6 +25,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         break;
       case 2:
         
+      window.location.href = 'https://word-search-wine.vercel.app/';
       
         break;
 
