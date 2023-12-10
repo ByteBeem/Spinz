@@ -27,6 +27,23 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         
       
         break;
+
+        case 3:
+        
+      
+        break;
+
+        case 4:
+        
+        <Link to="/withdraw">
+            
+          </Link>
+        break;
+
+        case 5:
+        
+      
+        break;
       
       default:
         
