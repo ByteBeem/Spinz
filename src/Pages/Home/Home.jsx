@@ -35,7 +35,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
         case 4:
         
-        <Link to="/withdraw">
+        <Link to="/ticGame">
             
           </Link>
         break;
