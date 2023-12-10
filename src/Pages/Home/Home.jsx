@@ -39,7 +39,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
       break;
 
         case 5:
-        
+          window.location.href = 'https://dice-three-snowy.vercel.app/';
       
         break;
       
