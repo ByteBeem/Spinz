@@ -1,7 +1,7 @@
-import Pic1 from "../assets/splash2.png";
-import Pic2 from "../assets/bckj.jpg";
-import Pic3 from "../assets/home-back.jpg";
-import Pic4 from "../assets/back.jpg";
+// import Pic1 from "../assets/splash2.png";
+// import Pic2 from "../assets/bckj.jpg";
+// import Pic3 from "../assets/home-back.jpg";
+// import Pic4 from "../assets/back.jpg";
 
 const Games = [
   {

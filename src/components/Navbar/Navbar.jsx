@@ -54,9 +54,9 @@ const Navbar = ({ showSidebar }) => {
           <IoNotifications className="icon" />
           <div className="count">5</div>
         </div>
-        <li className="profile">
+        <Link className="profile" to='/profile'>
           <img src="" alt="" />
-        </li>
+        </Link>
       </ul>
     </header>
   );

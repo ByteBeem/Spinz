@@ -14,7 +14,7 @@ const backgroundStyle = {
   flexDirection: "column",
 };
 
-const PictureWithPlayButton = () => {
+const PictureWithPlayButton = ({ showSidebar, active, closeSidebar }) => {
   const navigate = useNavigate();
   const handlePlayClick = () => {
     window.location.href = "https://spinz-spin.vercel.app";
