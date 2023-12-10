@@ -78,6 +78,17 @@ function App() {
                 />
               }
             />
+
+          <Route
+              path="tacToe"
+              element={
+                <Tac
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
          
             <Route
               path="chat"

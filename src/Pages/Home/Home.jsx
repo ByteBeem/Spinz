@@ -35,12 +35,12 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
         case 4:
       return (
-        <Link to="/ticGame">
+        <Link to="/tacToe">
           
         </Link>
-      )
+      );
 
-      break;
+      
 
         case 5:
         
