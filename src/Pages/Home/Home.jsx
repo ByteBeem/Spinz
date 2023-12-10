@@ -34,11 +34,13 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         break;
 
         case 4:
-        
+      return (
         <Link to="/ticGame">
-            
-          </Link>
-        break;
+          
+        </Link>
+      )
+
+      break;
 
         case 5:
         
