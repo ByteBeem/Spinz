@@ -23,6 +23,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         window.location.href = "https://spinz-spin.vercel.app";
         break;
       case 2:
+      window.location.href = 'https://word-search-wine.vercel.app/';
         break;
 
       case 3:
