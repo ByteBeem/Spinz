@@ -5,11 +5,11 @@ import Signup from "./Pages/Signup/Signup";
 import Logo from "./components/Logo/Logo";
 import Home from "./Pages/Home/Home";
 import Profile from "./Pages/Profile/Profile";
-import Reset from "./components/Reset";
+import Reset from "./Pages/Reset/Reset";
 import Deposit from "./Pages/Deposit/Deposit";
 import Chatbot from "./Pages/chatbot/Chatbot";
 import Wallet from "./Pages/wallet/Wallet";
-import Choice from "./components/choose";
+// import Choice from "./components/choose";
 import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
 import { AuthProvider } from "./components/AuthContext";
@@ -34,7 +34,6 @@ function App() {
             <Route index element={<Login />} />
 
             <Route path="signup" element={<Signup />} />
-            <Route path="login" element={<Login />} />
             <Route
               path="dashboard"
               element={
@@ -55,7 +54,16 @@ function App() {
                 />
               }
             />
-            <Route path="reset" element={<Reset />} />
+            <Route
+              path="reset"
+              element={
+                <Reset
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
             <Route
               path="deposit"
               element={
@@ -65,7 +73,6 @@ function App() {
                   active={active}
                 />
               }
-              
             />
             <Route
               path="wallets"
@@ -90,16 +97,27 @@ function App() {
                 />
               }
             />
-            
-            <Route path="choose" element={<Choice />} />
-            <Route path="games"
-             element={
-            <Games
-            showSidebar={showSidebar}
+
+            {/* <Route
+              path="choose"
+              element={
+                <Choice
+                  showSidebar={showSidebar}
                   closeSidebar={closeSidebar}
                   active={active}
-            />
-          } 
+                />
+              }
+            /> */}
+
+            <Route
+              path="games"
+              element={
+                <Games
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
             />
             <Route
               path="withdraw"

@@ -24,13 +24,19 @@
         }
 
         .div {
-          width: 1200px;
+          width: 1500px;
           // @media screen and (max-width: 1000px) {
           //   width: 900px;
+          // }
+          // @media screen and (max-width: 700px) {
+          //   width: 600px;
           // }
         }
         .game_box {
           padding: 0 1rem;
+          @media screen and (max-width: 1000px) {
+            padding: 0 0.5rem;
+          }
           img {
             border-radius: 10px;
             width: 20rem;
