@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./Home.scss";
 import Games from "../../Data/Games";
 import Slider from "react-slick";
@@ -18,34 +18,28 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   };
 
   const handlePlayClick = (id) => {
-   
     switch (id) {
       case 1:
-        window.location.href = 'https://spinz-spin.vercel.app';
+        window.location.href = "https://spinz-spin.vercel.app";
         break;
       case 2:
-        
-      
         break;
 
-        case 3:
-        
-      
+      case 3:
         break;
-    
-        case 4:
-          window.location.href = 'https://tac-game.vercel.app/';
 
-      break;
+      case 4:
+        window.location.href = "https://tac-game.vercel.app/";
 
-        case 5:
-          window.location.href = 'https://dice-three-snowy.vercel.app/';
-      
         break;
-      
+
+      case 5:
+        window.location.href = "https://dice-three-snowy.vercel.app/";
+
+        break;
+
       default:
-        
-        console.log('Unknown game id');
+        console.log("Unknown game id");
     }
   };
 
@@ -58,17 +52,20 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         <div className="content">
           <div className="games_slider">
             <div className="div">
-            <Slider {...settings}>
-      {Games.map(({ id, title, img }) => (
-        <div key={id} className="game_box">
-          <img src={img} alt="" className="game_img" />
-          <div className="title">{title}</div>
-          <div className="form_btn" onClick={() => handlePlayClick(id)}>
-            Play
-          </div>
-        </div>
-      ))}
-    </Slider>
+              <Slider {...settings}>
+                {Games.map(({ id, title, img }) => (
+                  <div key={id} className="game_box">
+                    <img src={img} alt="" className="game_img" />
+                    <div className="title">{title}</div>
+                    <div
+                      className="form_btn"
+                      onClick={() => handlePlayClick(id)}
+                    >
+                      Play
+                    </div>
+                  </div>
+                ))}
+              </Slider>
             </div>
           </div>
         </div>

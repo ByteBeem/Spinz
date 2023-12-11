@@ -3,7 +3,7 @@ import "./Reset.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 
-function PasswordReset({ showSidebar, active, closeSidebar }) {
+function Reset({ showSidebar, active, closeSidebar }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
@@ -39,12 +39,28 @@ function PasswordReset({ showSidebar, active, closeSidebar }) {
 
   return (
     <div className="reset">
-      <Sidebar closeSidebar={closeSidebar} />
+      <Sidebar active={active} closeSidebar={closeSidebar} />
 
       <div className="reset_container">
-        <Navbar active={active} showSidebar={showSidebar} />
+        <Navbar showSidebar={showSidebar} />
 
-        <div className="content">container</div>
+        <div className="content">
+          <div className="form">
+            <div>
+              <label htmlFor="">Enter Old password</label>
+              <input type="password" />
+            </div>
+            <div>
+              <label htmlFor="">Enter New password</label>
+              <input type="password" />
+            </div>
+            <div>
+              <label htmlFor="">Confirm New password</label>
+              <input type="password" />
+            </div>
+            <button className="form_btn">submit</button>
+          </div>
+        </div>
       </div>
 
       {/* <h1>Password Reset</h1>
@@ -57,4 +73,4 @@ function PasswordReset({ showSidebar, active, closeSidebar }) {
   );
 }
 
-export default PasswordReset;
+export default Reset;
