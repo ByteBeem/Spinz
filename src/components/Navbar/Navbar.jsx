@@ -38,9 +38,9 @@ const Navbar = ({ showSidebar }) => {
 
   return (
     <header>
-      <div className="menu_btn" onClick={() => showSidebar()}>
+      {/* <div className="menu_btn" onClick={() => showSidebar()}>
         &#9776;
-      </div>
+      </div> */}
       <ul className="games_filter">
         <li>
           <div className="balance">
@@ -54,7 +54,7 @@ const Navbar = ({ showSidebar }) => {
           <IoNotifications className="icon" />
           <div className="count">5</div>
         </div>
-        <Link className="profile" to='/profile'>
+        <Link className="profile" to="/profile">
           <img src="" alt="" />
         </Link>
       </ul>

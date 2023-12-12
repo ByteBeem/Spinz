@@ -5,6 +5,7 @@
 
   .home_container {
     flex: 6;
+    padding-bottom: 3rem;
 
     .content {
       padding: 5rem 0 1rem 0;
@@ -41,6 +42,11 @@
             border-radius: 10px;
             width: 20rem;
             height: 15rem;
+
+            @media screen and (max-width: 700px) {
+              width: 100%;
+              height: 15rem;
+            }
           }
 
           .title {
@@ -48,6 +54,10 @@
             margin: 10px 0;
             font-weight: bold;
           }
+
+          // .form_btn {
+          //   width: 50%;
+          // }
         }
       }
     }
