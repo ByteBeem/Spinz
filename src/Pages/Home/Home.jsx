@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../components/AuthContext";
-import Axios from "axios";
+import axios from "axios";
 import "./Home.scss";
 import Games from "../../Data/Games";
 import Slider from "react-slick";
