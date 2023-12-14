@@ -45,14 +45,14 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             window.location.href = "https://tac-game.vercel.app/";
             break;
           case 5:
-            const response = await axios.get(
-              "https://heavenly-onyx-bun.glitch.me/dice",
-              { headers }
-            );
-            const { gameLink } = response.data;
-  
-            window.location.href = gameLink;
-            break;
+           const response = await axios.post(
+          "https://heavenly-onyx-bun.glitch.me/dice",
+          {},
+          { headers }
+        );
+        const { gameLink } = response.data;
+        window.location.href = gameLink;
+        break;
           default:
             console.log("Unknown game id");
         }
