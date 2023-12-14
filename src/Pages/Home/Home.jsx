@@ -46,7 +46,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             break;
           case 5:
             const response = await Axios.get(
-              "https://heavenly-onyx-bun.glitch.me/startGameDice",
+              "https://heavenly-onyx-bun.glitch.me/dice",
               { headers }
             );
             const { gameLink } = response.data;
