@@ -1,7 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { Link } from "react-router-dom";
 import { useAuth } from "../../components/AuthContext";
 import axios from "axios";
 import "./Home.scss";
@@ -19,12 +18,14 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     slidesToScroll: 1,
   };
 
-    const [loading, setLoading] = useState(false);
-    const { setToken } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [betAmountInput, setBetAmountInput] = useState(""); // State for storing bet amount
+  const { setToken } = useAuth();
 
-const handlePlayClick = async (id) => {
+  const handlePlayClick = async (id) => {
     const storedToken = localStorage.getItem("token");
-if (id === 2) {
+
+    if (id === 2) {
       const userBetAmount = prompt("Enter your bet amount:");
       if (userBetAmount === null || isNaN(parseFloat(userBetAmount)) || parseFloat(userBetAmount) <= 0) {
         alert("Invalid bet amount. Please enter a valid bet amount.");
@@ -53,7 +54,7 @@ if (id === 2) {
           break;
 
         case 2:
-           const startGameResponse = await axios.post(
+          const startGameResponse = await axios.post(
             "https://heavenly-onyx-bun.glitch.me/startGame",
             { betAmount: betAmountInput },
             { headers }
@@ -61,11 +62,11 @@ if (id === 2) {
 
           const { gameLink: startGameLink } = startGameResponse.data;
           window.location.href = startGameLink;
-          
           break;
 
         case 3:
           // Additional cases can be added here
+          break;
 
         case 4:
           window.location.href = "https://tac-game.vercel.app/";
@@ -90,7 +91,6 @@ if (id === 2) {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="home">
@@ -106,12 +106,12 @@ if (id === 2) {
                   <div key={id} className="game_box">
                     <img src={img} alt="" className="game_img" />
                     <div className="title">{title}</div>
-                   <div
-                    className="form_btn"
-                    onClick={() => handlePlayClick(id)}
-                  >
-                    {loading ? "Loading..." : "Play"}
-                  </div>
+                    <div
+                      className="form_btn"
+                      onClick={() => handlePlayClick(id)}
+                    >
+                      {loading ? "Loading..." : "Play"}
+                    </div>
                   </div>
                 ))}
               </Slider>
