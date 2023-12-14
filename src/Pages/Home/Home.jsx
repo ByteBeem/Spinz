@@ -24,6 +24,16 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
 const handlePlayClick = async (id) => {
     const storedToken = localStorage.getItem("token");
+if (id === 2) {
+      const userBetAmount = prompt("Enter your bet amount:");
+      if (userBetAmount === null || isNaN(parseFloat(userBetAmount)) || parseFloat(userBetAmount) <= 0) {
+        alert("Invalid bet amount. Please enter a valid bet amount.");
+        return;
+      }
+
+      setBetAmountInput(userBetAmount);
+    }
+
     setLoading(true);
 
     try {
@@ -43,7 +53,15 @@ const handlePlayClick = async (id) => {
           break;
 
         case 2:
-          window.location.href = "https://word-search-wine.vercel.app/";
+           const startGameResponse = await axios.post(
+            "https://heavenly-onyx-bun.glitch.me/startGame",
+            { betAmount: betAmountInput },
+            { headers }
+          );
+
+          const { gameLink: startGameLink } = startGameResponse.data;
+          window.location.href = startGameLink;
+          
           break;
 
         case 3:
