@@ -22,53 +22,56 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     const [loading, setLoading] = useState(false);
     const { setToken } = useAuth();
 
-    const handlePlayClick = async (id) => {
-      const storedToken = localStorage.getItem("token");
-      setLoading(true);
-  
-      try {
-        const headers = {
-          Authorization: `Bearer ${storedToken}`,
-        };
-  
-        switch (id) {
-          case 1:
-            const response = await axios.post(
-          "https://heavenly-onyx-bun.glitch.me/slot",
-          {},
-          { headers }
-        );
-        const { gameLink } = response.data;
-        window.location.href = gameLink;
-        break;
-           
-          case 2:
-            window.location.href = "https://word-search-wine.vercel.app/";
-            break;
-          case 3:
-           
-            break;
-          case 4:
-            window.location.href = "https://tac-game.vercel.app/";
-            break;
-          case 5:
-           const response = await axios.post(
-          "https://heavenly-onyx-bun.glitch.me/dice",
-          {},
-          { headers }
-        );
-        const { gameLink } = response.data;
-        window.location.href = gameLink;
-        break;
-          default:
-            console.log("Unknown game id");
-        }
-      } catch (error) {
-        console.error("Error fetching or redirecting:", error);
-      } finally {
-        setLoading(false);
+const handlePlayClick = async (id) => {
+    const storedToken = localStorage.getItem("token");
+    setLoading(true);
+
+    try {
+      const headers = {
+        Authorization: `Bearer ${storedToken}`,
+      };
+
+      switch (id) {
+        case 1:
+          const slotResponse = await axios.post(
+            "https://heavenly-onyx-bun.glitch.me/slot",
+            {},
+            { headers }
+          );
+          const { gameLink: slotGameLink } = slotResponse.data;
+          window.location.href = slotGameLink;
+          break;
+
+        case 2:
+          window.location.href = "https://word-search-wine.vercel.app/";
+          break;
+
+        case 3:
+          // Additional cases can be added here
+
+        case 4:
+          window.location.href = "https://tac-game.vercel.app/";
+          break;
+
+        case 5:
+          const diceResponse = await axios.post(
+            "https://heavenly-onyx-bun.glitch.me/dice",
+            {},
+            { headers }
+          );
+          const { gameLink: diceGameLink } = diceResponse.data;
+          window.location.href = diceGameLink;
+          break;
+
+        default:
+          console.log("Unknown game id");
       }
-    };
+    } catch (error) {
+      console.error("Error fetching or redirecting:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   
 
   return (
