@@ -45,7 +45,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             window.location.href = "https://tac-game.vercel.app/";
             break;
           case 5:
-            const response = await Axios.get(
+            const response = await axios.get(
               "https://heavenly-onyx-bun.glitch.me/dice",
               { headers }
             );
