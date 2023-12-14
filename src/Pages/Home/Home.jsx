@@ -33,8 +33,15 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   
         switch (id) {
           case 1:
-            window.location.href = "https://spinz-spin.vercel.app";
-            break;
+            const response = await axios.post(
+          "https://heavenly-onyx-bun.glitch.me/slot",
+          {},
+          { headers }
+        );
+        const { gameLink } = response.data;
+        window.location.href = gameLink;
+        break;
+           
           case 2:
             window.location.href = "https://word-search-wine.vercel.app/";
             break;
