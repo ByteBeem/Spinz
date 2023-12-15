@@ -4,11 +4,23 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 import Typed from "typed.js";
+import DOMPurify from 'dompurify';
+
 
 function Login() {
+
+const sanitizeText = (text) => {
+    return { __html: DOMPurify.sanitize(text) };
+  };
+
+  const sanitizeInput = (input) => {
+  return DOMPurify.sanitize(input);
+};
+
+
   useEffect(() => {
     var typed = new Typed(".typing", {
-      strings: ["Login Now!", "Welcome to Spinz"],
+      strings: [sanitizeText("Login Now!"), "Welcome to Spinz"],
       typeSpeed: 90,
       backSpeed: 50,
       loop: true,
@@ -119,29 +131,31 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="cellphone">Cellphone</label>
-            <input
-              type="text"
-              id="cellphone"
-              name="cellphone"
-              value={formData.cellphone}
-              onChange={handleChange}
-              required
-              inputMode="numeric"
-            />
+<input
+  type="text"
+  id="cellphone"
+  name="cellphone"
+  value={sanitizeInput(formData.cellphone)}
+  onChange={handleChange}
+  required
+  inputMode="numeric"
+/>
+
             {errors.cellphone && (
               <p className="error-message">{errors.cellphone}</p>
             )}
           </div>
           <div>
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
+           <input
+  type="password"
+  id="password"
+  name="password"
+  value={sanitizeInput(formData.password)}
+  onChange={handleChange}
+  required
+/>
+
             {errors.password && (
               <p className="error-message">{errors.password}</p>
             )}
