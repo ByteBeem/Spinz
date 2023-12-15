@@ -13,7 +13,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 800,
+    speed: 200,
     slidesToShow: 4,
     slidesToScroll: 1,
   };
@@ -87,7 +87,14 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
           break;
 
           case 7:
-          window.location.href = "https://tac-game.vercel.app/";
+           const wheelResponse = await axios.post(
+            "https://heavenly-onyx-bun.glitch.me/wheel",
+            {},
+            { headers }
+          );
+          const { gameLink: wheelGameLink } = wheelResponse.data;
+          window.location.href = wheelGameLink;
+          
           break;
 
         default:
