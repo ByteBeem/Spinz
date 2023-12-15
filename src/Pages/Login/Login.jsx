@@ -10,8 +10,9 @@ import DOMPurify from 'dompurify';
 function Login() {
 
 const sanitizeText = (text) => {
-    return { __html: DOMPurify.sanitize(text) };
-  };
+  return DOMPurify.sanitize(text);
+};
+
 
   const sanitizeInput = (input) => {
   return DOMPurify.sanitize(input);
@@ -19,13 +20,14 @@ const sanitizeText = (text) => {
 
 
   useEffect(() => {
-    var typed = new Typed(".typing", {
-      strings: [sanitizeText("Login Now!"), "Welcome to Spinz"],
-      typeSpeed: 90,
-      backSpeed: 50,
-      loop: true,
-    });
-  }, []);
+  var typed = new Typed(".typing", {
+    strings: [sanitizeText("Login Now!"), "Welcome to Spinz"],
+    typeSpeed: 90,
+    backSpeed: 50,
+    loop: true,
+  });
+}, []);
+
 
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
