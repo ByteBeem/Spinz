@@ -20,7 +20,7 @@ const Sidebar = ({ active, closeSidebar }) => {
       
       
       setLoading(false);
-      window.location.href = "/login";
+      window.location.href = "www.shopient.co.za";
       closeSidebar();
     }, 5000);
   };

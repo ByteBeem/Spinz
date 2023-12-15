@@ -1,7 +1,8 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { Link } from "react-router-dom";
+import { useAuth } from "../../components/AuthContext";
+import axios from "axios";
 import "./Home.scss";
 import Games from "../../Data/Games";
 import Slider from "react-slick";
@@ -17,30 +18,77 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     slidesToScroll: 1,
   };
 
-  const handlePlayClick = (id) => {
-    switch (id) {
-      case 1:
-        window.location.href = "https://spinz-spin.vercel.app";
-        break;
-      case 2:
-      window.location.href = 'https://word-search-wine.vercel.app/';
-        break;
+  const [loading, setLoading] = useState(false);
+  const [betAmountInput, setBetAmountInput] = useState(""); // State for storing bet amount
+  const { setToken } = useAuth();
 
-      case 3:
-        break;
+  const handlePlayClick = async (id) => {
+    const storedToken = localStorage.getItem("token");
 
-      case 4:
-        window.location.href = "https://tac-game.vercel.app/";
+    if (id === 2) {
+      const userBetAmount = prompt("Enter your bet amount:");
+      if (userBetAmount === null || isNaN(parseFloat(userBetAmount)) || parseFloat(userBetAmount) <= 0) {
+        alert("Invalid bet amount. Please enter a valid bet amount.");
+        return;
+      }
 
-        break;
+      setBetAmountInput(userBetAmount);
+    }
 
-      case 5:
-        window.location.href = "https://dice-three-snowy.vercel.app/";
+    setLoading(true);
 
-        break;
+    try {
+      const headers = {
+        Authorization: `Bearer ${storedToken}`,
+      };
 
-      default:
-        console.log("Unknown game id");
+      switch (id) {
+        case 1:
+          const slotResponse = await axios.post(
+            "https://heavenly-onyx-bun.glitch.me/slot",
+            {},
+            { headers }
+          );
+          const { gameLink: slotGameLink } = slotResponse.data;
+          window.location.href = slotGameLink;
+          break;
+
+        case 2:
+          const startGameResponse = await axios.post(
+            "https://heavenly-onyx-bun.glitch.me/startGame",
+            { betAmount: betAmountInput },
+            { headers }
+          );
+
+          const { gameLink: startGameLink } = startGameResponse.data;
+          window.location.href = startGameLink;
+          break;
+
+        case 3:
+          // Additional cases can be added here
+          break;
+
+        case 4:
+          window.location.href = "https://tac-game.vercel.app/";
+          break;
+
+        case 5:
+          const diceResponse = await axios.post(
+            "https://heavenly-onyx-bun.glitch.me/dice",
+            {},
+            { headers }
+          );
+          const { gameLink: diceGameLink } = diceResponse.data;
+          window.location.href = diceGameLink;
+          break;
+
+        default:
+          console.log("Unknown game id");
+      }
+    } catch (error) {
+      console.error("Error fetching or redirecting:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,7 +110,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
                       className="form_btn"
                       onClick={() => handlePlayClick(id)}
                     >
-                      Play
+                      {loading ? "Loading..." : "Play"}
                     </div>
                   </div>
                 ))}
