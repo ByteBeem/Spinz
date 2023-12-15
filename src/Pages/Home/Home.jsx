@@ -13,7 +13,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 800,
     slidesToShow: 4,
     slidesToScroll: 1,
   };
@@ -83,6 +83,10 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
           break;
 
           case 6:
+          window.location.href = "https://tac-game.vercel.app/";
+          break;
+
+          case 7:
           window.location.href = "https://tac-game.vercel.app/";
           break;
 
