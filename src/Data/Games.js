@@ -30,6 +30,11 @@ const Games = [
     title: "Rock Paper Scissors",
     img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F000%2F691%2F497%2Foriginal%2Frock-paper-scissors-neon-icons-vector.jpg&f=1&nofb=1&ipt=aa16d61e69aecda94292170a29a64bf07d61ca6e36de5a8dedbbc6907154d868&ipo=images",
   },
+   {
+    id: 7,
+    title: "Wheel Of Fortune",
+    img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs24990.pcdn.co%2Fwp-content%2Fuploads%2F2019%2F07%2Fwheel-of-fortune1.jpg&f=1&nofb=1&ipt=09c37df0d1d429ea307d38d9f1c5cdf9797fe68336c03376b6614b8cc5f907a8&ipo=images",
+  },
 ];
 
 export default Games;
