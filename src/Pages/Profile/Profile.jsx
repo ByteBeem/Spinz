@@ -173,9 +173,9 @@ function Profile({ showSidebar, active, closeSidebar }) {
                   .reverse()
                   .map(({ id, title, msg, time, result }) => (
                     <tr key={id} className={result}>
-                      <td id="title">{title}</td>
-                      <td id="body">{msg}</td>
-                      <td id="time">{time}</td>
+                      <td id="title">{activities.activity_description}</td>
+                      <td id="body">{activities.activity_details}</td>
+                      <td id="time">{activities.date_time}</td>
                     </tr>
                   ))}
               </tbody>
