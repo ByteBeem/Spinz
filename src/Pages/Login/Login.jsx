@@ -18,6 +18,23 @@ const sanitizeText = (text) => {
   return DOMPurify.sanitize(input);
 };
 
+  useEffect(() => {
+    const fetchCSRFToken = async () => {
+      try {
+        const response = await axios.get("https://warm-honored-cuticle.glitch.me/csrf-token");
+        setCSRFToken(response.data.csrfToken);
+      } catch (error) {
+        console.error("CSRF Token Error:", error);
+      }
+    };
+
+    fetchCSRFToken();
+  }, []);
+
+  return csrfToken;
+};
+
+const csrfToken = useCSRFToken();
 
   useEffect(() => {
   var typed = new Typed(".typing", {
@@ -162,6 +179,7 @@ const sanitizeText = (text) => {
               <p className="error-message">{errors.password}</p>
             )}
           </div>
+          <input type="hidden" name="_csrf" value={csrfToken} />
           <button type="submit" className="form_btn" disabled={isLoading}>
             {isLoading ? "Logging In..." : "Log In"}
           </button>
