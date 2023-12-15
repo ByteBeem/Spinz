@@ -157,27 +157,25 @@ function Profile({ showSidebar, active, closeSidebar }) {
 
         {/*  */}
 
-        <div className="activity">
+<div className="activity">
           <span>Activity</span>
           {activities.length > 0 ? (
             <table>
               <thead>
                 <tr>
+                  <th>Date</th>
                   <th>Type</th>
                   <th>Info</th>
-                  <th>Date</th>
                 </tr>
               </thead>
               <tbody>
-                {activities
-                  .reverse()
-                  .map(({ id, title, msg, time, result }) => (
-                    <tr key={id} className={result}>
-                      <td id="title">{activities.activity_description}</td>
-                      <td id="body">{activities.activity_details}</td>
-                      <td id="time">{activities.date_time}</td>
-                    </tr>
-                  ))}
+                {activities.reverse().map(({ id, date_time, activity_description, activity_details, result }) => (
+                  <tr key={id} className={result}>
+                    <td>{new Date(date_time).toLocaleString()}</td>
+                    <td>{activity_description}</td>
+                    <td>{activity_details}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           ) : (
