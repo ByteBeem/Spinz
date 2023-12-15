@@ -11,11 +11,12 @@ import { Link } from "react-router-dom";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { MdOutlinePayments } from "react-icons/md";
 import { FiLoader } from "react-icons/fi";
+import Activities from "../../Data/Activities";
 
 function Profile({ showSidebar, active, closeSidebar }) {
   const { setToken } = useAuth();
   const [userData, setUserData] = useState({});
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState(Activities);
   const [Dates, setDates] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -137,38 +138,54 @@ function Profile({ showSidebar, active, closeSidebar }) {
           Reset Password
         </Link>
 
+        {/* <div className="activity">
+          <span>Activity</span>
+          <div className="activity_box">
+            <div className="left">
+              <img className="activity_icon" src="" alt="" />
+              <div className="text">
+                <div className="title">Title</div>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Adipisci, dolore!
+                </p>
+              </div>
+            </div>
+            <span className="time">20 mins ago</span>
+          </div>
+        </div> */}
+
+        {/*  */}
+
         <div className="activity">
           <span>Activity</span>
+          {activities.length > 0 ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Info</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activities
+                  .reverse()
+                  .map(({ id, title, msg, time, result }) => (
+                    <tr key={id} className={result}>
+                      <td id="title">{title}</td>
+                      <td id="body">{msg}</td>
+                      <td id="time">{time}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No Activities Yet</p>
+          )}
         </div>
       </div>
     </div>
-
-    //   <div className="activities">
-    //     <h2>Activities</h2>
-    //     {activities.length > 0 ? (
-    //       <table>
-    //         <thead>
-    //           <tr>
-    //             <th>Type</th>
-    //             <th>Info</th>
-    //             <th>Date</th>
-    //           </tr>
-    //         </thead>
-    //         <tbody>
-    //           {activities.reverse().map((activity, index) => (
-    //             <tr key={index}>
-    //               <td>{activity.activity_description}</td>
-    //               <td>{activity.activity_details}</td>
-    //               <td>{Dates[index]}</td>
-    //             </tr>
-    //           ))}
-    //         </tbody>
-    //       </table>
-    //     ) : (
-    //       <p>No Activities Yet</p>
-    //     )}
-    //   </div>
-    // </div>
   );
 }
 
