@@ -7,8 +7,8 @@ import Typed from "typed.js";
 import DOMPurify from 'dompurify';
 
 function Login() {
-  const { useCSRFToken, setToken, setUserData } = useAuth();
-  const csrfToken = useCSRFToken();
+  const {setToken, setUserData } = useAuth();
+
   const navigate = useNavigate();
 
   const sanitizeText = (text) => {
@@ -19,18 +19,6 @@ function Login() {
     return DOMPurify.sanitize(input);
   };
 
-  useEffect(() => {
-    const fetchCSRFToken = async () => {
-      try {
-        const response = await axios.get("https://warm-honored-cuticle.glitch.me/csrf-token");
-        setCSRFToken(response.data.csrfToken);
-      } catch (error) {
-        console.error("CSRF Token Error:", error);
-      }
-    };
-
-    fetchCSRFToken();
-  }, [setCSRFToken]);
 
   useEffect(() => {
     var typed = new Typed(".typing", {
@@ -171,7 +159,7 @@ function Login() {
               <p className="error-message">{errors.password}</p>
             )}
           </div>
-          <input type="hidden" name="_csrf" value={csrfToken} />
+
           <button type="submit" className="form_btn" disabled={isLoading}>
             {isLoading ? "Logging In..." : "Log In"}
           </button>
