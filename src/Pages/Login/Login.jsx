@@ -6,17 +6,18 @@ import { useAuth } from "../../components/AuthContext";
 import Typed from "typed.js";
 import DOMPurify from 'dompurify';
 
-
 function Login() {
+  const { useCSRFToken, setToken, setUserData } = useAuth();
+  const csrfToken = useCSRFToken();
+  const navigate = useNavigate();
 
-const sanitizeText = (text) => {
-  return DOMPurify.sanitize(text);
-};
-
+  const sanitizeText = (text) => {
+    return DOMPurify.sanitize(text);
+  };
 
   const sanitizeInput = (input) => {
-  return DOMPurify.sanitize(input);
-};
+    return DOMPurify.sanitize(input);
+  };
 
   useEffect(() => {
     const fetchCSRFToken = async () => {
@@ -29,26 +30,18 @@ const sanitizeText = (text) => {
     };
 
     fetchCSRFToken();
-  }, []);
-
-  return csrfToken;
-};
-
-const csrfToken = useCSRFToken();
+  }, [setCSRFToken]);
 
   useEffect(() => {
-  var typed = new Typed(".typing", {
-    strings: [sanitizeText("Login Now!"), "Welcome to Spinz"],
-    typeSpeed: 90,
-    backSpeed: 50,
-    loop: true,
-  });
-}, []);
-
+    var typed = new Typed(".typing", {
+      strings: [sanitizeText("Login Now!"), "Welcome to Spinz"],
+      typeSpeed: 90,
+      backSpeed: 50,
+      loop: true,
+    });
+  }, []);
 
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-  const { setToken, setUserData } = useAuth();
 
   const [errors, setErrors] = useState({
     cellphone: "",
@@ -82,7 +75,6 @@ const csrfToken = useCSRFToken();
     setIsLoading(true);
     setErrors({
       cellphone: "",
-
       password: "",
     });
 
@@ -119,7 +111,7 @@ const csrfToken = useCSRFToken();
 
         setErrors((prevErrors) => ({
           ...prevErrors,
-          password: " Successfully! ",
+          password: "Login Successful!",
         }));
       } else if (response.status === 201) {
         setErrors((prevErrors) => ({
@@ -150,15 +142,15 @@ const csrfToken = useCSRFToken();
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="cellphone">Cellphone</label>
-<input
-  type="text"
-  id="cellphone"
-  name="cellphone"
-  value={sanitizeInput(formData.cellphone)}
-  onChange={handleChange}
-  required
-  inputMode="numeric"
-/>
+            <input
+              type="text"
+              id="cellphone"
+              name="cellphone"
+              value={sanitizeInput(formData.cellphone)}
+              onChange={handleChange}
+              required
+              inputMode="numeric"
+            />
 
             {errors.cellphone && (
               <p className="error-message">{errors.cellphone}</p>
@@ -166,14 +158,14 @@ const csrfToken = useCSRFToken();
           </div>
           <div>
             <label htmlFor="password">Password</label>
-           <input
-  type="password"
-  id="password"
-  name="password"
-  value={sanitizeInput(formData.password)}
-  onChange={handleChange}
-  required
-/>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={sanitizeInput(formData.password)}
+              onChange={handleChange}
+              required
+            />
 
             {errors.password && (
               <p className="error-message">{errors.password}</p>
