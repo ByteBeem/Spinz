@@ -82,6 +82,10 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
           window.location.href = diceGameLink;
           break;
 
+          case 6:
+          window.location.href = "https://tac-game.vercel.app/";
+          break;
+
         default:
           console.log("Unknown game id");
       }
