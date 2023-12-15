@@ -11,7 +11,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
   useEffect(() => {
     // Connect to Socket.io server
-    const newSocket = io("https://glossy-fluorescent-ostrich.glitch.me/"); 
+    const newSocket = io("https://glossy-fluorescent-ostrich.glitch.me/");
     setSocket(newSocket);
 
     // Clean up on component unmount
@@ -25,7 +25,10 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
     // Listen for messages from the server
     socket.on("chat-message", (message) => {
-      setMessages((prevMessages) => [...prevMessages, { type: "bot", text: message }]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { type: "bot", text: message },
+      ]);
     });
 
     // Clean up on component unmount
