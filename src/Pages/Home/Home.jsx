@@ -14,7 +14,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     dots: false,
     infinite: true,
     speed: 800,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
   };
 
