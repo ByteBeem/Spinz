@@ -13,9 +13,9 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 200,
+    speed: 800,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 8,
   };
 
   const [loading, setLoading] = useState(false);
