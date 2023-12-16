@@ -13,8 +13,8 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 800,
-    slidesToShow: 3,
+    speed: 1000,
+    slidesToShow: 4,
     slidesToScroll: 1,
   };
 
