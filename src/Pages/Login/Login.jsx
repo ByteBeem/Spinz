@@ -177,7 +177,7 @@ function Login() {
 
           <span>
             Forgot Password?{" "}
-            <Link className="link" to="/reset">
+            <Link className="link" to="#">
               Reset
             </Link>
           </span>
