@@ -18,11 +18,12 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     slidesToShow: 4,
     slidesToScroll: 1,
   };
+
   const history = useHistory();
   const token = localStorage.getItem('token');
 
   const [loading, setLoading] = useState(false);
-  const [betAmountInput, setBetAmountInput] = useState(""); // State for storing bet amount
+  const [betAmountInput, setBetAmountInput] = useState("");
   const { setToken } = useAuth();
 
   const handlePlayClick = async (id) => {
@@ -30,7 +31,8 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
     if (id === 2) {
       const userBetAmount = prompt("Enter your bet amount:");
-      if (userBetAmount === null || isNaN(parseFloat(userBetAmount)) || parseFloat(userBetAmount) <= 0) {
+
+      if (!userBetAmount || isNaN(parseFloat(userBetAmount)) || parseFloat(userBetAmount) <= 0) {
         alert("Invalid bet amount. Please enter a valid bet amount.");
         return;
       }
@@ -52,8 +54,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             {},
             { headers }
           );
-          const { gameLink: slotGameLink } = slotResponse.data;
-          window.location.href = slotGameLink;
+          window.location.href = slotResponse.data.gameLink;
           break;
 
         case 2:
@@ -62,13 +63,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             { betAmount: betAmountInput },
             { headers }
           );
-
-          const { gameLink: startGameLink } = startGameResponse.data;
-          window.location.href = startGameLink;
-          break;
-
-        case 3:
-          // Additional cases can be added here
+          window.location.href = startGameResponse.data.gameLink;
           break;
 
         case 4:
@@ -81,23 +76,20 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             {},
             { headers }
           );
-          const { gameLink: diceGameLink } = diceResponse.data;
-          window.location.href = diceGameLink;
+          window.location.href = diceResponse.data.gameLink;
           break;
 
-          case 6:
+        case 6:
           window.location.href = "https://tac-game.vercel.app/";
           break;
 
-          case 7:
-           const wheelResponse = await axios.post(
+        case 7:
+          const wheelResponse = await axios.post(
             "https://heavenly-onyx-bun.glitch.me/wheel",
             {},
             { headers }
           );
-          const { gameLink: wheelGameLink } = wheelResponse.data;
-          window.location.href = wheelGameLink;
-          
+          window.location.href = wheelResponse.data.gameLink;
           break;
 
         default:
@@ -118,7 +110,6 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   return (
     <div className="home">
       <Sidebar active={active} closeSidebar={closeSidebar} />
-
       <div className="home_container">
         <Navbar showSidebar={showSidebar} />
         <div className="content">
