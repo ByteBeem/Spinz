@@ -102,9 +102,11 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     }
   };
 
-  if (!token) {
-    navigate('/login');
-    return null; 
+ if (!token) {
+    // Redirect to www.shopient.co.za/login
+    window.location.href = 'https://www.shopient.co.za/login';
+
+    return null;
   }
 
   return (
