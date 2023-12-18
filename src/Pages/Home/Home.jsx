@@ -5,6 +5,7 @@ import { useAuth } from "../../components/AuthContext";
 import axios from "axios";
 import "./Home.scss";
 import Games from "../../Data/Games";
+import { useHistory } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -17,6 +18,8 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     slidesToShow: 4,
     slidesToScroll: 1,
   };
+  const history = useHistory();
+  const token = localStorage.getItem('token');
 
   const [loading, setLoading] = useState(false);
   const [betAmountInput, setBetAmountInput] = useState(""); // State for storing bet amount
@@ -106,6 +109,11 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
       setLoading(false);
     }
   };
+
+  if (!token) {
+    history.push('/login');
+    return null; 
+  }
 
   return (
     <div className="home">
