@@ -29,6 +29,9 @@ function App() {
     <AuthProvider>
       <Router>
         <Logo />
+     <Routes>
+          <Route path="login" element={<Login />} />
+        </Routes>
         <Routes>
           <Route path="/">
             <Route index element={<Home />} />
@@ -82,12 +85,6 @@ function App() {
                   closeSidebar={closeSidebar}
                   active={active}
                 />
-              }
-            />
-<Route
-              path="login"
-              element={
-                <Login
               }
             />
             
