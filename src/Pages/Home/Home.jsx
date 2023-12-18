@@ -5,7 +5,7 @@ import { useAuth } from "../../components/AuthContext";
 import axios from "axios";
 import "./Home.scss";
 import Games from "../../Data/Games";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,7 +19,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     slidesToScroll: 1,
   };
 
-  const history = useHistory();
+   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
   const [loading, setLoading] = useState(false);
@@ -103,7 +103,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   };
 
   if (!token) {
-    history.push('/login');
+    navigate('/login');
     return null; 
   }
 
