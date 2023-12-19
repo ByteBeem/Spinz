@@ -21,20 +21,25 @@ const Navbar = ({ showSidebar }) => {
     }
   }, [setToken]);
 
-  const fetchUserData = (token) => {
-    setLoading(true);
-    axios
-      .get("https://changeable-pinnate-soursop.glitch.me/getUserData", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        setUserData(response.data);
-      })
-      .catch((error) => {})
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+ const fetchUserData = (token) => {
+  setLoading(true);
+  axios
+    .get("https://changeable-pinnate-soursop.glitch.me/getUserData", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      setUserData(response.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching user data:", error);
+      alert("Go login now!");
+      window.location.href = "https://www.shopient.co.za/login";
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+};
+
 
   return (
     <header>
