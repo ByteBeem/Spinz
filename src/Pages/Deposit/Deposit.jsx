@@ -123,7 +123,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
             </div>
 
             <p>
-                <b>Other banks use the option below :</b>
+               <h2><b>Other banks use the option below :</b> </h2> 
               </p>
 
             <div className="deposit_form">
