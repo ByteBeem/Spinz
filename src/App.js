@@ -9,7 +9,7 @@ import Reset from "./Pages/Reset/Reset";
 import Deposit from "./Pages/Deposit/Deposit";
 import Chatbot from "./Pages/chatbot/Chatbot";
 import Wallet from "./Pages/wallet/Wallet";
-import count from "./Pages/countdown";
+import Count from "./Pages/countdown";
 // import Choice from "./components/choose";
 import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
@@ -89,10 +89,10 @@ function App() {
               }
             />
 
-                                <Route
+                <Route
               path="coming"
               element={
-                <count
+                <Count
                   showSidebar={showSidebar}
                   closeSidebar={closeSidebar}
                   active={active}
