@@ -9,6 +9,7 @@ import Reset from "./Pages/Reset/Reset";
 import Deposit from "./Pages/Deposit/Deposit";
 import Chatbot from "./Pages/chatbot/Chatbot";
 import Wallet from "./Pages/wallet/Wallet";
+import count from "./Pages/countdown";
 // import Choice from "./components/choose";
 import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
@@ -81,6 +82,17 @@ function App() {
               path="wallets"
               element={
                 <Wallet
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
+
+                                <Route
+              path="coming"
+              element={
+                <count
                   showSidebar={showSidebar}
                   closeSidebar={closeSidebar}
                   active={active}
