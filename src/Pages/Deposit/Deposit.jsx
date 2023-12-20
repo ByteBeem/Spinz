@@ -67,6 +67,11 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     setLoading(true);
 
     const token = localStorage.getItem("token");
+    if (!token) {
+  setError("Token not found , Go log in again.");
+  setLoading(false);
+  return;
+}
 
     if (isNaN(amount) || amount <= 0) {
       setError("Invalid amount");
@@ -80,7 +85,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
     axios
       .post(
-        "https://heavenly-onyx-bun.glitch.me/initiate-payment2",
+        "https://heavenly-onyx-bun.glitch.me/initiatePayment2",
         requestBody,
         {
           headers: { Authorization: `Bearer ${token}` },
