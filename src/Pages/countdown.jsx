@@ -29,21 +29,8 @@ const ComingSoon = ({ showSidebar, active, closeSidebar }) => {
             <li>Transparency: Track your progress and earnings seamlessly on our platform.</li>
           </ul>
         </div>
-        <p>
-          🌍 Global Markets, Local Convenience: Explore global markets hassle-free while we handle the complexities. Your journey into Forex trading is about to become effortless.
-        </p>
-        <p>
-          🔒 Secure and Swift Payouts: Rest assured, your profits are secure, and withdrawals are processed promptly. Our commitment is to provide you with a seamless and secure trading experience.
-        </p>
-        <p>
-          📆 Countdown to Profits: The clock is ticking! Prepare for a new era of hassle-free Forex trading. Stay tuned for the official launch date and join us on this exciting venture.
-        </p>
-        <p>
-          🔥 Subscribe for Updates: Don't miss out on the latest developments! Subscribe to our newsletter and stay in the loop for exclusive insights, promotions, and more.
-        </p>
-        <p>
-          Get ready to experience the future of Forex trading – effortless, profitable, and coming soon to [Your Website Name]! 💰🌐
-        </p>
+       
+
         <div className="loading-spinner"></div>
       </div>
     </div>
