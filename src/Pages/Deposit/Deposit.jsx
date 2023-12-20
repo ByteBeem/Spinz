@@ -67,6 +67,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     setLoading(true);
 
     const token = localStorage.getItem("token");
+    console.log("token",token);
     if (!token) {
   setError("Token not found , Go log in again.");
   setLoading(false);
@@ -81,6 +82,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
     const requestBody = {
       amount: parseFloat(amount),
+      console.log('amount',amount);
     };
 
     axios
