@@ -58,7 +58,7 @@ const Navbar = ({ showSidebar }) => {
       <ul className="right">
         <div className="notification">
           <IoNotifications className="icon" />
-          <div className="count"></div>
+          <div className="count">5</div>
         </div>
         <Link className="profile" to="/profile">
           <img src="" alt="" />
