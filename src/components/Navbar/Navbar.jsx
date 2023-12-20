@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 import { IoNotifications } from "react-icons/io5";
+import { IoIosPaper } from "react-icons/io";
 
 const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
@@ -57,11 +58,15 @@ const Navbar = ({ showSidebar }) => {
       <ul className="right">
         <div className="notification">
           <IoNotifications className="icon" />
-          <div className="count">5</div>
+          <div className="count"></div>
         </div>
         <Link className="profile" to="/profile">
           <img src="" alt="" />
         </Link>
+        <div className="notification">
+          <IoIosPaper className="icon" />
+          <div className="count"></div>
+        </div>
       </ul>
     </header>
   );
