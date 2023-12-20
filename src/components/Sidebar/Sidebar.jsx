@@ -52,7 +52,7 @@ const Sidebar = ({ active, closeSidebar }) => {
           <span>Wallet</span>
         </Link>
 
-        <Link className="link" to="#" onClick={() => closeSidebar()}>
+        <Link className="link" to="/coming" onClick={() => closeSidebar()}>
           <FaHandHoldingDollar className="icon" />
           <span>Forex</span>
         </Link>
