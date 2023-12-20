@@ -7,6 +7,7 @@ import { IoSettingsSharp } from "react-icons/io5";
 import { FiLoader } from "react-icons/fi";
 import { IoLogOut } from "react-icons/io5";
 import { GiWallet } from "react-icons/gi";
+import { FaHandHoldingDollar } from "react-icons/fa6";
 import {useState} from 'react';
 import { IoIosChatbubbles } from "react-icons/io";
 
@@ -49,6 +50,11 @@ const Sidebar = ({ active, closeSidebar }) => {
         <Link className="link" to="/wallets" onClick={() => closeSidebar()}>
           <GiWallet className="icon" />
           <span>Wallet</span>
+        </Link>
+
+        <Link className="link" to="#" onClick={() => closeSidebar()}>
+          <FaHandHoldingDollar className="icon" />
+          <span>Forex</span>
         </Link>
 
         <Link className="link" to="/profile" onClick={() => closeSidebar()}>
