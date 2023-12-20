@@ -26,7 +26,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const cellphone = userData.cell;
   const balance = userData.balance;
   const surname = userData.surname;
-  const ID = "*********";
+  const ID = "*************";
 
   const handleWithdraw = () => {
     navigate("/withdraw");
@@ -135,32 +135,15 @@ function Profile({ showSidebar, active, closeSidebar }) {
         </div>
 
         <Link className="form_btn" to="/reset">
-          Reset Password
+          Change Password
         </Link>
 
-        {/* <div className="activity">
-          <span>Activity</span>
-          <div className="activity_box">
-            <div className="left">
-              <img className="activity_icon" src="" alt="" />
-              <div className="text">
-                <div className="title">Title</div>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Adipisci, dolore!
-                </p>
-              </div>
-            </div>
-            <span className="time">20 mins ago</span>
-          </div>
-        </div> */}
+      
 
-        {/*  */}
-
-<div className="activity">
+ <div className="activity">
           <span>Activity</span>
           {activities.length > 0 ? (
-            <table>
+            <table className="activity-table">
               <thead>
                 <tr>
                   <th>Date</th>
