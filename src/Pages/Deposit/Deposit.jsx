@@ -82,7 +82,6 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
     const requestBody = {
       amount: parseFloat(amount),
-      console.log('amount',amount);
     };
 
     axios
