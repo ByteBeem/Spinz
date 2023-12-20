@@ -1,5 +1,7 @@
 import React from 'react';
 import './ComingSoon.scss';
+import Sidebar from "../components/Sidebar/Sidebar";
+import Navbar from "../components/Navbar/Navbar";
 
 const ComingSoon = () => {
   return (
