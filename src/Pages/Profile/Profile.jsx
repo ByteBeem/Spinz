@@ -153,10 +153,10 @@ function Profile({ showSidebar, active, closeSidebar }) {
               </thead>
               <tbody>
                 {activities.reverse().map(({ id, date_time, activity_description, activity_details, result }) => (
-                  <tr key={id} className={result}>
-                    <td>{new Date(date_time).toLocaleString()}</td>
-                    <td>{activity_description}</td>
-                    <td>{activity_details}</td>
+                  <tr key={id} className={result === 'fail' ? 'fail' : ''}>
+                    <td id="time">{new Date(date_time).toLocaleString()}</td>
+                    <td id="title">{activity_description}</td>
+                    <td id="body">{activity_details}</td>
                   </tr>
                 ))}
               </tbody>
