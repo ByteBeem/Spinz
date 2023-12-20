@@ -40,45 +40,4 @@ $secondaryColor: #ecf0f1;
       transform: rotate(360deg);
     }
   }
-
-  .coming-soon-content {
-    margin-top: 20px;
-    text-align: center;
-
-    h2 {
-      color: $primaryColor;
-      font-size: 1.8em;
-    }
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-
-      li {
-        margin-top: 10px;
-      }
-    }
-
-    p {
-      margin-top: 20px;
-    }
-  }
-
-  .how-it-works, .why-trust-us {
-    margin-top: 20px;
-
-    h2 {
-      color: $primaryColor;
-      font-size: 1.8em;
-    }
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-
-      li {
-        margin-top: 10px;
-      }
-    }
-  }
 }
