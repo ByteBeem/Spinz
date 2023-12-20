@@ -9,7 +9,7 @@ const ComingSoon = ({ showSidebar, active, closeSidebar }) => {
       <Sidebar active={active} closeSidebar={closeSidebar} />
       <Navbar showSidebar={showSidebar} />
       <div className="coming-soon-content">
-        <h1>🌐 Coming Soon: Automated Forex Trading at Your Fingertips!</h1>
+       
         <p>
           Get ready for a groundbreaking addition to our platform! 📈 Our upcoming Forex trading service brings you the opportunity to let us handle the trading for you, with profits delivered within 24 hours.
         </p>
