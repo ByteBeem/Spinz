@@ -65,7 +65,7 @@ const Navbar = ({ showSidebar }) => {
         </Link>
         <div className="notification">
           <IoIosPaper className="icon" />
-          <div className="count"></div>
+          
         </div>
       </ul>
     </header>
