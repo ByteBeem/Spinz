@@ -63,10 +63,7 @@ const Navbar = ({ showSidebar }) => {
         <Link className="profile" to="/profile">
           <img src="" alt="" />
         </Link>
-        <div className="notification">
-          <IoIosPaper className="icon" />
-          
-        </div>
+        
       </ul>
     </header>
   );
