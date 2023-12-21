@@ -7,6 +7,7 @@ import io from "socket.io-client";
 const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
+  const [username, setUsername] = useState(""); // Add username state
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
@@ -23,28 +24,34 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   useEffect(() => {
     if (!socket) return;
 
+    // Join the "Hustleburg" chat room
+    socket.emit("join-room", "Hustleburg");
+
+    // Fetch old messages when connecting
+    socket.emit("fetch-messages", "Hustleburg");
+
+    // Listen for old messages from the server
+    socket.on("old-messages", (oldMessages) => {
+      setMessages((prevMessages) => [...prevMessages, ...oldMessages]);
+    });
+
     // Listen for messages from the server
     socket.on("chat-message", (message) => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { type: "bot", text: message },
-      ]);
+      setMessages((prevMessages) => [...prevMessages, message]);
     });
 
     // Clean up on component unmount
     return () => {
       socket.off("chat-message");
+      socket.off("old-messages");
     };
   }, [socket]);
 
   const handleSendMessage = () => {
     if (userInput.trim() !== "") {
-      // Update the local state with the user's message
-      setMessages([...messages, { type: "user", text: userInput }]);
-
-      // Emit the user's message to the server
+      // Emit the user's message to the server with the specified room
       if (socket) {
-        socket.emit("user-message", userInput);
+        socket.emit("user-message", { room: "Hustleburg", message: { type: "user", text: userInput, username } });
       }
 
       // Clear the input field
@@ -62,11 +69,17 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
           <ul className="chat-messages">
             {messages.map((message, index) => (
               <li key={index} className={`${message.type}-message`}>
-                {message.text}
+                <small>{message.username}</small> {message.text}
               </li>
             ))}
           </ul>
           <div className="user-input">
+            <input
+              type="text"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
             <textarea
               className="user_msg"
               placeholder="Type your message..."
