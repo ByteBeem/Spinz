@@ -7,18 +7,25 @@ import io from "socket.io-client";
 const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
-  const [username, setUsername] = useState(""); // Add username state
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    // Connect to Socket.io server
-    const newSocket = io("https://glossy-fluorescent-ostrich.glitch.me/");
-    setSocket(newSocket);
+    // Fetch the token from local storage
+    const token = localStorage.getItem("token");
 
-    // Clean up on component unmount
-    return () => {
-      newSocket.disconnect();
-    };
+    if (token) {
+      // Connect to Socket.io server with authentication
+      const newSocket = io("https://mousy-mirror-tick.glitch.me/", {
+        auth: { token },
+      });
+
+      setSocket(newSocket);
+
+      // Clean up on component unmount
+      return () => {
+        newSocket.disconnect();
+      };
+    }
   }, []);
 
   useEffect(() => {
@@ -40,12 +47,6 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
-    // Fetch the username from local storage
-    const storedUsername = localStorage.getItem("username");
-    if (storedUsername) {
-      setUsername(storedUsername);
-    }
-
     // Clean up on component unmount
     return () => {
       socket.off("chat-message");
@@ -57,7 +58,10 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
     if (userInput.trim() !== "") {
       // Emit the user's message to the server with the specified room
       if (socket) {
-        socket.emit("user-message", { room: "Hustleburg", message: { type: "user", text: userInput, username } });
+        socket.emit("user-message", {
+          room: "Hustleburg",
+          message: { type: "user", text: userInput },
+        });
       }
 
       // Clear the input field
