@@ -10,23 +10,26 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    // Fetch the token from local storage
-    const token = localStorage.getItem("token");
+  // Fetch the token from local storage
+  const token = localStorage.getItem("token");
 
-    if (token) {
-      // Connect to Socket.io server with authentication
-      const newSocket = io("https://mousy-mirror-tick.glitch.me/", {
-        auth: { token },
-      });
+  if (token) {
+    // Connect to Socket.io server with authentication
+    const newSocket = io("https://mousy-mirror-tick.glitch.me/", {
+      auth: { token },
+    });
 
-      setSocket(newSocket);
+    setSocket(newSocket);
 
-      // Clean up on component unmount
-      return () => {
-        newSocket.disconnect();
-      };
-    }
-  }, []);
+    // Clean up on component unmount
+    return () => {
+      newSocket.disconnect();
+    };
+  } else {
+    console.warn("Token not available. Socket connection not established.");
+  }
+}, []);
+
 
   useEffect(() => {
     if (!socket) return;
