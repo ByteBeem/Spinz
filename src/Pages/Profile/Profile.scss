@@ -95,10 +95,25 @@
           text-align: center;
           margin-bottom: 7px;
         }
+.form_btn_delete {
+  text-decoration: none;
+  text-align: center;
+  color:red;
+  margin-bottom: 7px;
+  display: flex;
+  justify-content: flex-end; 
+}
+
       }
     }
 
     .form_btn {
+      text-decoration: none;
+      padding: 0.6rem;
+      margin: 0 2rem 1rem 2rem;
+    }
+
+    .form_btn_delete {
       text-decoration: none;
       padding: 0.6rem;
       margin: 0 2rem 1rem 2rem;
