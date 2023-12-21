@@ -40,6 +40,12 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
+    // Fetch the username from local storage
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+
     // Clean up on component unmount
     return () => {
       socket.off("chat-message");
@@ -74,12 +80,6 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
             ))}
           </ul>
           <div className="user-input">
-            <input
-              type="text"
-              placeholder="Enter your username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
             <textarea
               className="user_msg"
               placeholder="Type your message..."
