@@ -301,7 +301,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        "https://warm-honored-cuticle.glitch.me/signup",
+        "https://chill-emphasized-radish.glitch.me/signup",
         {
           fullName: full,
           surname: surname,
