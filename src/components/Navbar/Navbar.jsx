@@ -25,7 +25,7 @@ const Navbar = ({ showSidebar }) => {
  const fetchUserData = (token) => {
   setLoading(true);
   axios
-    .get("https://changeable-pinnate-soursop.glitch.me/getUserData", {
+    .get("https://prickle-flashy-carver.glitch.me/getUserData", {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
