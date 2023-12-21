@@ -51,7 +51,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://persistent-unmarred-cannon.glitch.me/activities",
+        "https://imported-glory-toque.glitch.me/activities",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const fetchUserData = (token) => {
     setLoading(true);
     axios
-      .get("https://persistent-unmarred-cannon.glitch.me/getUserData", {
+      .get("https://imported-glory-toque.glitch.me/getUserData", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
