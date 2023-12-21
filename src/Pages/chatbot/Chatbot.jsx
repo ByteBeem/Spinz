@@ -31,7 +31,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   useEffect(() => {
     if (!socket) return;
 
-    // Join the "Hustleburg" chat room
+
     socket.emit("join-room", "Hustleburg");
 
     // Fetch old messages when connecting
