@@ -13,10 +13,10 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [userColor, setUserColor] = useState(null);
   const [socket, setSocket] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [image , setImage]=useState('');
+  const [image , setImage]=useState(null);
 
   function handleImage(e){
-    cosnole.log(e.target.files);
+    console.log(e.target.files);
     setImage(e.target.files[0])
   }
 
