@@ -65,11 +65,11 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const handleSendMessage = () => {
     if (userInput.trim() !== "") {
       if (socket) {
-        setLoading(true); // Set loading to true when sending a message
+        const name= localStorage.getItem("user_name");
 
         // Send user message
         socket.emit("user-message", {
-          message: { type: "user", text: userInput },
+          message: { type: "user", text: userInput , name:name },
         });
 
         setUserInput("");
@@ -100,7 +100,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
                     message.username === socket.id ? "flex-end" : "flex-start",
                 }}
               >
-                {message.text}
+<small>{message.username} : </small> {message.text}
               </li>
             ))}
           </ul>
