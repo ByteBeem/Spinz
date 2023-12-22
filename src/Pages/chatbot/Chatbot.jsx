@@ -65,7 +65,12 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
         <div className="chatbot-container">
           <ul className="chat-messages">
             {messages.map((message, index) => (
-              <li key={index} className={`user-message`}>
+              <li
+                key={index}
+                className={`message ${
+                  message.type === "user" ? "user-message" : "received-message"
+                }`}
+              >
                 <small>{message.username}</small> {message.text}
               </li>
             ))}
