@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Chatbot.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
@@ -9,19 +10,44 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [userInput, setUserInput] = useState("");
   const [userColor, setUserColor] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [loading, setLoading] = useState(true); // Set loading to true initially
 
   useEffect(() => {
-    const newSocket = io("https://mousy-mirror-tick.glitch.me/");
+    const token = localStorage.getItem("token");
 
-    newSocket.on("user-color", ({ color }) => {
-      setUserColor(color);
-    });
+    if (token) {
+      // Send a separate request using Axios
+      axios.post("https://mousy-mirror-tick.glitch.me/userChat", { token })
+        .then((response) => {
+          const { name } = response.data;
 
-    setSocket(newSocket);
+          // Save the name to localStorage
+          localStorage.setItem("user_name", name);
 
-    return () => {
-      newSocket.disconnect();
-    };
+          setLoading(false); // Set loading to false when server responds
+        })
+        .catch((error) => {
+          console.error("Error fetching user name:", error);
+          setLoading(false); // Set loading to false in case of an error
+        });
+
+      // Connect to Socket.io
+      const newSocket = io("https://mousy-mirror-tick.glitch.me/");
+
+      newSocket.on("user-color", ({ color }) => {
+        setUserColor(color);
+      });
+
+      newSocket.on("connect", () => {
+        setLoading(false); // Set loading to false when connected
+      });
+
+      setSocket(newSocket);
+
+      return () => {
+        newSocket.disconnect();
+      };
+    }
   }, []);
 
   useEffect(() => {
@@ -39,11 +65,15 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const handleSendMessage = () => {
     if (userInput.trim() !== "") {
       if (socket) {
+        setLoading(true); // Set loading to true when sending a message
+
+        // Send user message
         socket.emit("user-message", {
           message: { type: "user", text: userInput },
         });
+
+        setUserInput("");
       }
-      setUserInput("");
     }
   };
 
@@ -54,23 +84,26 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
       <div className="content">
         <Navbar showSidebar={showSidebar} />
         <div className="chatbot-container">
-<ul className="chat-messages">
-  {messages.map((message, index) => (
-    <li
-      key={index}
-      style={{
-        backgroundColor:
-          message.username === socket.id
-            ? "#3498db"
-            : message.color,
-        alignSelf:
-          message.username === socket.id ? "flex-end" : "flex-start",
-      }}
-    >
-      {message.text}
-    </li>
-  ))}
-</ul>
+          {/* Overlay for connecting message */}
+          {loading && <div className="overlay">Connecting...</div>}
+
+          <ul className="chat-messages">
+            {messages.map((message, index) => (
+              <li
+                key={index}
+                style={{
+                  backgroundColor:
+                    message.username === socket.id
+                      ? "#3498db"
+                      : message.color,
+                  alignSelf:
+                    message.username === socket.id ? "flex-end" : "flex-start",
+                }}
+              >
+                {message.text}
+              </li>
+            ))}
+          </ul>
 
           <div className="user-input">
             <textarea
