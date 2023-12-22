@@ -13,18 +13,22 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [userColor, setUserColor] = useState(null);
   const [socket, setSocket] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null); // Added missing state
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      axios.post("https://mousy-mirror-tick.glitch.me/userChat", { token })
+      axios
+        .post("https://mousy-mirror-tick.glitch.me/userChat", { token })
         .then((response) => {
           const { name, messages } = response.data;
 
           localStorage.setItem("user_name", name);
 
-          const sortedMessages = messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+          const sortedMessages = messages.sort(
+            (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+          );
 
           setMessages(sortedMessages);
           setLoading(false);
@@ -65,40 +69,38 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   }, [socket]);
 
   const handleSendMessage = () => {
-  if (userInput.trim() !== "") {
-    if (socket) {
-      const name = localStorage.getItem("user_name");
+    if (userInput.trim() !== "") {
+      if (socket) {
+        const name = localStorage.getItem("user_name");
 
-      if (userInput.startsWith('data:image')) {
-        // Image message
-        socket.emit("user-message", {
-          message: {
-            type: 'image',
-            content: userInput,
-            name: name,
-          },
-        });
-      } else {
-        // Text message
-        socket.emit("user-message", {
-          message: {
-            type: 'text',
-            text: userInput,
-            name: name,
-          },
-        });
+        if (userInput.startsWith("data:image")) {
+          // Image message
+          socket.emit("user-message", {
+            message: {
+              type: "image",
+              content: userInput,
+              name: name,
+            },
+          });
+        } else {
+          // Text message
+          socket.emit("user-message", {
+            message: {
+              type: "text",
+              text: userInput,
+              name: name,
+            },
+          });
+        }
+
+        setUserInput("");
       }
-
-      setUserInput("");
     }
-  }
-};
+  };
 
-
-
-const handleImageUpload = () => {
+  const handleImageUpload = () => {
     if (socket) {
-      const fileInput = document.getElementById('imageUpload');
+      const fileInput = document.getElementById("imageUpload");
       const imageFile = fileInput.files[0];
 
       if (imageFile) {
@@ -109,10 +111,10 @@ const handleImageUpload = () => {
 
   const handleSendImage = () => {
     if (socket && selectedImage) {
-      const name = localStorage.getItem('user_name');
+      const name = localStorage.getItem("user_name");
       socket.emit("user-message", {
         message: {
-          type: 'image',
+          type: "image",
           content: selectedImage,
           name: name,
         },
@@ -120,8 +122,6 @@ const handleImageUpload = () => {
       setSelectedImage(null);
     }
   };
-
-
 
   const handleVoiceNote = () => {
     // Implement voice note recording logic here
@@ -138,65 +138,78 @@ const handleImageUpload = () => {
           {loading && <div className="overlay">Connecting...</div>}
 
           <ul className="chat-messages">
-{messages.map((message, index) => (
+            {messages.map((message, index) => (
               <li
                 key={index}
                 style={{
                   backgroundColor:
                     message.username === socket.id
                       ? "#3498db"
-                      : message.color,
+                      : message.color || userColor,
                   alignSelf:
                     message.username === socket.id ? "flex-end" : "flex-start",
                 }}
               >
-<small>{message.username} : </small> {message.text}
+                <small>{message.username} : </small> {message.text}
               </li>
             ))}
-
           </ul>
 
-         <div className="user-input">
-        <div className="input-icons">
-          <label htmlFor="imageUpload" className="icon">
-            <FontAwesomeIcon icon={faCamera} />
-            <input
-              type="file"
-              id="imageUpload"
-              accept="image/*"
-              onChange={handleImageUpload}
-            />
-          </label>
+          <div className="user-input">
+            <div className="input-icons">
+              <label htmlFor="imageUpload" className="icon">
+                <FontAwesomeIcon icon={faCamera} />
+                <input
+                  type="file"
+                  id="imageUpload"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+              </label>
 
-          {selectedImage && (
+              {selectedImage && (
+                <button
+                  style={{
+                    marginRight: "10px",
+                    height: "60px",
+                    marginTop: "35px",
+                  }}
+                  onClick={handleSendImage}
+                >
+                  Send Picture
+                </button>
+              )}
+
+              <textarea
+                className="user_msg"
+                placeholder="Type your message..."
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+              ></textarea>
+            </div>
             <button
-              style={{ marginRight: '10px', height: '60px', marginTop: '35px' }}
-              onClick={handleSendImage}
+              style={{
+                marginLeft: "10px",
+                height: "60px",
+                marginTop: "35px",
+              }}
+              onClick={handleSendMessage}
             >
-              Send Picture
+              <FontAwesomeIcon icon={faMicrophone} />
+              Voice
             </button>
-          )}
-
-          <textarea
-            className="user_msg"
-            placeholder="Type your message..."
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-          ></textarea>
+            <button
+              style={{
+                marginLeft: "10px",
+                height: "60px",
+                marginTop: "35px",
+              }}
+              onClick={handleSendMessage}
+            >
+              Send
+            </button>
+          </div>
         </div>
-        <button
-          style={{ marginLeft: '10px', height: '60px', marginTop: '35px' }}
-          onClick={handleSendMessage}
-        >
-          <FontAwesomeIcon icon={faMicrophone} />
-          Voice
-        </button>
-        <button
-          style={{ marginLeft: '10px', height: '60px', marginTop: '35px' }}
-          onClick={handleSendMessage}
-        >
-          Send
-        </button>
       </div>
     </div>
   );
