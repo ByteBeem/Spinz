@@ -164,7 +164,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
           <div className="user-input">
             <div className="input-icons">
-              <label htmlFor="imageUpload" className="icon">
+              
 <label htmlFor="imageUpload" className="icon">
   <FontAwesomeIcon icon={faCamera} />
   <input
