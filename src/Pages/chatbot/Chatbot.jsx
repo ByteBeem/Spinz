@@ -59,13 +59,15 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
               <li
                 key={index}
                 style={{
-                  color:
-                    message.username === socket.id ? "white" : message.color,
+                  backgroundColor:
+                    message.username === socket.id
+                      ? "#3498db"
+                      : message.color,
                   alignSelf:
                     message.username === socket.id ? "flex-end" : "flex-start",
                 }}
               >
-                <small>{message.username}</small> {message.text}
+                 {message.text}
               </li>
             ))}
           </ul>
