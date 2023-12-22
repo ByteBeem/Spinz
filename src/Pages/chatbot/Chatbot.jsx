@@ -65,23 +65,60 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   }, [socket]);
 
   const handleSendMessage = () => {
-    if (userInput.trim() !== "") {
-      if (socket) {
-        const name = localStorage.getItem("user_name");
+  if (userInput.trim() !== "") {
+    if (socket) {
+      const name = localStorage.getItem("user_name");
 
+      if (userInput.startsWith('data:image')) {
+        // Image message
         socket.emit("user-message", {
-          message: { type: "user", text: userInput, name: name },
+          message: {
+            type: 'image',
+            content: userInput,
+            name: name,
+          },
         });
-
-        setUserInput("");
+      } else {
+        // Text message
+        socket.emit("user-message", {
+          message: {
+            type: 'text',
+            text: userInput,
+            name: name,
+          },
+        });
       }
-    }
-  };
 
-  const handleImageUpload = () => {
-    // Implement image upload logic here
-    // You may use a file input and send the selected image to the server
-  };
+      setUserInput("");
+    }
+  }
+};
+
+
+
+  const handleImageUpload = async (event) => {
+  const imageFile = event.target.files[0];
+
+  if (!imageFile) return;
+
+  const formData = new FormData();
+  formData.append('image', imageFile);
+
+  try {
+    const response = await axios.post('https://mousy-mirror-tick.glitch.me/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    // Handle success (optional)
+    console.log(response.data); 
+  } catch (error) {
+    // Handle error (optional)
+    console.error('Error uploading image:', error);
+  }
+};
+
 
   const handleVoiceNote = () => {
     // Implement voice note recording logic here
@@ -99,33 +136,41 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
           <ul className="chat-messages">
             {messages.map((message, index) => (
-              <li
-                key={index}
-                style={{
-                  backgroundColor:
-                    message.username === socket.id
-                      ? "#3498db"
-                      : message.color,
-                  alignSelf:
-                    message.username === socket.id ? "flex-end" : "flex-start",
-                }}
-              >
-                <small>{message.username} : </small> {message.text}
-              </li>
-            ))}
+  <li
+    key={index}
+    style={{
+      backgroundColor:
+        message.username === socket.id ? "#3498db" : message.color,
+      alignSelf:
+        message.username === socket.id ? "flex-end" : "flex-start",
+    }}
+  >
+    {message.type === 'text' ? (
+      <>
+        <small>{message.username} : </small> {message.text}
+      </>
+    ) : (
+      <img src={message.content} alt="user upload" />
+    )}
+  </li>
+))}
+
           </ul>
 
           <div className="user-input">
             <div className="input-icons">
               <label htmlFor="imageUpload" className="icon">
-                <FontAwesomeIcon icon={faCamera} />
-                <input
-                  type="file"
-                  id="imageUpload"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
-              </label>
+<label htmlFor="imageUpload" className="icon">
+  <FontAwesomeIcon icon={faCamera} />
+  <input
+    type="file"
+    id="imageUpload"
+    accept="image/*"
+    onChange={handleImageUpload}
+  />
+</label>
+
+
               <textarea
                 className="user_msg"
                 placeholder="Type your message..."
@@ -133,14 +178,14 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
                 onChange={(e) => setUserInput(e.target.value)}
               ></textarea>
             </div>
-            <button  onClick={handleSendMessage}>
-              <FontAwesomeIcon icon={faMicrophone} />
-                Voice
-            </button>
-            <button onClick={handleSendMessage}>
-             
-              Send
-            </button>
+<button style={{ marginRight: '10px' }} onClick={handleSendMessage}>
+  <FontAwesomeIcon icon={faMicrophone} />
+  Voice
+</button>
+<button style={{ marginLeft: '10px' }} onClick={handleSendMessage}>
+  Send
+</button>
+
           </div>
         </div>
       </div>
