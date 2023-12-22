@@ -7,51 +7,42 @@ import io from "socket.io-client";
 const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
+  const [userColor, setUserColor] = useState(null);
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    // Fetch the token from local storage
-    const token = localStorage.getItem("token");
+    const newSocket = io("https://mousy-mirror-tick.glitch.me/");
 
-    if (token) {
-      // Connect to Socket.io server with authentication
-      const newSocket = io("https://mousy-mirror-tick.glitch.me/");
+    newSocket.on("user-color", ({ color }) => {
+      setUserColor(color);
+    });
 
-      setSocket(newSocket);
+    setSocket(newSocket);
 
-      // Clean up on component unmount
-      return () => {
-        newSocket.disconnect();
-      };
-    } else {
-      console.warn("Token not available. Socket connection not established.");
-    }
+    return () => {
+      newSocket.disconnect();
+    };
   }, []);
 
   useEffect(() => {
     if (!socket) return;
 
-    // Listen for messages from the server
     socket.on("chat-message", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
-    // Clean up on component unmount
     return () => {
       socket.off("chat-message");
     };
   }, [socket]);
 
- const handleSendMessage = () => {
+  const handleSendMessage = () => {
     if (userInput.trim() !== "") {
-      // Emit the user's message to the server
       if (socket) {
         socket.emit("user-message", {
           message: { type: "user", text: userInput },
         });
       }
-
-      // Clear the input field
       setUserInput("");
     }
   };
@@ -67,9 +58,12 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
             {messages.map((message, index) => (
               <li
                 key={index}
-                className={`message ${
-                  message.type === "user" ? "user-message" : "bot-message"
-                }`}
+                style={{
+                  color:
+                    message.username === socket.id ? "white" : message.color,
+                  alignSelf:
+                    message.username === socket.id ? "flex-end" : "flex-start",
+                }}
               >
                 <small>{message.username}</small> {message.text}
               </li>
