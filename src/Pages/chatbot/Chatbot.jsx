@@ -13,6 +13,12 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [userColor, setUserColor] = useState(null);
   const [socket, setSocket] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [image , setImage]=useState('');
+
+  function handleImage(e){
+    cosnole.log(e.target.files);
+    setImage(e.target.files[0])
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -93,6 +99,15 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
     }
   }
 };
+
+
+  function handleApi(){
+    const formData=new FormData()
+    formData.append('image', image)
+    axios.post('https://imported-glory-toque.glitch.me/image', formData).then((res) =>{
+      console.log(res);
+    })
+  }
 
 
 
@@ -179,10 +194,11 @@ const handleImageUpload = () => {
   <input
     type="file"
     id="imageUpload"
-    name="image"
+    name="file"
     accept="image/*"
-    onChange={handleImageUpload}
+    onChange={handleImage}
   />
+  <button onClick={handleApi}>Submit</button>
 </label>
 
 
