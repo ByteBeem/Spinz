@@ -96,28 +96,33 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
 
 
-  const handleImageUpload = async (event) => {
-  const imageFile = event.target.files[0];
+  const handleImageUpload = () => {
+  if (socket) {
+    const name = localStorage.getItem('user_name');
+    const fileInput = document.getElementById('imageUpload');
+    const imageFile = fileInput.files[0];
 
-  if (!imageFile) return;
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append('image', imageFile);
 
-  const formData = new FormData();
-  formData.append('image', imageFile);
-
-  try {
-    const response = await axios.post('https://mousy-mirror-tick.glitch.me/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    // Handle success (optional)
-    console.log(response.data); 
-  } catch (error) {
-    // Handle error (optional)
-    console.error('Error uploading image:', error);
+      // Use fetch to send the image to the server
+      fetch('https://mousy-mirror-tick.glitch.me/upload', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data); // Log the server response
+          // Handle the server response as needed
+        })
+        .catch((error) => {
+          console.error('Error uploading image:', error);
+        });
+    }
   }
 };
+
 
 
   const handleVoiceNote = () => {
