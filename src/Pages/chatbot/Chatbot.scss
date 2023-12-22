@@ -7,6 +7,15 @@
   }
 }
 
+.input-icons {
+  display: flex;
+  gap: 10px; 
+}
+
+.voice-button {
+  font-size: 10px; 
+}
+
   .overlay {
     position: fixed;
     top: 0;
