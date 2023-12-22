@@ -96,32 +96,30 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
 
 
-  const handleImageUpload = () => {
-  if (socket) {
-    const name = localStorage.getItem('user_name');
-    const fileInput = document.getElementById('imageUpload');
-    const imageFile = fileInput.files[0];
+const handleImageUpload = () => {
+    if (socket) {
+      const fileInput = document.getElementById('imageUpload');
+      const imageFile = fileInput.files[0];
 
-    if (imageFile) {
-      const formData = new FormData();
-      formData.append('image', imageFile);
-
-      // Use fetch to send the image to the server
-      fetch('https://mousy-mirror-tick.glitch.me/upload', {
-        method: 'POST',
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data); // Log the server response
-          // Handle the server response as needed
-        })
-        .catch((error) => {
-          console.error('Error uploading image:', error);
-        });
+      if (imageFile) {
+        setSelectedImage(URL.createObjectURL(imageFile));
+      }
     }
-  }
-};
+  };
+
+  const handleSendImage = () => {
+    if (socket && selectedImage) {
+      const name = localStorage.getItem('user_name');
+      socket.emit("user-message", {
+        message: {
+          type: 'image',
+          content: selectedImage,
+          name: name,
+        },
+      });
+      setSelectedImage(null);
+    }
+  };
 
 
 
@@ -158,37 +156,47 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
           </ul>
 
-          <div className="user-input">
-            <div className="input-icons">
-              
-<label htmlFor="imageUpload" className="icon">
-  <FontAwesomeIcon icon={faCamera} />
-  <input
-    type="file"
-    id="imageUpload"
-    accept="image/*"
-    onChange={handleImageUpload}
-  />
-</label>
+         <div className="user-input">
+        <div className="input-icons">
+          <label htmlFor="imageUpload" className="icon">
+            <FontAwesomeIcon icon={faCamera} />
+            <input
+              type="file"
+              id="imageUpload"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+          </label>
 
+          {selectedImage && (
+            <button
+              style={{ marginRight: '10px', height: '60px', marginTop: '35px' }}
+              onClick={handleSendImage}
+            >
+              Send Picture
+            </button>
+          )}
 
-              <textarea
-                className="user_msg"
-                placeholder="Type your message..."
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-              ></textarea>
-            </div>
-<button style={{ marginRight: '10px' , height: '60px' , marginTop:'25px' }} onClick={handleSendMessage}>
-  <FontAwesomeIcon icon={faMicrophone} />
-  Voice
-</button>
-<button style={{ marginLeft: '10px' ,  height: '60px' , marginTop:'25px'}} onClick={handleSendMessage}>
-  Send
-</button>
-
-          </div>
+          <textarea
+            className="user_msg"
+            placeholder="Type your message..."
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+          ></textarea>
         </div>
+        <button
+          style={{ marginLeft: '10px', height: '60px', marginTop: '35px' }}
+          onClick={handleSendMessage}
+        >
+          <FontAwesomeIcon icon={faMicrophone} />
+          Voice
+        </button>
+        <button
+          style={{ marginLeft: '10px', height: '60px', marginTop: '35px' }}
+          onClick={handleSendMessage}
+        >
+          Send
+        </button>
       </div>
     </div>
   );
