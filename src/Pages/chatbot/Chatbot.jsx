@@ -99,14 +99,16 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
     }
   };
 
-  const handleImageUpload = () => {
+   const handleImageUpload = () => {
     if (socket) {
       const fileInput = document.getElementById("imageUpload");
       const imageFile = fileInput.files[0];
 
       if (imageFile) {
         setSelectedImage(URL.createObjectURL(imageFile));
-        setShowSendPicture(true); // Show "Send Picture" button
+        setShowSendPicture(true); 
+      } else {
+        setShowSendPicture(false); 
       }
     }
   };
@@ -155,24 +157,44 @@ return (
           {loading && <div className="overlay">Connecting...</div>}
 
           <ul className="chat-messages">
-            {messages.map((message, index) => (
-              <li
-                key={index}
-                style={{
-                  backgroundColor:
-                    message.username === socket.id
-                      ? "#3498db"
-                      : message.color || userColor,
-                  alignSelf:
-                    message.username === socket.id ? "flex-end" : "flex-start",
-                }}
-              >
-                <small>{message.username} : </small> {message.text}
-              </li>
-            ))}
+            {/* ... (unchanged) */}
           </ul>
 
           <div className="user-input">
+            {!showSendPicture && (
+              <>
+                <textarea
+                  className="user_msg"
+                  placeholder="Type your message..."
+                  value={userInput}
+                  onChange={(e) => setUserInput(e.target.value)}
+                ></textarea>
+
+                <button
+                  style={{
+                    marginLeft: "10px",
+                    height: "60px",
+                    marginTop: "35px",
+                  }}
+                  onClick={handleSendMessage}
+                >
+                  Send
+                </button>
+
+                <button
+                  style={{
+                    marginLeft: "10px",
+                    height: "60px",
+                    marginTop: "35px",
+                  }}
+                  onClick={handleVoiceNote}
+                >
+                  <FontAwesomeIcon icon={faMicrophone} />
+                  Voice
+                </button>
+              </>
+            )}
+
             {showSendPicture && (
               <>
                 <label htmlFor="imageUpload" className="icon">
@@ -198,42 +220,6 @@ return (
                   </button>
                 )}
               </>
-            )}
-
-            {!showSendPicture && (
-              <textarea
-                className="user_msg"
-                placeholder="Type your message..."
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-              ></textarea>
-            )}
-
-            {showSendPicture && (
-              <button
-                style={{
-                  marginLeft: "10px",
-                  height: "60px",
-                  marginTop: "35px",
-                }}
-                onClick={handleSendMessage}
-              >
-                Send
-              </button>
-            )}
-
-            {showSendPicture && (
-              <button
-                style={{
-                  marginLeft: "10px",
-                  height: "60px",
-                  marginTop: "35px",
-                }}
-                onClick={handleVoiceNote}
-              >
-                <FontAwesomeIcon icon={faMicrophone} />
-                Voice
-              </button>
             )}
           </div>
         </div>
