@@ -42,7 +42,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
     };
   }, [socket]);
 
-  const handleSendMessage = () => {
+ const handleSendMessage = () => {
     if (userInput.trim() !== "") {
       // Emit the user's message to the server
       if (socket) {
@@ -68,7 +68,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
               <li
                 key={index}
                 className={`message ${
-                  message.type === "user" ? "user-message" : "received-message"
+                  message.type === "user" ? "user-message" : "bot-message"
                 }`}
               >
                 <small>{message.username}</small> {message.text}
