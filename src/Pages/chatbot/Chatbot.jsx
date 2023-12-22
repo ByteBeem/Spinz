@@ -178,6 +178,15 @@ return (
           <div className="user-input">
             {!showSendPicture && (
               <>
+                                <label htmlFor="imageUpload" className="icon">
+                  <FontAwesomeIcon icon={faCamera} />
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                  />
+                </label>
                 <textarea
                   className="user_msg"
                   placeholder="Type your message..."
@@ -212,15 +221,7 @@ return (
 
             {showSendPicture && (
               <>
-                <label htmlFor="imageUpload" className="icon">
-                  <FontAwesomeIcon icon={faCamera} />
-                  <input
-                    type="file"
-                    id="imageUpload"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                  />
-                </label>
+
 
                 {selectedImage && (
                   <button
