@@ -156,9 +156,24 @@ return (
         <div className="chatbot-container">
           {loading && <div className="overlay">Connecting...</div>}
 
-          <ul className="chat-messages">
-            {/* ... (unchanged) */}
+           <ul className="chat-messages">
+            {messages.map((message, index) => (
+              <li
+                key={index}
+                style={{
+                  backgroundColor:
+                    message.username === socket.id
+                      ? "#3498db"
+                      : message.color || userColor,
+                  alignSelf:
+                    message.username === socket.id ? "flex-end" : "flex-start",
+                }}
+              >
+                <small>{message.username} : </small> {message.text}
+              </li>
+            ))}
           </ul>
+
 
           <div className="user-input">
             {!showSendPicture && (
