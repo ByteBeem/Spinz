@@ -64,7 +64,7 @@ const Sidebar = ({ active, closeSidebar }) => {
 
         <Link className="link" to="/chat" onClick={() => closeSidebar()}>
           <IoIosChatbubbles className="icon" />
-          <span>Support</span>
+          <span>Chat</span>
         </Link>
       
 
