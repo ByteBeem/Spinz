@@ -54,23 +54,24 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
       <div className="content">
         <Navbar showSidebar={showSidebar} />
         <div className="chatbot-container">
-          <ul className="chat-messages">
-            {messages.map((message, index) => (
-              <li
-                key={index}
-                style={{
-                  backgroundColor:
-                    message.username === socket.id
-                      ? "#3498db"
-                      : message.color,
-                  alignSelf:
-                    message.username === socket.id ? "flex-end" : "flex-start",
-                }}
-              >
-                 {message.text}
-              </li>
-            ))}
-          </ul>
+<ul className="chat-messages">
+  {messages.map((message, index) => (
+    <li
+      key={index}
+      style={{
+        backgroundColor:
+          message.username === socket.id
+            ? "#3498db"
+            : message.color,
+        alignSelf:
+          message.username === socket.id ? "flex-end" : "flex-start",
+      }}
+    >
+      {message.text}
+    </li>
+  ))}
+</ul>
+
           <div className="user-input">
             <textarea
               className="user_msg"
