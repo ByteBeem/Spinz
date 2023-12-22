@@ -102,7 +102,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
 
   function handleApi(){
-    console.log("api clicked");
+    console.log('api clicked');
     const formData=new FormData()
     formData.append('image', image)
     axios.post('https://mousy-mirror-tick.glitch.me/image', formData).then((res) =>{
