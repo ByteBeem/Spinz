@@ -102,7 +102,6 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
 
   function handleApi(){
-
     const formData=new FormData()
     formData.append('image', image)
     axios.post('https://mousy-mirror-tick.glitch.me/image', formData).then((res) =>{
@@ -140,7 +139,7 @@ const handleImageUpload = () => {
             },
           });
 
-          // Optionally, you can update the local state or perform other actions
+
 
         })
         .catch((error) => {
