@@ -31,14 +31,6 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   useEffect(() => {
     if (!socket) return;
 
-    // Fetch old messages when connecting
-    socket.emit("fetch-messages");
-
-    // Listen for old messages from the server
-    socket.on("old-messages", (oldMessages) => {
-      setMessages((prevMessages) => [...prevMessages, ...oldMessages]);
-    });
-
     // Listen for messages from the server
     socket.on("chat-message", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
@@ -47,7 +39,6 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
     // Clean up on component unmount
     return () => {
       socket.off("chat-message");
-      socket.off("old-messages");
     };
   }, [socket]);
 
@@ -74,7 +65,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
         <div className="chatbot-container">
           <ul className="chat-messages">
             {messages.map((message, index) => (
-              <li key={index} className={`${message.type}-message`}>
+              <li key={index} className={`user-message`}>
                 <small>{message.username}</small> {message.text}
               </li>
             ))}
