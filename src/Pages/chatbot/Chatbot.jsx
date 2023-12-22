@@ -4,6 +4,8 @@ import "./Chatbot.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import io from "socket.io-client";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera, faMicrophone } from "@fortawesome/free-solid-svg-icons";
 
 const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [messages, setMessages] = useState([]);
@@ -76,6 +78,16 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
     }
   };
 
+  const handleImageUpload = () => {
+    // Implement image upload logic here
+    // You may use a file input and send the selected image to the server
+  };
+
+  const handleVoiceNote = () => {
+    // Implement voice note recording logic here
+    // You may use a library like MediaRecorder to record audio
+  };
+
   return (
     <div className="chatbot">
       <Sidebar active={active} closeSidebar={closeSidebar} />
@@ -104,13 +116,27 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
           </ul>
 
           <div className="user-input">
-            <textarea
-              className="user_msg"
-              placeholder="Type your message..."
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-            ></textarea>
-            <button onClick={handleSendMessage}>Send</button>
+            <div className="input-icons">
+              <label htmlFor="imageUpload" className="icon">
+                <FontAwesomeIcon icon={faCamera} />
+                <input
+                  type="file"
+                  id="imageUpload"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+              </label>
+              <textarea
+                className="user_msg"
+                placeholder="Type your message..."
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+              ></textarea>
+            </div>
+            <button onClick={handleSendMessage}>
+              <FontAwesomeIcon icon={faMicrophone} />
+              Send
+            </button>
           </div>
         </div>
       </div>
