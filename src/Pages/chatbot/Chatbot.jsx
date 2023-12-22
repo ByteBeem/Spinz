@@ -10,35 +10,29 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-  // Fetch the token from local storage
-  const token = localStorage.getItem("token");
+    // Fetch the token from local storage
+    const token = localStorage.getItem("token");
 
-  if (token) {
-    // Connect to Socket.io server with authentication
-    const newSocket = io("https://mousy-mirror-tick.glitch.me/", {
-      auth: { token },
-    });
+    if (token) {
+      // Connect to Socket.io server with authentication
+      const newSocket = io("https://mousy-mirror-tick.glitch.me/");
 
-    setSocket(newSocket);
+      setSocket(newSocket);
 
-    // Clean up on component unmount
-    return () => {
-      newSocket.disconnect();
-    };
-  } else {
-    console.warn("Token not available. Socket connection not established.");
-  }
-}, []);
-
+      // Clean up on component unmount
+      return () => {
+        newSocket.disconnect();
+      };
+    } else {
+      console.warn("Token not available. Socket connection not established.");
+    }
+  }, []);
 
   useEffect(() => {
     if (!socket) return;
 
-
-    socket.emit("join-room", "Hustleburg");
-
     // Fetch old messages when connecting
-    socket.emit("fetch-messages", "Hustleburg");
+    socket.emit("fetch-messages");
 
     // Listen for old messages from the server
     socket.on("old-messages", (oldMessages) => {
@@ -59,10 +53,9 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
   const handleSendMessage = () => {
     if (userInput.trim() !== "") {
-      // Emit the user's message to the server with the specified room
+      // Emit the user's message to the server
       if (socket) {
         socket.emit("user-message", {
-          room: "Hustleburg",
           message: { type: "user", text: userInput },
         });
       }
