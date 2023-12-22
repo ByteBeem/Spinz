@@ -191,14 +191,8 @@ const handleImageUpload = () => {
               
 <label htmlFor="imageUpload" className="icon">
   <FontAwesomeIcon icon={faCamera} />
-  <input
-    type="file"
-    id="imageUpload"
-    name="file"
-    accept="image/*"
-    onChange={handleImage}
-  />
-  <button onClick={handleApi}>Submit</button>
+
+
 </label>
 
 
