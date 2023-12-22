@@ -86,7 +86,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
     axios
       .post(
-        "https://imported-glory-toque.glitch.me/deposit",
+        "https://chill-emphasized-radish.glitch.me/deposit",
         requestBody,
         {
           headers: { Authorization: `Bearer ${token}` },
