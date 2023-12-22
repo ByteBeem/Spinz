@@ -17,6 +17,7 @@ const ComingSoon = ({ showSidebar, active, closeSidebar }) => {
         Profit: Enjoy your earnings delivered straight to your account within 24 hours.</p>
       <div className="loading-spinner"></div>
     </div>
+     </div>
   );
 };
 
