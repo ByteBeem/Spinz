@@ -133,7 +133,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
                 onChange={(e) => setUserInput(e.target.value)}
               ></textarea>
             </div>
-            <button onClick={}>
+            <button onClick={handleSendMessage}>
               <FontAwesomeIcon icon={faMicrophone} />
                 Voice
             </button>
