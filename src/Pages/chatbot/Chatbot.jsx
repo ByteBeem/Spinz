@@ -140,25 +140,21 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
           {loading && <div className="overlay">Connecting...</div>}
 
           <ul className="chat-messages">
-            {messages.map((message, index) => (
-  <li
-    key={index}
-    style={{
-      backgroundColor:
-        message.username === socket.id ? "#3498db" : message.color,
-      alignSelf:
-        message.username === socket.id ? "flex-end" : "flex-start",
-    }}
-  >
-    {message.type === 'text' ? (
-      <>
-        <small>{message.username} : </small> {message.text}
-      </>
-    ) : (
-      <img src={message.content} alt="user upload" />
-    )}
-  </li>
-))}
+{messages.map((message, index) => (
+              <li
+                key={index}
+                style={{
+                  backgroundColor:
+                    message.username === socket.id
+                      ? "#3498db"
+                      : message.color,
+                  alignSelf:
+                    message.username === socket.id ? "flex-end" : "flex-start",
+                }}
+              >
+<small>{message.username} : </small> {message.text}
+              </li>
+            ))}
 
           </ul>
 
@@ -183,7 +179,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
                 onChange={(e) => setUserInput(e.target.value)}
               ></textarea>
             </div>
-<button style={{ marginRight: '10px' }} onClick={handleSendMessage}>
+<button style={{ marginRight: '10px' , height: '60px' }} onClick={handleSendMessage}>
   <FontAwesomeIcon icon={faMicrophone} />
   Voice
 </button>
