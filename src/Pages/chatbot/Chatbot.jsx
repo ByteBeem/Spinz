@@ -96,7 +96,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
 
 
 
-  const handleImageUpload = () => {
+const handleImageUpload = () => {
   if (socket) {
     const name = localStorage.getItem('user_name');
     const fileInput = document.getElementById('imageUpload');
@@ -106,22 +106,35 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
       const formData = new FormData();
       formData.append('image', imageFile);
 
-      // Use fetch to send the image to the server
-      fetch('https://mousy-mirror-tick.glitch.me/upload', {
-        method: 'POST',
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data); // Log the server response
+      // Use axios to send the image to the server
+      axios.post('https://mousy-mirror-tick.glitch.me/upload', formData)
+        .then((response) => {
+          console.log(response.data); // Log the server response
           // Handle the server response as needed
+
+          // Assuming response.data has the image URL
+          const imageUrl = response.data.imageUrl;
+
+          // Send the image URL to the server through the socket
+          socket.emit("user-message", {
+            message: {
+              type: 'image',
+              content: imageUrl,
+              name: name,
+            },
+          });
+
+          // Optionally, you can update the local state or perform other actions
+
         })
         .catch((error) => {
           console.error('Error uploading image:', error);
+          // Handle the error as needed
         });
     }
   }
 };
+
 
 
 
@@ -166,6 +179,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   <input
     type="file"
     id="imageUpload"
+    name="image"
     accept="image/*"
     onChange={handleImageUpload}
   />
