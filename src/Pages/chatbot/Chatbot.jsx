@@ -19,6 +19,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
     console.log(e.target.files);
     setImage(e.target.files[0])
   }
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
