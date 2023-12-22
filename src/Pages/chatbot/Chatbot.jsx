@@ -10,28 +10,28 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [userInput, setUserInput] = useState("");
   const [userColor, setUserColor] = useState(null);
   const [socket, setSocket] = useState(null);
-  const [loading, setLoading] = useState(true); // Set loading to true initially
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      // Send a separate request using Axios
       axios.post("https://mousy-mirror-tick.glitch.me/userChat", { token })
         .then((response) => {
-          const { name } = response.data;
+          const { name, messages } = response.data;
 
-          // Save the name to localStorage
           localStorage.setItem("user_name", name);
 
-          setLoading(false); // Set loading to false when server responds
+          const sortedMessages = messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+          setMessages(sortedMessages);
+          setLoading(false);
         })
         .catch((error) => {
           console.error("Error fetching user name:", error);
-          setLoading(false); // Set loading to false in case of an error
+          setLoading(false);
         });
 
-      // Connect to Socket.io
       const newSocket = io("https://mousy-mirror-tick.glitch.me/");
 
       newSocket.on("user-color", ({ color }) => {
@@ -39,7 +39,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
       });
 
       newSocket.on("connect", () => {
-        setLoading(false); // Set loading to false when connected
+        setLoading(false);
       });
 
       setSocket(newSocket);
@@ -65,11 +65,10 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const handleSendMessage = () => {
     if (userInput.trim() !== "") {
       if (socket) {
-        const name= localStorage.getItem("user_name");
+        const name = localStorage.getItem("user_name");
 
-        // Send user message
         socket.emit("user-message", {
-          message: { type: "user", text: userInput , name:name },
+          message: { type: "user", text: userInput, name: name },
         });
 
         setUserInput("");
@@ -84,7 +83,6 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
       <div className="content">
         <Navbar showSidebar={showSidebar} />
         <div className="chatbot-container">
-          {/* Overlay for connecting message */}
           {loading && <div className="overlay">Connecting...</div>}
 
           <ul className="chat-messages">
@@ -100,7 +98,7 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
                     message.username === socket.id ? "flex-end" : "flex-start",
                 }}
               >
-<small>{message.username} : </small> {message.text}
+                <small>{message.username} : </small> {message.text}
               </li>
             ))}
           </ul>
