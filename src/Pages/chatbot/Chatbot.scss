@@ -23,11 +23,13 @@
 .chat-messages {
   list-style-type: none;
   padding: 10px;
-  width: 800px;
+  width: 300px;
   margin: 0 auto;
   overflow-y: auto;
+  border-radius:15px;
   flex-grow: 1;
   overflow-y: scroll;
+  align-items: flex-end;
 
   @media screen and (max-width: 1000px) {
     width: 600px;
