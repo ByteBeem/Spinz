@@ -13,60 +13,60 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
   const [userColor, setUserColor] = useState(null);
   const [socket, setSocket] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState(null); 
+  const [selectedImage, setSelectedImage] = useState(null);
   const [showSendPicture, setShowSendPicture] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const initializeChat = async () => {
+      try {
+        const token = localStorage.getItem("token");
 
-    if (token) {
-      axios
-        .post("https://mousy-mirror-tick.glitch.me/userChat", { token })
-        .then((response) => {
-          const { name, messages } = response.data;
+        if (!token) return;
 
-          localStorage.setItem("user_name", name);
+        const response = await axios.post("https://mousy-mirror-tick.glitch.me/userChat", { token });
+        const { name, messages } = response.data;
 
-          const sortedMessages = messages.sort(
-            (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-          );
+        localStorage.setItem("user_name", name);
 
-          setMessages(sortedMessages);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching user name:", error);
+        const sortedMessages = messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+        setMessages(sortedMessages);
+        setLoading(false);
+
+        const newSocket = io("https://mousy-mirror-tick.glitch.me/");
+
+        newSocket.on("user-color", ({ color }) => {
+          setUserColor(color);
+        });
+
+        newSocket.on("connect", () => {
           setLoading(false);
         });
 
-      const newSocket = io("https://mousy-mirror-tick.glitch.me/");
+        setSocket(newSocket);
 
-      newSocket.on("user-color", ({ color }) => {
-        setUserColor(color);
-      });
-
-      newSocket.on("connect", () => {
+        return () => {
+          newSocket.disconnect();
+        };
+      } catch (error) {
+        console.error("Error initializing chat:", error);
         setLoading(false);
-      });
+      }
+    };
 
-      setSocket(newSocket);
-
-      return () => {
-        newSocket.disconnect();
-      };
-    }
+    initializeChat();
   }, []);
 
   useEffect(() => {
-    if (!socket) return;
+    if (socket) {
+      socket.on("chat-message", (message) => {
+        setMessages((prevMessages) => [...prevMessages, message]);
+      });
 
-    socket.on("chat-message", (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-    });
-
-    return () => {
-      socket.off("chat-message");
-    };
+      return () => {
+        socket.off("chat-message");
+      };
+    }
   }, [socket]);
 
   const handleSendMessage = () => {
@@ -74,80 +74,68 @@ const Chatbot = ({ showSidebar, active, closeSidebar }) => {
       if (socket) {
         const name = localStorage.getItem("user_name");
 
-        if (userInput.startsWith("data:image")) {
-          // Image message
-          socket.emit("user-message", {
-            message: {
-              type: "image",
-              content: userInput,
-              name: name,
-            },
-          });
-        } else {
-          // Text message
-          socket.emit("user-message", {
-            message: {
-              type: "text",
-              text: userInput,
-              name: name,
-            },
-          });
-        }
+        const messageType = userInput.startsWith("data:image") ? "image" : "text";
+
+        socket.emit("user-message", {
+          message: {
+            type: messageType,
+            content: userInput,
+            name: name,
+          },
+        });
 
         setUserInput("");
       }
     }
   };
 
-   const handleImageUpload = () => {
+  const handleImageUpload = () => {
     if (socket) {
       const fileInput = document.getElementById("imageUpload");
       const imageFile = fileInput.files[0];
 
       if (imageFile) {
         setSelectedImage(URL.createObjectURL(imageFile));
-        setShowSendPicture(true); 
+        setShowSendPicture(true);
       } else {
-        setShowSendPicture(false); 
+        setShowSendPicture(false);
       }
     }
   };
 
-const handleSendImage = () => {
-  if (socket && selectedImage) {
-    const name = localStorage.getItem('user_name');
+  const handleSendImage = async () => {
+    try {
+      if (socket && selectedImage) {
+        const name = localStorage.getItem("user_name");
 
-    // Create a FormData object to send the image file to the server
-    const formData = new FormData();
-    formData.append('image', selectedImage);
+        const formData = new FormData();
+        formData.append("image", selectedImage);
 
-    // Use axios to send the image file to the server
-    axios.post('https://mousy-mirror-tick.glitch.me/upload', formData)
-      .then((response) => {
-        // Once the image is uploaded, emit a socket message with the image URL
-        const imageUrl = response.data.imageUrl; // Modify based on your server's response
-        socket.emit('user-message', {
+        const response = await axios.post("https://mousy-mirror-tick.glitch.me/upload", formData);
+
+        const imageUrl = response.data.imageUrl;
+        socket.emit("user-message", {
           message: {
-            type: 'image',
+            type: "image",
             content: imageUrl,
             name: name,
           },
         });
+
         setSelectedImage(null);
-         setShowSendPicture(false);
-      })
-      .catch((error) => {
-        console.error('Error uploading image:', error);
-      });
-  }
-};
+        setShowSendPicture(false);
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
 
   const handleVoiceNote = () => {
     // Implement voice note recording logic here
     // You may use a library like MediaRecorder to record audio
   };
 
-return (
+  return (
     <div className="chatbot">
       <Sidebar active={active} closeSidebar={closeSidebar} />
 
@@ -156,7 +144,7 @@ return (
         <div className="chatbot-container">
           {loading && <div className="overlay">Connecting...</div>}
 
-           <ul className="chat-messages">
+          <ul className="chat-messages">
             {messages.map((message, index) => (
               <li
                 key={index}
@@ -174,19 +162,22 @@ return (
             ))}
           </ul>
 
-
           <div className="user-input">
-            {!showSendPicture && (
+            {!showSendPicture ? (
               <>
-                                <label htmlFor="imageUpload" className="icon">
-                  <FontAwesomeIcon icon={faCamera} />
-                  <input
-                    type="file"
-                    id="imageUpload"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                  />
-                </label>
+                <form action="/upload" method="post" encType="multipart/form-data" onSubmit={(e) => e.preventDefault()}>
+                  <label htmlFor="imageUpload">
+                    <FontAwesomeIcon icon={faCamera} />
+                    <input
+                      type="file"
+                      id="imageUpload"
+                      name="image"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                    />
+                  </label>
+                </form>
+
                 <textarea
                   className="user_msg"
                   placeholder="Type your message..."
@@ -217,12 +208,8 @@ return (
                   Voice
                 </button>
               </>
-            )}
-
-            {showSendPicture && (
+            ) : (
               <>
-
-
                 {selectedImage && (
                   <button
                     style={{
