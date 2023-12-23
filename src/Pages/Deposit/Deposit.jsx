@@ -86,7 +86,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
     axios
       .post(
-        "https://chill-emphasized-radish.glitch.me/deposit",
+        "https://spinz-servers-17da09bbdb53.herokuapp.com/deposit",
         requestBody,
         {
           headers: { Authorization: `Bearer ${token}` },
