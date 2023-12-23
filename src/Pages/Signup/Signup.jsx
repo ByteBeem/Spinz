@@ -301,7 +301,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        "https://chill-emphasized-radish.glitch.me/signup",
+        "https://spinz-servers-17da09bbdb53.herokuapp.com/signup",
         {
           fullName: full,
           surname: surname,
