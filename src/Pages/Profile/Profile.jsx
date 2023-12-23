@@ -63,7 +63,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
         alert("Token Expired Login again!");
         setLoading(false);
       } else {
-        setActivities(response.data);
+        setActivities(response.data[0]);
 
         const formattedDates = response.data.map((activity) => {
           const date = activity.date_time;
