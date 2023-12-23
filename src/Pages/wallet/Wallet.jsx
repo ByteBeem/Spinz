@@ -30,8 +30,10 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data);
-        setUserData(response.data);
+        
+        if (response.data.length > 0) {
+    setUserData(response.data[0]);
+  }
         setLoading(false);
       })
       .catch((error) => {
