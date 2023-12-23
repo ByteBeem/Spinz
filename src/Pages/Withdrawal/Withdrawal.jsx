@@ -21,7 +21,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
     try {
       // Send the token as an Authorization header to the server
       const response = await axios.get(
-        "https://heavenly-onyx-bun.glitch.me/getBalance2",
+        "https://imported-glory-toque.glitch.me/getBalance2",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("https://heavenly-onyx-bun.glitch.me/getBalance2", {
+        .get("https://imported-glory-toque.glitch.me/getBalance2", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -92,7 +92,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
     };
 
     axios
-      .post("https://heavenly-onyx-bun.glitch.me/withdraw", requestBody, {
+      .post("https://imported-glory-toque.glitch.me/withdraw", requestBody, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

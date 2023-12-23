@@ -51,7 +51,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://heavenly-onyx-bun.glitch.me/activities",
+        "https://imported-glory-toque.glitch.me/activities",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const fetchUserData = (token) => {
     setLoading(true);
     axios
-      .get("https://heavenly-onyx-bun.glitch.me/getUserData", {
+      .get("https://imported-glory-toque.glitch.me/getUserData", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -138,7 +138,9 @@ function Profile({ showSidebar, active, closeSidebar }) {
           Change Password
         </Link>
 
-      
+      <Link className="form_btn" to="#">
+          Delete Account
+        </Link>
 
  <div className="activity">
           <span>Activity</span>

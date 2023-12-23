@@ -72,7 +72,7 @@ const Sidebar = ({ active, closeSidebar }) => {
 
         <Link className="link" to="/chat">
           <IoIosChatbubbles className="icon" />
-          <span>Support</span>
+          <span>Chat</span>
         </Link>
 
         <Link

@@ -50,7 +50,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
       switch (id) {
         case 1:
           const slotResponse = await axios.post(
-            "https://heavenly-onyx-bun.glitch.me/slot",
+            "https://imported-glory-toque.glitch.me/slot",
             {},
             { headers }
           );
@@ -59,7 +59,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
         case 2:
           const startGameResponse = await axios.post(
-            "https://heavenly-onyx-bun.glitch.me/startGame",
+            "https://imported-glory-toque.glitch.me/startGame",
             { betAmount: betAmountInput },
             { headers }
           );
@@ -72,7 +72,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
         case 5:
           const diceResponse = await axios.post(
-            "https://heavenly-onyx-bun.glitch.me/dice",
+            "https://imported-glory-toque.glitch.medice",
             {},
             { headers }
           );
@@ -85,7 +85,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
         case 7:
           const wheelResponse = await axios.post(
-            "https://heavenly-onyx-bun.glitch.me/wheel",
+            "https://imported-glory-toque.glitch.me/wheel",
             {},
             { headers }
           );
