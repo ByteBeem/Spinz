@@ -29,7 +29,9 @@ const Navbar = ({ showSidebar }) => {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
-      setUserData(response.data);
+      if (response.data.length > 0) {
+    setUserData(response.data[0]);
+  }
     })
     .catch((error) => {
       console.error("Error fetching user data:", error);
