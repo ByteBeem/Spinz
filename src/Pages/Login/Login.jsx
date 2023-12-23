@@ -79,7 +79,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "https://65870a1930feeea492925905--storied-meringue-671102.netlify.app/login",
+        "https://spinz-servers-17da09bbdb53.herokuapp.com/login",
         {
           cell: cellphone,
           password: password,
