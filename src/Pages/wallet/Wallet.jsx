@@ -11,7 +11,7 @@ import "../../App.scss";
 
 const Wallet = ({ showSidebar, active, closeSidebar }) => {
   const { setToken } = useAuth();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({ balance: 0 });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
+        console.log(response.data);
         setUserData(response.data);
         setLoading(false);
       })
@@ -53,7 +54,7 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
           )}
 
           <span>Account Balance:</span>
-          <div className="balance">{`R${userData.balance}`}</div>
+          <div className="balance">{`R${userData.balance || 0}`}</div>
 
           <Link className="form_btn" to="/withdraw">
             Withdraw
