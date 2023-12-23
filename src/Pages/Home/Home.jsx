@@ -50,7 +50,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
       switch (id) {
         case 1:
           const slotResponse = await axios.post(
-            "https://imported-glory-toque.glitch.me/slot",
+            "https://spinz-servers-17da09bbdb53.herokuapp.com/slot",
             {},
             { headers }
           );
@@ -59,7 +59,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
         case 2:
           const startGameResponse = await axios.post(
-            "https://imported-glory-toque.glitch.me/startGame",
+            "https://spinz-servers-17da09bbdb53.herokuapp.com/startGame",
             { betAmount: betAmountInput },
             { headers }
           );
@@ -72,7 +72,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
         case 5:
           const diceResponse = await axios.post(
-            "https://imported-glory-toque.glitch.medice",
+            "https://spinz-servers-17da09bbdb53.herokuapp.com/dice",
             {},
             { headers }
           );
@@ -85,7 +85,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 
         case 7:
           const wheelResponse = await axios.post(
-            "https://imported-glory-toque.glitch.me/wheel",
+            "https://spinz-servers-17da09bbdb53.herokuapp.com/wheel",
             {},
             { headers }
           );
