@@ -51,7 +51,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://imported-glory-toque.glitch.me/activities",
+        "https://spinz-servers-17da09bbdb53.herokuapp.com/activities",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const fetchUserData = (token) => {
     setLoading(true);
     axios
-      .get("https://imported-glory-toque.glitch.me/getUserData", {
+      .get("https://spinz-servers-17da09bbdb53.herokuapp.com/getUserData", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
