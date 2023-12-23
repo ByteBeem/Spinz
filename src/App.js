@@ -9,7 +9,7 @@ import Reset from "./Pages/Reset/Reset";
 import Deposit from "./Pages/Deposit/Deposit";
 import Chatbot from "./Pages/chatbot/Chatbot";
 import Wallet from "./Pages/wallet/Wallet";
-import Count from "./Pages/countdown";
+import Forex from "./Pages/Forex/Forex";
 // import Choice from "./components/choose";
 import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
@@ -30,7 +30,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Logo />
-     <Routes>
+        <Routes>
           <Route path="login" element={<Login />} />
         </Routes>
         <Routes>
@@ -89,18 +89,17 @@ function App() {
               }
             />
 
-                <Route
-              path="coming"
+            <Route
+              path="forex"
               element={
-                <Count
+                <Forex
                   showSidebar={showSidebar}
                   closeSidebar={closeSidebar}
                   active={active}
                 />
               }
             />
-            
-         
+
             <Route
               path="chat"
               element={
