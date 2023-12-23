@@ -18,7 +18,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     try {
       // Send the token as an Authorization header to the server
       const response = await axios.get(
-        "https://imported-glory-toque.glitch.me/getBalance2",
+        "https://spinz-servers-17da09bbdb53.herokuapp.com/getBalance2",
         {
           headers: {
             Authorization: `Bearer ${token}`,
