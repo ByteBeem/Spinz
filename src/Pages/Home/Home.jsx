@@ -7,19 +7,14 @@ import "./Home.scss";
 import Games from "../../Data/Games";
 import { useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
+import Modal from "./model";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const EasyWinSection = () => {
-  const handleButtonClick = () => {
-    
-    console.log("Button clicked!");
-  };
-
+const EasyWinSection = ({ showModal }) => {
   return (
     <div className="easyWin_section">
-    
-      <button className="glowButton" onClick={handleButtonClick}>
+      <button className="glowButton" onClick={showModal}>
         Easy Win
       </button>
     </div>
@@ -35,12 +30,14 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     slidesToScroll: 1,
   };
 
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
   const [loading, setLoading] = useState(false);
   const [betAmountInput, setBetAmountInput] = useState("");
   const { setToken } = useAuth();
+
+  const [showModal, setShowModal] = useState(false);
 
   const handlePlayClick = async (id) => {
     const storedToken = localStorage.getItem("token");
@@ -59,53 +56,24 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     setLoading(true);
 
     try {
-      const headers = {
-        Authorization: `Bearer ${storedToken}`,
-      };
+      const headers = { Authorization: `Bearer ${storedToken}` };
 
       switch (id) {
         case 1:
-          const slotResponse = await axios.post(
-            "https://spinz-servers-17da09bbdb53.herokuapp.com/slot",
-            {},
-            { headers }
-          );
-          window.location.href = slotResponse.data.gameLink;
-          break;
-
         case 2:
-          const startGameResponse = await axios.post(
-            "https://spinz-servers-17da09bbdb53.herokuapp.com/startGame",
-            { betAmount: betAmountInput },
+        case 5:
+        case 7:
+          const response = await axios.post(
+            `https://spinz-servers-17da09bbdb53.herokuapp.com/${getGamePath(id)}`,
+            getGameData(id),
             { headers }
           );
-          window.location.href = startGameResponse.data.gameLink;
+          window.location.href = response.data.gameLink;
           break;
 
         case 4:
-          window.location.href = "https://tac-game.vercel.app/";
-          break;
-
-        case 5:
-          const diceResponse = await axios.post(
-            "https://spinz-servers-17da09bbdb53.herokuapp.com/dice",
-            {},
-            { headers }
-          );
-          window.location.href = diceResponse.data.gameLink;
-          break;
-
         case 6:
           window.location.href = "https://tac-game.vercel.app/";
-          break;
-
-        case 7:
-          const wheelResponse = await axios.post(
-            "https://spinz-servers-17da09bbdb53.herokuapp.com/wheel",
-            {},
-            { headers }
-          );
-          window.location.href = wheelResponse.data.gameLink;
           break;
 
         default:
@@ -118,43 +86,63 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     }
   };
 
-//  if (!token) {
-//     // Redirect to www.shopient.co.za/login
-//     window.location.href = 'https://www.shopient.co.za/login';
+  const getGamePath = (id) => {
+    const paths = {
+      1: "slot",
+      2: "startGame",
+      5: "dice",
+      7: "wheel",
+    };
+    return paths[id] || "";
+  };
 
-//     return null;
-//   }
+  const getGameData = (id) => {
+    if (id === 2) {
+      return { betAmount: betAmountInput };
+    }
+    return {};
+  };
 
-return (
-  <div className="home">
-    <Sidebar active={active} closeSidebar={closeSidebar} />
-    <div className="home_container">
-      <Navbar showSidebar={showSidebar} />
-      <div className="content">
-        <div className="games_slider">
-          <div className="div">
-            <Slider {...settings}>
-              {Games.map(({ id, title, img }) => (
-                <div key={id} className="game_box">
-                  <img src={img} alt="" className="game_img" />
-                  <div className="title">{title}</div>
-                  <div
-                    className="form_btn"
-                    onClick={() => handlePlayClick(id)}
-                  >
-                    {loading ? "Loading..." : "Play"}
-                  </div>
-                </div>
-              ))}
-            </Slider>
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  return (
+    <div className="home">
+      <Sidebar active={active} closeSidebar={closeSidebar} />
+      <div className="home_container">
+        <Navbar showSidebar={showSidebar} />
+        <div className="content">
+          <div className="games_slider">
+            {showModal ? null : (
+              <div className="div">
+                <Slider {...settings}>
+                  {Games.map(({ id, title, img }) => (
+                    <div key={id} className="game_box">
+                      <img src={img} alt="" className="game_img" />
+                      <div className="title">{title}</div>
+                      <div
+                        className="form_btn"
+                        onClick={() => handlePlayClick(id)}
+                      >
+                        {loading ? "Loading..." : "Play"}
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            )}
           </div>
+          <EasyWinSection showModal={openModal} />
+          <Modal visible={showModal} closeModal={closeModal} />
         </div>
-
-        <EasyWinSection />
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default Home;
