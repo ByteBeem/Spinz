@@ -10,6 +10,22 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const EasyWinSection = () => {
+  const handleButtonClick = () => {
+    
+    console.log("Button clicked!");
+  };
+
+  return (
+    <div className="easyWin_section">
+    
+      <button className="glowButton" onClick={handleButtonClick}>
+        Easy Win
+      </button>
+    </div>
+  );
+};
+
 const Home = ({ showSidebar, active, closeSidebar }) => {
   const settings = {
     dots: false,
@@ -109,34 +125,36 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
 //     return null;
 //   }
 
-  return (
-    <div className="home">
-      <Sidebar active={active} closeSidebar={closeSidebar} />
-      <div className="home_container">
-        <Navbar showSidebar={showSidebar} />
-        <div className="content">
-          <div className="games_slider">
-            <div className="div">
-              <Slider {...settings}>
-                {Games.map(({ id, title, img }) => (
-                  <div key={id} className="game_box">
-                    <img src={img} alt="" className="game_img" />
-                    <div className="title">{title}</div>
-                    <div
-                      className="form_btn"
-                      onClick={() => handlePlayClick(id)}
-                    >
-                      {loading ? "Loading..." : "Play"}
-                    </div>
+return (
+  <div className="home">
+    <Sidebar active={active} closeSidebar={closeSidebar} />
+    <div className="home_container">
+      <Navbar showSidebar={showSidebar} />
+      <div className="content">
+        <div className="games_slider">
+          <div className="div">
+            <Slider {...settings}>
+              {Games.map(({ id, title, img }) => (
+                <div key={id} className="game_box">
+                  <img src={img} alt="" className="game_img" />
+                  <div className="title">{title}</div>
+                  <div
+                    className="form_btn"
+                    onClick={() => handlePlayClick(id)}
+                  >
+                    {loading ? "Loading..." : "Play"}
                   </div>
-                ))}
-              </Slider>
-            </div>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
+
+        <EasyWinSection />
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Home;
