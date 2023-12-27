@@ -1,8 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Modal.scss';
 
 export default function Modal({ visible, closeModal }) {
+  const [showPayment, setShowPayment] = useState(false);
+  const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
+  const token = localStorage.getItem('token');
+
   if (!visible) return null;
+
+  const handleContinue = () => {
+    setShowPayment(true);
+  };
+
+  const handlePay = () => {
+    setShowLoadingSpinner(true);
+
+   
+      fetch('https://spinz-servers-17da09bbdb53.herokuapp.com/pay', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+       
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Payment failed');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setShowLoadingSpinner(false);
+          alert('Payment successful!');
+          closeModal();
+        })
+        .catch((error) => {
+          setShowLoadingSpinner(false);
+          alert('Payment failed');
+          
+        });
+    
+  };
 
   return (
     <div className="modal-overlay">
@@ -12,20 +51,35 @@ export default function Modal({ visible, closeModal }) {
           This section offers higher winning chances and making more money fast, but it is a premium choice. To continue, you agree to pay a fee of R30.
         </p>
 
-        <div className="modal-buttons">
-          <button
-            className="modal-button modal-button-red"
-            onClick={closeModal}
-          >
-            Back
-          </button>
-          <button
-            className="modal-button modal-button-green"
-            // Add onClick handler for the "Continue" button, e.g., onClick={handleContinue}
-          >
-            Continue (R30)
-          </button>
-        </div>
+        {showLoadingSpinner ? (
+          <div className="loading-spinner"></div>
+        ) : showPayment ? (
+          <div className="payment-box">
+            <div className="modal-buttons">
+              <button
+                className="modal-button modal-button-green"
+                onClick={handlePay}
+              >
+                Pay
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="modal-buttons">
+            <button
+              className="modal-button modal-button-red"
+              onClick={closeModal}
+            >
+              Back
+            </button>
+            <button
+              className="modal-button modal-button-green"
+              onClick={handleContinue}
+            >
+              Continue (R30)
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
