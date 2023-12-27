@@ -32,8 +32,8 @@ const Games = [
   },
    {
     id: 7,
-    title: "Wheel Of Fortune",
-    img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fs24990.pcdn.co%2Fwp-content%2Fuploads%2F2019%2F07%2Fwheel-of-fortune1.jpg&f=1&nofb=1&ipt=09c37df0d1d429ea307d38d9f1c5cdf9797fe68336c03376b6614b8cc5f907a8&ipo=images",
+    title: "Super Hot Fruit",
+    img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcasinogamescatalog.com%2Fimg%2Fwide%2Ffruits-slot-machine5.png&f=1&nofb=1&ipt=5755f8a6c6ae79cc7552f24e5468a56f3e2cd56e1305b54b3e664b93b15fe58c&ipo=images",
   },
 ];
 
