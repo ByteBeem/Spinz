@@ -13,33 +13,39 @@ export default function Modal({ visible, closeModal }) {
     setShowPayment(true);
   };
 
-  const handlePay = () => {
-    const token = localStorage.getItem('token');
-    setShowLoadingSpinner(true);
+const handlePay = () => {
+  const Storedtoken = localStorage.getItem('token');
+  console.log("token", Storedtoken);
+  setShowLoadingSpinner(true);
 
-    axios.post('https://spinz-servers-17da09bbdb53.herokuapp.com/pay', null, {
+  axios.post(
+    'https://spinz-servers-17da09bbdb53.herokuapp.com/pay',
+    {},
+    {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${Storedtoken}`,
+        'Origin': 'https://www.shopient.co.za',  
       },
+    }
+  )
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        throw new Error('Payment failed');
+      }
     })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.data;
-        } else {
-          throw new Error('Payment failed');
-        }
-      })
-      .then((data) => {
-        setShowLoadingSpinner(false);
-        alert('Payment successful!');
-        closeModal();
-      })
-      .catch((error) => {
-        setShowLoadingSpinner(false);
-        alert('Payment failed');
-      });
-  };
+    .then((data) => {
+      setShowLoadingSpinner(false);
+      alert('Payment successful!');
+      closeModal();
+    })
+    .catch((error) => {
+      setShowLoadingSpinner(false);
+      alert('Payment failed');
+    });
+};
 
   return (
     <div className="modal-overlay">
