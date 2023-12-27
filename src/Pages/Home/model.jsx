@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+
 import './Modal.scss';
 
 export default function Modal({ visible, closeModal }) {
@@ -13,35 +15,30 @@ export default function Modal({ visible, closeModal }) {
   };
 
   const handlePay = () => {
-    setShowLoadingSpinner(true);
+  setShowLoadingSpinner(true);
 
-   
-      fetch('https://spinz-servers-17da09bbdb53.herokuapp.com/pay', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-       
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Payment failed');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setShowLoadingSpinner(false);
-          alert('Payment successful!');
-          closeModal();
-        })
-        .catch((error) => {
-          setShowLoadingSpinner(false);
-          alert('Payment failed');
-          
-        });
-    
-  };
+  axios.post('https://spinz-servers-17da09bbdb53.herokuapp.com/pay', null, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error('Payment failed');
+      }
+      return response.data;
+    })
+    .then((data) => {
+      setShowLoadingSpinner(false);
+      alert('Payment successful!');
+      closeModal();
+    })
+    .catch((error) => {
+      setShowLoadingSpinner(false);
+      alert('Payment failed');
+    });
+};
 
   return (
     <div className="modal-overlay">
