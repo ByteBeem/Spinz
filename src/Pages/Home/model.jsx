@@ -14,8 +14,8 @@ export default function Modal({ visible, closeModal }) {
   };
 
 const handlePay = () => {
-  const Storedtoken = localStorage.getItem('token');
-  console.log("token", Storedtoken);
+  const storedToken = localStorage.getItem('token');
+  console.log("token", storedToken);
   setShowLoadingSpinner(true);
 
   axios.post(
@@ -24,8 +24,8 @@ const handlePay = () => {
     {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${Storedtoken}`,
-        'Origin': 'https://www.shopient.co.za',  
+        Authorization: `Bearer ${storedToken}`,
+        'Origin': 'https://www.shopient.co.za',
       },
     }
   )
@@ -40,12 +40,15 @@ const handlePay = () => {
       setShowLoadingSpinner(false);
       alert('Payment successful!');
       closeModal();
+     
+      window.location.href = data.gameLink;
     })
     .catch((error) => {
       setShowLoadingSpinner(false);
       alert('Payment failed');
     });
 };
+
 
   return (
     <div className="modal-overlay">
