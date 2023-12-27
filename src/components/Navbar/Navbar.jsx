@@ -15,6 +15,9 @@ const Navbar = ({ showSidebar }) => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
+    if(!storedToken){
+      window.location.href = "https://www.shopient.co.za/login";
+    }
 
     if (storedToken) {
       setToken(storedToken);
