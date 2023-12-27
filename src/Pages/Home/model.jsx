@@ -6,7 +6,6 @@ import './Modal.scss';
 export default function Modal({ visible, closeModal }) {
   const [showPayment, setShowPayment] = useState(false);
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
-  const token = localStorage.getItem('token');
 
   if (!visible) return null;
 
@@ -15,30 +14,32 @@ export default function Modal({ visible, closeModal }) {
   };
 
   const handlePay = () => {
-  setShowLoadingSpinner(true);
+    const token = localStorage.getItem('token');
+    setShowLoadingSpinner(true);
 
-  axios.post('https://spinz-servers-17da09bbdb53.herokuapp.com/pay', null, {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => {
-      if (response.status !== 200) {
-        throw new Error('Payment failed');
-      }
-      return response.data;
+    axios.post('https://spinz-servers-17da09bbdb53.herokuapp.com/pay', null, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .then((data) => {
-      setShowLoadingSpinner(false);
-      alert('Payment successful!');
-      closeModal();
-    })
-    .catch((error) => {
-      setShowLoadingSpinner(false);
-      alert('Payment failed');
-    });
-};
+      .then((response) => {
+        if (response.status === 200) {
+          return response.data;
+        } else {
+          throw new Error('Payment failed');
+        }
+      })
+      .then((data) => {
+        setShowLoadingSpinner(false);
+        alert('Payment successful!');
+        closeModal();
+      })
+      .catch((error) => {
+        setShowLoadingSpinner(false);
+        alert('Payment failed');
+      });
+  };
 
   return (
     <div className="modal-overlay">
