@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from "react";
+import './Forex.scss';
+import Sidebar from '../../components/Sidebar/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
 import { useAuth } from "../../components/AuthContext";
 import Modal from "./model";
