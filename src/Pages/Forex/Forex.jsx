@@ -158,8 +158,8 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
           </div>
         </div>
         <div className="activity">
-          <span>Activity</span>
-          <div className="activity-table-container">
+          <span>Trades</span>
+          
             {activities.length > 0 ? (
               <table className="activity-table">
                 <thead>
