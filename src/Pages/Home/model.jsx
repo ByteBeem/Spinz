@@ -33,6 +33,7 @@ const handlePay = () => {
       if (response.status === 200) {
         return response.data;
       } else {
+        alert("Insufficient balance");
         throw new Error('Payment failed');
       }
     })
