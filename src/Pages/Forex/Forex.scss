@@ -60,12 +60,11 @@ $secondaryColor: #ecf0f1;
 .forex-chart-canvas {
 
   @media screen and (max-width: 700px) {
-    padding: 0 0.5rem;
+    padding: 0.5rem;
     align-items: center;
-    width: 500px;
-    height: 200px;
-    padding-left: 130px;
-   
-    
+    width: 100%; 
+    max-width: 500px; 
+    height: auto; 
+    padding-left: 0; 
   }
 }
