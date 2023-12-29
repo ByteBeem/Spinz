@@ -18,17 +18,16 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
   const [dates, setDates] = useState([]);
   const { setToken } = useAuth();
 
-useEffect(() => {
-  setShowModal(true);
+  useEffect(() => {
+    setShowModal(true);
 
-  const storedToken = localStorage.getItem("token");
+    const storedToken = localStorage.getItem("token");
 
-  if (storedToken) {
-    setToken(storedToken);
-    fetchActivities(storedToken);
-  }
-}, []);
-
+    if (storedToken) {
+      setToken(storedToken);
+      fetchActivities(storedToken);
+    }
+  }, [setToken]);
 
   const closeModal = () => {
     setShowModal(false);
@@ -73,7 +72,7 @@ useEffect(() => {
       );
 
       // Store trade details in state
-     // setTradeDetails(response.data);
+      setTradeDetails(response.data);
 
       // Set success message
       setMessage(`Successfully placed a trade.`);
@@ -160,28 +159,30 @@ useEffect(() => {
         </div>
         <div className="activity">
           <span>Activity</span>
-          {activities.length > 0 ? (
-            <table className="activity-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Estimated Profit</th>
-                  <th>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {activities.reverse().map(({ id, timestamp, estimated_outcome, amount, result }) => (
-                  <tr key={id} className={result === 'fail' ? 'fail' : ''}>
-                    <td id="time">{timestamp}</td>
-                    <td id="title">{estimated_outcome}</td>
-                    <td id="body">{amount}</td>
+          <div className="activity-table-container">
+            {activities.length > 0 ? (
+              <table className="activity-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Estimated Profit</th>
+                    <th>Amount</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>No trades yet</p>
-          )}
+                </thead>
+                <tbody>
+                  {activities.reverse().map(({ id, timestamp, estimated_outcome, amount, result }) => (
+                    <tr key={id} className={result === 'fail' ? 'fail' : ''}>
+                      <td>{timestamp}</td>
+                      <td>{estimated_outcome}</td>
+                      <td>{amount}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p>No trades yet</p>
+            )}
+          </div>
         </div>
       </div>
       {showModal && <Modal visible={showModal} closeModal={closeModal} />}
