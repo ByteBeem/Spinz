@@ -4,6 +4,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import Navbar from '../../components/Navbar/Navbar';
 import Modal from "./model";
 import ForexChart from './ForexChart';
+import axios from 'axios';
 
 const Forex = ({ showSidebar, active, closeSidebar }) => {
   const [amount, setAmount] = useState("");
@@ -26,12 +27,12 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
     setLoading(true);
 
     const token = localStorage.getItem("token");
-
+    
     if (!token) {
-      setError("Token not found, go log in again.");
-      setLoading(false);
-      return;
-    }
+  setError("Token not found , Go log in again.");
+  setLoading(false);
+  return;
+}
 
     if (isNaN(amount) || amount <= 0) {
       setError("Invalid amount");
@@ -39,17 +40,36 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
       return;
     }
 
-    if (amount < 200) {
-      setError("Minimum amount is R200");
+    if ( amount < 100) {
+      setError("Minimum amount is R100");
       setLoading(false);
       return;
     }
 
-   
-    setTimeout(() => {
-      setLoading(false);
-      setMessage("Deposit successful!");
-    }, 2000);
+    const requestBody = {
+      amount: parseFloat(amount),
+    };
+
+    axios
+      .post(
+        "https://spinz-servers-17da09bbdb53.herokuapp.com/trade",
+        requestBody,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        setMessage(`Successfully placed a trade.`);
+        
+
+        setAmount("");
+      })
+      .catch((error) => {
+        setError("Trading failed. " + error.response.data.error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
