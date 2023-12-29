@@ -15,6 +15,7 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
         <div className="content">
 
           <ForexChart />
+          <h3>Let's Handle The Trading for you!</h3>
         </div>
       </div>
     </div>
