@@ -73,7 +73,7 @@ useEffect(() => {
       );
 
       // Store trade details in state
-      setTradeDetails(response.data);
+      setTradeDetails(response.data[0]);
 
       // Set success message
       setMessage(`Successfully placed a trade.`);
