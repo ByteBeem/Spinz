@@ -71,6 +71,10 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
         }
       );
 
+      if(response.status === 400){
+        alert("Insufficient balance");
+      }else{
+
       // Store trade details in state
       setTradeDetails(response.data);
 
@@ -82,6 +86,7 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
       
       // Fetch updated activities after a successful trade
       fetchActivities(token);
+      }
     } catch (error) {
       setError("Trading failed. " + error.response?.data?.error || "Unexpected error");
     } finally {
