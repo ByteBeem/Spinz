@@ -170,16 +170,16 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
               <thead>
                 <tr>
                   <th>Date</th>
-                  <th>Type</th>
-                  <th>Info</th>
+                  <th>Estimated Profit</th>
+                  <th>Amount</th>
                 </tr>
               </thead>
               <tbody>
                 {activities.reverse().map(({ id, date_time, activity_description, activity_details, result }) => (
                   <tr key={id} className={result === 'fail' ? 'fail' : ''}>
-                    <td id="time">{new Date(date_time).toLocaleString()}</td>
-                    <td id="title">{activity_description}</td>
-                    <td id="body">{activity_details}</td>
+                    <td id="time">{new Date(timestamp).toLocaleString()}</td>
+                    <td id="title">{estimated_outcome}</td>
+                    <td id="body">{amount}</td>
                   </tr>
                 ))}
               </tbody>
