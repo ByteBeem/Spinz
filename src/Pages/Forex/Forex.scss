@@ -108,6 +108,11 @@ $secondaryColor: #ecf0f1;
     cursor: not-allowed;
   }
 
+  .cash-out-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
   .success-message {
     margin-top: 20px;
     color: #009944;
