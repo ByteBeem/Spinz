@@ -17,18 +17,17 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
   const [dates, setDates] = useState([]);
   const { setToken } = useAuth();
 
-  useEffect(() => {
-    setShowModal(true);
-  }, []);
+useEffect(() => {
+  setShowModal(true);
 
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
+  const storedToken = localStorage.getItem("token");
 
-    if (storedToken) {
-      setToken(storedToken);
-      fetchActivities(storedToken);
-    }
-  }, [setToken]);
+  if (storedToken) {
+    setToken(storedToken);
+    fetchActivities(storedToken);
+  }
+}, []);
+
 
   const closeModal = () => {
     setShowModal(false);
