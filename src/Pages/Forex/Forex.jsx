@@ -106,7 +106,7 @@ useEffect(() => {
         setActivities(response.data[0]);
 
         const formattedDates = response.data.map((activity) => {
-          const date = activity.date_time;
+          const date = activity.timestamp;
           const originalDate = new Date(date);
           return originalDate.toLocaleString("en-US", {
             weekday: "long",
@@ -170,9 +170,9 @@ useEffect(() => {
                 </tr>
               </thead>
               <tbody>
-                {activities.reverse().map(({ id, date_time, estimated_outcome, amount, result }) => (
+                {activities.reverse().map(({ id, timestamp, estimated_outcome, amount, result }) => (
                   <tr key={id} className={result === 'fail' ? 'fail' : ''}>
-                    <td id="time">{date_time}</td>
+                    <td id="time">{timestamp}</td>
                     <td id="title">{estimated_outcome}</td>
                     <td id="body">{amount}</td>
                   </tr>
