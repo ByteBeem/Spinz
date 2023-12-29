@@ -1,4 +1,8 @@
-// ... (imports)
+import Navbar from '../../components/Navbar/Navbar';
+import { useAuth } from "../../components/AuthContext";
+import Modal from "./model";
+import ForexChart from './ForexChart';
+import axios from 'axios';
 
 const Forex = ({ showSidebar, active, closeSidebar }) => {
   const [amount, setAmount] = useState("");
