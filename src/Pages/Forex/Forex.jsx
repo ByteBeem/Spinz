@@ -1,11 +1,4 @@
-import React, { useState, useEffect } from "react";
-import './Forex.scss';
-import Sidebar from '../../components/Sidebar/Sidebar';
-import Navbar from '../../components/Navbar/Navbar';
-import { useAuth } from "../../components/AuthContext";
-import Modal from "./model";
-import ForexChart from './ForexChart';
-import axios from 'axios';
+// ... (imports)
 
 const Forex = ({ showSidebar, active, closeSidebar }) => {
   const [amount, setAmount] = useState("");
@@ -79,6 +72,9 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
 
       // Clear the amount input
       setAmount("");
+      
+      // Fetch updated activities after a successful trade
+      fetchActivities(token);
     } catch (error) {
       setError("Trading failed. " + error.response?.data?.error || "Unexpected error");
     } finally {
@@ -100,7 +96,7 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
       );
 
       if (response.status === 206) {
-        alert("Token Expired. Please log in again!");
+        setError("Token Expired. Please log in again!");
       } else {
         setActivities(response.data[0]);
 
@@ -122,6 +118,7 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
       }
     } catch (error) {
       console.error("Error fetching activities:", error);
+      setError("Error fetching activities. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -159,30 +156,35 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
         </div>
         <div className="activity">
           <span>Trades</span>
-          
-            {activities.length > 0 ? (
-              <table className="activity-table">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Estimated Profit</th>
-                    <th>Amount</th>
+          {activities.length > 0 ? (
+            <table className="activity-table">
+              <thead>
+                <tr>
+                  <th>Estimated Profit</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activities.reverse().map(({ id, timestamp, estimated_outcome, amount, result }) => (
+                  <tr key={id} className={result === 'fail' ? 'fail' : ''}>
+                    <td>{estimated_outcome}</td>
+                    <td>{amount}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {activities.reverse().map(({ id, timestamp, estimated_outcome, amount, result }) => (
-                    <tr key={id} className={result === 'fail' ? 'fail' : ''}>
-                      <td>{timestamp}</td>
-                      <td>{estimated_outcome}</td>
-                      <td>{amount}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p>No trades yet</p>
-            )}
-          </div>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No trades yet</p>
+          )}
+
+          {/* Cash Out button */}
+          <button
+            className="cash-out-btn"
+            disabled={activities.length === 0}
+            onClick={() => console.log("Cash Out clicked")}
+          >
+            Cash Out
+          </button>
         </div>
       </div>
       {showModal && <Modal visible={showModal} closeModal={closeModal} />}
