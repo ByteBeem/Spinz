@@ -13,8 +13,8 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [tradeDetails, setTradeDetails] = useState(null);
-  const [activities, setActivities] = useState(Activities);
-  const [Dates, setDates] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [dates, setDates] = useState([]);
   const { setToken } = useAuth();
 
   useEffect(() => {
@@ -26,9 +26,7 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
 
     if (storedToken) {
       setToken(storedToken);
-
       fetchActivities(storedToken);
-      
     }
   }, [setToken]);
 
@@ -36,7 +34,7 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
     setShowModal(false);
   };
 
-  const handleDeposit = () => {
+  const handleDeposit = async () => {
     setError("");
     setMessage("");
     setLoading(true);
@@ -44,7 +42,7 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      setError("Token not found , Go log in again.");
+      setError("Token not found, please log in again.");
       setLoading(false);
       return;
     }
@@ -61,38 +59,38 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
       return;
     }
 
-    const requestBody = {
-      amount: parseFloat(amount),
-    };
+    try {
+      const requestBody = {
+        amount: parseFloat(amount),
+      };
 
-    axios
-      .post(
+      const response = await axios.post(
         "https://spinz-servers-17da09bbdb53.herokuapp.com/trade",
         requestBody,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
-      )
-      .then((response) => {
-        // Store trade details in state
-        setTradeDetails(response.data);
+      );
 
-        // Set success message
-        setMessage(`Successfully placed a trade.`);
+      // Store trade details in state
+      setTradeDetails(response.data);
 
-        setAmount("");
-      })
-      .catch((error) => {
-        setError("Trading failed. " + error.response.data.error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      // Set success message
+      setMessage(`Successfully placed a trade.`);
+
+      // Clear the amount input
+      setAmount("");
+    } catch (error) {
+      setError("Trading failed. " + error.response?.data?.error || "Unexpected error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const fetchActivities = async (token) => {
     try {
       setLoading(true);
+
       const response = await axios.get(
         "https://spinz-servers-17da09bbdb53.herokuapp.com/tradesHistory",
         {
@@ -103,10 +101,9 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
       );
 
       if (response.status === 206) {
-        alert("Token Expired Login again!");
-        setLoading(false);
+        alert("Token Expired. Please log in again!");
       } else {
-        setActivities(response.data[0]);
+        setActivities(response.data);
 
         const formattedDates = response.data.map((activity) => {
           const date = activity.date_time;
@@ -120,11 +117,12 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
             minute: "numeric",
             second: "numeric",
           });
-          setLoading(false);
         });
+
         setDates(formattedDates);
       }
     } catch (error) {
+      console.error("Error fetching activities:", error);
     } finally {
       setLoading(false);
     }
@@ -133,13 +131,11 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
   return (
     <div className="forex">
       <Sidebar active={active} closeSidebar={closeSidebar} />
-
       <div className="forex_container">
         <Navbar showSidebar={showSidebar} />
-
         <div className="content">
           <ForexChart />
-          <h3>Let's Handle The Trading for you!</h3>
+          <h3>Let's Handle The Trading for You!</h3>
           <div className="deposit_form">
             <div>
               <label>Amount</label>
@@ -159,11 +155,10 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
               </button>
               {message && <p className="success-message">{message}</p>}
               {error && <p className="error-message">{error}</p>}
-              
             </div>
           </div>
         </div>
-         <div className="activity">
+        <div className="activity">
           <span>Activity</span>
           {activities.length > 0 ? (
             <table className="activity-table">
@@ -175,9 +170,9 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
                 </tr>
               </thead>
               <tbody>
-                {activities.reverse().map(({ id, date_time, activity_description, activity_details, result }) => (
+                {activities.reverse().map(({ id, date_time, estimated_outcome, amount, result }) => (
                   <tr key={id} className={result === 'fail' ? 'fail' : ''}>
-                    <td id="time">{new Date(timestamp).toLocaleString()}</td>
+                    <td id="time">{date_time}</td>
                     <td id="title">{estimated_outcome}</td>
                     <td id="body">{amount}</td>
                   </tr>
@@ -185,11 +180,10 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
               </tbody>
             </table>
           ) : (
-            <p>No trades Yet</p>
+            <p>No trades yet</p>
           )}
         </div>
       </div>
-
       {showModal && <Modal visible={showModal} closeModal={closeModal} />}
     </div>
   );
