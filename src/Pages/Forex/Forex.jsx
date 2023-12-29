@@ -12,11 +12,25 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [tradeDetails, setTradeDetails] = useState(null); // New state to store trade details
+  const [tradeDetails, setTradeDetails] = useState(null);
+  const [activities, setActivities] = useState(Activities);
+  const [Dates, setDates] = useState([]);
+  const { setToken } = useAuth();
 
   useEffect(() => {
     setShowModal(true);
   }, []);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      setToken(storedToken);
+
+      fetchActivities(storedToken);
+      
+    }
+  }, [setToken]);
 
   const closeModal = () => {
     setShowModal(false);
@@ -76,6 +90,46 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
       });
   };
 
+  const fetchActivities = async (token) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        "https://spinz-servers-17da09bbdb53.herokuapp.com/tradesHistory",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 206) {
+        alert("Token Expired Login again!");
+        setLoading(false);
+      } else {
+        setActivities(response.data[0]);
+
+        const formattedDates = response.data.map((activity) => {
+          const date = activity.date_time;
+          const originalDate = new Date(date);
+          return originalDate.toLocaleString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+          });
+          setLoading(false);
+        });
+        setDates(formattedDates);
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="forex">
       <Sidebar active={active} closeSidebar={closeSidebar} />
@@ -105,14 +159,34 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
               </button>
               {message && <p className="success-message">{message}</p>}
               {error && <p className="error-message">{error}</p>}
-              {/* Display trade details if available */}
-              {tradeDetails && (
-                <p className="trade-details">
-                  Placed a trade of R{tradeDetails.amount} - Estimated outcome: R{tradeDetails.estimatedOutcome}
-                </p>
-              )}
+              
             </div>
           </div>
+        </div>
+         <div className="activity">
+          <span>Activity</span>
+          {activities.length > 0 ? (
+            <table className="activity-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Info</th>
+                </tr>
+              </thead>
+              <tbody>
+                {activities.reverse().map(({ id, date_time, activity_description, activity_details, result }) => (
+                  <tr key={id} className={result === 'fail' ? 'fail' : ''}>
+                    <td id="time">{new Date(date_time).toLocaleString()}</td>
+                    <td id="title">{activity_description}</td>
+                    <td id="body">{activity_details}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No trades Yet</p>
+          )}
         </div>
       </div>
 
