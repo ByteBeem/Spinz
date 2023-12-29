@@ -11,7 +11,8 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [showModal, setShowModal] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
+  const [tradeDetails, setTradeDetails] = useState(null); // New state to store trade details
 
   useEffect(() => {
     setShowModal(true);
@@ -27,12 +28,12 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
     setLoading(true);
 
     const token = localStorage.getItem("token");
-    
+
     if (!token) {
-  setError("Token not found , Go log in again.");
-  setLoading(false);
-  return;
-}
+      setError("Token not found , Go log in again.");
+      setLoading(false);
+      return;
+    }
 
     if (isNaN(amount) || amount <= 0) {
       setError("Invalid amount");
@@ -40,7 +41,7 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
       return;
     }
 
-    if ( amount < 100) {
+    if (amount < 100) {
       setError("Minimum amount is R100");
       setLoading(false);
       return;
@@ -59,8 +60,11 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
         }
       )
       .then((response) => {
+        // Store trade details in state
+        setTradeDetails(response.data);
+
+        // Set success message
         setMessage(`Successfully placed a trade.`);
-        
 
         setAmount("");
       })
@@ -101,11 +105,17 @@ const Forex = ({ showSidebar, active, closeSidebar }) => {
               </button>
               {message && <p className="success-message">{message}</p>}
               {error && <p className="error-message">{error}</p>}
+              {/* Display trade details if available */}
+              {tradeDetails && (
+                <p className="trade-details">
+                  Placed a trade of R{tradeDetails.amount} - Estimated outcome: R{tradeDetails.estimatedOutcome}
+                </p>
+              )}
             </div>
           </div>
         </div>
       </div>
-    
+
       {showModal && <Modal visible={showModal} closeModal={closeModal} />}
     </div>
   );
