@@ -73,7 +73,7 @@ useEffect(() => {
       );
 
       // Store trade details in state
-      setTradeDetails(response.data[0]);
+     // setTradeDetails(response.data);
 
       // Set success message
       setMessage(`Successfully placed a trade.`);
@@ -103,7 +103,7 @@ useEffect(() => {
       if (response.status === 206) {
         alert("Token Expired. Please log in again!");
       } else {
-        setActivities(response.data);
+        setActivities(response.data[0]);
 
         const formattedDates = response.data.map((activity) => {
           const date = activity.date_time;
