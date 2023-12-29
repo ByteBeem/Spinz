@@ -68,7 +68,11 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             getGameData(id),
             { headers }
           );
+          if(response.status===400){
+            alert("Insufficient Balance");
+          }else{
           window.location.href = response.data.gameLink;
+          }
           break;
 
         case 4:
