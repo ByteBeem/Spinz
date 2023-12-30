@@ -32,7 +32,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
       if (response.status === 206) {
         alert("Token Expired Login again!");
       } else {
-        setCurrentBalance(response.data[0].balance);
+        setCurrentBalance(response.data.balance);
       }
     } catch (error) {
       console.error("Error fetching balance:", error);
@@ -55,7 +55,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
           },
         })
         .then((response) => {
-          setBalance(response.data[0].balance);
+          setBalance(response.data.balance);
           setCurrentBalance(response.data.balance);
         })
         .catch((error) => {
