@@ -29,7 +29,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       if (response.status === 206) {
         alert("Token Expired Login again!");
       } else {
-        setCurrentBalance(response.data.balance);
+        setCurrentBalance(response.data[0].balance);
       }
     } catch (error) {
       console.error("Error fetching balance:", error);
@@ -53,7 +53,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
         })
         .then((response) => {
           setBalance(response.data.balance);
-          setCurrentBalance(response.data.balance);
+          setCurrentBalance(response.data[0].balance);
         })
         .catch((error) => {
           console.error("Error fetching balance:", error);
