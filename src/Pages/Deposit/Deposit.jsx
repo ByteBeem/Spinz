@@ -46,7 +46,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("https://imported-glory-toque.glitch.me/getBalance2", {
+        .get("https://spinz-servers-17da09bbdb53.herokuapp.com/getBalance2", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
