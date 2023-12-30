@@ -123,7 +123,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
             <div className="info">
               <p>
                 <h2>For Capitec Users :</h2>To Deposit to your account , make a
-                transfer to account <b>2054670215</b> and use your name and
+                transfer to account: <b>1051763436</b> Choose bank: <b>Capitec Business</b> and use your name and
                 surname as reference{" "}
               </p>
             </div>
