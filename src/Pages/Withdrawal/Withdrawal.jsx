@@ -21,7 +21,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
     try {
       // Send the token as an Authorization header to the server
       const response = await axios.get(
-        "https://imported-glory-toque.glitch.me/getBalance2",
+        "https://spinz-servers-17da09bbdb53.herokuapp.com/getBalance2",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
       if (response.status === 206) {
         alert("Token Expired Login again!");
       } else {
-        setCurrentBalance(response.data.balance);
+        setCurrentBalance(response.data[0].balance);
       }
     } catch (error) {
       console.error("Error fetching balance:", error);
@@ -55,7 +55,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
           },
         })
         .then((response) => {
-          setBalance(response.data.balance);
+          setBalance(response.data[0].balance);
           setCurrentBalance(response.data.balance);
         })
         .catch((error) => {
