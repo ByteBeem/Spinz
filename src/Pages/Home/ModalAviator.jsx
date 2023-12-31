@@ -16,58 +16,48 @@ export default function Modal({ visible, closeModal }) {
   };
 
   const handlePay = () => {
-    const storedToken = localStorage.getItem('token');
-    console.log("token", storedToken);
-    setShowLoadingSpinner(true);
+  const storedToken = localStorage.getItem('token');
+  console.log("token", storedToken);
+  setShowLoadingSpinner(true);
 
-    axios.post(
-      'https://spinz-servers-17da09bbdb53.herokuapp.com/pay',
-      {},
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${storedToken}`,
-          'Origin': 'https://www.shopient.co.za',
-        },
+  axios.post(
+    'https://spinz-servers-17da09bbdb53.herokuapp.com/pay',
+    {},
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${storedToken}`,
+        'Origin': 'https://www.shopient.co.za',
+      },
+    }
+  )
+    .then((response) => {
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        alert("Insufficient balance");
+        throw new Error('Payment failed');
       }
-    )
-      .then((response) => {
-        if (response.status === 200) {
-          return response.data;
-        } else {
-          alert("Insufficient balance");
-          throw new Error('Payment failed');
-        }
-      })
-      .then((data) => {
-        setShowLoadingSpinner(false);
-        setPaymentSuccess(true);
+    })
+    .then((data) => {
+      setShowLoadingSpinner(false);
+      setPaymentSuccess(true);
+      setAviatorNumber(generateRandomAviatorNumber());
 
-        // Calculate the next aviator movement time
-        const nextAviatorTime = calculateNextAviatorTime();
+      
+      alert('Payment successful!');
 
-        // Generate a random aviator number between 0.00 and 35.00
-        const randomAviatorNumber = generateRandomAviatorNumber();
-
-        // Set the aviator number state
-        setAviatorNumber(randomAviatorNumber);
-
-        // Display relevant information
-        alert('Payment successful!');
-
-        // Update modal content
+     
+      setTimeout(() => {
         closeModal();
+      }, 10000);
+    })
+    .catch((error) => {
+      setShowLoadingSpinner(false);
+      alert('Payment failed');
+    });
+};
 
-        // Use the information as needed
-        console.log(`The next aviator movement is ${randomAviatorNumber}. Make sure not to miss it at ${nextAviatorTime}.`);
-
-        // You can perform additional actions with the data if required
-      })
-      .catch((error) => {
-        setShowLoadingSpinner(false);
-        alert('Payment failed');
-      });
-  };
 
   // Function to calculate the next aviator movement time (example: 5 minutes from the current time)
   const calculateNextAviatorTime = () => {
