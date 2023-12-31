@@ -8,13 +8,14 @@ import Games from "../../Data/Games";
 import { useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
 import Modal from "./model";
+import ModalAviator from "./ModalAviator";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const EasyWinSection = ({ showModal }) => {
+const EasyWinSection = ({ showModal, showModalAviator }) => {
   return (
     <div className="easyWin_section">
-      <button className="glowButtonAviator redButton" onClick={showModal}>
+      <button className="glowButtonAviator redButton" onClick={showModalAviator}>
         Aviator Prediction
       </button>
       <div className="buttonSpacer" />
@@ -24,6 +25,7 @@ const EasyWinSection = ({ showModal }) => {
     </div>
   );
 };
+
 
 const Home = ({ showSidebar, active, closeSidebar }) => {
   const settings = {
@@ -42,6 +44,16 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
   const { setToken } = useAuth();
 
   const [showModal, setShowModal] = useState(false);
+
+  const [showModalAviator, setShowModalAviator] = useState(false);
+
+  const closeModalAviator = () => {
+    setShowModalAviator(false);
+  };
+
+  const openModalAviator = () => {
+    setShowModalAviator(true);
+  };
 
   const handlePlayClick = async (id) => {
     const storedToken = localStorage.getItem("token");
@@ -145,8 +157,9 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
               </div>
             )}
           </div>
-          <EasyWinSection showModal={openModal} />
-          <Modal visible={showModal} closeModal={closeModal} />
+          <EasyWinSection showModal={openModal} showModalAviator={openModalAviator} />
+        {showModal && <Modal visible={showModal} closeModal={closeModal} />}
+        {showModalAviator && <ModalAviator visible={showModalAviator} closeModal={closeModalAviator} />}
         </div>
       </div>
     </div>
