@@ -245,7 +245,7 @@
   font-family: "Montserrat", sans-serif;
 
   
-  animation: glow 1.5s infinite alternate;
+  animation: glowAviator 1.5s infinite alternate;
 
   
   position: relative;
@@ -351,7 +351,7 @@
   }
 }
 
-@keyframes glow {
+@keyframes glowAviator {
   from {
     box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
   }
