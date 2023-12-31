@@ -227,3 +227,135 @@
     box-shadow: 0 0 20px #4c87af, 0 0 30px #4c87af, 0 0 40px #4c87af;
   }
 }
+
+.glowButtonAviator {
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 15px 20px;
+  background-color: #e79cf7; 
+  color: #fff;
+  border: none;
+  border-radius: 10px; 
+  cursor: pointer;
+  outline: none;
+  
+  
+  
+  
+  font-family: "Montserrat", sans-serif;
+
+  
+  animation: glow 1.5s infinite alternate;
+
+  
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  letter-spacing: 4px;
+  transition: 0.5s;
+  &:hover {
+    background-color: #03e9f4;
+    color: var(--white-color);
+    border-radius: 5px;
+    box-shadow: var(--box-shadow);
+  }
+
+  &::before,
+  &::after,
+  &::before::before,
+  &::before::after,
+  &::after::before,
+  &::after::after {
+    content: '';
+    position: absolute;
+    display: block;
+  }
+
+  &::before {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-color));
+    animation: btn-anim1 1s linear infinite;
+  }
+
+  &::after {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--accent-color));
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: 0.25s;
+  }
+
+  &::before::before {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, var(--accent-color));
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: 0.5s;
+  }
+
+  &::before::after {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, var(--accent-color));
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: 0.75s;
+  }
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+  }
+  to {
+    box-shadow: 0 0 20px #4c87af, 0 0 30px #4c87af, 0 0 40px #4c87af;
+  }
+}
