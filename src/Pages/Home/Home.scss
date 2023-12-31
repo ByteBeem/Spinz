@@ -17,7 +17,7 @@
         display: flex;
         align-items: center;
 
-                @media screen and (max-width: 15000px) {
+                @media screen and (max-width: 1500px) {
           padding: 0.6rem 2rem;
         }
         @media screen and (max-width: 900px) {
@@ -33,21 +33,21 @@
 
         .div {
           width: 1500px;
-          // @media screen and (max-width: 1000px) {
-          //   width: 900px;
-          // }
-          // @media screen and (max-width: 700px) {
-          //   width: 600px;
-          // }
+           @media screen and (max-width: 1000px) {
+             width: 900px;
+           }
+           @media screen and (max-width: 700px) {
+             width: 600px;
+           }
         }
         .game_box {
           padding: 0 1rem;
-          @media screen and (max-width: 1000px) {
+          @media screen and (max-width: 900px) {
             padding: 0 0.5rem;
           }
 
           padding: 0 1rem;
-          @media screen and (max-width: 1500px) {
+          @media screen and (max-width: 1000px) {
             padding: 0 0.5rem;
           }
           
