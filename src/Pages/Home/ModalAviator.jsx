@@ -6,6 +6,8 @@ import './Modal.scss';
 export default function Modal({ visible, closeModal }) {
   const [showPayment, setShowPayment] = useState(false);
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [aviatorNumber, setAviatorNumber] = useState(null);
 
   if (!visible) return null;
 
@@ -13,55 +15,95 @@ export default function Modal({ visible, closeModal }) {
     setShowPayment(true);
   };
 
-const handlePay = () => {
-  const storedToken = localStorage.getItem('token');
-  console.log("token", storedToken);
-  setShowLoadingSpinner(true);
+  const handlePay = () => {
+    const storedToken = localStorage.getItem('token');
+    console.log("token", storedToken);
+    setShowLoadingSpinner(true);
 
-  axios.post(
-    'https://spinz-servers-17da09bbdb53.herokuapp.com/pay',
-    {},
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${storedToken}`,
-        'Origin': 'https://www.shopient.co.za',
-      },
-    }
-  )
-    .then((response) => {
-      if (response.status === 200) {
-        return response.data;
-      } else {
-        alert("Insufficient balance");
-        throw new Error('Payment failed');
+    axios.post(
+      'https://spinz-servers-17da09bbdb53.herokuapp.com/pay',
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${storedToken}`,
+          'Origin': 'https://www.shopient.co.za',
+        },
       }
-    })
-    .then((data) => {
-      setShowLoadingSpinner(false);
-      alert('Payment successful!');
-      closeModal();
-     
-      window.location.href = data.gameLink;
-    })
-    .catch((error) => {
-      setShowLoadingSpinner(false);
-      alert('Payment failed');
-    });
-};
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          return response.data;
+        } else {
+          alert("Insufficient balance");
+          throw new Error('Payment failed');
+        }
+      })
+      .then((data) => {
+        setShowLoadingSpinner(false);
+        setPaymentSuccess(true);
 
+        // Calculate the next aviator movement time
+        const nextAviatorTime = calculateNextAviatorTime();
+
+        // Generate a random aviator number between 0.00 and 35.00
+        const randomAviatorNumber = generateRandomAviatorNumber();
+
+        // Set the aviator number state
+        setAviatorNumber(randomAviatorNumber);
+
+        // Display relevant information
+        alert('Payment successful!');
+
+        // Update modal content
+        closeModal();
+
+        // Use the information as needed
+        console.log(`The next aviator movement is ${randomAviatorNumber}. Make sure not to miss it at ${nextAviatorTime}.`);
+
+        // You can perform additional actions with the data if required
+      })
+      .catch((error) => {
+        setShowLoadingSpinner(false);
+        alert('Payment failed');
+      });
+  };
+
+  // Function to calculate the next aviator movement time (example: 5 minutes from the current time)
+  const calculateNextAviatorTime = () => {
+    const currentTime = new Date();
+    const nextAviatorTime = new Date(currentTime.getTime() + 5 * 60000); // 5 minutes in milliseconds
+    return nextAviatorTime.toLocaleTimeString();
+  };
+
+  // Function to generate a random aviator number between 0.00 and 35.00
+  const generateRandomAviatorNumber = () => {
+    const randomDecimal = (Math.random() * 35).toFixed(2);
+    return parseFloat(randomDecimal);
+  };
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2 className="modal-title">Disclaimer</h2>
-        <p className="modal-text">
-          This section offers 90% accuracy with aviator upcoming movements, but it is a premium choice. To continue, you agree to pay a fee of R30.
-        </p>
+        {paymentSuccess ? (
+          <>
+            <h2 className="modal-title">Prediction</h2>
+            <p className="modal-text">
+              The next aviator movement is {aviatorNumber}. Make sure not to miss it at {calculateNextAviatorTime()}.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2 className="modal-title">Disclaimer</h2>
+            <p className="modal-text">
+              This section offers 90% accuracy with aviator upcoming movements, but it is a premium choice. To continue, you agree to pay a fee of R30.
+            </p>
+          </>
+        )}
 
         {showLoadingSpinner ? (
           <div className="loading-spinner"></div>
-        ) : showPayment ? (
+        ) : showPayment && !paymentSuccess ? (
           <div className="payment-box">
             <div className="modal-buttons">
               <button
@@ -80,12 +122,14 @@ const handlePay = () => {
             >
               Back
             </button>
-            <button
-              className="modal-button modal-button-green"
-              onClick={handleContinue}
-            >
-              Continue (R30)
-            </button>
+            {!paymentSuccess && (
+              <button
+                className="modal-button modal-button-green"
+                onClick={handleContinue}
+              >
+                Continue (R30)
+              </button>
+            )}
           </div>
         )}
       </div>
