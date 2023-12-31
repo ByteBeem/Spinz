@@ -17,6 +17,7 @@ const EasyWinSection = ({ showModal }) => {
       <button className="glowButton redButton" onClick={showModal}>
         Aviator Prediction
       </button>
+      <div className="buttonSpacer" />
       <button className="glowButton" onClick={showModal}>
         Easy Win
       </button>
