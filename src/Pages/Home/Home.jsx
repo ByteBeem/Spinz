@@ -14,6 +14,9 @@ import "slick-carousel/slick/slick-theme.css";
 const EasyWinSection = ({ showModal }) => {
   return (
     <div className="easyWin_section">
+      <button className="glowButton redButton" onClick={showModal}>
+        Aviator Prediction
+      </button>
       <button className="glowButton" onClick={showModal}>
         Easy Win
       </button>
