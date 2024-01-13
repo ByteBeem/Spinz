@@ -31,9 +31,11 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
       })
       .then((response) => {
         
-        if (response.data.length > 0) {
-    setUserData(response.data[0]);
-  }
+        const balance = response.data; 
+
+      if (balance !== undefined) {
+        setUserData( balance );
+      }
         setLoading(false);
       })
       .catch((error) => {
