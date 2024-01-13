@@ -28,13 +28,13 @@ const Navbar = ({ showSidebar }) => {
  const fetchUserData = (token) => {
   setLoading(true);
   axios
-    .get("https://spinz-servers-17da09bbdb53.herokuapp.com/getUserData", {
+    .get("https://spinz-server-100d0276d968.herokuapp.com/balance", {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
-      if (response.data.length > 0) {
-    setUserData(response.data[0]);
-  }
+      
+    setUserData(response.data.balance);
+  
     })
     .catch((error) => {
       console.error("Error fetching user data:", error);
