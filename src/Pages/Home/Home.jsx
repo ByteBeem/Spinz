@@ -1,20 +1,24 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { useAuth } from "../../components/AuthContext";
 import axios from "axios";
-import "./Home.scss";
-import Games from "../../Data/Games";
-import { useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
+import Games from "../../Data/Games";
 import Modal from "./model";
 import ModalAviator from "./ModalAviator";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-
+import "./Home.scss";
 
 const Home = ({ showSidebar, active, closeSidebar }) => {
+  const [loading, setLoading] = useState(false);
+  const [betAmountInput, setBetAmountInput] = useState("");
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token');
+
   const settings = {
     dots: false,
     infinite: true,
@@ -22,14 +26,6 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     slidesToShow: 4,
     slidesToScroll: 1,
   };
-
-  const navigate = useNavigate();
-  const token = localStorage.getItem('token');
-
-  const [loading, setLoading] = useState(false);
-  const [betAmountInput, setBetAmountInput] = useState("");
-  const { setToken } = useAuth();
-
 
   const handlePlayClick = async (id) => {
     const storedToken = localStorage.getItem("token");
@@ -60,10 +56,10 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
             getGameData(id),
             { headers }
           );
-          if(response.status===400){
+          if (response.status === 400) {
             alert("Insufficient Balance");
-          }else{
-          window.location.href = response.data.gameLink;
+          } else {
+            window.location.href = response.data.gameLink;
           }
           break;
 
@@ -99,8 +95,6 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
     return {};
   };
 
-  
-
   return (
     <div className="home">
       <Sidebar active={active} closeSidebar={closeSidebar} />
@@ -127,7 +121,6 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
               </div>
             )}
           </div>
-         
         </div>
       </div>
     </div>
