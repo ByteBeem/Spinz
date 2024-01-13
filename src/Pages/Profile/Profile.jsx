@@ -94,9 +94,11 @@ function Profile({ showSidebar, active, closeSidebar }) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        if (response.data.length > 0) {
-    setUserData(response.data[0]);
-  }
+         const info = response.data; 
+
+      if (info !== undefined) {
+        setUserData(info ); 
+      }
         setLoading(false);
       })
       .catch((error) => {});
