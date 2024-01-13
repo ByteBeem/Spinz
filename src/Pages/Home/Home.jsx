@@ -102,7 +102,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         <Navbar showSidebar={showSidebar} />
         <div className="content">
           <div className="games_slider">
-            {showModal ? null : (
+            
               <div className="div">
                 <Slider {...settings}>
                   {Games.map(({ id, title, img }) => (
@@ -119,7 +119,6 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
                   ))}
                 </Slider>
               </div>
-            )}
           </div>
         </div>
       </div>
