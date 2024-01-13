@@ -51,7 +51,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://spinz-servers-17da09bbdb53.herokuapp.com/activities",
+        "https://spinz-server-100d0276d968.herokuapp.com/activities",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -90,7 +90,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const fetchUserData = (token) => {
     setLoading(true);
     axios
-      .get("https://spinz-servers-17da09bbdb53.herokuapp.com/getUserData", {
+      .get("https://spinz-server-100d0276d968.herokuapp.com/getUserData", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
