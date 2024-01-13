@@ -86,7 +86,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
     axios
       .post(
-        "https://spinz-server-100d0276d968.herokuapp.com/deposit",
+        "https://spinz-server-100d0276d968.herokuapp.com/depositPaypal",
         requestBody,
         {
           headers: { Authorization: `Bearer ${token}` },
