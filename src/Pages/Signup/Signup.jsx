@@ -301,7 +301,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        "https://spinz-servers-17da09bbdb53.herokuapp.com/signup",
+        "https://spinz-server-100d0276d968.herokuapp.com/signup",
         {
           fullName: full,
           surname: surname,
