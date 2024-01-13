@@ -32,8 +32,11 @@ const Navbar = ({ showSidebar }) => {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
-      
-    setUserData(response.data.balance);
+     const balance = response.data; 
+
+      if (balance !== undefined) {
+        setUserData( balance ); 
+      }
   
     })
     .catch((error) => {
