@@ -21,7 +21,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
     try {
       // Send the token as an Authorization header to the server
       const response = await axios.get(
-        "https://spinz-servers-17da09bbdb53.herokuapp.com/getBalance2",
+        "https://spinz-server-100d0276d968.herokuapp.com/balance",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("https://spinz-servers-17da09bbdb53.herokuapp.com/getBalance2", {
+        .get("https://spinz-server-100d0276d968.herokuapp.com/balance", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -92,7 +92,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
     };
 
     axios
-      .post("https://spinz-servers-17da09bbdb53.herokuapp.com/withdraw", requestBody, {
+      .post("https://spinz-server-100d0276d968.herokuapp.com/withdraw", requestBody, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
