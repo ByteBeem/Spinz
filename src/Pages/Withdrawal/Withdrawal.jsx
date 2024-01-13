@@ -77,8 +77,8 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
       return;
     }
 
-    if (isNaN(iD) || iD < 13) {
-      setError("Invalid ID number");
+    if (!iD) {
+      setError("Enter password");
       setLoading(false);
       return;
     }
@@ -151,13 +151,13 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
               </div>
 
               <div>
-                <label>ID Number</label>
+                <label>Password</label>
                 <br />
                 <input 
                 type="text"
                 value={iD}
                 onChange={(e) => setiD(e.target.value)}
-                inputMode="numeric"
+                inputMode="text"
                 />
               </div>
             </div>
