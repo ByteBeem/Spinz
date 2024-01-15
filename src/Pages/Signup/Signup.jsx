@@ -382,7 +382,7 @@ const handleNext = () => {
     if (formData.country === "ZA") {
       if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID)) {
         setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
-        isValid = false;
+        
       }
     }
   }
