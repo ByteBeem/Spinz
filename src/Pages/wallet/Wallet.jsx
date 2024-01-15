@@ -13,6 +13,8 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
   const { setToken } = useAuth();
   const [userData, setUserData] = useState({ balance: 0 });
   const [loading, setLoading] = useState(false);
+  const country = userData.country;
+   const balance = userData.balance;
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -43,6 +45,11 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
       });
   };
 
+  const getCurrencySymbol = () => {
+    
+    return country === 'ZA' ? 'R' : '$';
+  };
+
   return (
     <div className="wallet">
       <Sidebar active={active} closeSidebar={closeSidebar} />
@@ -58,7 +65,7 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
           )}
 
           <span>Account Balance:</span>
-          <div className="balance">{`R${userData.balance || 0}`}</div>
+            <div className="balance">{`${getCurrencySymbol()}${balance.toString()}`}</div>
 
           <Link className="form_btn" to="/withdraw">
             Withdraw
