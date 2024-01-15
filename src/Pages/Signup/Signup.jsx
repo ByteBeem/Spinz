@@ -4,7 +4,6 @@ import logo from "../../assets/new.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
-import Typed from 'typed.js';
 import { countries as countriesList } from "countries-list";
 
 function Signup() {
@@ -400,7 +399,7 @@ const handleNext = () => {
 
   return (
     <div className="form">
-      <div className="typing"></div>
+     
 
       <div className="form_container">
         <form onSubmit={handleSubmit}>
