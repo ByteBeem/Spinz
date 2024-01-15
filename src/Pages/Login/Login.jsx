@@ -116,7 +116,7 @@ function Login() {
               type="text"
               id="cellphone"
               name="cellphone"
-              value={sanitizeInput(formData.cellphone)}
+              value={formData.cellphone}
               onChange={handleChange}
               required
               inputMode="numeric"
@@ -132,7 +132,7 @@ function Login() {
               type="password"
               id="password"
               name="password"
-              value={sanitizeInput(formData.password)}
+              value={formData.password}
               onChange={handleChange}
               required
             />
