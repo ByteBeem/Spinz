@@ -342,7 +342,7 @@ function Signup() {
     }
   };
 
-  const handleNext = () => {
+const handleNext = () => {
     setErrors({
       full: "",
       surname: "",
@@ -487,19 +487,22 @@ function Signup() {
                   <p className="error-message">{errors.country}</p>
                 )}
               </div>
-              <div className="input-group">
-                <label htmlFor="ID">ID number: </label>
-                <input
-                  type="numeric"
-                  id="ID"
-                  name="ID"
-                  value={formData.ID}
-                  onChange={handleChange}
-                  required
-                  inputMode="numeric"
-                />
-                {errors.ID && <p className="error-message">{errors.ID}</p>}
-              </div>
+           
+              {formData.country === "ZA" && (
+                <div className="input-group">
+                  <label htmlFor="ID">ID number: </label>
+                  <input
+                    type="numeric"
+                    id="ID"
+                    name="ID"
+                    value={formData.ID}
+                    onChange={handleChange}
+                    required
+                    inputMode="numeric"
+                  />
+                  {errors.ID && <p className="error-message">{errors.ID}</p>}
+                </div>
+              )}
             </>
           )}
 
@@ -538,7 +541,7 @@ function Signup() {
               <button type="button" onClick={handleBack}>
                 Back
               </button>
-       )}
+            )}
             {section < 3 && (
               <button type="button" onClick={handleNext}>
                 Next
