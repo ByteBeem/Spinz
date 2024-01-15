@@ -319,7 +319,7 @@ function Signup() {
       setIsLoading(false);
 
       if (response.status === 200) {
-        // Handle successful registration
+        
         setErrors((prevErrors) => ({
           ...prevErrors,
           password: "Account Opened Successfully! Login Now",
@@ -354,8 +354,7 @@ const handleNext = () => {
     });
 
     if (section === 1) {
-      // Validate the inputs of section 1
-      // If validation passes, proceed to the next section
+      
       if (!validateName(formData.full)) {
         setErrors((prevErrors) => ({
           ...prevErrors,
@@ -379,35 +378,33 @@ const handleNext = () => {
       }
     }
 
-    if (section === 2) {
-      // Validate the inputs of section 2
-      // If validation passes, proceed to the next section
+   if (section === 2) {
+    if (formData.country === "ZA") {
       if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID)) {
         setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
-        return;
+        isValid = false;
       }
     }
+  }
 
     if (section === 3) {
-      // Validate the inputs of section 3
-      // If validation passes, submit the form or perform final actions
+    
       const passwordError = validatePassword(formData.password, formData.confirmPassword);
       if (passwordError) {
         setErrors((prevErrors) => ({ ...prevErrors, password: passwordError }));
         return;
       }
 
-      // Submit the form or perform final actions
       handleSubmit();
       return;
     }
 
-    // If validation passes, move to the next section
+    
     setSection(section + 1);
   };
 
   const handleBack = () => {
-    // Move to the previous section
+   
     setSection(section - 1);
   };
 
