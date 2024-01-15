@@ -6,8 +6,6 @@ import { useAuth } from "../../components/AuthContext";
 import axios from "axios";
 import Slider from "react-slick";
 import Games from "../../Data/Games";
-import Modal from "./model";
-import ModalAviator from "./ModalAviator";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.scss";
