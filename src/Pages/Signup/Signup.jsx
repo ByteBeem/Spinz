@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Signup.scss";
 import logo from "../../assets/new.png";
 import { Link } from "react-router-dom";
@@ -7,17 +7,8 @@ import moment from "moment";
 import Typed from 'typed.js';
 import { countries as countriesList } from "countries-list";
 
-
 function Signup() {
-
-  useEffect(() => {
-    var typed = new Typed(".typing", {
-      strings: ["Sign up Now!", "Welcome to Spinz"],
-      typeSpeed: 90,
-      backSpeed: 50,
-      loop: true
-    });
-  }, []);
+  const [section, setSection] = useState(1);
 
   const [formData, setFormData] = useState({
     full: "",
@@ -29,13 +20,15 @@ function Signup() {
     country: "ZA",
   });
 
-   const countryOptions = Object.entries(countriesList).map(
+  const countryOptions = Object.entries(countriesList).map(
     ([code, details]) => ({
       code,
       name: details.name,
     })
   );
+
   const [isLoading, setIsLoading] = useState(false);
+
   const [errors, setErrors] = useState({
     full: "",
     surname: "",
@@ -349,114 +342,216 @@ function Signup() {
     }
   };
 
+  const handleNext = () => {
+    setErrors({
+      full: "",
+      surname: "",
+      cellphone: "",
+      ID: "",
+      password: "",
+      confirmPassword: "",
+      country: "",
+    });
+
+    if (section === 1) {
+      // Validate the inputs of section 1
+      // If validation passes, proceed to the next section
+      if (!validateName(formData.full)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          full: "Invalid full name. Use letters and spaces only",
+        }));
+        return;
+      }
+      if (!validateName(formData.surname)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          surname: "Invalid surname. Use letters and spaces only",
+        }));
+        return;
+      }
+      if (!validateCellphone(formData.cellphone)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          cellphone: "Invalid cellphone number",
+        }));
+        return;
+      }
+    }
+
+    if (section === 2) {
+      // Validate the inputs of section 2
+      // If validation passes, proceed to the next section
+      if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID)) {
+        setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
+        return;
+      }
+    }
+
+    if (section === 3) {
+      // Validate the inputs of section 3
+      // If validation passes, submit the form or perform final actions
+      const passwordError = validatePassword(formData.password, formData.confirmPassword);
+      if (passwordError) {
+        setErrors((prevErrors) => ({ ...prevErrors, password: passwordError }));
+        return;
+      }
+
+      // Submit the form or perform final actions
+      handleSubmit();
+      return;
+    }
+
+    // If validation passes, move to the next section
+    setSection(section + 1);
+  };
+
+  const handleBack = () => {
+    // Move to the previous section
+    setSection(section - 1);
+  };
+
+  const handleSubmit = async () => {
+    // Your existing form submission logic
+  };
+
   return (
     <div className="form">
       <div className="typing"></div>
 
       <div className="form_container">
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="full">Full Name(s): </label>
-            <input
-              type="text"
-              id="full"
-              name="full"
-              value={formData.full}
-              onChange={handleChange}
-              required
-            />
-            {errors.full && <p className="error-message">{errors.full}</p>}
-          </div>
-          <div className="input-group">
-            <label htmlFor="surname">Surname: </label>
-            <input
-              type="text"
-              id="surname"
-              name="surname"
-              value={formData.surname}
-              onChange={handleChange}
-              required
-            />
-            {errors.surname && (
-              <p className="error-message">{errors.surname}</p>
+          {section === 1 && (
+            <>
+              <div className="input-group">
+                <label htmlFor="full">Full Name(s): </label>
+                <input
+                  type="text"
+                  id="full"
+                  name="full"
+                  value={formData.full}
+                  onChange={handleChange}
+                  required
+                />
+                {errors.full && <p className="error-message">{errors.full}</p>}
+              </div>
+              <div className="input-group">
+                <label htmlFor="surname">Surname: </label>
+                <input
+                  type="text"
+                  id="surname"
+                  name="surname"
+                  value={formData.surname}
+                  onChange={handleChange}
+                  required
+                />
+                {errors.surname && (
+                  <p className="error-message">{errors.surname}</p>
+                )}
+              </div>
+              <div className="input-group">
+                <label htmlFor="cellphone">Cellphone: </label>
+                <input
+                  type="text"
+                  id="cellphone"
+                  name="cellphone"
+                  value={formData.cellphone}
+                  onChange={handleChange}
+                  required
+                  inputMode="numeric"
+                />
+                {errors.cellphone && (
+                  <p className="error-message">{errors.cellphone}</p>
+                )}
+              </div>
+            </>
+          )}
+
+          {section === 2 && (
+            <>
+              <div className="input-group">
+                <label htmlFor="country">Country: </label>
+                <select
+                  id="country"
+                  className="dropdown"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  required
+                >
+                  {countryOptions.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.country && (
+                  <p className="error-message">{errors.country}</p>
+                )}
+              </div>
+              <div className="input-group">
+                <label htmlFor="ID">ID number: </label>
+                <input
+                  type="numeric"
+                  id="ID"
+                  name="ID"
+                  value={formData.ID}
+                  onChange={handleChange}
+                  required
+                  inputMode="numeric"
+                />
+                {errors.ID && <p className="error-message">{errors.ID}</p>}
+              </div>
+            </>
+          )}
+
+          {section === 3 && (
+            <>
+              <div className="input-group">
+                <label htmlFor="password">Password: </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+                {errors.password && (
+                  <p className="error-message">{errors.password}</p>
+                )}
+              </div>
+              <div className="input-group">
+                <label htmlFor="confirmPassword">Confirm Password: </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </>
+          )}
+
+          <div className="navigation-buttons">
+            {section > 1 && (
+              <button type="button" onClick={handleBack}>
+                Back
+              </button>
+       )}
+            {section < 3 && (
+              <button type="button" onClick={handleNext}>
+                Next
+              </button>
+            )}
+            {section === 3 && (
+              <button type="submit" className="form_btn" disabled={isLoading}>
+                {isLoading ? "Registering..." : "Register"}
+              </button>
             )}
           </div>
-          <div className="input-group">
-            <label htmlFor="cellphone">Cellphone: </label>
-            <input
-              type="text"
-              id="cellphone"
-              name="cellphone"
-              value={formData.cellphone}
-              onChange={handleChange}
-              required
-              inputMode="numeric"
-            />
-            {errors.cellphone && (
-              <p className="error-message">{errors.cellphone}</p>
-            )}
-          </div>
-<div className="input-group">
-            <label htmlFor="country">Country: </label>
-            <select
-              id="country"
-              className="dropdown"
-              name="country"
-              value={formData.country}
-              onChange={handleChange}
-              required
-            >
-              {countryOptions.map((country) => (
-                <option key={country.code} value={country.code}>
-                  {country.name}
-                </option>
-              ))}
-            </select>
-            {errors.country && (
-              <p className="error-message">{errors.country}</p>
-            )}
-          </div>
-          <div className="input-group">
-            <label htmlFor="ID">ID number: </label>
-            <input
-              type="numeric"
-              id="ID"
-              name="ID"
-              value={formData.ID}
-              onChange={handleChange}
-              required
-              inputMode="numeric"
-            />
-            {errors.ID && <p className="error-message">{errors.ID}</p>}
-          </div>
-          <div className="input-group">
-            <label htmlFor="password">Password: </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            {errors.password && (
-              <p className="error-message">{errors.password}</p>
-            )}
-          </div>
-          <div className="input-group">
-            <label htmlFor="confirmPassword">Confirm Password: </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <button type="submit" className="form_btn" disabled={isLoading}>
-            {isLoading ? "Registering..." : "Register"}
-          </button>
           {isLoading && <div className="loading-spinner" />}
         </form>
 
