@@ -71,6 +71,25 @@
       margin-bottom: 2rem;
     }
 
+    .input-group {
+
+            span {
+              color: var(--primary-color);
+              font-size: 17px;
+            }
+
+            .dropdown {
+             // margin-top: 7px;
+              padding: 5px;
+              font-size: 16px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              width: 200px;
+              outline: none;
+              cursor: pointer;
+            }
+          }
+
     .bottom {
       display: flex;
       align-items: flex-start;
