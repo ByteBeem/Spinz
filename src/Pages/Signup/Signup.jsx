@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import Typed from 'typed.js';
-import countriesList from "countries-list";
+import { countries as countriesList } from "countries-list";
+
 
 function Signup() {
 
@@ -28,13 +29,12 @@ function Signup() {
     country: "ZA",
   });
 
-  const countryOptions = Object.entries(countriesList.countries).map(
+   const countryOptions = Object.entries(countriesList).map(
     ([code, details]) => ({
       code,
       name: details.name,
     })
   );
-
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({
     full: "",
@@ -396,7 +396,7 @@ function Signup() {
               <p className="error-message">{errors.cellphone}</p>
             )}
           </div>
- <div className="input-group">
+<div className="input-group">
             <label htmlFor="country">Country: </label>
             <select
               id="country"
