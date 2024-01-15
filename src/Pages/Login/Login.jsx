@@ -3,31 +3,13 @@ import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
-import Typed from "typed.js";
-import DOMPurify from 'dompurify';
+
 
 function Login() {
   const {setToken, setUserData } = useAuth();
 
   const navigate = useNavigate();
 
-  const sanitizeText = (text) => {
-    return DOMPurify.sanitize(text);
-  };
-
-  const sanitizeInput = (input) => {
-    return DOMPurify.sanitize(input);
-  };
-
-
-  useEffect(() => {
-    var typed = new Typed(".typing", {
-      strings: [sanitizeText("Login Now!"), "Welcome to Spinz"],
-      typeSpeed: 90,
-      backSpeed: 50,
-      loop: true,
-    });
-  }, []);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -124,7 +106,7 @@ function Login() {
 
   return (
     <div className="login">
-      <div className="typing"></div>
+      
 
       <div className="login_container">
         <form onSubmit={handleSubmit}>
