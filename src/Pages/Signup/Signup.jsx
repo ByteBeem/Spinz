@@ -257,12 +257,6 @@ function Signup() {
 
     
 
-    if (!SAIDCheck(formData.ID, setErrors)) {
-      setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
-      setIsLoading(false);
-      return;
-    }
-
     // Validate the full name
     if (!validateName(formData.full)) {
       setErrors((prevErrors) => ({
