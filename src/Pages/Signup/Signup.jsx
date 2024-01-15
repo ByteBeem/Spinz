@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import Typed from 'typed.js';
+import countriesList from "countries-list";
 
 function Signup() {
 
@@ -24,7 +25,15 @@ function Signup() {
     ID: "",
     password: "",
     confirmPassword: "",
+    country: "ZA",
   });
+
+  const countryOptions = Object.entries(countriesList.countries).map(
+    ([code, details]) => ({
+      code,
+      name: details.name,
+    })
+  );
 
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({
@@ -34,6 +43,7 @@ function Signup() {
     ID: "",
     password: "",
     confirmPassword: "",
+    country: "",
   });
 
   const handleChange = (e) => {
@@ -239,6 +249,7 @@ function Signup() {
       ID: "",
       password: "",
       confirmPassword: "",
+      country: "",
     });
 
     // Validate the cellphone number
@@ -383,6 +394,26 @@ function Signup() {
             />
             {errors.cellphone && (
               <p className="error-message">{errors.cellphone}</p>
+            )}
+          </div>
+ <div className="input-group">
+            <label htmlFor="country">Country: </label>
+            <select
+              id="country"
+              className="dropdown"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              required
+            >
+              {countryOptions.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.name}
+                </option>
+              ))}
+            </select>
+            {errors.country && (
+              <p className="error-message">{errors.country}</p>
             )}
           </div>
           <div className="input-group">
