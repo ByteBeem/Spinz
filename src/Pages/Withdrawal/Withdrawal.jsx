@@ -120,10 +120,6 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
         <Navbar showSidebar={showSidebar} />
 
         <div className="content">
-          <div className="balance_info">
-            <span>Current Balance:</span>
-            <h1>R{balance}</h1>
-          </div>
 
           <div className="middle">
             <div className="left">
