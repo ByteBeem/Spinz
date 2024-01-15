@@ -63,16 +63,7 @@ const Navbar = ({ showSidebar }) => {
         </li>
       </ul>
 
-      <ul className="right">
-        <div className="notification">
-          <IoNotifications className="icon" />
-          <div className="count">5</div>
-        </div>
-        <Link className="profile" to="/profile">
-          <img src="" alt="" />
-        </Link>
-        
-      </ul>
+      
     </header>
   );
 };
