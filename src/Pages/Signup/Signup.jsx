@@ -411,9 +411,7 @@ function Signup() {
     setSection(section - 1);
   };
 
-  const handleSubmit = async () => {
-    // Your existing form submission logic
-  };
+  
 
   return (
     <div className="form">
