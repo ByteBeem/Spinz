@@ -255,14 +255,7 @@ function Signup() {
       return;
     }
 
-    if (
-      !validateID(formData.ID) ||
-      !idValidationService.checkNumber(formData.ID)
-    ) {
-      setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
-      setIsLoading(false);
-      return;
-    }
+    
 
     if (!SAIDCheck(formData.ID, setErrors)) {
       setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
