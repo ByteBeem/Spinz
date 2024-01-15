@@ -52,7 +52,7 @@ const Navbar = ({ showSidebar }) => {
 };
 
   const getCurrencySymbol = () => {
-  const symbol = country === 'ZAR' ? 'R' : '$';
+  const symbol = country === 'ZA' ? 'R' : '$';
   localStorage.setItem("country", country);
   return symbol;
 };
