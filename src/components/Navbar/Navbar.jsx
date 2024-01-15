@@ -13,6 +13,7 @@ const Navbar = ({ showSidebar }) => {
   const navigate = useNavigate();
 
   const balance = userData.balance;
+  const country = userData.country;
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -50,6 +51,11 @@ const Navbar = ({ showSidebar }) => {
     });
 };
 
+  const getCurrencySymbol = () => {
+  const symbol = country === 'ZAR' ? 'R' : '$';
+  localStorage.setItem("country", country);
+  return symbol;
+};
 
   return (
     <header>
@@ -59,7 +65,7 @@ const Navbar = ({ showSidebar }) => {
       <ul className="games_filter">
         <li>
           <div className="balance">
-            {loading ? "Loading..." : `R${balance}`}
+            {loading ? "Loading..." : `${getCurrencySymbol()}${balance.toString()}`}
           </div>
         </li>
       </ul>
