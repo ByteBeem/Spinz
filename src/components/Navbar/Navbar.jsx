@@ -1,6 +1,6 @@
 import "./Navbar.scss";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 import { IoNotifications } from "react-icons/io5";
@@ -10,6 +10,7 @@ const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const { setToken } = useAuth();
+  const navigate = useNavigate();
 
   const balance = userData.balance;
 
@@ -41,8 +42,8 @@ const Navbar = ({ showSidebar }) => {
     })
     .catch((error) => {
       console.error("Error fetching user data:", error);
-      alert("Go login now!");
-      window.location.href = "https://www.shopient.co.za/login";
+      
+      navigate("/dashboard");
     })
     .finally(() => {
       setLoading(false);
