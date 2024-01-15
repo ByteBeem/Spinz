@@ -312,6 +312,7 @@ function Signup() {
           cell: cellphone,
           idNumber: ID,
           password: password,
+          country: country,
         },
         { withCredentials: true }
       );
