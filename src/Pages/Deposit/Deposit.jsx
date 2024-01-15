@@ -114,22 +114,17 @@ function Deposit({ showSidebar, active, closeSidebar }) {
         <Navbar showSidebar={showSidebar} />
 
         <div className="content">
-          <div className="balance_info">
-            <span>Current Balance:</span>
-            <h1>R{balance}</h1>
-          </div>
+          
 
           <div className="middle">
             <div className="info">
               <p>
-                <h2>For Capitec Users :</h2>To Deposit to your account , make a
-                transfer to account: <b>1051763436</b> Choose bank: <b>Capitec Business</b> and use your name and
-                surname as reference{" "}
+               <h2><b>Other nationatls use :</b> </h2> 
               </p>
             </div>
 
             <p>
-               <h2><b>Other banks use the option below :</b> </h2> 
+               <h2><b>South African citizens use:</b> </h2> 
               </p>
 
             <div className="deposit_form">
