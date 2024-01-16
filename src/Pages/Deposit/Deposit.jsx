@@ -141,7 +141,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
           </button>
 
           {show ? (
-      <PayPalbuttons style={{ layout: "vertical" }} createOrder={createOrder} onApprove={onApprove} />
+      <PayPalButtons style={{ layout: "vertical" }} createOrder={createOrder} onApprove={onApprove} />
        
           ) : null}
             </PayPalScriptProvider>
