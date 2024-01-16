@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Deposit.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
+import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 
 function Deposit({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
@@ -106,6 +107,19 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       });
   };
 
+  const [show, setShow] = useState(false);
+  const [success , setSuccess] = useState(false);
+  const [errorMessage , setErrorMessage] = useState(false);
+   const [orderId , setOrderId] = useState(false);
+
+  const createOrder = (data , actions) => {
+
+  };
+
+  const onApprove = (data , actions) => {
+
+  };
+
   return (
     <div className="deposit">
       <Sidebar active={active} closeSidebar={closeSidebar} />
@@ -114,7 +128,23 @@ function Deposit({ showSidebar, active, closeSidebar }) {
         <Navbar showSidebar={showSidebar} />
 
         <div className="content">
+          <PayPalScriptProvider 
+
+            options={{
+              'client-id':'Aft3OCQujzt42-4_EAtWyIeLnZ-RsLynG4BbhVztRHfKHLe2OxPEl3a1HakXW1b4ASv1YCsUaOjLgm-A'
+            }}
+
+            >
+          <button onClick={() => setShow(true) } type = 'submit'>
+            Paypal
           
+          </button>
+
+          {show ? (
+      <PayPalbuttons style{{layout: 'vertical'}} createOrder={createOrder}
+        onApprove={onApprove} />
+          ) : null}
+            </PayPalScriptProvider>
 
           <div className="middle">
            
