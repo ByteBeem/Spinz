@@ -14,6 +14,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const [Currentbalance, setCurrentBalance] = useState("0.00");
 
   const token = localStorage.getItem("token");
@@ -101,7 +102,8 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       .then((response) => {
         setMessage(`Redirecting...`);
         //window.location.href = response.data.redirectUrl;
-navigate("/paymnets");
+setShow(true);
+        setHide(true);
         setAmount("");
       })
       .catch((error) => {
@@ -112,12 +114,16 @@ navigate("/paymnets");
       });
   };
 
-  const [show, setShow] = useState(true);
+ 
+
+  const [show, setShow] = useState(false);
+  const [hide, setHide] = useState(false);
   const [success , setSuccess] = useState(false);
   const [errorMessage , setErrorMessage] = useState(false);
    const [orderId , setOrderId] = useState(false);
 
   const createOrder = (data , actions) => {
+    setShowModal(true); 
     return actions.order.create({
       purchase_units : [
         {
@@ -182,6 +188,7 @@ setErrorMessage("Something went wrong");
            
 
             <div className="deposit_form">
+              {Hide ? (
               <h3>Deposit Funds</h3>
               <div>
                 <label>Deposit Amount</label>
@@ -201,6 +208,7 @@ setErrorMessage("Something went wrong");
                 </button>
                 {message && <p className="success-message">{message}</p>}
                 {error && <p className="error-message">{error}</p>}
+              ) : null}
               </div>
             </div>
           </div>
