@@ -7,7 +7,7 @@ import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 
 
-function payments({ showSidebar, active, closeSidebar }) {
+function Payments({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
   const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -190,4 +190,4 @@ setErrorMessage("Something went wrong");
   );
 }
 
-export default payments;
+export default Payments;
