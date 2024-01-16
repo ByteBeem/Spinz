@@ -14,7 +14,7 @@ import Forex from "./Pages/Forex/Forex";
 import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
 import { AuthProvider } from "./components/AuthContext";
-import payments from "./Pages/Deposit/payments";
+import payments from "./Pages/Deposit/Payments";
 
 function App() {
   const [active, setActive] = useState("");
