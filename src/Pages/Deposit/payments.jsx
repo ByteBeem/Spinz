@@ -150,9 +150,7 @@ function Payments({ showSidebar, active, closeSidebar }) {
         <Navbar showSidebar={showSidebar} />
 
         <div className="content">
-          <div className="middle">
-            <div className="deposit_form">
-              <PayPalScriptProvider
+                        <PayPalScriptProvider
                 options={{
                   "client-id": "Aft3OCQujzt42-4_EAtWyIeLnZ-RsLynG4BbhVztRHfKHLe2OxPEl3a1HakXW1b4ASv1YCsUaOjLgm-A",
                 }}
@@ -166,6 +164,9 @@ function Payments({ showSidebar, active, closeSidebar }) {
                   />
                 ) : null}
               </PayPalScriptProvider>
+          <div className="middle">
+            <div className="deposit_form">
+
             </div>
           </div>
         </div>
