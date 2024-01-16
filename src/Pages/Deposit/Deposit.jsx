@@ -4,6 +4,8 @@ import "./Deposit.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
+import { PayPalButtons } from "@paypal/react-paypal-js";
+
 
 function Deposit({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
