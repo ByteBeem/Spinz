@@ -115,12 +115,42 @@ function Deposit({ showSidebar, active, closeSidebar }) {
    const [orderId , setOrderId] = useState(false);
 
   const createOrder = (data , actions) => {
+    return actions.order.create({
+      purchase_units : [
+        {
+          description : 'depositToSpinz',
+          amount : {
+            currency_code : 'USD',
+            value : 20
+          },
+
+        },
+        ],
+      application_context: {
+        'NO_SHIPPING'
+      }
+    })
+    .then ((orderID) => {
+      setOrderId(orderID)
+      return orderID
+    })
 
   };
 
   const onApprove = (data , actions) => {
+    return actions.order.capture().then (function (details ) {
+      const {payer} =details;
+      setSuccess(true);
+      
+
+    })
 
   };
+
+  const onError = (data , actions) => {
+    
+setErroMessage("Something went wrong");
+  }
 
   return (
     <div className="deposit">
@@ -143,7 +173,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
           </button>
 
           {show ? (
-      <PayPalButtons style={{ layout: "vertical" }} createOrder={createOrder} onApprove={onApprove} />
+      <PayPalButtons style={{ layout: "vertical" }} createOrder={createOrder} onApprove={onApprove}   onError={onError}/>
        
           ) : null}
             </PayPalScriptProvider>
