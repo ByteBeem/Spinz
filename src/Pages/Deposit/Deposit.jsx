@@ -170,10 +170,7 @@ setErrorMessage("Something went wrong");
             }}
 
             >
-          <button onClick={() => setShow(true) } type = 'submit'>
-            Paypal
-          
-          </button>
+
 
           {show ? (
       <PayPalButtons style={{ layout: "vertical" }} createOrder={createOrder} onApprove={onApprove}   onError={onError}/>
