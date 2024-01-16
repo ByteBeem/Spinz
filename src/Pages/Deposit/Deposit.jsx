@@ -149,7 +149,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
   const onError = (data , actions) => {
     
-setErroMessage("Something went wrong");
+setErrorMessage("Something went wrong");
   }
 
   return (
