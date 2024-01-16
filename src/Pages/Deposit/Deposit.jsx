@@ -127,7 +127,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
         },
         ],
       application_context: {
-        'NO_SHIPPING'
+        shipping_preference:'NO_SHIPPING'
       }
     })
     .then ((orderID) => {
