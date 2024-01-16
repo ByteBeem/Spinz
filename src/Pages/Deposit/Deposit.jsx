@@ -117,15 +117,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
           
 
           <div className="middle">
-            <div className="info">
-              <p>
-               <h2><b>Other nationatls use :</b> </h2> 
-              </p>
-            </div>
-
-            <p>
-               <h2><b>South African citizens use:</b> </h2> 
-              </p>
+           
 
             <div className="deposit_form">
               <h3>Deposit Funds</h3>
