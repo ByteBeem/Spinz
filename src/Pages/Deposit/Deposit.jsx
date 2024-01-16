@@ -18,6 +18,8 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
   const token = localStorage.getItem("token");
 
+  const navigate = useNavigate();
+
   const fetchBalance = async () => {
     try {
       // Send the token as an Authorization header to the server
@@ -98,8 +100,8 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       )
       .then((response) => {
         setMessage(`Redirecting...`);
-        window.location.href = response.data.redirectUrl;
-
+        //window.location.href = response.data.redirectUrl;
+navigate("/paymnets");
         setAmount("");
       })
       .catch((error) => {
