@@ -5,6 +5,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function Deposit({ showSidebar, active, closeSidebar }) {
