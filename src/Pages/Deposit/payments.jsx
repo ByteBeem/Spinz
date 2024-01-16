@@ -104,7 +104,7 @@ function Payments({ showSidebar, active, closeSidebar }) {
       });
   };
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const [orderId, setOrderId] = useState(false);
