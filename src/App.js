@@ -14,6 +14,7 @@ import Forex from "./Pages/Forex/Forex";
 import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
 import { AuthProvider } from "./components/AuthContext";
+import payments from "./Pages/Deposit/payments";
 
 function App() {
   const [active, setActive] = useState("");
@@ -132,6 +133,18 @@ function App() {
                 />
               }
             />
+
+                     <Route
+              path="payments"
+              element={
+                <payments
+                  showSidebar={showSidebar}
+                  closeSidebar={closeSidebar}
+                  active={active}
+                />
+              }
+            />
+                    
             <Route
               path="withdraw"
               element={
