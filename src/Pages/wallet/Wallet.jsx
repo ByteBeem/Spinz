@@ -25,6 +25,19 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
     }
   }, [setToken]);
 
+   useEffect(() => {
+  axios.get("https://spinz-server-100d0276d968.herokuapp.com/paypal-client-id")
+    .then(response => {
+      const clientId = response.data.clientId;
+      const idclient = localStorage.setItem("idclient" , clientId);
+      
+    })
+    .catch(error => {
+      console.error("Error fetching PayPal client ID:", error);
+    });
+}, []); 
+
+
   const fetchUserData = (token) => {
     setLoading(true);
     axios
