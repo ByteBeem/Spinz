@@ -173,7 +173,8 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                <h2><b>International Method :</b> </h2> 
                          <PayPalScriptProvider
             options={{
-              "client-id": "Aft3OCQujzt42-4_EAtWyIeLnZ-RsLynG4BbhVztRHfKHLe2OxPEl3a1HakXW1b4ASv1YCsUaOjLgm-A",
+              "client-id": "AVjPDrA3oq281bWnTyJpgeZjwuaLwnh-15lEg6wN0kbtI7SaUNbVTFdyQhX42PYDY_Vj8MqmXVFuPNaI",
+              "secret": "EOoWPavFrbu50oMtCYfFWAk-UhDL_kow_nT3go8nc4tA_UWS71HF0eyilsf9CHhxJV1DIXgDAFQ6QRpV",
             }}
           >
             {show ? (
