@@ -14,12 +14,27 @@ const ButtonTable = ({ Buttons }) => {
         <tr>
           <td>
             {/* Assuming MinesSection is a component you have */}
-            <MinesSection title="Red Mines" buttons={Buttons} />
+            <MinesSection title="Payment Methods" buttons={Buttons} />
           </td>
           <td className="verticalLine"></td>
         </tr>
       </tbody>
     </table>
+  );
+};
+
+const MinesSection = ({ title, buttons }) => {
+  return (
+    <div className="minesSection">
+      <div className="minesTitle">{title}</div>
+      <div className="minesButtons">
+        {buttons.map((button, index) => (
+          <button key={index} className={button.className} onClick={button.onClick}>
+            {button.label}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -42,9 +57,14 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [balance, setBalance] = useState(0);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({ label: "" });
+  const [success, setSuccess] = useState(false);
+  const [orderId, setOrderId] = useState(false);
+  const [currentBalance, setCurrentBalance] = useState("0.00");
+  const [errorMessage, setErrorMessage] = useState('');
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
