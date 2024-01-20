@@ -20,35 +20,11 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
   const token = localStorage.getItem("token");
   const idClient=localStorage.getItem("idclient");
+
   
   
 
-  const fetchBalance = async () => {
-    try {
-      // Send the token as an Authorization header to the server
-      const response = await axios.get(
-        "https://mainp-server-c7a5046a3a01.herokuapp.com/balance",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.status === 206) {
-        alert("Token Expired Login again!");
-      } else {
-        setCurrentBalance(response.data.balance);
-      }
-    } catch (error) {
-      console.error("Error fetching balance:", error);
-    } finally {
-    }
-  };
-
-  useEffect(() => {
-    fetchBalance();
-  }, [token]);
+ 
 
   useEffect(() => {
   axios.get("https://spinz-server-100d0276d968.herokuapp.com/paypal-client-id")
@@ -63,25 +39,6 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 }, []); 
 
 
-  useEffect(() => {
-    // Fetch user's balance when the component mounts
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get("https://mainp-server-c7a5046a3a01.herokuapp.com/balance", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setBalance(response.data.balance);
-          setCurrentBalance(response.data.balance);
-        })
-        .catch((error) => {
-          console.error("Error fetching balance:", error);
-        });
-    }
-  }, []);
 
   const handleDeposit = () => {
     setError("");
@@ -159,7 +116,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       })
       .then((orderID) => {
         setOrderId(orderID);
-        console.log("idk", orderID);
+        
         return orderID;
       });
   };
