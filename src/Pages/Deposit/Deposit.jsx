@@ -19,6 +19,8 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   const [payPalClientId,setPayPalClientId] =useState('');
 
   const token = localStorage.getItem("token");
+  const idClient=payPalClientId.clientId;
+  console.log("idClient",idClient);
 
   const fetchBalance = async () => {
     try {
@@ -51,6 +53,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   axios.get("https://spinz-server-100d0276d968.herokuapp.com/paypal-client-id")
     .then(response => {
       const clientId = response.data.clientId;
+      console.log("id",clientId);
       setPayPalClientId(clientId);
     })
     .catch(error => {
@@ -186,7 +189,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                <h2><b>International Method :</b> </h2> 
                          <PayPalScriptProvider
             options={{
-             "client-id": `${payPalClientId.clientId}`,
+             "client-id": idClient,
 
 
             }}
