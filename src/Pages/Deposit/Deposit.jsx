@@ -7,8 +7,6 @@ import Modal from "./Modal";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
 
-
-
 function Deposit({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,6 +14,13 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({ label: "" });
+  const [balance, setBalance] = useState(0);
+  const [currentBalance, setCurrentBalance] = useState(0);
+  const [orderId, setOrderId] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [show, setShow] = useState(false);
+  const [hide, setHide] = useState(false);
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -109,9 +114,6 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       });
   };
 
-  const [show, setShow] = useState(false);
-  const [hide, setHide] = useState(false);
-
   const createOrder = (data, actions) => {
     setShowModal(true);
     return actions.order
@@ -145,7 +147,6 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   const onError = (data, actions) => {
     setErrorMessage("Something went wrong");
   };
-
 
   return (
     <div className="deposit">
@@ -195,7 +196,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                 </div>
               ) : null}
             </div>
-        
+          </div>
         </div>
       </div>
     </div>
