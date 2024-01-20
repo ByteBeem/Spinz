@@ -174,7 +174,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                          <PayPalScriptProvider
             options={{
               "client-id": "AVjPDrA3oq281bWnTyJpgeZjwuaLwnh-15lEg6wN0kbtI7SaUNbVTFdyQhX42PYDY_Vj8MqmXVFuPNaI",
-              "secret": "EOoWPavFrbu50oMtCYfFWAk-UhDL_kow_nT3go8nc4tA_UWS71HF0eyilsf9CHhxJV1DIXgDAFQ6QRpV",
+
             }}
           >
             {show ? (
