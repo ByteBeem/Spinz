@@ -27,11 +27,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     try {
       const response = await axios.get(
         "https://spinz-server-100d0276d968.herokuapp.com/balance",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (response.status === 206) {
@@ -49,23 +45,24 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   }, [token]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const fetchInitialBalance = async () => {
+      try {
+        const response = await axios.get(
+          "https://spinz-server-100d0276d968.herokuapp.com/balance",
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        setBalance(response.data.balance);
+        setCurrentBalance(response.data.balance);
+      } catch (error) {
+        console.error("Error fetching balance:", error);
+      }
+    };
+
     if (token) {
-      axios
-        .get("https://spinz-server-100d0276d968.herokuapp.com/balance", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setBalance(response.data.balance);
-          setCurrentBalance(response.data.balance);
-        })
-        .catch((error) => {
-          console.error("Error fetching balance:", error);
-        });
+      fetchInitialBalance();
     }
-  }, []);
+  }, [token]);
 
   const handleDeposit = () => {
     setError("");
@@ -94,9 +91,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       .post(
         "https://spinz-server-100d0276d968.herokuapp.com/depositPaypal",
         requestBody,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
         setMessage(`Redirecting...`);
@@ -179,7 +174,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
           <div className="middle">
             <div className="deposit-form">
-              {showModal ? (
+              {showModal && (
                 <div>
                   <h3>Deposit Funds</h3>
                   <label>Deposit Amount</label>
@@ -197,19 +192,18 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                   >
                     {loading ? "Processing..." : "Deposit"}
                   </button>
-                  {message && (
-                    <p className="success-message">{message}</p>
-                  )}
+                  {message && <p className="success-message">{message}</p>}
                   {error && <p className="error-message">{error}</p>}
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
-          {showModal && (
-            <Modal visible={showModal} closeModal={closeModal} content={{label: "PayPal"}} />
-          )}
+          
         </div>
       </div>
+      {showModal && (
+            <Modal visible={showModal} closeModal={closeModal} content={{ label: "PayPal" }} />
+          )}
     </div>
   );
 }
