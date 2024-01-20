@@ -11,6 +11,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [show , setShow] = useState(true);
   const [orderId, setOrderId] = useState("");
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -117,7 +118,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   };
 
  const createOrder = (data, actions) => {
-    setShowModal(true);
+    
     return actions.order
       .create({
         purchase_units: [
