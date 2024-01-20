@@ -2,33 +2,27 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Deposit.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import Navbar from "../../components/Navbar/Navbar";
-import Modal from "./modal";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
 function Deposit({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
+  const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState({ label: "" });
-  const [balance, setBalance] = useState(0);
-  const [currentBalance, setCurrentBalance] = useState(0);
   const [orderId, setOrderId] = useState("");
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [show, setShow] = useState(false);
-  const [hide, setHide] = useState(false);
+  const [Currentbalance, setCurrentBalance] = useState("0.00");
 
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
 
   const fetchBalance = async () => {
     try {
+      // Send the token as an Authorization header to the server
       const response = await axios.get(
-        "https://spinz-server-100d0276d968.herokuapp.com/balance",
+        "https://mainp-server-c7a5046a3a01.herokuapp.com/balance",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,12 +31,13 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       );
 
       if (response.status === 206) {
-        alert("Token Expired. Please log in again!");
+        alert("Token Expired Login again!");
       } else {
         setCurrentBalance(response.data.balance);
       }
     } catch (error) {
       console.error("Error fetching balance:", error);
+    } finally {
     }
   };
 
@@ -51,10 +46,11 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   }, [token]);
 
   useEffect(() => {
+    // Fetch user's balance when the component mounts
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("https://spinz-server-100d0276d968.herokuapp.com/balance", {
+        .get("https://mainp-server-c7a5046a3a01.herokuapp.com/balance", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -75,15 +71,21 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     setLoading(true);
 
     const token = localStorage.getItem("token");
-
+    console.log("token",token);
     if (!token) {
-      setError("Token not found. Please log in again.");
+  setError("Token not found , Go log in again.");
+  setLoading(false);
+  return;
+}
+
+    if (isNaN(amount) || amount <= 0) {
+      setError("Invalid amount");
       setLoading(false);
       return;
     }
 
-    if (isNaN(amount) || amount <= 0) {
-      setError("Invalid amount");
+        if ( amount <= 10) {
+      setError("Min amount is R10");
       setLoading(false);
       return;
     }
@@ -94,7 +96,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
 
     axios
       .post(
-        "https://spinz-server-100d0276d968.herokuapp.com/depositPaypal",
+        "https://mainp-server-c7a5046a3a01.herokuapp.com/deposit",
         requestBody,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -102,8 +104,8 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       )
       .then((response) => {
         setMessage(`Redirecting...`);
-        setShow(true);
-        setHide(true);
+        window.location.href = response.data.redirectUrl;
+
         setAmount("");
       })
       .catch((error) => {
@@ -114,7 +116,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       });
   };
 
-  const createOrder = (data, actions) => {
+ const createOrder = (data, actions) => {
     setShowModal(true);
     return actions.order
       .create({
@@ -151,10 +153,12 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   return (
     <div className="deposit">
       <Sidebar active={active} closeSidebar={closeSidebar} />
-      <div className="deposit-container">
+
+      <div className="deposit_container">
         <Navbar showSidebar={showSidebar} />
+
         <div className="content">
-          <PayPalScriptProvider
+           <PayPalScriptProvider
             options={{
               "client-id": "Aft3OCQujzt42-4_EAtWyIeLnZ-RsLynG4BbhVztRHfKHLe2OxPEl3a1HakXW1b4ASv1YCsUaOjLgm-A",
             }}
@@ -170,31 +174,35 @@ function Deposit({ showSidebar, active, closeSidebar }) {
           </PayPalScriptProvider>
 
           <div className="middle">
-            <div className="deposit-form">
-              {hide ? (
-                <div>
-                  <h3>Deposit Funds</h3>
-                  <label>Deposit Amount</label>
-                  <br />
-                  <input
-                    type="number"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    inputMode="numeric"
-                  />
-                  <button
-                    className="form-btn"
-                    onClick={handleDeposit}
-                    disabled={loading}
-                  >
-                    {loading ? "Processing..." : "Deposit"}
-                  </button>
-                  {message && (
-                    <p className="success-message">{message}</p>
-                  )}
-                  {error && <p className="error-message">{error}</p>}
-                </div>
-              ) : null}
+            <div className="info">
+               <h2><b>Other Countries use :</b> </h2> 
+            </div>
+
+            <p>
+               <h2><b>For South African citizens :</b> </h2> 
+              </p>
+
+            <div className="deposit_form">
+              <h3>Deposit Funds</h3>
+              <div>
+                <label>Deposit Amount</label>
+                <br />
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  inputMode="numeric"
+                />
+                <button
+                  className="form_btn"
+                  onClick={handleDeposit}
+                  disabled={loading}
+                >
+                  {loading ? "Processing..." : "Deposit"}
+                </button>
+                {message && <p className="success-message">{message}</p>}
+                {error && <p className="error-message">{error}</p>}
+              </div>
             </div>
           </div>
         </div>
