@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Deposit.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
-import Modal from "./Modal";
+import Modal from "./modal";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
 
