@@ -186,7 +186,8 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                <h2><b>International Method :</b> </h2> 
                          <PayPalScriptProvider
             options={{
-              "client-id": ${payPalClientId.clientId},
+             "client-id": `${payPalClientId.clientId}`,
+
 
             }}
           >
