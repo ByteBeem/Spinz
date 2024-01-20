@@ -3,17 +3,48 @@ import axios from "axios";
 import "./Deposit.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
+import Modal from "./Modal";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+const ButtonTable = ({ Buttons }) => {
+  return (
+    <table className="minesTable">
+      <tbody>
+        <tr>
+          <td>
+            {/* Assuming MinesSection is a component you have */}
+            <MinesSection title="Red Mines" buttons={Buttons} />
+          </td>
+          <td className="verticalLine"></td>
+        </tr>
+      </tbody>
+    </table>
+  );
+};
+
+const DepositSection = ({ decideButtons }) => {
+  const PaymentsButtons = [
+    { label: "Paypal", onClick: () => decideButtons("Paypal") },
+    { label: "Stripe", onClick: () => decideButtons("Stripe") },
+    { label: "Crypto", onClick: () => decideButtons("Crypto") },
+    { label: "SALocalBank", onClick: () => decideButtons("SALocalBank") },
+  ];
+
+  return (
+    <div className="deposit-section">
+      <ButtonTable Buttons={PaymentsButtons} />
+    </div>
+  );
+};
 
 function Deposit({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
-  const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [currentBalance, setCurrentBalance] = useState("0.00");
+  const [modalContent, setModalContent] = useState({ label: "" });
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -144,10 +175,23 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     setErrorMessage("Something went wrong");
   };
 
+  const decideButtons = (label) => {
+    setModalContent({ label });
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
   return (
     <div className="deposit">
       <Sidebar active={active} closeSidebar={closeSidebar} />
-      <div className="deposit_container">
+      <div className="deposit-container">
         <Navbar showSidebar={showSidebar} />
         <div className="content">
           <PayPalScriptProvider
@@ -156,12 +200,17 @@ function Deposit({ showSidebar, active, closeSidebar }) {
             }}
           >
             {show ? (
-              <PayPalButtons style={{ layout: "vertical" }} createOrder={createOrder} onApprove={onApprove} onError={onError} />
+              <PayPalButtons
+                style={{ layout: "vertical" }}
+                createOrder={createOrder}
+                onApprove={onApprove}
+                onError={onError}
+              />
             ) : null}
           </PayPalScriptProvider>
 
           <div className="middle">
-            <div className="deposit_form">
+            <div className="deposit-form">
               {hide ? (
                 <div>
                   <h3>Deposit Funds</h3>
@@ -173,15 +222,26 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                     onChange={(e) => setAmount(e.target.value)}
                     inputMode="numeric"
                   />
-                  <button className="form_btn" onClick={handleDeposit} disabled={loading}>
+                  <button
+                    className="form-btn"
+                    onClick={handleDeposit}
+                    disabled={loading}
+                  >
                     {loading ? "Processing..." : "Deposit"}
                   </button>
-                  {message && <p className="success-message">{message}</p>}
+                  {message && (
+                    <p className="success-message">{message}</p>
+                  )}
                   {error && <p className="error-message">{error}</p>}
                 </div>
               ) : null}
             </div>
+            {showModal ? null : <div className="div"></div>}
           </div>
+          <DepositSection showModal={openModal} decideButtons={decideButtons} />
+          {showModal && (
+            <Modal visible={showModal} closeModal={closeModal} content={modalContent} />
+          )}
         </div>
       </div>
     </div>
