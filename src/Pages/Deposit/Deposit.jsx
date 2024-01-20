@@ -58,6 +58,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     .catch(error => {
       console.error("Error fetching PayPal client ID:", error);
     });
+  }
 
   useEffect(() => {
     // Fetch user's balance when the component mounts
