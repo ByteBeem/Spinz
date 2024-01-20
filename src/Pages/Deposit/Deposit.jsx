@@ -206,7 +206,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
             </div>
           </div>
           {showModal && (
-            <Modal visible={showModal} closeModal={closeModal} content={label: "PayPal"} />
+            <Modal visible={showModal} closeModal={closeModal} content={{label: "PayPal"}} />
           )}
         </div>
       </div>
