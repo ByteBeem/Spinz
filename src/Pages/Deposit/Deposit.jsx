@@ -3,22 +3,19 @@ import axios from "axios";
 import "./Deposit.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
-import Modal from "./modal";
+import Modal from "./Modal";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
+
+
 
 function Deposit({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const [balance, setBalance] = useState(0);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({ label: "" });
-  const [success, setSuccess] = useState(false);
-  const [orderId, setOrderId] = useState(false);
-  const [currentBalance, setCurrentBalance] = useState("0.00");
-  const [errorMessage, setErrorMessage] = useState('');
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -27,7 +24,11 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     try {
       const response = await axios.get(
         "https://spinz-server-100d0276d968.herokuapp.com/balance",
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (response.status === 206) {
@@ -45,24 +46,23 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   }, [token]);
 
   useEffect(() => {
-    const fetchInitialBalance = async () => {
-      try {
-        const response = await axios.get(
-          "https://spinz-server-100d0276d968.herokuapp.com/balance",
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        setBalance(response.data.balance);
-        setCurrentBalance(response.data.balance);
-      } catch (error) {
-        console.error("Error fetching balance:", error);
-      }
-    };
-
+    const token = localStorage.getItem("token");
     if (token) {
-      fetchInitialBalance();
+      axios
+        .get("https://spinz-server-100d0276d968.herokuapp.com/balance", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setBalance(response.data.balance);
+          setCurrentBalance(response.data.balance);
+        })
+        .catch((error) => {
+          console.error("Error fetching balance:", error);
+        });
     }
-  }, [token]);
+  }, []);
 
   const handleDeposit = () => {
     setError("");
@@ -91,11 +91,14 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       .post(
         "https://spinz-server-100d0276d968.herokuapp.com/depositPaypal",
         requestBody,
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       )
       .then((response) => {
         setMessage(`Redirecting...`);
-        setShowModal(true); // Show modal after successful deposit
+        setShow(true);
+        setHide(true);
         setAmount("");
       })
       .catch((error) => {
@@ -105,6 +108,9 @@ function Deposit({ showSidebar, active, closeSidebar }) {
         setLoading(false);
       });
   };
+
+  const [show, setShow] = useState(false);
+  const [hide, setHide] = useState(false);
 
   const createOrder = (data, actions) => {
     setShowModal(true);
@@ -140,18 +146,6 @@ function Deposit({ showSidebar, active, closeSidebar }) {
     setErrorMessage("Something went wrong");
   };
 
-  const decideButtons = (label) => {
-    setModalContent({ label });
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
-  const openModal = () => {
-    setShowModal(true);
-  };
 
   return (
     <div className="deposit">
@@ -164,17 +158,19 @@ function Deposit({ showSidebar, active, closeSidebar }) {
               "client-id": "Aft3OCQujzt42-4_EAtWyIeLnZ-RsLynG4BbhVztRHfKHLe2OxPEl3a1HakXW1b4ASv1YCsUaOjLgm-A",
             }}
           >
-            <PayPalButtons
-              style={{ layout: "vertical" }}
-              createOrder={createOrder}
-              onApprove={onApprove}
-              onError={onError}
-            />
+            {show ? (
+              <PayPalButtons
+                style={{ layout: "vertical" }}
+                createOrder={createOrder}
+                onApprove={onApprove}
+                onError={onError}
+              />
+            ) : null}
           </PayPalScriptProvider>
 
           <div className="middle">
             <div className="deposit-form">
-              {showModal && (
+              {hide ? (
                 <div>
                   <h3>Deposit Funds</h3>
                   <label>Deposit Amount</label>
@@ -192,18 +188,16 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                   >
                     {loading ? "Processing..." : "Deposit"}
                   </button>
-                  {message && <p className="success-message">{message}</p>}
+                  {message && (
+                    <p className="success-message">{message}</p>
+                  )}
                   {error && <p className="error-message">{error}</p>}
                 </div>
-              )}
+              ) : null}
             </div>
-          </div>
-          
+        
         </div>
       </div>
-      {showModal && (
-            <Modal visible={showModal} closeModal={closeModal} content={{ label: "PayPal" }} />
-          )}
     </div>
   );
 }
