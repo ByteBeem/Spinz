@@ -85,8 +85,14 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       return;
     }
 
-        if ( amount <= 10) {
-      setError("Min amount is R10");
+        if ( amount < 10) {
+      setError("Minimum amount is R10");
+      setLoading(false);
+      return;
+    }
+
+     if ( amount > 1000) {
+      setError("Maximum amount is R1000");
       setLoading(false);
       return;
     }
