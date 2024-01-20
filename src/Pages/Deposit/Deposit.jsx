@@ -180,12 +180,8 @@ function Deposit({ showSidebar, active, closeSidebar }) {
           </PayPalScriptProvider>
             </div>
 
-            <p>
-               <h2><b>SA Local bank :</b> </h2> 
-              </p>
-
             <div className="deposit_form">
-              <h3>Deposit Funds</h3>
+             <h2><b>SA Local bank :</b> </h2> 
               <div>
                 <label>Deposit Amount</label>
                 <br />
