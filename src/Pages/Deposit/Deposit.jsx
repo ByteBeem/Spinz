@@ -7,52 +7,6 @@ import Modal from "./modal";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
 
-const ButtonTable = ({ Buttons }) => {
-  return (
-    <table className="minesTable">
-      <tbody>
-        <tr>
-          <td>
-            {/* Assuming MinesSection is a component you have */}
-            <MinesSection title="Payment Methods" buttons={Buttons} />
-          </td>
-          <td className="verticalLine"></td>
-        </tr>
-      </tbody>
-    </table>
-  );
-};
-
-const MinesSection = ({ title, buttons }) => {
-  return (
-    <div className="minesSection">
-      <div className="minesTitle">{title}</div>
-      <div className="minesButtons">
-        {buttons.map((button, index) => (
-          <button key={index} className={button.className} onClick={button.onClick}>
-            {button.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const DepositSection = ({ decideButtons }) => {
-  const PaymentsButtons = [
-    { label: "Paypal", onClick: () => decideButtons("Paypal") },
-    { label: "Stripe", onClick: () => decideButtons("Stripe") },
-    { label: "Crypto", onClick: () => decideButtons("Crypto") },
-    { label: "SALocalBank", onClick: () => decideButtons("SALocalBank") },
-  ];
-
-  return (
-    <div className="deposit-section">
-      <ButtonTable Buttons={PaymentsButtons} />
-    </div>
-  );
-};
-
 function Deposit({ showSidebar, active, closeSidebar }) {
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
@@ -146,8 +100,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       )
       .then((response) => {
         setMessage(`Redirecting...`);
-        setShow(true);
-        setHide(true);
+        setShowModal(true); // Show modal after successful deposit
         setAmount("");
       })
       .catch((error) => {
@@ -157,9 +110,6 @@ function Deposit({ showSidebar, active, closeSidebar }) {
         setLoading(false);
       });
   };
-
-  const [show, setShow] = useState(false);
-  const [hide, setHide] = useState(false);
 
   const createOrder = (data, actions) => {
     setShowModal(true);
@@ -219,19 +169,17 @@ function Deposit({ showSidebar, active, closeSidebar }) {
               "client-id": "Aft3OCQujzt42-4_EAtWyIeLnZ-RsLynG4BbhVztRHfKHLe2OxPEl3a1HakXW1b4ASv1YCsUaOjLgm-A",
             }}
           >
-            {show ? (
-              <PayPalButtons
-                style={{ layout: "vertical" }}
-                createOrder={createOrder}
-                onApprove={onApprove}
-                onError={onError}
-              />
-            ) : null}
+            <PayPalButtons
+              style={{ layout: "vertical" }}
+              createOrder={createOrder}
+              onApprove={onApprove}
+              onError={onError}
+            />
           </PayPalScriptProvider>
 
           <div className="middle">
             <div className="deposit-form">
-              {hide ? (
+              {showModal ? (
                 <div>
                   <h3>Deposit Funds</h3>
                   <label>Deposit Amount</label>
@@ -256,11 +204,9 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                 </div>
               ) : null}
             </div>
-            {showModal ? null : <div className="div"></div>}
           </div>
-          <DepositSection showModal={openModal} decideButtons={decideButtons} />
           {showModal && (
-            <Modal visible={showModal} closeModal={closeModal} content={modalContent} />
+            <Modal visible={showModal} closeModal={closeModal} content={label: "PayPal"} />
           )}
         </div>
       </div>
