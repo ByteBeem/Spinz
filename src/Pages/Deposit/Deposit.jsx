@@ -142,6 +142,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
       })
       .then((orderID) => {
         setOrderId(orderID);
+        console.log("idk", orderID);
         return orderID;
       });
   };
