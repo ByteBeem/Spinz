@@ -16,6 +16,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [Currentbalance, setCurrentBalance] = useState("0.00");
+  const [payPalClientId,setPayPalClientId] =useState('');
 
   const token = localStorage.getItem("token");
 
@@ -45,6 +46,18 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   useEffect(() => {
     fetchBalance();
   }, [token]);
+
+  useEffect(() => {
+  
+  axios.get("https://spinz-server-100d0276d968.herokuapp.com/paypal-client-id")
+    .then(response => {
+      const clientId = response.data.clientId;
+     
+      setPayPalClientId(clientId);
+    })
+    .catch(error => {
+      console.error("Error fetching PayPal client ID:", error);
+    });
 
   useEffect(() => {
     // Fetch user's balance when the component mounts
@@ -173,7 +186,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
                <h2><b>International Method :</b> </h2> 
                          <PayPalScriptProvider
             options={{
-              "client-id": "AVjPDrA3oq281bWnTyJpgeZjwuaLwnh-15lEg6wN0kbtI7SaUNbVTFdyQhX42PYDY_Vj8MqmXVFuPNaI",
+              "client-id": payPalClientId.clientId,
 
             }}
           >
