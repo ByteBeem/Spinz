@@ -16,10 +16,11 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [Currentbalance, setCurrentBalance] = useState("0.00");
-  const [payPalClientId,setPayPalClientId] =useState('');
+  const [PayPalClientId,setPayPalClientId] =useState('');
 
   const token = localStorage.getItem("token");
-  const idClient=payPalClientId;
+  const idClient=localStorage.getItem("idclient");
+  
   
 
   const fetchBalance = async () => {
@@ -53,7 +54,7 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   axios.get("https://spinz-server-100d0276d968.herokuapp.com/paypal-client-id")
     .then(response => {
       const clientId = response.data.clientId;
-      
+      const idclient = localStorage.setItem("idclient" , clientId);
       setPayPalClientId(clientId);
     })
     .catch(error => {
