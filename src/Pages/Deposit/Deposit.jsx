@@ -48,17 +48,16 @@ function Deposit({ showSidebar, active, closeSidebar }) {
   }, [token]);
 
   useEffect(() => {
-  
   axios.get("https://spinz-server-100d0276d968.herokuapp.com/paypal-client-id")
     .then(response => {
       const clientId = response.data.clientId;
-     
       setPayPalClientId(clientId);
     })
     .catch(error => {
       console.error("Error fetching PayPal client ID:", error);
     });
-  }
+}, []); 
+
 
   useEffect(() => {
     // Fetch user's balance when the component mounts
