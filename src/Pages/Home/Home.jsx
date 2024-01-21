@@ -50,7 +50,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
         case 5:
         case 7:
           const response = await axios.post(
-            `https://spinz-servers-17da09bbdb53.herokuapp.com/${getGamePath(id)}`,
+            `https://spinz-server-100d0276d968.herokuapp.com/${getGamePath(id)}`,
             getGameData(id),
             { headers }
           );
