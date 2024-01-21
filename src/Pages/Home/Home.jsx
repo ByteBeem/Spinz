@@ -70,7 +70,7 @@ const Home = ({ showSidebar, active, closeSidebar }) => {
           console.log("Unknown game id");
       }
     } catch (error) {
-      console.error("Error fetching or redirecting:", error);
+   alert("Something went wrong , try again later");
     } finally {
       setLoading(false);
     }
