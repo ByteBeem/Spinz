@@ -6,7 +6,7 @@ import { useAuth } from "../../components/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
-import UserProfile from "../../assets/user.png";
+import UserProfile from "../../assets/user.jpeg";
 import { Link } from "react-router-dom";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { MdOutlinePayments } from "react-icons/md";
