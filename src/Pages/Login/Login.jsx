@@ -1,172 +1,146 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 
+class Login extends Component {
+  constructor(props) {
+    super(props);
 
-function Login() {
-  const {setToken, setUserData } = useAuth();
+    this.state = {
+      isLoading: false,
+      errors: { cellphone: "", password: "" },
+      formData: { cellphone: "", password: "" }
+    };
 
-  const navigate = useNavigate();
+    this.navigate = useNavigate();
+    this.authContext = useAuth();
+  }
 
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [errors, setErrors] = useState({
-    cellphone: "",
-    password: "",
-  });
-
-  const [formData, setFormData] = useState({
-    cellphone: "",
-    password: "",
-  });
-
-  const storeTokenInLocalStorage = (token) => {
+  storeTokenInLocalStorage = (token) => {
     localStorage.setItem("token", token);
   };
 
-  const handleChange = (e) => {
+  handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    this.setState((prevState) => ({
+      formData: { ...prevState.formData, [name]: value }
+    }));
   };
 
-  const validateCellphone = (cellphone) => {
+  validateCellphone = (cellphone) => {
     const phoneRegex = /^[0-9]{10}$/;
     return phoneRegex.test(cellphone);
   };
 
-  const handleSubmit = async (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    setErrors({
-      cellphone: "",
-      password: "",
-    });
+    this.setState({ isLoading: true, errors: { cellphone: "", password: "" } });
 
-    if (!validateCellphone(formData.cellphone)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        cellphone: "Invalid cellphone number",
-      }));
-      setIsLoading(false);
+    const { cellphone, password } = this.state.formData;
+
+    if (!this.validateCellphone(cellphone)) {
+      this.setState({
+        errors: { cellphone: "Invalid cellphone number" },
+        isLoading: false
+      });
       return;
     }
-
-    const { cellphone, password } = formData;
 
     try {
       const response = await axios.post(
         "https://spinz-server-100d0276d968.herokuapp.com/login",
-        {
-          cell: cellphone,
-          password: password,
-        },
+        { cell: cellphone, password },
         { withCredentials: true }
       );
 
-      setIsLoading(false);
+      this.setState({ isLoading: false });
 
       if (response.status === 200) {
-        setToken(response.data.token);
-        storeTokenInLocalStorage(response.data.token);
-
-        setUserData(response.data.Data);
-
-        navigate("/dashboard");
-
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          password: "Login Successful!",
+        this.authContext.setToken(response.data.token);
+        this.storeTokenInLocalStorage(response.data.token);
+        this.authContext.setUserData(response.data.Data);
+        this.navigate("/dashboard");
+        this.setState((prevState) => ({
+          errors: { ...prevState.errors, password: "Login Successful!" }
         }));
       } else if (response.status === 201) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          cellphone: "Incorrect Cellphone number",
+        this.setState((prevState) => ({
+          errors: { ...prevState.errors, cellphone: "Incorrect Cellphone number" }
         }));
       } else if (response.status === 202) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          password: "Incorrect Password",
+        this.setState((prevState) => ({
+          errors: { ...prevState.errors, password: "Incorrect Password" }
         }));
       }
     } catch (error) {
-      setIsLoading(false);
+      this.setState({ isLoading: false });
       console.error("Login Error:", error);
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password: "An error occurred. Please try again later.",
+      this.setState((prevState) => ({
+        errors: {
+          ...prevState.errors,
+          password: "An error occurred. Please try again later."
+        }
       }));
     }
   };
 
-  return (
-    <div className="login">
-      
+  render() {
+    const { isLoading, errors, formData } = this.state;
 
-      <div className="login_container">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="cellphone">Cellphone</label>
-            <input
-              type="text"
-              id="cellphone"
-              name="cellphone"
-              value={formData.cellphone}
-              onChange={handleChange}
-              required
-              inputMode="numeric"
-            />
-
-            {errors.cellphone && (
-              <p className="error-message">{errors.cellphone}</p>
-            )}
+    return (
+      <div className="login">
+        <div className="login_container">
+          <form onSubmit={this.handleSubmit}>
+            <div>
+              <label htmlFor="cellphone">Cellphone</label>
+              <input
+                type="text"
+                id="cellphone"
+                name="cellphone"
+                value={formData.cellphone}
+                onChange={this.handleChange}
+                required
+                inputMode="numeric"
+              />
+              {errors.cellphone && <p className="error-message">{errors.cellphone}</p>}
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={this.handleChange}
+                required
+              />
+              {errors.password && <p className="error-message">{errors.password}</p>}
+            </div>
+            <button type="submit" className="form_btn" disabled={isLoading}>
+              {isLoading ? "Logging In..." : "Log In"}
+            </button>
+            {isLoading && <div className="loading-spinner" />}
+          </form>
+          <div className="bottom">
+            <span>
+              Don't have an account?{" "}
+              <Link className="link" to="/signup">
+                Signup
+              </Link>
+            </span>
+            <span>
+              Forgot Password?{" "}
+              <Link className="link" to="#">
+                Reset
+              </Link>
+            </span>
           </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-
-            {errors.password && (
-              <p className="error-message">{errors.password}</p>
-            )}
-          </div>
-
-          <button type="submit" className="form_btn" disabled={isLoading}>
-            {isLoading ? "Logging In..." : "Log In"}
-          </button>
-
-          {isLoading && <div className="loading-spinner" />}
-        </form>
-
-        <div className="bottom">
-          <span>
-            Don't have an account?{" "}
-            <Link className="link" to="/signup">
-              Signup
-            </Link>
-          </span>
-
-          <span>
-            Forgot Password?{" "}
-            <Link className="link" to="#">
-              Reset
-            </Link>
-          </span>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Login;

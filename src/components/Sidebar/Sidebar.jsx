@@ -3,13 +3,11 @@ import "../../App.scss";
 import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
-import { IoSettingsSharp } from "react-icons/io5";
 import { FiLoader } from "react-icons/fi";
 import { IoLogOut } from "react-icons/io5";
 import { GiWallet } from "react-icons/gi";
-import { FaHandHoldingDollar } from "react-icons/fa6";
 import { useState } from "react";
-import { IoIosChatbubbles } from "react-icons/io";
+
 
 const Sidebar = ({ active, closeSidebar }) => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +20,7 @@ const Sidebar = ({ active, closeSidebar }) => {
       setLoading(false);
       window.location.href = "";
       closeSidebar();
-    }, 5000);
+    }, 3000);
   };
   return (
     <aside className={`sidebar ${active}`}>
@@ -63,10 +61,7 @@ const Sidebar = ({ active, closeSidebar }) => {
           <span>Profile</span>
         </Link>
 
-        <Link className="link" to="/chat">
-          <IoIosChatbubbles className="icon" />
-          <span>Chat</span>
-        </Link>
+      
 
         <Link
           className="link"
