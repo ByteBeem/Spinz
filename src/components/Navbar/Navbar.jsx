@@ -18,7 +18,7 @@ const Navbar = ({ showSidebar }) => {
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if(!storedToken){
-      window.location.href = "https://www.shopient.co.za/login";
+      window.location.href = "https://spinz-three.vercel.app/login";
     }
 
     if (storedToken) {
