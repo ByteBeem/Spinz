@@ -8,7 +8,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({ cellphone: "", password: "" });
   const [formData, setFormData] = useState({ cellphone: "", password: "" });
-  const history = useHistory();
   const authContext = useAuth();
  const navigate = useNavigate();
   
