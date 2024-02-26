@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.scss";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 
@@ -10,6 +10,8 @@ const Login = () => {
   const [formData, setFormData] = useState({ cellphone: "", password: "" });
   const history = useHistory();
   const authContext = useAuth();
+ const navigate = useNavigate();
+  
 
   const storeTokenInLocalStorage = (token) => {
     localStorage.setItem("token", token);
@@ -51,7 +53,7 @@ const Login = () => {
         authContext.setToken(response.data.token);
         storeTokenInLocalStorage(response.data.token);
         authContext.setUserData(response.data.Data);
-        history.push("/dashboard");
+        navigate("/dashboard");
         setErrors((prevState) => ({ ...prevState, password: "Login Successful!" }));
       } else if (response.status === 201) {
         setErrors((prevState) => ({ ...prevState, cellphone: "Incorrect Cellphone number" }));
