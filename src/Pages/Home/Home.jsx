@@ -19,14 +19,14 @@ class Home extends Component {
       betAmountInput: "",
     };
 
-    this.navigate = useNavigate();
+  //  this.navigate = useNavigate();
     this.token = localStorage.getItem('token');
     this.settings = {
       dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 4,
-      slidesToScroll: 1,
+      slidesToScroll: 1, 
     };
   }
 
