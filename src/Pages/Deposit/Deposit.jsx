@@ -128,6 +128,23 @@ class Deposit extends Component {
           <Navbar showSidebar={showSidebar} />
           <div className="content">
             <div className="middle">
+            <div className="info">
+                <h2><b>Paystack Method :</b> </h2>
+                <PayPalScriptProvider
+                  options={{
+                    "client-id": payPalClientId,
+                  }}
+                >
+                  {show ? (
+                    <PayPalButtons
+                      style={{ layout: "vertical" }}
+                      createOrder={this.createOrder}
+                      onApprove={this.onApprove}
+                      onError={this.onError}
+                    />
+                  ) : null}
+                </PayPalScriptProvider>
+              </div>
               <div className="info">
                 <h2><b>International Method :</b> </h2>
                 <PayPalScriptProvider
