@@ -1,50 +1,40 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./Login.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
+const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({ cellphone: "", password: "" });
+  const [formData, setFormData] = useState({ cellphone: "", password: "" });
+  const history = useHistory();
+  const authContext = useAuth();
 
-    this.state = {
-      isLoading: false,
-      errors: { cellphone: "", password: "" },
-      formData: { cellphone: "", password: "" }
-    };
-
-    this.navigate = useNavigate();
-    this.authContext = useAuth();
-  }
-
-  storeTokenInLocalStorage = (token) => {
+  const storeTokenInLocalStorage = (token) => {
     localStorage.setItem("token", token);
   };
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState((prevState) => ({
-      formData: { ...prevState.formData, [name]: value }
-    }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  validateCellphone = (cellphone) => {
+  const validateCellphone = (cellphone) => {
     const phoneRegex = /^[0-9]{10}$/;
     return phoneRegex.test(cellphone);
   };
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    this.setState({ isLoading: true, errors: { cellphone: "", password: "" } });
+    setIsLoading(true);
+    setErrors({ cellphone: "", password: "" });
 
-    const { cellphone, password } = this.state.formData;
+    const { cellphone, password } = formData;
 
-    if (!this.validateCellphone(cellphone)) {
-      this.setState({
-        errors: { cellphone: "Invalid cellphone number" },
-        isLoading: false
-      });
+    if (!validateCellphone(cellphone)) {
+      setErrors({ cellphone: "Invalid cellphone number" });
+      setIsLoading(false);
       return;
     }
 
@@ -55,92 +45,80 @@ class Login extends Component {
         { withCredentials: true }
       );
 
-      this.setState({ isLoading: false });
+      setIsLoading(false);
 
       if (response.status === 200) {
-        this.authContext.setToken(response.data.token);
-        this.storeTokenInLocalStorage(response.data.token);
-        this.authContext.setUserData(response.data.Data);
-        this.navigate("/dashboard");
-        this.setState((prevState) => ({
-          errors: { ...prevState.errors, password: "Login Successful!" }
-        }));
+        authContext.setToken(response.data.token);
+        storeTokenInLocalStorage(response.data.token);
+        authContext.setUserData(response.data.Data);
+        history.push("/dashboard");
+        setErrors((prevState) => ({ ...prevState, password: "Login Successful!" }));
       } else if (response.status === 201) {
-        this.setState((prevState) => ({
-          errors: { ...prevState.errors, cellphone: "Incorrect Cellphone number" }
-        }));
+        setErrors((prevState) => ({ ...prevState, cellphone: "Incorrect Cellphone number" }));
       } else if (response.status === 202) {
-        this.setState((prevState) => ({
-          errors: { ...prevState.errors, password: "Incorrect Password" }
-        }));
+        setErrors((prevState) => ({ ...prevState, password: "Incorrect Password" }));
       }
     } catch (error) {
-      this.setState({ isLoading: false });
+      setIsLoading(false);
       console.error("Login Error:", error);
-      this.setState((prevState) => ({
-        errors: {
-          ...prevState.errors,
-          password: "An error occurred. Please try again later."
-        }
+      setErrors((prevState) => ({
+        ...prevState,
+        password: "An error occurred. Please try again later."
       }));
     }
   };
 
-  render() {
-    const { isLoading, errors, formData } = this.state;
-
-    return (
-      <div className="login">
-        <div className="login_container">
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <label htmlFor="cellphone">Cellphone</label>
-              <input
-                type="text"
-                id="cellphone"
-                name="cellphone"
-                value={formData.cellphone}
-                onChange={this.handleChange}
-                required
-                inputMode="numeric"
-              />
-              {errors.cellphone && <p className="error-message">{errors.cellphone}</p>}
-            </div>
-            <div>
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={this.handleChange}
-                required
-              />
-              {errors.password && <p className="error-message">{errors.password}</p>}
-            </div>
-            <button type="submit" className="form_btn" disabled={isLoading}>
-              {isLoading ? "Logging In..." : "Log In"}
-            </button>
-            {isLoading && <div className="loading-spinner" />}
-          </form>
-          <div className="bottom">
-            <span>
-              Don't have an account?{" "}
-              <Link className="link" to="/signup">
-                Signup
-              </Link>
-            </span>
-            <span>
-              Forgot Password?{" "}
-              <Link className="link" to="#">
-                Reset
-              </Link>
-            </span>
+  return (
+    <div className="login">
+      <div className="login_container">
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="cellphone">Cellphone</label>
+            <input
+              type="text"
+              id="cellphone"
+              name="cellphone"
+              value={formData.cellphone}
+              onChange={handleChange}
+              required
+              inputMode="numeric"
+            />
+            {errors.cellphone && <p className="error-message">{errors.cellphone}</p>}
           </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            {errors.password && <p className="error-message">{errors.password}</p>}
+          </div>
+          <button type="submit" className="form_btn" disabled={isLoading}>
+            {isLoading ? "Logging In..." : "Log In"}
+          </button>
+          {isLoading && <div className="loading-spinner" />}
+        </form>
+        <div className="bottom">
+          <span>
+            Don't have an account?{" "}
+            <Link className="link" to="/signup">
+              Signup
+            </Link>
+          </span>
+          <span>
+            Forgot Password?{" "}
+            <Link className="link" to="#">
+              Reset
+            </Link>
+          </span>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Login;
