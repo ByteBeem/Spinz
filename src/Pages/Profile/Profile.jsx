@@ -145,7 +145,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
       <Link className="form_btn" to="#">
           Delete Account
         </Link>
-
+{/* 
  <div className="activity">
           <span>Activity</span>
           {activities.length > 0 ? (
@@ -171,7 +171,9 @@ function Profile({ showSidebar, active, closeSidebar }) {
             <p>No Activities Yet</p>
           )}
         </div>
+          */}
       </div>
+          
     </div>
   );
 }
