@@ -19,7 +19,7 @@ class Home extends Component {
       betAmountInput: "",
     };
 
-  //  this.navigate = useNavigate();
+  
     this.token = localStorage.getItem('token');
     this.settings = {
       dots: false,
