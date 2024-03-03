@@ -16,8 +16,8 @@ class Deposit extends Component {
       message: "",
       error: "",
       currentBalance: "0.00",
-      paystackKey: '', 
-      payPalClientId: '',
+      paystackKey: "",
+      payPalClientId: "",
       show: true,
     };
 
@@ -83,6 +83,7 @@ class Deposit extends Component {
         this.setState({ loading: false });
       });
   };
+
   createOrder = (data, actions) => {
     return actions.order
       .create({
@@ -115,10 +116,10 @@ class Deposit extends Component {
     this.setState({ errorMessage: "Something went wrong" });
   };
 
- 
   render() {
-    const { amount, loading, message, error, paystackKey } = this.state;
+    const { amount, loading, message, error, paystackKey, payPalClientId, show } = this.state;
     const { showSidebar, active, closeSidebar } = this.props;
+   
 
     return (
       <div className="deposit">
