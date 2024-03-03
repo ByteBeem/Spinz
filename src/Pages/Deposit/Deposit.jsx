@@ -17,6 +17,8 @@ class Deposit extends Component {
       error: "",
       currentBalance: "0.00",
       paystackKey: '', 
+      payPalClientId: '',
+      show: true,
     };
 
     this.token = localStorage.getItem("token");
