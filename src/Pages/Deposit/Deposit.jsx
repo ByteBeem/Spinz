@@ -16,7 +16,7 @@ class Deposit extends Component {
       message: "",
       error: "",
       currentBalance: "0.00",
-      paystackKey: "",
+      paystackKey: "pk_live_0d264673afdb09adf3c161aa3e733ef34c8cc851",
       payPalClientId: "",
       show: true,
     };
