@@ -15,7 +15,7 @@ class Deposit extends Component {
       message: "",
       error: "",
       currentBalance: "0.00",
-      paystackKey: '', // Paystack public key
+      paystackKey: '', 
     };
 
     this.token = localStorage.getItem("token");
