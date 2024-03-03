@@ -24,7 +24,7 @@ class Deposit extends Component {
 
   componentDidMount() {
     axios
-      .get("https://spinz-server-100d0276d968.herokuapp.com/pk_test_44509a0fdac95e27a8c42e8d591ec5550f08efc5")
+      .get("https://spinz-server-100d0276d968.herokuapp.com/pay")
       .then((response) => {
         const paystackKey = response.data.paystackKey;
         localStorage.setItem("paystackKey", paystackKey);
@@ -61,7 +61,7 @@ class Deposit extends Component {
                     onError: (error) => console.error('Error:', error),
                     email: "user@example.com",
                     amount: 5000, // amount in kobo
-                    publicKey: paystackKey,
+                    publicKey: 'pk_test_44509a0fdac95e27a8c42e8d591ec5550f08efc5,
                   }}
                 />
               </div>
