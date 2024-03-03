@@ -4,6 +4,7 @@ import "./Deposit.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import { PaystackButton } from "react-paystack";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 class Deposit extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class Deposit extends Component {
         console.error("Error fetching PayPal client ID:", error);
       });
   }
+
   handleDeposit = () => {
     this.setState({ error: "", message: "", loading: true });
 
@@ -79,7 +81,6 @@ class Deposit extends Component {
         this.setState({ loading: false });
       });
   };
-
   createOrder = (data, actions) => {
     return actions.order
       .create({
@@ -114,7 +115,7 @@ class Deposit extends Component {
 
  
   render() {
-    const { amount, loading, message, error, currentBalance, paystackKey } = this.state;
+    const { amount, loading, message, error, paystackKey } = this.state;
     const { showSidebar, active, closeSidebar } = this.props;
 
     return (
@@ -126,6 +127,25 @@ class Deposit extends Component {
             <div className="middle">
               <div className="info">
                 <h2><b>Paystack Method :</b> </h2>
+                <div>
+                  <label>Deposit Amount</label>
+                  <br />
+                  <input
+                    type="number"
+                    value={amount}
+                    onChange={(e) => this.setState({ amount: e.target.value })}
+                    inputMode="numeric"
+                  />
+                  <button
+                    className="form_btn"
+                    onClick={this.handleDeposit}
+                    disabled={loading}
+                  >
+                    {loading ? "Processing..." : "Deposit"}
+                  </button>
+                  {message && <p className="success-message">{message}</p>}
+                  {error && <p className="error-message">{error}</p>}
+                </div>
                 <PaystackButton
                   className="paystack-button"
                   {...{
@@ -134,9 +154,9 @@ class Deposit extends Component {
                     onClose: () => console.log('Closed'),
                     onError: (error) => console.error('Error:', error),
                     email: "user@example.com",
-                    amount: 5000, 
-                    currency: "ZAR", 
-                    publicKey: 'pk_test_44509a0fdac95e27a8c42e8d591ec5550f08efc5',
+                    amount: amount * 100, // amount in kobo
+                    currency: "ZAR", // South African Rand
+                    publicKey: paystackKey,
                   }}
                 />
               </div>
