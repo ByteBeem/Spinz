@@ -139,26 +139,20 @@ class Deposit extends Component {
                     onChange={(e) => this.setState({ amount: e.target.value })}
                     inputMode="numeric"
                   />
-                  <button
-                    className="form_btn"
-                    onClick={this.handleDeposit}
-                    disabled={loading}
-                  >
-                    {loading ? "Processing..." : "Deposit"}
-                  </button>
+                 
                   {message && <p className="success-message">{message}</p>}
                   {error && <p className="error-message">{error}</p>}
                 </div>
                 <PaystackButton
-                  className="paystack-button"
+                  className="form_btn"
                   {...{
                     text: "Make Payment",
                     onSuccess: (response) => console.log(response),
                     onClose: () => console.log('Closed'),
                     onError: (error) => console.error('Error:', error),
                     email: "user@example.com",
-                    amount: amount * 100, // amount in kobo
-                    currency: "ZAR", // South African Rand
+                    amount: amount * 100, 
+                    currency: "ZAR", 
                     publicKey: paystackKey,
                   }}
                 />
