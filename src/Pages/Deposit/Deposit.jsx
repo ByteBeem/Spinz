@@ -16,7 +16,7 @@ class Deposit extends Component {
       message: "",
       error: "",
       currentBalance: "0.00",
-      paystackKey: "sk_test_5b9abe0ffe65fc95907c056508e32a011ea7f439",
+      paystackKey: "pk_test_44509a0fdac95e27a8c42e8d591ec5550f08efc5",
       show: true,
     };
 
