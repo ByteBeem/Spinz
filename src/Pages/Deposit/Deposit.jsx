@@ -104,24 +104,10 @@ class Deposit extends Component {
                   {error && <p className="error-message">{error}</p>}
                 </div>
                 <button className="form_btn" onClick={this.handleDepositPayStack}>
-                  press
+                  Make Payment
                 </button>
 
 
-                <PaystackButton
-                  className="form_btn"
-                  {...{
-                    text: "Make Payment",
-                    onSuccess: () => alert("Payment Successful"),
-                    onClose: () => console.log('Closed'),
-
-
-                    email: "bettingusers@spinz4bets.com",
-                    amount: amount * 100,
-                    currency: "ZAR",
-                    publicKey: paystackKey,
-                  }}
-                />
               </div>
 
 
