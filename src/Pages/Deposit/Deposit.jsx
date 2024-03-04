@@ -60,7 +60,7 @@ class Deposit extends Component {
       })
       .then((response) => {
         this.setState({ message: `Redirecting...` });
-        window.location.href = response.data.redirectUrl;
+       // window.location.href = response.data.redirectUrl;
         this.setState({ amount: "" });
       })
       .catch((error) => {
