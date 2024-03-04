@@ -4,7 +4,7 @@ import "./Deposit.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import { PaystackButton } from "react-paystack";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
 
 class Deposit extends Component {
   constructor(props) {
@@ -17,7 +17,6 @@ class Deposit extends Component {
       error: "",
       currentBalance: "0.00",
       paystackKey: "pk_live_0d264673afdb09adf3c161aa3e733ef34c8cc851",
-      payPalClientId: "",
       show: true,
     };
 
@@ -25,18 +24,6 @@ class Deposit extends Component {
     this.idClient = localStorage.getItem("idclient");
   }
 
-  componentDidMount() {
-    axios
-      .get("https://spinz-server-100d0276d968.herokuapp.com/paypal-client-id")
-      .then((response) => {
-        const clientId = response.data.clientId;
-        localStorage.setItem("idclient", clientId);
-        this.setState({ payPalClientId: clientId });
-      })
-      .catch((error) => {
-        console.error("Error fetching PayPal client ID:", error);
-      });
-  }
 
   handleDeposit = () => {
     this.setState({ error: "", message: "", loading: true });
@@ -84,42 +71,11 @@ class Deposit extends Component {
       });
   };
 
-  createOrder = (data, actions) => {
-    return actions.order
-      .create({
-        purchase_units: [
-          {
-            description: "depositToSpinz",
-            amount: {
-              currency_code: "USD",
-              value: 20,
-            },
-          },
-        ],
-        application_context: {
-          shipping_preference: "NO_SHIPPING",
-        },
-      })
-      .then((orderId) => {
-        this.setState({ orderId });
-        return orderId;
-      });
-  };
-
-  onApprove = (data, actions) => {
-    return actions.order.capture().then(() => {
-      this.setState({ success: true });
-    });
-  };
-
-  onError = () => {
-    this.setState({ errorMessage: "Something went wrong" });
-  };
 
   render() {
     const { amount, loading, message, error, paystackKey, payPalClientId, show } = this.state;
     const { showSidebar, active, closeSidebar } = this.props;
-   
+
 
     return (
       <div className="deposit">
@@ -128,8 +84,8 @@ class Deposit extends Component {
           <Navbar showSidebar={showSidebar} />
           <div className="content">
             <div className="middle">
-              <div className="info">
-                <h2><b>Paystack Method :</b> </h2>
+              <div className="deposit_form">
+                <h2><b>Secure Method :</b> </h2>
                 <div>
                   <label>Deposit Amount</label>
                   <br />
@@ -139,7 +95,7 @@ class Deposit extends Component {
                     onChange={(e) => this.setState({ amount: e.target.value })}
                     inputMode="numeric"
                   />
-                 
+
                   {message && <p className="success-message">{message}</p>}
                   {error && <p className="error-message">{error}</p>}
                 </div>
@@ -151,55 +107,19 @@ class Deposit extends Component {
                     onClose: () => console.log('Closed'),
                     onError: (error) => console.error('Error:', error),
                     email: "user@example.com",
-                    amount: amount * 100, 
-                    currency: "ZAR", 
+                    amount: amount * 100,
+                    currency: "ZAR",
                     publicKey: paystackKey,
                   }}
                 />
               </div>
-              <div className="info">
-                <h2><b>International Method :</b> </h2>
-                <PayPalScriptProvider
-                  options={{
-                    "client-id": payPalClientId,
-                  }}
-                >
-                  {show ? (
-                    <PayPalButtons
-                      style={{ layout: "vertical" }}
-                      createOrder={this.createOrder}
-                      onApprove={this.onApprove}
-                      onError={this.onError}
-                    />
-                  ) : null}
-                </PayPalScriptProvider>
-              </div>
-              <div className="deposit_form">
-                <h2><b>SA Local bank :</b> </h2>
-                <div>
-                  <label>Deposit Amount</label>
-                  <br />
-                  <input
-                    type="number"
-                    value={amount}
-                    onChange={(e) => this.setState({ amount: e.target.value })}
-                    inputMode="numeric"
-                  />
-                  <button
-                    className="form_btn"
-                    onClick={this.handleDeposit}
-                    disabled={loading}
-                  >
-                    {loading ? "Processing..." : "Deposit"}
-                  </button>
-                  {message && <p className="success-message">{message}</p>}
-                  {error && <p className="error-message">{error}</p>}
-                </div>
-              </div>
+
+
             </div>
           </div>
         </div>
       </div>
+
     );
   }
 }
