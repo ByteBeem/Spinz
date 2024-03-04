@@ -101,9 +101,11 @@ class Deposit extends Component {
                   {message && <p className="success-message">{message}</p>}
                   {error && <p className="error-message">{error}</p>}
                 </div>
-                <button onClick={handleDepositPayStack}>
+                <button className="form_btn" onClick={this.handleDepositPayStack}>
                   press
                 </button>
+
+
                 <PaystackButton
                   className="form_btn"
                   {...{
