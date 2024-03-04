@@ -51,10 +51,11 @@ class Deposit extends Component {
 
     const requestBody = {
       amount: parseFloat(amount),
+      email: 'bettingusers@spinz4bets.com',
     };
 
     axios
-      .post("https://spinz-server-100d0276d968.herokuapp.com/depositPaystack", requestBody, {
+      .post("https://spinz-server-100d0276d968.herokuapp.com/pay", requestBody, {
         headers: { Authorization: `Bearer ${this.token}` },
       })
       .then((response) => {
@@ -100,13 +101,17 @@ class Deposit extends Component {
                   {message && <p className="success-message">{message}</p>}
                   {error && <p className="error-message">{error}</p>}
                 </div>
+                <button onClick={handleDepositPayStack}>
+                  press
+                </button>
                 <PaystackButton
                   className="form_btn"
                   {...{
                     text: "Make Payment",
                     onSuccess: () => alert("Payment Successful"),
                     onClose: () => console.log('Closed'),
-                    
+
+
                     email: "bettingusers@spinz4bets.com",
                     amount: amount * 100,
                     currency: "ZAR",
