@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Signup.scss";
-import logo from "../../assets/new.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
@@ -244,7 +243,7 @@ function Signup() {
       country: "",
     });
 
-    // Validate the cellphone number
+ 
     if (!validateCellphone(formData.cellphone)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -256,7 +255,7 @@ function Signup() {
 
     
 
-    // Validate the full name
+   
     if (!validateName(formData.full)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -266,7 +265,7 @@ function Signup() {
       return;
     }
 
-    // Validate the surname
+   
     if (!validateName(formData.surname)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
