@@ -19,7 +19,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
 
   const fetchBalance = async () => {
     try {
-      // Send the token as an Authorization header to the server
+   
       const response = await axios.get(
         "https://spinz-server-100d0276d968.herokuapp.com/balance",
         {
@@ -45,7 +45,7 @@ function Withdraw({ showSidebar, active, closeSidebar }) {
   }, [token]);
 
   useEffect(() => {
-    // Fetch user's balance when the component mounts
+   
     const token = localStorage.getItem("token");
     if (token) {
       axios

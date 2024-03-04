@@ -106,7 +106,7 @@ class Deposit extends Component {
                     onSuccess: (response) => console.log(response),
                     onClose: () => console.log('Closed'),
                     onError: (error) => console.error('Error:', error),
-                    email: "user@example.com",
+                    email: "user@spinz4bets.com",
                     amount: amount * 100,
                     currency: "ZAR",
                     publicKey: paystackKey,

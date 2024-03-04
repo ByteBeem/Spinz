@@ -1,4 +1,4 @@
-// https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4041567.jpg&f=1&nofb=1&ipt=18445b79bbb2c0f9c4b98c98dd83e88424ac79daf3b1721f6d802f092d369b4b&ipo=images
+
 
 * {
   margin: 0;
@@ -30,10 +30,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-//  background: url("../../assets/bg.jpg");
-//  background-position: center;
-//  background-repeat: no-repeat;
-//  background-size: cover;
 
   h1 {
     font-size: 1.5rem;
@@ -69,6 +65,10 @@
       color: white;
       background: var(--primary-color);
       margin-bottom: 2rem;
+    }
+    .form_btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
     }
 
     .bottom {
