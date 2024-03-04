@@ -24,8 +24,7 @@ class Deposit extends Component {
     this.idClient = localStorage.getItem("idclient");
   }
 
-
-  handleDeposit = () => {
+  handleDepositPayStack = () => {
     this.setState({ error: "", message: "", loading: true });
 
     if (!this.token) {
@@ -55,7 +54,7 @@ class Deposit extends Component {
     };
 
     axios
-      .post("https://spinz-server-100d0276d968.herokuapp.com/deposit", requestBody, {
+      .post("https://spinz-server-100d0276d968.herokuapp.com/depositPaystack", requestBody, {
         headers: { Authorization: `Bearer ${this.token}` },
       })
       .then((response) => {
@@ -72,8 +71,10 @@ class Deposit extends Component {
   };
 
 
+
+
   render() {
-    const { amount, loading, message, error, paystackKey, payPalClientId, show } = this.state;
+    const { amount, message, error, paystackKey } = this.state;
     const { showSidebar, active, closeSidebar } = this.props;
 
 
@@ -103,10 +104,10 @@ class Deposit extends Component {
                   className="form_btn"
                   {...{
                     text: "Make Payment",
-                    onSuccess: (response) => console.log(response),
+                    onSuccess: () => alert("Payment Successful"),
                     onClose: () => console.log('Closed'),
-                    onError: (error) => console.error('Error:', error),
-                    email: "user@spinz4bets.com",
+                    
+                    email: "bettingusers@spinz4bets.com",
                     amount: amount * 100,
                     currency: "ZAR",
                     publicKey: paystackKey,
