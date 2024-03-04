@@ -62,6 +62,8 @@ class Deposit extends Component {
         this.setState({ message: `Redirecting...` });
         console.log('response', response);
         console.log('responsedata',response.data); 
+        console.log('responsedatadata',response.data.data); 
+        console.log('responsedatadataauthurl',response.data.data.authorization_url); 
         console.log('responsedata.authorization_url',response.data.authorization_url); 
         
        // window.location.href = response.data.authorization_url;
