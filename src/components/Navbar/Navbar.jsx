@@ -1,5 +1,6 @@
+import "./Navbar.scss";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 import { IoNotifications } from "react-icons/io5";
@@ -11,8 +12,11 @@ const Navbar = ({ showSidebar }) => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
 
+  const balance = userData.balance;
+  const country = userData.country;
+
   useEffect(() => {
-    // Fetch user data on component mount
+    
     fetchUserData();
   }, []);
 
@@ -38,10 +42,10 @@ const Navbar = ({ showSidebar }) => {
   };
 
   const getCurrencySymbol = () => {
-    const symbol = userData.country === "ZA" ? "R" : "$";
-    localStorage.setItem("country", userData.country);
-    return symbol;
-  };
+  const symbol = country === 'ZA' ? 'R' : '$';
+  localStorage.setItem("country", country);
+  return symbol;
+};
 
   return (
     <header>
@@ -51,14 +55,12 @@ const Navbar = ({ showSidebar }) => {
       <ul className="games_filter">
         <li>
           <div className="balance">
-            {loading ? (
-              "Loading..."
-            ) : (
-              `${getCurrencySymbol()}${userData.balance.toString()}`
-            )}
+            {loading ? "Loading..." : `${getCurrencySymbol()}${balance.toString()}`}
           </div>
         </li>
       </ul>
+
+      
     </header>
   );
 };
