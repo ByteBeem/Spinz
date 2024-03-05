@@ -16,40 +16,31 @@ const Navbar = ({ showSidebar }) => {
   const country = userData.country;
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if(!storedToken){
-      window.location.href = "https://spinz-three.vercel.app/login";
-    }
+    
+    fetchUserData();
+  }, []);
 
-    if (storedToken) {
-      setToken(storedToken);
-      fetchUserData(storedToken);
-    }
-  }, [setToken]);
-
- const fetchUserData = (token) => {
-  setLoading(true);
-  axios
-    .get("https://spinz-server-100d0276d968.herokuapp.com/balance", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => {
-     const balance = response.data; 
-
-      if (balance !== undefined) {
-        setUserData( balance ); 
-      }
-  
-    })
-    .catch((error) => {
-      console.error("Error fetching user data:", error);
-      
-      navigate("/dashboard");
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-};
+  const fetchUserData = () => {
+    setLoading(true);
+    axios
+      .get("https://capable-faint-scallop.glitch.me/balance", {
+        withCredentials: true, 
+      })
+      .then((response) => {
+        const balance = response.data;
+        if (balance !== undefined) {
+          setUserData(balance);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+        alert("You are not Logged in...")
+        window.location.href = "https://spinz-three.vercel.app/login";
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const getCurrencySymbol = () => {
   const symbol = country === 'ZA' ? 'R' : '$';
