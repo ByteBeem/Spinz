@@ -1,6 +1,5 @@
-import "./Navbar.scss";
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 import { IoNotifications } from "react-icons/io5";
@@ -12,50 +11,37 @@ const Navbar = ({ showSidebar }) => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
 
-  const balance = userData.balance;
-  const country = userData.country;
-
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if(!storedToken){
-      window.location.href = "https://spinz-three.vercel.app/login";
-    }
+    // Fetch user data on component mount
+    fetchUserData();
+  }, []);
 
-    if (storedToken) {
-      setToken(storedToken);
-      fetchUserData(storedToken);
-    }
-  }, [setToken]);
-
- const fetchUserData = (token) => {
-  setLoading(true);
-  axios
-    .get("https://capable-faint-scallop.glitch.me/balance", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => {
-     const balance = response.data; 
-
-      if (balance !== undefined) {
-        setUserData( balance ); 
-      }
-  
-    })
-    .catch((error) => {
-      console.error("Error fetching user data:", error);
-      
-      navigate("/dashboard");
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-};
+  const fetchUserData = () => {
+    setLoading(true);
+    axios
+      .get("https://capable-faint-scallop.glitch.me/balance", {
+        withCredentials: true, 
+      })
+      .then((response) => {
+        const balance = response.data;
+        if (balance !== undefined) {
+          setUserData(balance);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+        window.location.href = "https://spinz-three.vercel.app/login";
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const getCurrencySymbol = () => {
-  const symbol = country === 'ZA' ? 'R' : '$';
-  localStorage.setItem("country", country);
-  return symbol;
-};
+    const symbol = userData.country === "ZA" ? "R" : "$";
+    localStorage.setItem("country", userData.country);
+    return symbol;
+  };
 
   return (
     <header>
@@ -65,12 +51,14 @@ const Navbar = ({ showSidebar }) => {
       <ul className="games_filter">
         <li>
           <div className="balance">
-            {loading ? "Loading..." : `${getCurrencySymbol()}${balance.toString()}`}
+            {loading ? (
+              "Loading..."
+            ) : (
+              `${getCurrencySymbol()}${userData.balance.toString()}`
+            )}
           </div>
         </li>
       </ul>
-
-      
     </header>
   );
 };
