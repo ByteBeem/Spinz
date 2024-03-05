@@ -12,9 +12,9 @@ const Login = () => {
  const navigate = useNavigate();
   
 
-  const storeTokenInLocalStorage = (token) => {
-    localStorage.setItem("token", token);
-  };
+ const storeTokenInCookie = (token) => {
+  document.cookie = `jwt=${token}; path=/; secure; HttpOnly`;
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,8 +49,10 @@ const Login = () => {
       setIsLoading(false);
 
       if (response.status === 200) {
-        authContext.setToken(response.data.token);
-        storeTokenInLocalStorage(response.data.token);
+        const token = response.data.token;
+        authContext.setToken(token);
+        
+        storeTokenInCookie(token);
         authContext.setUserData(response.data.Data);
         navigate("/dashboard");
         setErrors((prevState) => ({ ...prevState, password: "Login Successful!" }));

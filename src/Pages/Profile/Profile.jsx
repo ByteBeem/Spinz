@@ -8,8 +8,6 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import UserProfile from "../../assets/user.jpeg";
 import { Link } from "react-router-dom";
-import { BiMoneyWithdraw } from "react-icons/bi";
-import { MdOutlinePayments } from "react-icons/md";
 import { FiLoader } from "react-icons/fi";
 import Activities from "../../Data/Activities";
 
@@ -28,82 +26,52 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const surname = userData.surname;
   const ID = "*************";
 
-  const handleWithdraw = () => {
-    navigate("/withdraw");
-  };
-
-  const handleDeposit = () => {
-    navigate("/deposit");
-  };
-
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
+    fetchActivities();
+    fetchUserData();
+  }, []);
 
-    if (storedToken) {
-      setToken(storedToken);
-
-      fetchActivities(storedToken);
-      fetchUserData(storedToken);
-    }
-  }, [setToken, setToken]);
-
-  const fetchActivities = async (token) => {
+  const fetchActivities = async () => {
     try {
       setLoading(true);
       const response = await axios.get(
         "https://spinz-server-100d0276d968.herokuapp.com/activities",
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          withCredentials: true, 
         }
       );
 
-      if (response.status === 206) {
-        alert("Token Expired Login again!");
-        setLoading(false);
-      } else {
-        setActivities(response.data[0]);
-
-        const formattedDates = response.data.map((activity) => {
-          const date = activity.date_time;
-          const originalDate = new Date(date);
-          return originalDate.toLocaleString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-          });
-          setLoading(false);
-        });
-        setDates(formattedDates);
-      }
+    
+      setActivities(response.data);
+      setDates(
+        response.data.map((activity) => new Date(activity.date_time))
+      );
     } catch (error) {
+     
+      console.error("Error fetching activities:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const fetchUserData = (token) => {
+  const fetchUserData = () => {
     setLoading(true);
     axios
       .get("https://spinz-server-100d0276d968.herokuapp.com/getUserData", {
-        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true, 
       })
       .then((response) => {
-         const info = response.data; 
-
-      if (info !== undefined) {
-        setUserData(info ); 
-      }
-        setLoading(false);
+       
+        setUserData(response.data);
       })
-      .catch((error) => {});
+      .catch((error) => {
+       
+        console.error("Error fetching user data:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
-
   return (
     <div className="profile">
       {loading && (

@@ -50,7 +50,7 @@ class Deposit extends Component {
     }
 
     const requestBody = {
-      amount: parseFloat(amount),
+      amount: parseFloat(amount) *100,
       email: 'bettingusers@spinz4bets.com',
     };
 
@@ -103,7 +103,7 @@ class Deposit extends Component {
                   {message && <p className="success-message">{message}</p>}
                   {error && <p className="error-message">{error}</p>}
                 </div>
-                <button className="form_btn" onClick={this.handleDepositPayStack}>
+                <button className="form_btn"  onClick={this.handleDepositPayStack}>
                   Make Payment
                 </button>
 
