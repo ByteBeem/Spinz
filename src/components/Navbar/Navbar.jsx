@@ -30,7 +30,7 @@ const Navbar = ({ showSidebar }) => {
  const fetchUserData = (token) => {
   setLoading(true);
   axios
-    .get("https://spinz-server-100d0276d968.herokuapp.com/balance", {
+    .get("https://capable-faint-scallop.glitch.me/balance", {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {

@@ -41,7 +41,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://spinz-server-100d0276d968.herokuapp.com/login",
+        "https://capable-faint-scallop.glitch.me/login",
         { cell: cellphone, password },
         { withCredentials: true }
       );

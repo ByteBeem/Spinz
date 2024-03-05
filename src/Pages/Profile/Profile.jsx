@@ -35,7 +35,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://spinz-server-100d0276d968.herokuapp.com/activities",
+        "https://capable-faint-scallop.glitch.me/activities",
         {
           withCredentials: true, 
         }
@@ -57,7 +57,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const fetchUserData = () => {
     setLoading(true);
     axios
-      .get("https://spinz-server-100d0276d968.herokuapp.com/getUserData", {
+      .get("https://capable-faint-scallop.glitch.me/getUserData", {
         withCredentials: true, 
       })
       .then((response) => {
