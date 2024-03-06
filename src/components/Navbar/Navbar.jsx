@@ -24,7 +24,7 @@ const Navbar = ({ showSidebar }) => {
     }else {
       setErrorMessage("You first need to Log in...");
       setErrorModalOpen(true);
-      window.location.href = "https://spinz-three.vercel.app/login";
+      
    
       
     }
