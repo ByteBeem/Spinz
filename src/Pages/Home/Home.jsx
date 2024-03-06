@@ -128,8 +128,10 @@ class Home extends Component {
             
           </div>
           <div className="aviator_image">
-              <img src={aviatorImage} alt="Aviator" />
-            </div>
+    <img src={aviatorImage} alt="Aviator" />
+    <div className="play_button"> Play</div>
+</div>
+
         </div>
       </div>
     );
