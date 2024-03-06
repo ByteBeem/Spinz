@@ -14,11 +14,16 @@ const Navbar = ({ showSidebar }) => {
 
   const balance = userData.balance;
   const country = userData.country;
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+  
   const fetchUserData = () => {
     setLoading(true);
     axios
       .get("https://capable-faint-scallop.glitch.me/balance", {
-        withCredentials: true,
+        credentials: 'include',
       })
       .then((response) => {
         const balance = response.data;
