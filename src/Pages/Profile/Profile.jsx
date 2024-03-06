@@ -37,7 +37,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
       const response = await axios.get(
         "https://capable-faint-scallop.glitch.me/activities",
         {
-          withCredentials: true, 
+          credentials: 'include',
         }
       );
 
