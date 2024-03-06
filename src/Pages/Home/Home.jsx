@@ -127,7 +127,7 @@ class Home extends Component {
             </div>
 
           </div>
-          <div className="content">
+          
             <div className="games_slider">
               <div className="div">
                 <Slider {...this.settings}>
@@ -138,7 +138,7 @@ class Home extends Component {
                     </div>
                   ))}
                 </Slider>
-              </div>
+             
             </div>
 
           </div>
