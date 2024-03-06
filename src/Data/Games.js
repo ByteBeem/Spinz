@@ -30,11 +30,7 @@ const Games = [
     title: "Rock Paper Scissors",
     img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F000%2F691%2F497%2Foriginal%2Frock-paper-scissors-neon-icons-vector.jpg&f=1&nofb=1&ipt=aa16d61e69aecda94292170a29a64bf07d61ca6e36de5a8dedbbc6907154d868&ipo=images",
   },
-   {
-    id: 7,
-    title: "Super Hot Fruit",
-    img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcasinogamescatalog.com%2Fimg%2Fwide%2Ffruits-slot-machine5.png&f=1&nofb=1&ipt=5755f8a6c6ae79cc7552f24e5468a56f3e2cd56e1305b54b3e664b93b15fe58c&ipo=images",
-  },
+  
 ];
 
 export default Games;
