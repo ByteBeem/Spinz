@@ -299,16 +299,22 @@ function Signup() {
     setIsLoading(false);
 
     if (response.status === 200) {
+      setErrorMessage("Account Opened Successfully! Login Now");
+      setErrorModalOpen(true);
       setErrors((prevErrors) => ({
         ...prevErrors,
         password: "Account Opened Successfully! Login Now",
       }));
     } else if (response.status === 201) {
+      setErrorMessage("Cellphone Already registered!");
+      setErrorModalOpen(true);
       setErrors((prevErrors) => ({
         ...prevErrors,
         cellphone: "Cellphone Already registered!",
       }));
     } else if (response.status === 208) {
+      setErrorMessage("ID number Already registered!");
+      setErrorModalOpen(true);
       setErrors((prevErrors) => ({
         ...prevErrors,
         ID: "ID number Already registered!",
