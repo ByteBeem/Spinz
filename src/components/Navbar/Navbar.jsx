@@ -3,14 +3,15 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
-import { IoNotifications } from "react-icons/io5";
-import { IoIosPaper } from "react-icons/io";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const { setToken } = useAuth();
   const navigate = useNavigate();
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); 
 
   const balance = userData.balance;
   const country = userData.country;
@@ -21,8 +22,11 @@ const Navbar = ({ showSidebar }) => {
       fetchUserData(token);
     
     }else {
-      alert("You first need to Log in...");
+      setErrorMessage("You first need to Log in...");
+      setErrorModalOpen(true);
       window.location.href = "https://spinz-three.vercel.app/login";
+   
+      
     }
    
   }, []);
@@ -70,8 +74,15 @@ const Navbar = ({ showSidebar }) => {
         </li>
       </ul>
 
-      
+      <div >
+    <ErrorModal
+    errorMessage={errorMessage}
+    isOpen={errorModalOpen}
+    onClose={() => setErrorModalOpen(false)}
+  />
+  </div>
     </header>
+   
   );
 };
 
