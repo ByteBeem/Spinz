@@ -18,14 +18,14 @@ class Home extends Component {
       betAmountInput: "",
     };
 
-  
+
     this.token = localStorage.getItem('token');
     this.settings = {
       dots: false,
       infinite: true,
       speed: 500,
       slidesToShow: 4,
-      slidesToScroll: 1, 
+      slidesToScroll: 1,
     };
   }
 
@@ -125,12 +125,13 @@ class Home extends Component {
                 </Slider>
               </div>
             </div>
-            
+
           </div>
           <div className="aviator_image">
-    <img src={aviatorImage} alt="Aviator" />
-    <div className="play_button"> Play</div>
-</div>
+            <img src={aviatorImage} alt="Aviator" />
+            <div className="play_button">Play</div>
+          </div>
+
 
         </div>
       </div>
