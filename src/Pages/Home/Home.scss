@@ -89,6 +89,11 @@
   }
 
   padding: 0 1rem;
+  @media screen and (max-width: 700px) {
+    padding: 0 0.5rem;
+  }
+
+  padding: 0 1rem;
   @media screen and (max-width: 1000px) {
     padding: 0 0.5rem;
   }
@@ -98,7 +103,17 @@
     width: 20rem;
     height: 15rem;
 
-                @media screen and (max-width: 900px) {
+      @media screen and (max-width: 900px) {
+      width: 100%;
+      height: 15rem;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 100%;
+      height: 15rem;
+    }
+
+    @media screen and (max-width: 1000px) {
       width: 100%;
       height: 15rem;
     }
