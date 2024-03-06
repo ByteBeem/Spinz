@@ -7,7 +7,7 @@ import Games from "../../Data/Games";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.scss";
-import aviatorImage from "../../assets/aviator.png";
+import aviatorImage from "../../assets/va.jpg";
 
 class Home extends Component {
   constructor(props) {
