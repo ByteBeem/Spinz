@@ -83,332 +83,37 @@
 }
 
 .aviator_image {
-  max-width: 100%;
-  margin-bottom: 20px; 
+  padding: 0 1rem;
+  @media screen and (max-width: 900px) {
+    padding: 0 0.5rem;
+  }
+
+  padding: 0 1rem;
+  @media screen and (max-width: 1000px) {
+    padding: 0 0.5rem;
+  }
   
   img {
-    display: block;
-    width: 100%;
-    height: auto;
+    border-radius: 10px;
+    width: 20rem;
+    height: 15rem;
+
+                @media screen and (max-width: 900px) {
+      width: 100%;
+      height: 15rem;
+    }
+
+    @media screen and (max-width: 700px) {
+      width: 100%;
+      height: 15rem;
+    }
   }
 
-  @media screen and (max-width: 700px) {
-    max-width: 50%;
-    margin: 0 auto;
+  .title {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    font-weight: bold;
   }
 
-  @media screen and (max-width: 1024px) {
-    max-width: 40%;
-  }
-
-  @media screen and (max-width: 1000px) {
-    max-width: 30%;
-  }
-}
-
-
-
-.easyWin_section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
- // padding-top: 70px;
-  padding-right: 20%;
- // padding-top: 80px;
-
-    @media screen and (max-width: 900px) {
-    padding: 0 0.5rem;
-    align-items: center;
-    width: 80%;
-    padding-right: 55%;
-    border-radius: 30px;
-   //  padding-top: 85px;
-    
-  }
  
-  
-  @media screen and (max-width: 700px) {
-    padding: 0 0.5rem;
-    align-items: center;
-    width: 80%;
-    padding-right: 55%;
-    border-radius: 30px;
-     //padding-top: 95px;
-    
-  }
-}
-
-
-.redButton {
-  background-color: red;
-  
-}
-
-.buttonSpacer {
-  margin-bottom: 10px; 
-}
-
-.glowButton {
-  width: 100%;
-  font-size: 1.5rem;
-  padding: 15px 20px;
-  background-color: #e79cf7; 
-  color: #fff;
-  border: none;
-  border-radius: 10px; 
-  cursor: pointer;
-  outline: none;
-  
-  
-  
-  
-  font-family: "Montserrat", sans-serif;
-
-  
-  animation: glow 1.5s infinite alternate;
-
-  
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  letter-spacing: 4px;
-  transition: 0.5s;
-  &:hover {
-    background-color: #03e9f4;
-    color: var(--white-color);
-    border-radius: 5px;
-    box-shadow: var(--box-shadow);
-  }
-
-  &::before,
-  &::after,
-  &::before::before,
-  &::before::after,
-  &::after::before,
-  &::after::after {
-    content: '';
-    position: absolute;
-    display: block;
-  }
-
-  &::before {
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent-color));
-    animation: btn-anim1 1s linear infinite;
-  }
-
-  &::after {
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(180deg, transparent, var(--accent-color));
-    animation: btn-anim2 1s linear infinite;
-    animation-delay: 0.25s;
-  }
-
-  &::before::before {
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(270deg, transparent, var(--accent-color));
-    animation: btn-anim3 1s linear infinite;
-    animation-delay: 0.5s;
-  }
-
-  &::before::after {
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(360deg, transparent, var(--accent-color));
-    animation: btn-anim4 1s linear infinite;
-    animation-delay: 0.75s;
-  }
-}
-
-@keyframes btn-anim1 {
-  0% {
-    left: -100%;
-  }
-  50%,
-  100% {
-    left: 100%;
-  }
-}
-
-@keyframes btn-anim2 {
-  0% {
-    top: -100%;
-  }
-  50%,
-  100% {
-    top: 100%;
-  }
-}
-
-@keyframes btn-anim3 {
-  0% {
-    right: -100%;
-  }
-  50%,
-  100% {
-    right: 100%;
-  }
-}
-
-@keyframes btn-anim4 {
-  0% {
-    bottom: -100%;
-  }
-  50%,
-  100% {
-    bottom: 100%;
-  }
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50, 0 0 30px #4caf50;
-  }
-  to {
-    box-shadow: 0 0 20px #4c87af, 0 0 30px #4c87af, 0 0 40px #4c87af;
-  }
-}
-
-.glowButtonAviator {
-  width: 100%;
-  font-size: 1.5rem;
-  padding: 15px 20px;
-  background-color: #e79cf7; 
-  color: #fff;
-  border: none;
-  border-radius: 10px; 
-  cursor: pointer;
-  outline: none;
-  
-  
-  
-  
-  font-family: "Montserrat", sans-serif;
-
-  
-  animation: glowAviator 1.5s infinite alternate;
-
-  
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  letter-spacing: 4px;
-  transition: 0.5s;
-  &:hover {
-    background-color: #03e9f4;
-    color: var(--white-color);
-    border-radius: 5px;
-    box-shadow: var(--box-shadow);
-  }
-
-  &::before,
-  &::after,
-  &::before::before,
-  &::before::after,
-  &::after::before,
-  &::after::after {
-    content: '';
-    position: absolute;
-    display: block;
-  }
-
-  &::before {
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent-color));
-    animation: btn-anim1 1s linear infinite;
-  }
-
-  &::after {
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(180deg, transparent, var(--accent-color));
-    animation: btn-anim2 1s linear infinite;
-    animation-delay: 0.25s;
-  }
-
-  &::before::before {
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(270deg, transparent, var(--accent-color));
-    animation: btn-anim3 1s linear infinite;
-    animation-delay: 0.5s;
-  }
-
-  &::before::after {
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(360deg, transparent, var(--accent-color));
-    animation: btn-anim4 1s linear infinite;
-    animation-delay: 0.75s;
-  }
-}
-
-@keyframes btn-anim1 {
-  0% {
-    left: -100%;
-  }
-  50%,
-  100% {
-    left: 100%;
-  }
-}
-
-@keyframes btn-anim2 {
-  0% {
-    top: -100%;
-  }
-  50%,
-  100% {
-    top: 100%;
-  }
-}
-
-@keyframes btn-anim3 {
-  0% {
-    right: -100%;
-  }
-  50%,
-  100% {
-    right: 100%;
-  }
-}
-
-@keyframes btn-anim4 {
-  0% {
-    bottom: -100%;
-  }
-  50%,
-  100% {
-    bottom: 100%;
-  }
-}
-
-@keyframes glowAviator {
-  from {
-    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-  }
-  to {
-    box-shadow: 0 0 20px #4c87af, 0 0 30px #4c87af, 0 0 40px #4c87af;
-  }
 }
