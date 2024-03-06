@@ -18,12 +18,9 @@ function Signup() {
     country: "ZA",
   });
 
-  const countryOptions = Object.entries(countriesList).map(
-    ([code, details]) => ({
-      code,
-      name: details.name,
-    })
-  );
+  const countryOptions = [
+    { code: "ZA", name: countriesList["ZA"].name }
+  ];
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -243,7 +240,7 @@ function Signup() {
       country: "",
     });
 
- 
+
     if (!validateCellphone(formData.cellphone)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -253,9 +250,9 @@ function Signup() {
       return;
     }
 
-    
 
-   
+
+
     if (!validateName(formData.full)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -265,7 +262,7 @@ function Signup() {
       return;
     }
 
-   
+
     if (!validateName(formData.surname)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -275,7 +272,7 @@ function Signup() {
       return;
     }
 
-    // Validate the password
+
     const passwordError = validatePassword(
       formData.password,
       formData.confirmPassword
@@ -286,7 +283,7 @@ function Signup() {
       return;
     }
 
-    const { username, full, surname, cellphone, ID, password , country  } = formData;
+    const { username, full, surname, cellphone, ID, password, country } = formData;
 
     try {
       const response = await axios.post(
@@ -305,7 +302,7 @@ function Signup() {
       setIsLoading(false);
 
       if (response.status === 200) {
-        
+
         setErrors((prevErrors) => ({
           ...prevErrors,
           password: "Account Opened Successfully! Login Now",
@@ -328,7 +325,7 @@ function Signup() {
     }
   };
 
-const handleNext = () => {
+  const handleNext = () => {
     setErrors({
       full: "",
       surname: "",
@@ -340,7 +337,7 @@ const handleNext = () => {
     });
 
     if (section === 1) {
-      
+
       if (!validateName(formData.full)) {
         setErrors((prevErrors) => ({
           ...prevErrors,
@@ -364,17 +361,17 @@ const handleNext = () => {
       }
     }
 
-   if (section === 2) {
-    if (formData.country === "ZA") {
-      if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID)) {
-        setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
-        return;
+    if (section === 2) {
+      if (formData.country === "ZA") {
+        if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID)) {
+          setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
+          return;
+        }
       }
     }
-  }
 
     if (section === 3) {
-    
+
       const passwordError = validatePassword(formData.password, formData.confirmPassword);
       if (passwordError) {
         setErrors((prevErrors) => ({ ...prevErrors, password: passwordError }));
@@ -385,20 +382,20 @@ const handleNext = () => {
       return;
     }
 
-    
+
     setSection(section + 1);
   };
 
   const handleBack = () => {
-   
+
     setSection(section - 1);
   };
 
-  
+
 
   return (
     <div className="form">
-     
+
 
       <div className="form_container">
         <form onSubmit={handleSubmit}>
@@ -466,11 +463,12 @@ const handleNext = () => {
                     </option>
                   ))}
                 </select>
+
                 {errors.country && (
                   <p className="error-message">{errors.country}</p>
                 )}
               </div>
-           
+
               {formData.country === "ZA" && (
                 <div className="input-group">
                   <label htmlFor="ID">ID number: </label>
