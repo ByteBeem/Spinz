@@ -10,7 +10,7 @@
     .content {
       padding: 5rem 0 1rem 0;
 
-      .games_slider {
+      .games_slider .aviator_image {
         width: 100%;
         margin: 0 auto;
         padding: 0.6rem 3rem;
@@ -79,47 +79,5 @@
         }
       }
     }
-  }
-}
-.aviator_image {
-  padding: 0 1rem;
-
-  @media screen and (max-width: 1000px) {
-    padding: 0 0.5rem;
-  }
-
-  @media screen and (max-width: 900px) {
-    padding: 0 0.5rem;
-  }
-
-  @media screen and (max-width: 700px) {
-    padding: 0 0.5rem;
-  }
-
-  img {
-    border-radius: 10px;
-    width: 20rem;
-    height: 15rem;
-
-    @media screen and (max-width: 900px) {
-      width: 100%;
-      height: auto; 
-    }
-
-    @media screen and (max-width: 500px) {
-      width: 90%; 
-      height: auto; 
-    }
-
-    @media screen and (max-width: 320px) {
-      width: 80%;
-      height: auto;
-    }
-  }
-
-  .title {
-    font-size: 1.5rem;
-    margin: 10px 0;
-    font-weight: bold;
   }
 }

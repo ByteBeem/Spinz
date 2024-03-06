@@ -125,10 +125,11 @@ class Home extends Component {
                 </Slider>
               </div>
             </div>
-          </div>
-          <div className="aviator_image">
+            <div className="aviator_image">
               <img src={aviatorImage} alt="Aviator" />
             </div>
+          </div>
+         
         </div>
       </div>
     );
