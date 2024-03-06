@@ -29,8 +29,8 @@ function Profile({ showSidebar, active, closeSidebar }) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token){
-      fetchActivities();
-      fetchUserData();
+      fetchActivities(token);
+      fetchUserData(token);
     }
     else {
       alert("You need to Login first...")
@@ -39,13 +39,15 @@ function Profile({ showSidebar, active, closeSidebar }) {
     
   }, []);
 
-  const fetchActivities = async () => {
+  const fetchActivities = async (token) => {
     try {
       setLoading(true);
       const response = await axios.get(
         "https://capable-faint-scallop.glitch.me/activities",
         {
-          credentials: 'include',
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
       );
 
@@ -62,11 +64,13 @@ function Profile({ showSidebar, active, closeSidebar }) {
     }
   };
 
-  const fetchUserData = () => {
+  const fetchUserData = (token) => {
     setLoading(true);
     axios
       .get("https://capable-faint-scallop.glitch.me/getUserData", {
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
       .then((response) => {
        
