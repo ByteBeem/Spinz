@@ -82,6 +82,31 @@
   }
 }
 
+.aviator_image {
+  max-width: 100%;
+  margin-bottom: 20px; 
+  
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 1024px) {
+    max-width: 40%;
+  }
+
+  @media screen and (min-width: 1200px) {
+    max-width: 30%;
+  }
+}
+
+
 
 .easyWin_section {
   display: flex;
