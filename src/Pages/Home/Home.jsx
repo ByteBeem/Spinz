@@ -126,8 +126,14 @@ class Home extends Component {
                 </Slider>
               </div>
             </div>
+
+            </div>
+            
+
+         
+          <div className="content">
             <div className="games_slider">
-              <div className="div">
+             
                 <Slider {...this.settings}>
                   {MoreGames.map(({ id, title, img }) => (
                     <div key={id} className="game_box">
@@ -142,11 +148,9 @@ class Home extends Component {
                     </div>
                   ))}
                 </Slider>
-              </div>
-            </div>
-
-          </div>
-
+                </div>
+                </div>
+               
         </div>
       </div>
     );
