@@ -125,9 +125,27 @@ class Home extends Component {
                 </Slider>
               </div>
             </div>
+            <div className="games_slider">
+              <div className="div">
+                <Slider {...this.settings}>
+                  {Games.map(({ id, title, img }) => (
+                    <div key={id} className="game_box">
+                      <img src={img} alt="" className="game_img" />
+                      <div className="title">{title}</div>
+                      <div
+                        className="form_btn"
+                        onClick={() => this.handlePlayClick(id)}
+                      >
+                        {loading ? "Loading..." : "Play"}
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </div>
 
           </div>
-          
+
         </div>
       </div>
     );
