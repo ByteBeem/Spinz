@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
-import ErrorModal from "../ErrorModal/ErrorModal";
+import ErrorModal from "../../Pages/ErrorModal/ErrorModal";
 
 const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
