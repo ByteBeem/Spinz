@@ -1,4 +1,3 @@
-// Import statements
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -22,26 +21,19 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
     if (storedToken) {
       setToken(storedToken);
       fetchUserData(storedToken);
+    }else{
+      alert("You need to Login...")
+      window.location.href = "https://spinz-three.vercel.app/login";
     }
   }, [setToken]);
 
-   useEffect(() => {
-  axios.get("https://spinz-server-100d0276d968.herokuapp.com/paypal-client-id")
-    .then(response => {
-      const clientId = response.data.clientId;
-      const idclient = localStorage.setItem("idclient" , clientId);
-      
-    })
-    .catch(error => {
-      console.error("Error fetching PayPal client ID:", error);
-    });
-}, []); 
+   
 
 
   const fetchUserData = (token) => {
     setLoading(true);
     axios
-      .get("https://spinz-server-100d0276d968.herokuapp.com/balance", {
+      .get("https://capable-faint-scallop.glitch.me/balance", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -60,7 +52,7 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
 
   const getCurrencySymbol = () => {
     
-    return country === 'ZA' ? 'R' : '$';
+    return country === 'ZA' ? 'R' : 'R';
   };
 
   return (

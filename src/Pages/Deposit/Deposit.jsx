@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Deposit.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
-import { PaystackButton } from "react-paystack";
+
 
 
 class Deposit extends Component {
@@ -16,7 +16,6 @@ class Deposit extends Component {
       message: "",
       error: "",
       currentBalance: "0.00",
-      paystackKey: "pk_test_44509a0fdac95e27a8c42e8d591ec5550f08efc5",
       show: true,
     };
 
@@ -77,7 +76,7 @@ class Deposit extends Component {
 
 
   render() {
-    const { amount, message, error, paystackKey } = this.state;
+    const { amount, message, error } = this.state;
     const { showSidebar, active, closeSidebar } = this.props;
 
 
