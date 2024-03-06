@@ -9,7 +9,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.scss";
 
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +17,6 @@ class Home extends Component {
       loading: false,
       betAmountInput: "",
     };
-
 
     this.token = localStorage.getItem('token');
     this.settings = {
@@ -109,48 +107,40 @@ class Home extends Component {
           <Navbar showSidebar={showSidebar} />
           <div className="content">
             <div className="games_slider">
-              <div className="div">
-                <Slider {...this.settings}>
-                  {Games.map(({ id, title, img }) => (
-                    <div key={id} className="game_box">
-                      <img src={img} alt="" className="game_img" />
-                      <div className="title">{title}</div>
-                      <div
-                        className="form_btn"
-                        onClick={() => this.handlePlayClick(id)}
-                      >
-                        {loading ? "Loading..." : "Play"}
-                      </div>
+              <Slider {...this.settings}>
+                {Games.map(({ id, title, img }) => (
+                  <div key={id} className="game_box">
+                    <img src={img} alt="" className="game_img" />
+                    <div className="title">{title}</div>
+                    <div
+                      className="form_btn"
+                      onClick={() => this.handlePlayClick(id)}
+                    >
+                      {loading ? "Loading..." : "Play"}
                     </div>
-                  ))}
-                </Slider>
-              </div>
+                  </div>
+                ))}
+              </Slider>
             </div>
-
-            </div>
-            
-
-         
+          </div>
           <div className="content">
             <div className="games_slider">
-             
-                <Slider {...this.settings}>
-                  {MoreGames.map(({ id, title, img }) => (
-                    <div key={id} className="game_box">
-                      <img src={img} alt="" className="game_img" />
-                      <div className="title">{title}</div>
-                      <div
-                        className="form_btn"
-                        onClick={() => this.handlePlayClick(id)}
-                      >
-                        {loading ? "Loading..." : "Play"}
-                      </div>
+              <Slider {...this.settings}>
+                {MoreGames.map(({ id, title, img }) => (
+                  <div key={id} className="game_box">
+                    <img src={img} alt="" className="game_img" />
+                    <div className="title">{title}</div>
+                    <div
+                      className="form_btn"
+                      onClick={() => this.handlePlayClick(id)}
+                    >
+                      {loading ? "Loading..." : "Play"}
                     </div>
-                  ))}
-                </Slider>
-                </div>
-                </div>
-               
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
         </div>
       </div>
     );
