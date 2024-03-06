@@ -44,8 +44,7 @@ const Navbar = ({ showSidebar }) => {
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
-        alert("You are not Logged in...")
-        window.location.href = "https://spinz-three.vercel.app/login";
+        
       })
       .finally(() => {
         setLoading(false);
