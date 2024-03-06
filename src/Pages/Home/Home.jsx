@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import axios from "axios";
 import Slider from "react-slick";
 import Games from "../../Data/Games";
+import MoreGames from "../../Data/2ndGames";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.scss";
@@ -128,7 +129,7 @@ class Home extends Component {
             <div className="games_slider">
               <div className="div">
                 <Slider {...this.settings}>
-                  {Games.map(({ id, title, img }) => (
+                  {MoreGames.map(({ id, title, img }) => (
                     <div key={id} className="game_box">
                       <img src={img} alt="" className="game_img" />
                       <div className="title">{title}</div>
