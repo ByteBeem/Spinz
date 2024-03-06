@@ -24,7 +24,7 @@ function Signup() {
   ];
 
   const [isLoading, setIsLoading] = useState(false);
-  const [errorModalOpen, setErrorModalOpen] = useState(false); 
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState(""); 
 
   const [errors, setErrors] = useState({

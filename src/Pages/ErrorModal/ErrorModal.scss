@@ -1,4 +1,4 @@
-.error-modal {
+.error-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,32 +8,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
   
-    .error-modal-content {
-      background-color: white;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      text-align: center;
-    }
+  .error-modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
   
-    .error-message {
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
+  .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
   
-    .ok-button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-  
-    .ok-button:hover {
-      background-color: #0056b3;
-    }
+  .error-message {
+    color: red;
+    font-size: 18px;
+    margin-top: 10px;
   }
   

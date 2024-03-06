@@ -1,14 +1,18 @@
-import React from 'react';
-import './ErrorModal.scss';
+import React from "react";
+import "./ErrorModal.scss";
 
-const ErrorModal = ({ errorMessage, onClose }) => {
+const ErrorModal = ({ errorMessage, isOpen, onClose }) => {
   return (
-    <div className="error-modal">
-      <div className="error-modal-content">
-        <p className="error-message">{errorMessage}</p>
-        <button className="ok-button" onClick={onClose}>OK</button>
+    isOpen && (
+      <div className="error-modal-overlay">
+        <div className="error-modal">
+          <button className="close-button" onClick={onClose}>
+            X
+          </button>
+          <div className="error-message">{errorMessage}</div>
+        </div>
       </div>
-    </div>
+    )
   );
 };
 
