@@ -7,9 +7,7 @@ import Games from "../../Data/Games";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.scss";
-import aviatorImage1 from "../../assets/va.jpg";
-import aviatorImage2 from "../../assets/va.jpg";
-import aviatorImage3 from "../../assets/va.jpg";
+
 
 class Home extends Component {
   constructor(props) {
@@ -132,20 +130,15 @@ class Home extends Component {
           <div className="aviator_slider">
           <div className="div">
           <Slider {...this.settings}>
-            <div>
-              <img src={aviatorImage1} alt="Aviator 1" />
-              <div className="play_button">Play</div>
-            </div>
-            <div>
-              <img src={aviatorImage2} alt="Aviator 2" />
-              <div className="play_button">Play</div>
-            </div>
-            <div>
-              <img src={aviatorImage3} alt="Aviator 3" />
-              <div className="play_button">Play</div>
-            </div>
-            
-          </Slider>
+                  {Games.map(({ id, title, img }) => (
+                    <div key={id} className="game_box">
+                      <img src={img} alt="" className="game_img" />
+                      
+                      
+                      </div>
+                  
+                  ))}
+                </Slider>
           </div>
         </div>
         </div>
