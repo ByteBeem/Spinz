@@ -1,8 +1,8 @@
 import "./Navbar.scss";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-
+import { SiAmazongames } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
@@ -65,7 +65,11 @@ const Navbar = ({ showSidebar }) => {
         </li>
       </ul>
 
-      
+    
+      <Link className="link" to="/profile">
+          <SiAmazongames className="icon" />
+          <span>More games</span>
+        </Link>
     </header>
    
   );

@@ -78,11 +78,12 @@
           // }
         }
       }
-    }.aviator_image {
+    }
+    .aviator_image {
       position: relative;
       display: inline-block;
       padding: 0 1rem;
-      
+  
       @media screen and (max-width: 900px) {
         padding: 0 0.5rem;
       }
@@ -135,12 +136,19 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 50px;
+      width: 100px;
       height: 50px;
-      background-color: rgb(137, 137, 228);
-      border-radius: 15px;
+      background-color: blue;
+      border-radius: 5px;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
   
+  .play_button_text {
+      color: white;
+      font-size: 16px;
   }
 }
+}  
