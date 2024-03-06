@@ -10,6 +10,7 @@ const ErrorModal = ({ errorMessage, isOpen, onClose }) => {
             X
           </button>
           <div className="error-message">{errorMessage}</div>
+          <button className="ok-button" onClick={onClose}>OK</button>
         </div>
       </div>
     )
