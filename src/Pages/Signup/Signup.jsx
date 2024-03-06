@@ -324,67 +324,53 @@ function Signup() {
   }
 };
 
+const handleNext = () => {
+  setErrors({
+    full: "",
+    surname: "",
+    cellphone: "",
+    ID: "",
+    password: "",
+    confirmPassword: "",
+    country: "",
+  });
 
-  const handleNext = () => {
-    setErrors({
-      full: "",
-      surname: "",
-      cellphone: "",
-      ID: "",
-      password: "",
-      confirmPassword: "",
-      country: "",
-    });
-
-    if (section === 1) {
-
-      if (!validateName(formData.full)) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          full: "Invalid full name. Use letters and spaces only",
-        }));
-        return;
-      }
-      if (!validateName(formData.surname)) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          surname: "Invalid surname. Use letters and spaces only",
-        }));
-        return;
-      }
-      if (!validateCellphone(formData.cellphone)) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          cellphone: "Invalid cellphone number",
-        }));
-        return;
-      }
-    }
-
-    if (section === 2) {
-      if (formData.country === "ZA") {
-        if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID)) {
-          setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
-          return;
-        }
-      }
-    }
-
-    if (section === 3) {
-
-      const passwordError = validatePassword(formData.password, formData.confirmPassword);
-      if (passwordError) {
-        setErrors((prevErrors) => ({ ...prevErrors, password: passwordError }));
-        return;
-      }
-
-      handleSubmit();
+  if (section === 1) {
+    if (!validateName(formData.full)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        full: "Invalid full name. Use letters and spaces only",
+      }));
       return;
     }
+    if (!validateName(formData.surname)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        surname: "Invalid surname. Use letters and spaces only",
+      }));
+      return;
+    }
+    if (!validateCellphone(formData.cellphone)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        cellphone: "Invalid cellphone number",
+      }));
+      return;
+    }
+  }
 
+  if (section === 2) {
+    if (formData.country === "ZA") {
+      if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID)) {
+        setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
+        return;
+      }
+    }
+  }
 
-    setSection(section + 1);
-  };
+  setSection(section + 1);
+};
+
 
   const handleBack = () => {
 
