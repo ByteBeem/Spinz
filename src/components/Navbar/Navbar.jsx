@@ -68,7 +68,7 @@ const Navbar = ({ showSidebar }) => {
     
       <Link className="link" to="/profile">
           <SiAmazongames className="icon" />
-          <span>More games</span>
+          <span>Games</span>
         </Link>
     </header>
    
