@@ -230,106 +230,100 @@ function Signup() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrors({
-      username: "",
-      full: "",
-      surname: "",
-      cellphone: "",
-      ID: "",
-      password: "",
-      confirmPassword: "",
-      country: "",
-    });
-  
-    if (!validateCellphone(formData.cellphone)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        cellphone: "Invalid cellphone number",
-      }));
-      setIsLoading(false);
-      return;
-    }
-  
-    if (!validateName(formData.full)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        full: "Invalid full name. Use letters and spaces only",
-      }));
-      setIsLoading(false);
-      return;
-    }
-  
-    if (!validateName(formData.surname)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        surname: "Invalid surname. Use letters and spaces only",
-      }));
-      setIsLoading(false);
-      return;
-    }
-  
-    const passwordError = validatePassword(
-      formData.password,
-      formData.confirmPassword
+  e.preventDefault();
+  setIsLoading(true);
+  setErrors({
+    username: "",
+    full: "",
+    surname: "",
+    cellphone: "",
+    ID: "",
+    password: "",
+    confirmPassword: "",
+    country: "",
+  });
+
+  if (!validateCellphone(formData.cellphone)) {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      cellphone: "Invalid cellphone number",
+    }));
+    setIsLoading(false);
+    return;
+  }
+
+  if (!validateName(formData.full)) {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      full: "Invalid full name. Use letters and spaces only",
+    }));
+    setIsLoading(false);
+    return;
+  }
+
+  if (!validateName(formData.surname)) {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      surname: "Invalid surname. Use letters and spaces only",
+    }));
+    setIsLoading(false);
+    return;
+  }
+
+  const passwordError = validatePassword(
+    formData.password,
+    formData.confirmPassword
+  );
+  if (passwordError) {
+    setErrors((prevErrors) => ({ ...prevErrors, password: passwordError }));
+    setIsLoading(false);
+    return;
+  }
+
+  const { full, surname, cellphone, ID, password, country } = formData;
+
+  try {
+    const response = await axios.post(
+      "https://capable-faint-scallop.glitch.me/signup",
+      {
+        fullName: full,
+        surname: surname,
+        cell: cellphone,
+        idNumber: ID,
+        password: password,
+        country: country,
+      },
+      { withCredentials: true }
     );
-    if (passwordError) {
-      setErrors((prevErrors) => ({ ...prevErrors, password: passwordError }));
-      setIsLoading(false);
-      return;
-    }
-  
-    const { full, surname, cellphone, ID, password, country } = formData;
-  
-    try {
-      const response = await axios.post(
-        "https://capable-faint-scallop.glitch.me/signup",
-        {
-          fullName: full,
-          surname: surname,
-          cell: cellphone,
-          idNumber: ID,
-          password: password,
-          country: country,
-        },
-        { withCredentials: true }
-      );
-  
-      setIsLoading(false);
-  
-      if (response.status === 200) {
-        setErrorMessage("Account Opened Successfully! Login Now.");
-        setErrorModalOpen(true);
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          password: "Account Opened Successfully! Login Now",
-        }));
-      } else if (response.status === 201) {
-        setErrorMessage("Cellphone Already registered!.");
-        setErrorModalOpen(true);
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          cellphone: "Cellphone Already registered!",
-        }));
-      } else if (response.status === 208) {
-        setErrorMessage("ID number Already registered!.");
-        setErrorModalOpen(true);
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          ID: "ID number Already registered!",
-        }));
-      } else {
-        setErrorMessage("Registration Error. Please try again later.");
-        setErrorModalOpen(true);
-      }
-    } catch (error) {
-      setIsLoading(false);
+
+    setIsLoading(false);
+
+    if (response.status === 200) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "Account Opened Successfully! Login Now",
+      }));
+    } else if (response.status === 201) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        cellphone: "Cellphone Already registered!",
+      }));
+    } else if (response.status === 208) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ID: "ID number Already registered!",
+      }));
+    } else {
       setErrorMessage("Registration Error. Please try again later.");
       setErrorModalOpen(true);
     }
-  };
-  
+  } catch (error) {
+    setIsLoading(false);
+    setErrorMessage("Registration Error. Please try again later.");
+    setErrorModalOpen(true);
+  }
+};
+
 
   const handleNext = () => {
     setErrors({
