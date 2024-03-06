@@ -1,17 +1,13 @@
 import "./Navbar.scss";
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../../components/AuthContext";
-import ErrorModal from "../../Pages/ErrorModal/ErrorModal";
+
+
 
 const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
-  const { setToken } = useAuth();
-  const navigate = useNavigate();
-  const [errorModalOpen, setErrorModalOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); 
+  
 
   const balance = userData.balance;
   const country = userData.country;
@@ -22,11 +18,8 @@ const Navbar = ({ showSidebar }) => {
       fetchUserData(token);
     
     }else {
-      setErrorMessage("You first need to Log in...");
-      setErrorModalOpen(true);
-      
-   
-      
+      alert("You first need to Log in...");
+      window.location.href = "https://spinz-three.vercel.app/login";
     }
    
   }, []);
@@ -63,16 +56,7 @@ const Navbar = ({ showSidebar }) => {
 
   return (
     <header>
-       <div >
-    <ErrorModal
-    errorMessage={errorMessage}
-    isOpen={errorModalOpen}
-    onClose={() => setErrorModalOpen(false)}
-  />
-  </div>
-      {/* <div className="menu_btn" onClick={() => showSidebar()}>
-        &#9776;
-      </div> */}
+      
       <ul className="games_filter">
         <li>
           <div className="balance">
@@ -81,7 +65,7 @@ const Navbar = ({ showSidebar }) => {
         </li>
       </ul>
 
-     
+      
     </header>
    
   );
