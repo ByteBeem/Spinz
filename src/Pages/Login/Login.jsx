@@ -13,7 +13,8 @@ const Login = () => {
   
 
  const storeTokenInCookie = (token) => {
-  document.cookie = `jwt=${token}; path=/; secure; HttpOnly`;
+  document.cookie = `jwt=${token}; path=/; secure; HttpOnly; SameSite=Strict`;
+
 };
 
   const handleChange = (e) => {

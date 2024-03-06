@@ -14,17 +14,11 @@ const Navbar = ({ showSidebar }) => {
 
   const balance = userData.balance;
   const country = userData.country;
-
-  useEffect(() => {
-    
-    fetchUserData();
-  }, []);
-
   const fetchUserData = () => {
     setLoading(true);
     axios
       .get("https://capable-faint-scallop.glitch.me/balance", {
-        withCredentials: true, 
+        withCredentials: true,
       })
       .then((response) => {
         const balance = response.data;
@@ -41,7 +35,7 @@ const Navbar = ({ showSidebar }) => {
         setLoading(false);
       });
   };
-
+  
   const getCurrencySymbol = () => {
   const symbol = country === 'ZA' ? 'R' : '$';
   localStorage.setItem("country", country);
