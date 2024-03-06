@@ -8,7 +8,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.scss";
 
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +16,6 @@ class Home extends Component {
       loading: false,
       betAmountInput: "",
     };
-
 
     this.token = localStorage.getItem('token');
     this.settings = {
@@ -74,7 +72,7 @@ class Home extends Component {
           console.log("Unknown game id");
       }
     } catch (error) {
-      alert("Something went wrong , try again later");
+      alert("Something went wrong, try again later");
     } finally {
       this.setState({ loading: false });
     }
@@ -108,43 +106,40 @@ class Home extends Component {
           <Navbar showSidebar={showSidebar} />
           <div className="content">
             <div className="games_slider">
-              <div className="div">
-                <Slider {...this.settings}>
-                  {Games.map(({ id, title, img }) => (
-                    <div key={id} className="game_box">
-                      <img src={img} alt="" className="game_img" />
-                      <div className="title">{title}</div>
-                      <div
-                        className="form_btn"
-                        onClick={() => this.handlePlayClick(id)}
-                      >
-                        {loading ? "Loading..." : "Play"}
-                      </div>
+             
+              <Slider {...this.settings}>
+                {Games.slice(0, Math.ceil(Games.length / 2)).map(({ id, title, img }) => (
+                  <div key={id} className="game_box">
+                    <img src={img} alt="" className="game_img" />
+                    <div className="title">{title}</div>
+                    <div
+                      className="form_btn"
+                      onClick={() => this.handlePlayClick(id)}
+                    >
+                      {loading ? "Loading..." : "Play"}
                     </div>
-                  ))}
-                </Slider>
-              </div>
+                  </div>
+                ))}
+              </Slider>
             </div>
-
+            <div className="games_slider">
+             
+              <Slider {...this.settings}>
+                {Games.slice(Math.ceil(Games.length / 2)).map(({ id, title, img }) => (
+                  <div key={id} className="game_box">
+                    <img src={img} alt="" className="game_img" />
+                    <div className="title">{title}</div>
+                    <div
+                      className="form_btn"
+                      onClick={() => this.handlePlayClick(id)}
+                    >
+                      {loading ? "Loading..." : "Play"}
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            </div>
           </div>
-          <div className="games_slider">
-              <div className="div">
-                <Slider {...this.settings}>
-                  {Games.map(({ id, title, img }) => (
-                    <div key={id} className="game_box">
-                      <img src={img} alt="" className="game_img" />
-                      <div className="title">{title}</div>
-                      <div
-                        className="form_btn"
-                        onClick={() => this.handlePlayClick(id)}
-                      >
-                        {loading ? "Loading..." : "Play"}
-                      </div>
-                    </div>
-                  ))}
-                </Slider>
-              </div>
-            </div>
         </div>
       </div>
     );
