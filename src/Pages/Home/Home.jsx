@@ -130,6 +130,7 @@ class Home extends Component {
 
           </div>
           <div className="aviator_slider">
+          <div className="div">
           <Slider {...this.settings}>
             <div>
               <img src={aviatorImage1} alt="Aviator 1" />
@@ -143,7 +144,9 @@ class Home extends Component {
               <img src={aviatorImage3} alt="Aviator 3" />
               <div className="play_button">Play</div>
             </div>
+            
           </Slider>
+          </div>
         </div>
         </div>
       </div>

@@ -79,6 +79,32 @@
         }
       }
     }
+
+    .aviator_slider  {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.6rem 3rem;
+      display: flex;
+      align-items: center;
+
+              @media screen and (max-width: 1500px) {
+        padding: 0.6rem 2rem;
+      }
+      @media screen and (max-width: 900px) {
+        padding: 0.6rem 10px;
+      }
+
+      @media screen and (max-width: 1000px) {
+        padding: 0.6rem 2rem;
+      }
+      @media screen and (max-width: 700px) {
+        padding: 0.6rem 10px;
+      }
+
+      .div {
+        width: 1500px;
+      
+      }
     .aviator_image {
       position: relative;
       display: inline-block;
@@ -150,5 +176,6 @@
       color: white;
       font-size: 16px;
   }
+}
 }
 }
