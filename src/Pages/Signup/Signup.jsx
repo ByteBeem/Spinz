@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import { countries as countriesList } from "countries-list";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 function Signup() {
   const [section, setSection] = useState(1);
@@ -23,6 +24,8 @@ function Signup() {
   ];
 
   const [isLoading, setIsLoading] = useState(false);
+  const [errorModalOpen, setErrorModalOpen] = useState(false); 
+  const [errorMessage, setErrorMessage] = useState(""); 
 
   const [errors, setErrors] = useState({
     full: "",
@@ -239,8 +242,7 @@ function Signup() {
       confirmPassword: "",
       country: "",
     });
-
-
+  
     if (!validateCellphone(formData.cellphone)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -249,10 +251,7 @@ function Signup() {
       setIsLoading(false);
       return;
     }
-
-
-
-
+  
     if (!validateName(formData.full)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -261,8 +260,7 @@ function Signup() {
       setIsLoading(false);
       return;
     }
-
-
+  
     if (!validateName(formData.surname)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -271,8 +269,7 @@ function Signup() {
       setIsLoading(false);
       return;
     }
-
-
+  
     const passwordError = validatePassword(
       formData.password,
       formData.confirmPassword
@@ -282,9 +279,9 @@ function Signup() {
       setIsLoading(false);
       return;
     }
-
-    const { username, full, surname, cellphone, ID, password, country } = formData;
-
+  
+    const { full, surname, cellphone, ID, password, country } = formData;
+  
     try {
       const response = await axios.post(
         "https://capable-faint-scallop.glitch.me/signup",
@@ -298,32 +295,41 @@ function Signup() {
         },
         { withCredentials: true }
       );
-
+  
       setIsLoading(false);
-
+  
       if (response.status === 200) {
-
+        setErrorMessage("Account Opened Successfully! Login Now.");
+        setErrorModalOpen(true);
         setErrors((prevErrors) => ({
           ...prevErrors,
           password: "Account Opened Successfully! Login Now",
         }));
       } else if (response.status === 201) {
+        setErrorMessage("Cellphone Already registered!.");
+        setErrorModalOpen(true);
         setErrors((prevErrors) => ({
           ...prevErrors,
           cellphone: "Cellphone Already registered!",
         }));
       } else if (response.status === 208) {
+        setErrorMessage("ID number Already registered!.");
+        setErrorModalOpen(true);
         setErrors((prevErrors) => ({
           ...prevErrors,
           ID: "ID number Already registered!",
         }));
+      } else {
+        setErrorMessage("Registration Error. Please try again later.");
+        setErrorModalOpen(true);
       }
     } catch (error) {
       setIsLoading(false);
-
-      setErrors("Registration Error. Please try again later.");
+      setErrorMessage("Registration Error. Please try again later.");
+      setErrorModalOpen(true);
     }
   };
+  
 
   const handleNext = () => {
     setErrors({
@@ -545,6 +551,11 @@ function Signup() {
             </Link>
           </span>
         </div>
+        <ErrorModal
+          errorMessage={errorMessage}
+          isOpen={errorModalOpen}
+          onClose={() => setErrorModalOpen(false)}
+        />
       </div>
     </div>
   );
