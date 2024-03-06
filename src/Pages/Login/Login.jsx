@@ -12,7 +12,9 @@ const Login = () => {
  const navigate = useNavigate();
   
  
-
+const saveTokenLocalStorage =  (token) => {
+   localStorage.setItem("token", token);
+}
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +49,7 @@ const Login = () => {
       setIsLoading(false);
 
       if (response.status === 200) {
+        saveTokenLocalStorage(response.data.token);
         
         navigate("/dashboard");
         setErrors((prevState) => ({ ...prevState, password: "Login Successful!" }));

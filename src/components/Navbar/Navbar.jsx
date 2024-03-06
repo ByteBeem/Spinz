@@ -16,14 +16,25 @@ const Navbar = ({ showSidebar }) => {
   const country = userData.country;
 
   useEffect(() => {
-    fetchUserData();
+    const token = localStorage.getItem("token");
+    if(token){
+      fetchUserData(token);
+    
+    }else {
+      alert("You first need to Log in...");
+      window.location.href = "https://spinz-three.vercel.app/login";
+    }
+   
   }, []);
   
-  const fetchUserData = () => {
+  const fetchUserData = (token) => {
     setLoading(true);
     axios
       .get("https://capable-faint-scallop.glitch.me/balance", {
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+        
       })
       .then((response) => {
         const balance = response.data;

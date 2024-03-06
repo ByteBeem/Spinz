@@ -27,8 +27,16 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const ID = "*************";
 
   useEffect(() => {
-    fetchActivities();
-    fetchUserData();
+    const token = localStorage.getItem("token");
+    if (token){
+      fetchActivities();
+      fetchUserData();
+    }
+    else {
+      alert("You need to Login first...")
+      window.location.href = "https://spinz-three.vercel.app/login";
+    };
+    
   }, []);
 
   const fetchActivities = async () => {
@@ -58,7 +66,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
     setLoading(true);
     axios
       .get("https://capable-faint-scallop.glitch.me/getUserData", {
-        withCredentials: true, 
+        credentials: 'include',
       })
       .then((response) => {
        
