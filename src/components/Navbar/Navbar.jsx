@@ -63,6 +63,13 @@ const Navbar = ({ showSidebar }) => {
 
   return (
     <header>
+       <div >
+    <ErrorModal
+    errorMessage={errorMessage}
+    isOpen={errorModalOpen}
+    onClose={() => setErrorModalOpen(false)}
+  />
+  </div>
       {/* <div className="menu_btn" onClick={() => showSidebar()}>
         &#9776;
       </div> */}
@@ -74,13 +81,7 @@ const Navbar = ({ showSidebar }) => {
         </li>
       </ul>
 
-      <div >
-    <ErrorModal
-    errorMessage={errorMessage}
-    isOpen={errorModalOpen}
-    onClose={() => setErrorModalOpen(false)}
-  />
-  </div>
+     
     </header>
    
   );
