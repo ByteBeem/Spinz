@@ -11,15 +11,7 @@ const Login = () => {
   const authContext = useAuth();
  const navigate = useNavigate();
   
- const storeTokenInCookie = (token) => {
-  console.log("token", token);
-  try {
-    document.cookie = `jwt=${token}; path=/; secure; HttpOnly; SameSite=Strict`;
-    console.log("Cookie set successfully");
-  } catch (error) {
-    console.error("Error setting cookie:", error);
-  }
-};
+ 
 
 
   const handleChange = (e) => {
@@ -49,17 +41,13 @@ const Login = () => {
       const response = await axios.post(
         "https://capable-faint-scallop.glitch.me/login",
         { cell: cellphone, password },
-        { withCredentials: true }
+       
       );
 
       setIsLoading(false);
 
       if (response.status === 200) {
-        const token = response.data.token;
-        authContext.setToken(token);
         
-        storeTokenInCookie(token);
-        authContext.setUserData(response.data.Data);
         navigate("/dashboard");
         setErrors((prevState) => ({ ...prevState, password: "Login Successful!" }));
       } else if (response.status === 201) {
