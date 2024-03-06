@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { useNavigate } from 'react-router-dom';
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { useAuth } from "../../components/AuthContext";
 import axios from "axios";
 import Slider from "react-slick";
 import Games from "../../Data/Games";
