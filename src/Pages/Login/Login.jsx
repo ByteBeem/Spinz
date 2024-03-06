@@ -11,11 +11,16 @@ const Login = () => {
   const authContext = useAuth();
  const navigate = useNavigate();
   
-
  const storeTokenInCookie = (token) => {
-  document.cookie = `jwt=${token}; path=/; secure; HttpOnly; SameSite=Strict`;
-
+  console.log("token", token);
+  try {
+    document.cookie = `jwt=${token}; path=/; secure; HttpOnly; SameSite=Strict`;
+    console.log("Cookie set successfully");
+  } catch (error) {
+    console.error("Error setting cookie:", error);
+  }
 };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
