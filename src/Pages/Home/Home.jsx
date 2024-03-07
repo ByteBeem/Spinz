@@ -53,7 +53,7 @@ class Home extends Component {
         case 5:
         case 7:
           const response = await axios.post(
-            `https://spinz-server-100d0276d968.herokuapp.com/${this.getGamePath(id)}`,
+            `https://spinzserver-e34cd148765a.herokuapp.com/${this.getGamePath(id)}`,
             this.getGameData(id),
             { headers }
           );
@@ -123,24 +123,7 @@ class Home extends Component {
               </Slider>
             </div>
           </div>
-          <div className="content">
-            <div className="games_slider">
-              <Slider {...this.settings}>
-                {MoreGames.map(({ id, title, img }) => (
-                  <div key={id} className="game_box">
-                    <img src={img} alt="" className="game_img" />
-                    <div className="title">{title}</div>
-                    <div
-                      className="form_btn"
-                      onClick={() => this.handlePlayClick(id)}
-                    >
-                      {loading ? "Loading..." : "Play"}
-                    </div>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </div>
+         
         </div>
       </div>
     );
