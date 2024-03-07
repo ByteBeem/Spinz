@@ -284,7 +284,7 @@ function Signup() {
 
   try {
     const response = await axios.post(
-      "https://capable-faint-scallop.glitch.me/signup",
+      "https://spinzserver-e34cd148765a.herokuapp.com/signup",
       {
         fullName: full,
         surname: surname,
