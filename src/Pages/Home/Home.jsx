@@ -6,7 +6,6 @@ import Slider from "react-slick";
 import Games from "../../Data/Games";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import aviatorImage from "../../assets/va.jpg";
 import "./Home.scss";
 
 class Home extends Component {
@@ -18,6 +17,7 @@ class Home extends Component {
       betAmountInput: "",
     };
 
+  
     this.token = localStorage.getItem('token');
     this.settings = {
       dots: false,
@@ -106,26 +106,23 @@ class Home extends Component {
         <div className="home_container">
           <Navbar showSidebar={showSidebar} />
           <div className="content">
-            {/* Aviator Image Section */}
-            <div className="aviator_image">
-              <img src={aviatorImage} alt="Aviator" />
-            </div>
-            {/* Games Slider Section */}
             <div className="games_slider">
-              <Slider {...this.settings}>
-                {Games.map(({ id, title, img }) => (
-                  <div key={id} className="game_box">
-                    <img src={img} alt="" className="game_img" />
-                    <div className="title">{title}</div>
-                    <div
-                      className="form_btn"
-                      onClick={() => this.handlePlayClick(id)}
-                    >
-                      {loading ? "Loading..." : "Play"}
+              <div className="div">
+                <Slider {...this.settings}>
+                  {Games.map(({ id, title, img }) => (
+                    <div key={id} className="game_box">
+                      <img src={img} alt="" className="game_img" />
+                      <div className="title">{title}</div>
+                      <div
+                        className="form_btn"
+                        onClick={() => this.handlePlayClick(id)}
+                      >
+                        {loading ? "Loading..." : "Play"}
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </Slider>
+                  ))}
+                </Slider>
+              </div>
             </div>
           </div>
         </div>
