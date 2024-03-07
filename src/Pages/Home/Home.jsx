@@ -53,7 +53,7 @@ class Home extends Component {
         case 5:
         case 7:
           const response = await axios.post(
-            `https://spinz-server-100d0276d968.herokuapp.com/${this.getGamePath(id)}`,
+            `https://spinzserver-e34cd148765a.herokuapp.com/${this.getGamePath(id)}`,
             this.getGameData(id),
             { headers }
           );
