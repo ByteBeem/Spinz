@@ -4,7 +4,6 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import axios from "axios";
 import Slider from "react-slick";
 import Games from "../../Data/Games";
-import MoreGames from "../../Data/2ndGames";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.scss";
@@ -73,7 +72,7 @@ class Home extends Component {
           console.log("Unknown game id");
       }
     } catch (error) {
-      alert("Something went wrong , try again later");
+      alert("Something went wrong, try again later");
     } finally {
       this.setState({ loading: false });
     }
@@ -110,7 +109,7 @@ class Home extends Component {
               <Slider {...this.settings}>
                 {Games.map(({ id, title, img }) => (
                   <div key={id} className="game_box">
-                    <img src={img} alt="" className="game_img" />
+                    <img src={img} alt={title} className="game_img" />
                     <div className="title">{title}</div>
                     <div
                       className="form_btn"
@@ -123,7 +122,6 @@ class Home extends Component {
               </Slider>
             </div>
           </div>
-         
         </div>
       </div>
     );
