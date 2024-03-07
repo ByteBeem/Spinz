@@ -10,45 +10,57 @@
     .content {
       padding: 5rem 0 1rem 0;
 
-      .games_slider {
+      .games_slider  {
         width: 100%;
         margin: 0 auto;
         padding: 0.6rem 3rem;
         display: flex;
         align-items: center;
 
-        @media screen and (max-width: 1500px) {
-          padding: 0.6rem 2rem;
-        }
-        @media screen and (max-width: 1000px) {
+                @media screen and (max-width: 1500px) {
           padding: 0.6rem 2rem;
         }
         @media screen and (max-width: 900px) {
           padding: 0.6rem 10px;
         }
+
+        @media screen and (max-width: 1000px) {
+          padding: 0.6rem 2rem;
+        }
         @media screen and (max-width: 700px) {
           padding: 0.6rem 10px;
         }
 
+        .div {
+          width: 1500px;
+        //   @media screen and (max-width: 1000px) {
+         //    width: 900px;
+        //   }
+        //   @media screen and (max-width: 700px) {
+        //     width: 600px;
+       //    }
+        }
         .game_box {
           padding: 0 1rem;
-
-          @media screen and (max-width: 1000px) {
-            padding: 0 0.5rem;
-          }
           @media screen and (max-width: 900px) {
             padding: 0 0.5rem;
           }
 
+          padding: 0 1rem;
+          @media screen and (max-width: 1000px) {
+            padding: 0 0.5rem;
+          }
+          
           img {
             border-radius: 10px;
             width: 20rem;
             height: 15rem;
 
-            @media screen and (max-width: 900px) {
+                        @media screen and (max-width: 900px) {
               width: 100%;
               height: 15rem;
             }
+
             @media screen and (max-width: 700px) {
               width: 100%;
               height: 15rem;
@@ -61,11 +73,109 @@
             font-weight: bold;
           }
 
-          .form_btn {
-            width: 50%; /* You can adjust this width as needed */
-          }
+          // .form_btn {
+          //   width: 50%;
+          // }
         }
       }
     }
+
+    .aviator_slider  {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.6rem 3rem;
+      display: flex;
+      align-items: center;
+
+              @media screen and (max-width: 1500px) {
+        padding: 0.6rem 2rem;
+      }
+      @media screen and (max-width: 900px) {
+        padding: 0.6rem 10px;
+      }
+
+      @media screen and (max-width: 1000px) {
+        padding: 0.6rem 2rem;
+      }
+      @media screen and (max-width: 700px) {
+        padding: 0.6rem 10px;
+      }
+
+      .div {
+        width: 1500px;
+      
+      }
+    .aviator_image {
+      position: relative;
+      display: inline-block;
+      padding: 0 1rem;
+  
+      @media screen and (max-width: 900px) {
+        padding: 0 0.5rem;
+      }
+  
+      @media screen and (max-width: 700px) {
+        padding: 0 0.5rem;
+      }
+  
+      @media screen and (max-width: 1000px) {
+        padding: 0 0.5rem;
+      }
+  
+      img {
+          border-radius: 10px;
+          width: 20rem;
+          height: 15rem;
+      }
+  
+      @media screen and (max-width: 900px) {
+        img {
+          width: 100%;
+          height: 15rem;
+        }
+      }
+  
+      @media screen and (max-width: 600px) {
+        img {
+          width: 100%;
+          height: 15rem;
+        }
+      }
+  
+      @media screen and (max-width: 700px) {
+        img {
+          width: 100%;
+          height: 15rem;
+        }
+      }
+  
+      @media screen and (max-width: 800px) {
+        img {
+          width: 100%;
+          height: 15rem;
+        }
+      }
   }
+  
+  .play_button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 50px;
+      background-color: rgb(165, 86, 185);
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .play_button_text {
+      color: white;
+      font-size: 16px;
+  }
+}
+}
 }
