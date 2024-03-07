@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import Games from "../../Data/Games";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import aviatorImage from "../../path/to/aviator.png"; // Import the aviator image
+import aviatorImage from "../../path/to/va.jpeg";
 import "./Home.scss";
 
 class Home extends Component {
