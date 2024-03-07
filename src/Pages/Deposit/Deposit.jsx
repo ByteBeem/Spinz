@@ -54,7 +54,7 @@ class Deposit extends Component {
     };
 
     axios
-      .post("https://spinz-server-100d0276d968.herokuapp.com/pay", requestBody, {
+      .post("https://spinzserver-e34cd148765a.herokuapp.com/pay", requestBody, {
         headers: { Authorization: `Bearer ${this.token}` },
       })
       .then((response) => {
