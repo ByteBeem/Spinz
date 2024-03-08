@@ -84,6 +84,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
         setLoading(false);
       });
   };
+
   return (
     <div className="profile">
       {loading && (
@@ -100,6 +101,11 @@ function Profile({ showSidebar, active, closeSidebar }) {
           <div className="user_info">
             <div className="profile_pic">
               <img src={UserProfile} alt="" />
+              <div className="verification">
+                <div className="red-dot"></div>
+                <span>Not Verified</span>
+                <button className="verify-btn">Verify now</button>
+              </div>
             </div>
 
             <div className="text">
@@ -121,37 +127,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
         <Link className="form_btn" to="/reset">
           Change Password
         </Link>
-
-      
-{/* 
- <div className="activity">
-          <span>Activity</span>
-          {activities.length > 0 ? (
-            <table className="activity-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Type</th>
-                  <th>Info</th>
-                </tr>
-              </thead>
-              <tbody>
-                {activities.reverse().map(({ id, date_time, activity_description, activity_details, result }) => (
-                  <tr key={id} className={result === 'fail' ? 'fail' : ''}>
-                    <td id="time">{new Date(date_time).toLocaleString()}</td>
-                    <td id="title">{activity_description}</td>
-                    <td id="body">{activity_details}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>No Activities Yet</p>
-          )}
-        </div>
-          */}
       </div>
-          
     </div>
   );
 }
