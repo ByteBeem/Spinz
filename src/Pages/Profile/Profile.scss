@@ -64,42 +64,43 @@
           img {
             width: 10rem;
           }
-          .profile_pic {
-            position: relative;
-      
-            .verification {
-              position: absolute;
-              bottom: 0;
-              left: 50%;
-              transform: translateX(-50%);
-              display: flex;
-              align-items: center;
-      
-              .red-dot {
-                width: 10px;
-                height: 10px;
-                background-color: red;
-                border-radius: 50%;
-                margin-right: 5px;
-              }
-      
-              span {
-                color: red;
-                font-size: 12px;
-                margin-right: 5px;
-              }
-      
-              .verify-btn {
-                background-color: transparent;
-                border: none;
-                color: blue;
-                font-size: 12px;
-                cursor: pointer;
-                padding: 0;
-                margin: 0;
-                text-decoration: underline;
-              }
-            }
+          
+        }
+      }
+      .profile_pic {
+        position: relative;
+  
+        .verification {
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+  
+          .red-dot {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            margin-right: 5px;
+          }
+  
+          span {
+            color: red;
+            font-size: 12px;
+            margin-right: 5px;
+          }
+  
+          .verify-btn {
+            background-color: transparent;
+            border: none;
+            color: blue;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            text-decoration: underline;
           }
         }
       }
