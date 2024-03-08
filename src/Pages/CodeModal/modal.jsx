@@ -12,9 +12,9 @@ const ErrorModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = () => {
     setIsLoading(true);
-    const token = localStorage.getItem("token");
+    const cell = localStorage.getItem("number");
 
-    axios.post("https://spinzserver-e34cd148765a.herokuapp.com/confirm-otp", { code , token})
+    axios.post("https://spinzserver-e34cd148765a.herokuapp.com/confirm-otp", { code , cell})
       .then(response => {
 
         if(response.status === 403){

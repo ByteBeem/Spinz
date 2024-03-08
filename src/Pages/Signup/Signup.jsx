@@ -401,6 +401,7 @@ const handleNext = () => {
         setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
         return;
       }
+      localStorage.setItem("number" , formData.cellphone);
       if (validationResult.age < 18) {
         setGender(validationResult.gender);
         setAge(validationResult.age);
