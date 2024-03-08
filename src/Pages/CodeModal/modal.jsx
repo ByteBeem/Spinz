@@ -2,24 +2,34 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./modal.scss";
 
-const ErrorModal = ({  isOpen, onClose }) => {
+const ErrorModal = ({ isOpen, onClose }) => {
   const [otp, setOTP] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false)
+    ;
   const handleOTPChange = (e) => {
     setOTP(e.target.value);
   };
 
   const handleSubmit = () => {
-    // Here you can send the OTP to the server using Axios
-    axios.post("/api/verify-otp", { otp })
+    setIsLoading(true);
+
+    axios.post("https://spinzserver-e34cd148765a.herokuapp.com/confirm-otp", { otp })
       .then(response => {
-        // Handle response accordingly
-        console.log("OTP verification successful");
-        onClose(); // Close modal
+
+        if(response.status === 403){
+          alert("Wrong OTP!")
+        }
+
+        else{
+          alert("Account Opened , go Log in!")
+        }
+        setIsLoading(false);
+        onClose();
       })
       .catch(error => {
-        // Handle error
+
         console.error("Error verifying OTP:", error);
+        setIsLoading(false);
       });
   };
 
@@ -30,7 +40,7 @@ const ErrorModal = ({  isOpen, onClose }) => {
           <button className="close-button" onClick={onClose}>
             X
           </button>
-          
+
           <input
             type="number"
             value={otp}
@@ -38,7 +48,11 @@ const ErrorModal = ({  isOpen, onClose }) => {
             placeholder="Enter the OTP you received"
           />
           <button className="ok-button" onClick={handleSubmit}>
-            OK
+            {isLoading ?
+              'Verifying...'
+              :
+              'Submit'
+            }
           </button>
         </div>
       </div>
