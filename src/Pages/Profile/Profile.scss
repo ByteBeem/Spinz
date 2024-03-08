@@ -76,12 +76,13 @@
           left: 50%;
           transform: translateX(-50%);
           display: flex;
-          padding-top: 30px;
+          padding-bottom: 30px;
           align-items: center;
   
           .red-dot {
             width: 10px;
             height: 10px;
+            padding-bottom: 30px;
             background-color: red;
             border-radius: 50%;
             margin-right: 5px;
