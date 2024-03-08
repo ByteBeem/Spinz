@@ -44,7 +44,7 @@ const ErrorModal = ({ isOpen, onClose }) => {
 
           <input
             type="number"
-            value={otp}
+            value={code}
             onChange={handleOTPChange}
             placeholder="Enter the OTP you received"
           />
