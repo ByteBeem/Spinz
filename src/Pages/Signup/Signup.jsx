@@ -26,6 +26,9 @@ function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState(""); 
+  const [Age , setAge]=useState(null)
+  const [Dob , setDob]=useState(null)
+  const [Gender , setGender]=useState(null)
 
   const [errors, setErrors] = useState({
     full: "",
@@ -280,7 +283,7 @@ function Signup() {
     return;
   }
 
-  const { full, surname, cellphone, ID, password, country } = formData;
+  const { full, surname, cellphone, ID, password, country  } = formData;
 
   try {
     const response = await axios.post(
@@ -292,6 +295,9 @@ function Signup() {
         idNumber: ID,
         password: password,
         country: country,
+        Age:Age,
+        Dob:Dob,
+        Gender:Gender,
       },
       { withCredentials: true }
     );
@@ -368,14 +374,20 @@ const handleNext = () => {
   if (section === 2) {
     if (formData.country === "ZA") {
       const validationResult = idValidationService.checkNumber(formData.ID);
-      console.log("DOB:", validationResult.dob);
-      console.log("Gender:", validationResult.gender);
-      console.log("Race:", validationResult.race);
-      console.log("Age:", validationResult.age);
-      console.log("Citizenship:", validationResult.citizenship);
-
+   
       if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID) || !SAIDCheck(formData.ID)) {
         setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
+        return;
+      }
+      if (validationResult.age < 18) {
+        setGender(validationResult.gender);
+        setAge(validationResult.age);
+        setDob(validationResult.dob);
+        setErrors((prevErrors) => ({ ...prevErrors, ID: " Sorry,You are Under age of 18." }));
+        return;
+      }
+      if (validationResult.citizenship !== 'SA Citizen') {
+        setErrors((prevErrors) => ({ ...prevErrors, ID: " Sorry,You must be an SA Citizen." }));
         return;
       }
     }
