@@ -3,18 +3,18 @@ import axios from "axios";
 import "./modal.scss";
 
 const ErrorModal = ({ isOpen, onClose }) => {
-  const [otp, setOTP] = useState("");
+  const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false)
     ;
   const handleOTPChange = (e) => {
-    setOTP(e.target.value);
+    setCode(e.target.value);
   };
 
   const handleSubmit = () => {
     setIsLoading(true);
     const token = localStorage.getItem("token");
 
-    axios.post("https://spinzserver-e34cd148765a.herokuapp.com/confirm-otp", { otp  , token})
+    axios.post("https://spinzserver-e34cd148765a.herokuapp.com/confirm-otp", { code , token})
       .then(response => {
 
         if(response.status === 403){
