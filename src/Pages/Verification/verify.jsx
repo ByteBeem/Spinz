@@ -8,8 +8,8 @@ function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
-  const [documentType, setDocumentType] = useState("");
-  const [document, setDocument] = useState("");
+  const [idDocument, setIdDocument] = useState("");
+  const [bankStatement, setBankStatement] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async () => {
@@ -24,15 +24,21 @@ function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
       return;
     }
 
-    if (!document) {
-      setError("Please upload the required document.");
+    if (!idDocument && !bankStatement) {
+      setError("Please upload at least one document.");
       setIsLoading(false);
       return;
     }
 
     const formData = new FormData();
-    formData.append("documentType", documentType);
-    formData.append("document", document);
+    if (idDocument) {
+      formData.append("documentType", "ID");
+      formData.append("document", idDocument);
+    }
+    if (bankStatement) {
+      formData.append("documentType", "Bank Statement");
+      formData.append("document", bankStatement);
+    }
     formData.append("token", token);
 
     try {
@@ -43,12 +49,12 @@ function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
       });
       
       if (response.status === 200) {
-        setMessage("Document submitted successfully.");
+        setMessage("Document(s) submitted successfully.");
       } else {
-        setError(response.data.message || "An error occurred while submitting the document.");
+        setError(response.data.message || "An error occurred while submitting the document(s).");
       }
     } catch (error) {
-      setError("An error occurred while submitting the document.");
+      setError("An error occurred while submitting the document(s).");
     } finally {
       setIsLoading(false);
     }
@@ -64,24 +70,21 @@ function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
         <div className="content">
           <div className="form">
             <div>
-              <label htmlFor="documentType">Document Type</label>
-              <select
-                id="documentType"
-                value={documentType}
-                onChange={(e) => setDocumentType(e.target.value)}
-              >
-                <option value="">Select Document Type</option>
-                <option value="ID">ID Document</option>
-                <option value="Bank Statement">Bank Statement</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="document">Upload Document</label>
+              <label htmlFor="idDocument">Upload ID Document</label>
               <input
                 type="file"
-                id="document"
+                id="idDocument"
                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                onChange={(e) => setDocument(e.target.files[0])}
+                onChange={(e) => setIdDocument(e.target.files[0])}
+              />
+            </div>
+            <div>
+              <label htmlFor="bankStatement">Upload Bank Statement</label>
+              <input
+                type="file"
+                id="bankStatement"
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                onChange={(e) => setBankStatement(e.target.files[0])}
               />
             </div>
             <button
