@@ -116,6 +116,11 @@ function Profile({ showSidebar, active, closeSidebar }) {
 
               <span>Phone:</span>
               <div className="text_item">{cellphone}</div>
+              <div className="verification">
+                <div className="red-dot"></div>
+                <span>Not Verified</span>
+
+              </div>
             </div>
           </div>
         </div>
@@ -127,11 +132,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
           Verify
         </Link>
       </div>
-      <div className="verification">
-        <div className="red-dot"></div>
-        <span>Not Verified</span>
 
-      </div>
     </div>
   );
 }
