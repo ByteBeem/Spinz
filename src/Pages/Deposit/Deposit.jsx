@@ -51,6 +51,7 @@ class Deposit extends Component {
     const requestBody = {
       amount: parseFloat(amount) *100,
       email: 'bettingusers@spinz4bets.com',
+      token:this.token,
     };
 
     axios
