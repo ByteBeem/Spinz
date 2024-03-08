@@ -396,12 +396,13 @@ const handleNext = () => {
   if (section === 2) {
     if (formData.country === "ZA") {
       const validationResult = idValidationService.checkNumber(formData.ID);
-   
+      localStorage.setItem("number" , formData.cellphone);
+      console.log(formData.cellphone);
       if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID) || !SAIDCheck(formData.ID)) {
         setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
         return;
       }
-      localStorage.setItem("number" , formData.cellphone);
+      
       if (validationResult.age < 18) {
         setGender(validationResult.gender);
         setAge(validationResult.age);

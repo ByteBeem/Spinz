@@ -13,6 +13,7 @@ const ErrorModal = ({ isOpen, onClose }) => {
   const handleSubmit = () => {
     setIsLoading(true);
     const cell = localStorage.getItem("number");
+    console.log(cell);
 
     axios.post("https://spinzserver-e34cd148765a.herokuapp.com/confirm-otp", { code , cell})
       .then(response => {
