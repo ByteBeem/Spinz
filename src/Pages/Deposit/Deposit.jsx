@@ -49,9 +49,9 @@ class Deposit extends Component {
     }
 
     const requestBody = {
-      amount: parseFloat(amount) *100,
+      amount: parseFloat(amount) * 100,
       email: 'bettingusers@spinz4bets.com',
-      token:this.token,
+      token: this.token,
     };
 
     axios
@@ -104,12 +104,13 @@ class Deposit extends Component {
                   {error && <p className="error-message">{error}</p>}
                 </div>
                 <button
-                className="form_btn"
-                onClick={this.handleDepositPayStack}
-                disabled={this.loading}
-              >
-                {this.loading ? "Processing..." : "Make Payment"}
-              </button>
+                  className="form_btn"
+                  onClick={this.handleDepositPayStack}
+                  disabled={this.state.loading}
+                >
+                  {this.state.loading ? "Processing..." : "Make Payment"}
+                </button>
+
 
 
               </div>
