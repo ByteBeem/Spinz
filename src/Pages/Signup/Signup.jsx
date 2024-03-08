@@ -367,6 +367,13 @@ const handleNext = () => {
 
   if (section === 2) {
     if (formData.country === "ZA") {
+      const validationResult = idValidationService.checkNumber(formData.ID);
+      console.log("DOB:", validationResult.dob);
+      console.log("Gender:", validationResult.gender);
+      console.log("Race:", validationResult.race);
+      console.log("Age:", validationResult.age);
+      console.log("Citizenship:", validationResult.citizenship);
+
       if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID) || !SAIDCheck(formData.ID)) {
         setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
         return;
