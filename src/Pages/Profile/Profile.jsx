@@ -104,7 +104,9 @@ function Profile({ showSidebar, active, closeSidebar }) {
               <div className="verification">
                 <div className="red-dot"></div>
                 <span>Not Verified</span>
-                <button className="verify-btn">Verify now</button>
+                <Link className="form_btn" to="/verify">
+            Verify
+          </Link>
               </div>
             </div>
 

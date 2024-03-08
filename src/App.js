@@ -10,6 +10,7 @@ import Deposit from "./Pages/Deposit/Deposit";
 import Wallet from "./Pages/wallet/Wallet";
 import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
+import Verification from "./Pages/Verification/verify";
 import { AuthProvider } from "./components/AuthContext";
 
 
@@ -87,6 +88,16 @@ function App() {
                             }
                         />
 
+                        <Route
+                            path="verify"
+                            element={
+                                <Verification
+                                    showSidebar={showSidebar}
+                                    closeSidebar={closeSidebar}
+                                    active={active}
+                                />
+                            }
+                        />
 
 
                         <Route
