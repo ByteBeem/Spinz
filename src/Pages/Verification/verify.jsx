@@ -68,6 +68,8 @@ function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
         <Navbar showSidebar={showSidebar} />
 
         <div className="content">
+        <div className="div_space">
+            
           <div className="form">
             <div>
               <label htmlFor="idDocument">Upload ID Document</label>
@@ -99,6 +101,7 @@ function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
             {error && <p className="error-message">{error}</p>}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
