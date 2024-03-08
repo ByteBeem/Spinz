@@ -367,7 +367,7 @@ const handleNext = () => {
 
   if (section === 2) {
     if (formData.country === "ZA") {
-      if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID)) {
+      if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID) || !SAIDCheck(formData.ID)) {
         setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
         return;
       }
