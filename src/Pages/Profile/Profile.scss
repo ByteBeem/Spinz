@@ -72,7 +72,7 @@
   
         .verification {
           position: absolute;
-          bottom: 40px;
+          padding-top: 50px;
           left: 50%;
           transform: translateX(-50%);
           display: flex;
@@ -82,7 +82,7 @@
           .red-dot {
             width: 10px;
             height: 10px;
-            bottom: 40px;
+            padding-top: 50px;
             background-color: red;
             border-radius: 50%;
             margin-right: 5px;
@@ -94,16 +94,7 @@
             margin-right: 5px;
           }
   
-          .verify-btn {
-            background-color: transparent;
-            border: none;
-            color: blue;
-            font-size: 12px;
-            cursor: pointer;
-            padding: 0;
-            margin: 0;
-            text-decoration: underline;
-          }
+         
         }
       }
 
@@ -128,6 +119,12 @@
           font-size: 2rem;
           font-weight: 600;
           margin-bottom: 2rem;
+        }
+
+        .form_btn_verify {
+          text-decoration: none;
+          text-align: center;
+          padding-top: 50px;
         }
 
         .form_btn {
