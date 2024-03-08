@@ -48,7 +48,10 @@ const ErrorModal = ({ isOpen, onClose }) => {
             onChange={handleOTPChange}
             placeholder="Enter the OTP you received"
           />
-          <button className="ok-button" onClick={handleSubmit}>
+          <button
+           className="ok-button"
+           disabled={isLoading}
+            onClick={handleSubmit}>
             {isLoading ?
               'Verifying...'
               :
