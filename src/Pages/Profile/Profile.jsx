@@ -28,7 +28,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token){
+    if (token) {
       fetchActivities(token);
       fetchUserData(token);
     }
@@ -36,7 +36,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
       alert("You need to Login first...")
       window.location.href = "https://spinz-three.vercel.app/login";
     };
-    
+
   }, []);
 
   const fetchActivities = async (token) => {
@@ -51,13 +51,13 @@ function Profile({ showSidebar, active, closeSidebar }) {
         }
       );
 
-    
+
       setActivities(response.data);
       setDates(
         response.data.map((activity) => new Date(activity.date_time))
       );
     } catch (error) {
-     
+
       console.error("Error fetching activities:", error);
     } finally {
       setLoading(false);
@@ -73,11 +73,11 @@ function Profile({ showSidebar, active, closeSidebar }) {
         }
       })
       .then((response) => {
-       
+
         setUserData(response.data);
       })
       .catch((error) => {
-       
+
         console.error("Error fetching user data:", error);
       })
       .finally(() => {
@@ -101,11 +101,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
           <div className="user_info">
             <div className="profile_pic">
               <img src={UserProfile} alt="" />
-              <div className="verification">
-                <div className="red-dot"></div>
-                <span>Not Verified</span>
-                
-              </div>
+
             </div>
 
             <div className="text">
@@ -128,8 +124,13 @@ function Profile({ showSidebar, active, closeSidebar }) {
           Change Password
         </Link>
         <Link className="form_btn" to="/verify">
-            Verify
-          </Link>
+          Verify
+        </Link>
+      </div>
+      <div className="verification">
+        <div className="red-dot"></div>
+        <span>Not Verified</span>
+
       </div>
     </div>
   );
