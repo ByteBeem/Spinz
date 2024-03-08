@@ -72,7 +72,7 @@
   
         .verification {
           position: absolute;
-          padding-top: 50px;
+          bottom: 40px;
           left: 50%;
           transform: translateX(-50%);
           display: flex;
@@ -82,7 +82,7 @@
           .red-dot {
             width: 10px;
             height: 10px;
-            padding-top: 50px;
+            bottom: 40px;
             background-color: red;
             border-radius: 50%;
             margin-right: 5px;
@@ -121,11 +121,7 @@
           margin-bottom: 2rem;
         }
 
-        .form_btn_verify {
-          text-decoration: none;
-          text-align: center;
-          padding-top: 50px;
-        }
+        
 
         .form_btn {
           text-decoration: none;
