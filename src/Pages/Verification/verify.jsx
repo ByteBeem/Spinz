@@ -4,17 +4,15 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import axios from 'axios';
 
-
-function Reset({ showSidebar, active, closeSidebar }) {
+function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [documentType, setDocumentType] = useState("");
+  const [document, setDocument] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleResetPassword = async () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
     setError("");
     setMessage("");
@@ -26,84 +24,69 @@ function Reset({ showSidebar, active, closeSidebar }) {
       return;
     }
 
-    if (!newPassword ) {
-      setError("Enter new Password.");
+    if (!document) {
+      setError("Please upload the required document.");
       setIsLoading(false);
       return;
     }
 
-    if (!oldPassword ) {
-      setError("Enter old Password.");
-      setIsLoading(false);
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      setError("New password and confirm password do not match.");
-      setIsLoading(false);
-      return;
-    }
-
-    const requestBody = {
-      oldPassword: oldPassword,
-      newPassword: newPassword,
-      token: token,
-    };
+    const formData = new FormData();
+    formData.append("documentType", documentType);
+    formData.append("document", document);
+    formData.append("token", token);
 
     try {
-      const response = await axios.post("https://spinzserver-e34cd148765a.herokuapp.com/changePassword", requestBody);
+      const response = await axios.post("https://spinzserver-e34cd148765a.herokuapp.com/submitDocument", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       
       if (response.status === 200) {
-        setMessage("Password changed successfully.");
+        setMessage("Document submitted successfully.");
       } else {
-        setError(response.data.message || "An error occurred while resetting the password.");
+        setError(response.data.message || "An error occurred while submitting the document.");
       }
     } catch (error) {
-      setError("An error occurred while resetting the password.");
+      setError("An error occurred while submitting the document.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="reset">
+    <div className="document-submitter">
       <Sidebar active={active} closeSidebar={closeSidebar} />
 
-      <div className="reset_container">
+      <div className="document-submitter_container">
         <Navbar showSidebar={showSidebar} />
 
         <div className="content">
           <div className="form">
             <div>
-              <label htmlFor="oldPassword">Enter Old Password</label>
-              <input 
-                type="password" 
-                id="oldPassword" 
-                value={oldPassword} 
-                onChange={(e) => setOldPassword(e.target.value)} 
-              />
+              <label htmlFor="documentType">Document Type</label>
+              <select
+                id="documentType"
+                value={documentType}
+                onChange={(e) => setDocumentType(e.target.value)}
+              >
+                <option value="">Select Document Type</option>
+                <option value="ID">ID Document</option>
+                <option value="Bank Statement">Bank Statement</option>
+              </select>
             </div>
             <div>
-              <label htmlFor="newPassword">Enter New Password</label>
-              <input 
-                type="password" 
-                id="newPassword" 
-                value={newPassword} 
-                onChange={(e) => setNewPassword(e.target.value)} 
-              />
-            </div>
-            <div>
-              <label htmlFor="confirmPassword">Confirm New Password</label>
-              <input 
-                type="password" 
-                id="confirmPassword" 
-                value={confirmPassword} 
-                onChange={(e) => setConfirmPassword(e.target.value)} 
+              <label htmlFor="document">Upload Document</label>
+              <input
+                type="file"
+                id="document"
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                onChange={(e) => setDocument(e.target.files[0])}
               />
             </div>
             <button
               className="form_btn"
-              onClick={handleResetPassword}
+              onClick={handleSubmit}
               disabled={isLoading}
             >
               {isLoading ? "Processing..." : "Submit"}
@@ -118,4 +101,4 @@ function Reset({ showSidebar, active, closeSidebar }) {
   );
 }
 
-export default Reset;
+export default DocumentSubmitter;

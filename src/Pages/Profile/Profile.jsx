@@ -127,7 +127,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
         <Link className="form_btn" to="/reset">
           Change Password
         </Link>
-        <Link className="form_btn_delete" to="/verify">
+        <Link className="form_btn" to="/verify">
             Verify
           </Link>
       </div>
