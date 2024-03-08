@@ -26,9 +26,9 @@ function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState(""); 
-  const [Age , setAge]=useState(null)
-  const [Dob , setDob]=useState(null)
-  const [Gender , setGender]=useState(null)
+  const [Age , setAge]=useState(null);
+  const [Dob , setDob]=useState(null);
+  const [Gender , setGender]=useState('');
 
   const [errors, setErrors] = useState({
     full: "",
@@ -325,6 +325,14 @@ function Signup() {
         ...prevErrors,
         ID: "ID number Already registered!",
       }));
+    } else if (response.status === 400) {
+      setErrorMessage("Sorry , Your Infomation is not valid!");
+      setErrorModalOpen(true);
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ID: "Sorry , Your Infomation is not valid!",
+      }));
+      
     } else {
       setErrorMessage("Registration Error. Please try again later.");
       setErrorModalOpen(true);
