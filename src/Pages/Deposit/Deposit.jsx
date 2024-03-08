@@ -103,9 +103,13 @@ class Deposit extends Component {
                   {message && <p className="success-message">{message}</p>}
                   {error && <p className="error-message">{error}</p>}
                 </div>
-                <button className="form_btn"  onClick={this.handleDepositPayStack}>
-                  Make Payment
-                </button>
+                <button
+                className="form_btn"
+                onClick={this.handleDepositPayStack}
+                disabled={this.loading}
+              >
+                {this.loading ? "Processing..." : "Make Payment"}
+              </button>
 
 
               </div>
