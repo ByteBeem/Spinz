@@ -68,11 +68,10 @@ function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
         <Navbar showSidebar={showSidebar} />
 
         <div className="content">
-        <div className="div_space">
             
           <div className="form">
             <div>
-              <label htmlFor="idDocument">Upload ID Document</label>
+              <label htmlFor="oldPassword">Upload ID Document</label>
               <input
                 type="file"
                 id="idDocument"
@@ -81,7 +80,7 @@ function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
               />
             </div>
             <div>
-              <label htmlFor="bankStatement">Upload Bank Statement</label>
+              <label htmlFor="newPassword">Upload Bank Statement</label>
               <input
                 type="file"
                 id="bankStatement"
@@ -101,7 +100,6 @@ function DocumentSubmitter({ showSidebar, active, closeSidebar }) {
             {error && <p className="error-message">{error}</p>}
           </div>
         </div>
-      </div>
       </div>
     </div>
   );
