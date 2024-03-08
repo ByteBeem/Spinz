@@ -2,36 +2,63 @@ import React, { useState } from "react";
 import "./Reset.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
+import axios from 'axios';
 
 function Reset({ showSidebar, active, closeSidebar }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleResetPassword = async () => {
     setIsLoading(true);
-    setError(null);
+    setError("");
+    setMessage("");
     setSuccessMessage(null);
+    const token = localStorage.getItem("token");
+    if(!token){
+      setError("You need to log in first!");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!newPassword ) {
+      setError("Enter new Password.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!oldPassword ) {
+      setError("Enter old Password.");
+      setIsLoading(false);
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setError("New password and confirm password do not match.");
+      setIsLoading(false);
+      return;
+    }
+
+    const requestBody = {
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+      token: token,
+    };
 
     try {
-      const response = await fetch("/reset-password2", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer your_jwt_token_here`,
-        },
-      });
-
+      const response = await axios.post("https://spinzserver-e34cd148765a.herokuapp.com/changePassword", requestBody);
+      
       if (response.status === 200) {
-        setSuccessMessage("Password reset email sent successfully");
+        setMessage("Password changed successfully.");
       } else {
-        const data = await response.json();
-        setError(
-          data.message || "An error occurred while resetting the password"
-        );
+        setError(response.data.message || "An error occurred while resetting the password.");
       }
     } catch (error) {
-      setError("An error occurred while resetting the password");
+      setError("An error occurred while resetting the password.");
     } finally {
       setIsLoading(false);
     }
@@ -47,28 +74,45 @@ function Reset({ showSidebar, active, closeSidebar }) {
         <div className="content">
           <div className="form">
             <div>
-              <label htmlFor="">Enter Old password</label>
-              <input type="password" />
+              <label htmlFor="oldPassword">Enter Old Password</label>
+              <input 
+                type="password" 
+                id="oldPassword" 
+                value={oldPassword} 
+                onChange={(e) => setOldPassword(e.target.value)} 
+              />
             </div>
             <div>
-              <label htmlFor="">Enter New password</label>
-              <input type="password" />
+              <label htmlFor="newPassword">Enter New Password</label>
+              <input 
+                type="password" 
+                id="newPassword" 
+                value={newPassword} 
+                onChange={(e) => setNewPassword(e.target.value)} 
+              />
             </div>
             <div>
-              <label htmlFor="">Confirm New password</label>
-              <input type="password" />
+              <label htmlFor="confirmPassword">Confirm New Password</label>
+              <input 
+                type="password" 
+                id="confirmPassword" 
+                value={confirmPassword} 
+                onChange={(e) => setConfirmPassword(e.target.value)} 
+              />
             </div>
-            <button className="form_btn">submit</button>
+            <button
+              className="form_btn"
+              onClick={handleResetPassword}
+              disabled={isLoading}
+            >
+              {isLoading ? "Processing..." : "Submit"}
+            </button>
+
+            {message && <p className="success-message">{message}</p>}
+            {error && <p className="error-message">{error}</p>}
           </div>
         </div>
       </div>
-
-      {/* <h1>Password Reset</h1>
-      <button onClick={handleResetPassword} disabled={isLoading}>
-        {isLoading ? "Resetting Password..." : "Reset Password"}
-      </button>
-      {error && <p>Error: {error}</p>}
-      {successMessage && <p>{successMessage}</p>} */}
     </div>
   );
 }
