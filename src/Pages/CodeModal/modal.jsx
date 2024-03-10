@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./modal.scss";
-import Modal from "../ErrorModal/ErrorModal";
+
 
 const ErrorModal = ({ isOpen, onClose }) => {
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); 
-  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+ 
   const handleOTPChange = (e) => {
     setCode(e.target.value);
   };
@@ -23,17 +24,21 @@ const ErrorModal = ({ isOpen, onClose }) => {
       );
 
       if (response.status === 403) {
-        setErrorMessage("You entered incorrect OTP, Try again.");
-        setErrorModalOpen(true);
+        setError(
+          'You entered Incorrect OTP , try again.'
+        );
+       
       } else {
-        
-        setErrorMessage("Account Opened, go Log in.");
-        setErrorModalOpen(true);
+        setMessage(
+          'Account Opened, go Log in.'
+        );
+       
+     
       }
     } catch (error) {
-      console.error("Error verifying OTP:", error);
-      setErrorMessage("An error occurred while verifying OTP.");
-      setErrorModalOpen(true);
+      
+      setError("An error occurred while verifying OTP.");
+      
     }
 
     setIsLoading(false);
@@ -64,12 +69,10 @@ const ErrorModal = ({ isOpen, onClose }) => {
               'Submit'
             }
           </button>
+          {message && <p className="success-message">{message}</p>}
+            {error && <p className="error-message">{error}</p>}
         </div>
-        <Modal
-          errorMessage={errorMessage}
-          isOpen={errorModalOpen}
-          onClose={() => setErrorModalOpen(false)}
-        />
+        
       </div>
     )
   );
