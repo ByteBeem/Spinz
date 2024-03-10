@@ -28,7 +28,7 @@ const ErrorModal = ({ isOpen, onClose }) => {
           'You entered Incorrect OTP , try again.'
         );
        
-      } else {
+      } else if (response.status === 200) {
         setMessage(
           'Account Opened, go Log in.'
         );
