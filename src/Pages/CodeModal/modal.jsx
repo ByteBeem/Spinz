@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./modal.scss";
-import ErrorModal from "../ErrorModal/ErrorModal";
+import Modal from "../ErrorModal/ErrorModal";
 
 const ErrorModal = ({ isOpen, onClose }) => {
   const [code, setCode] = useState("");
@@ -63,7 +63,7 @@ const ErrorModal = ({ isOpen, onClose }) => {
             }
           </button>
         </div>
-        <ErrorModal
+        <Modal
           errorMessage={errorMessage}
           isOpen={errorModalOpen}
           onClose={() => setErrorModalOpen(false)}
