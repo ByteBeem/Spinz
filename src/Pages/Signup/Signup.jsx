@@ -396,7 +396,7 @@ const handleNext = () => {
   if (section === 2) {
     if (formData.country === "ZA") {
       const validationResult = idValidationService.checkNumber(formData.ID);
-      localStorage.setItem("number" , formData.cellphone);
+      localStorage.setItem("number", formData.cellphone);
       console.log(formData.cellphone);
       if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID) || !SAIDCheck(formData.ID)) {
         setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
@@ -405,6 +405,7 @@ const handleNext = () => {
       
       if (validationResult.age < 18) {
         setGender(validationResult.gender);
+        console.log(validationResult.gender);
         setAge(validationResult.age);
         setDob(validationResult.dob);
         setErrors((prevErrors) => ({ ...prevErrors, ID: " Sorry,You are Under age of 18." }));
