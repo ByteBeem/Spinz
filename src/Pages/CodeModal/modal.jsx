@@ -32,6 +32,7 @@ const ErrorModal = ({ isOpen, onClose }) => {
         setMessage(
           'Account Opened, go Log in.'
         );
+        
        
      
       }
@@ -42,7 +43,7 @@ const ErrorModal = ({ isOpen, onClose }) => {
     }
 
     setIsLoading(false);
-    onClose();
+   
   };
 
   return (
