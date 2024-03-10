@@ -1,38 +1,41 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./modal.scss";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const ErrorModal = ({ isOpen, onClose }) => {
   const [code, setCode] = useState("");
-  const [isLoading, setIsLoading] = useState(false)
-    ;
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); 
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
   const handleOTPChange = (e) => {
     setCode(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsLoading(true);
     const cell = localStorage.getItem("number");
-    console.log(cell);
 
-    axios.post("https://spinzserver-e34cd148765a.herokuapp.com/confirm-otp", { code , cell})
-      .then(response => {
+    try {
+      const response = await axios.post(
+        "https://spinzserver-e34cd148765a.herokuapp.com/confirm-otp",
+        { code, cell }
+      );
 
-        if(response.status === 403){
-          alert("Wrong OTP!")
-        }
+      if (response.status === 403) {
+        setErrorMessage("You entered incorrect OTP, Try again.");
+        setErrorModalOpen(true);
+      } else {
+        alert("Account Opened, go Log in!");
+      }
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      setErrorMessage("An error occurred while verifying OTP.");
+      setErrorModalOpen(true);
+    }
 
-        else{
-          alert("Account Opened , go Log in!")
-        }
-        setIsLoading(false);
-        onClose();
-      })
-      .catch(error => {
-
-        console.error("Error verifying OTP:", error);
-        setIsLoading(false);
-      });
+    setIsLoading(false);
+    onClose();
   };
 
   return (
@@ -60,6 +63,11 @@ const ErrorModal = ({ isOpen, onClose }) => {
             }
           </button>
         </div>
+        <ErrorModal
+          errorMessage={errorMessage}
+          isOpen={errorModalOpen}
+          onClose={() => setErrorModalOpen(false)}
+        />
       </div>
     )
   );
