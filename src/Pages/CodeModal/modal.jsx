@@ -8,12 +8,14 @@ const ErrorModal = ({ isOpen, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
- 
+
   const handleOTPChange = (e) => {
     setCode(e.target.value);
   };
 
   const handleSubmit = async () => {
+    setError("");
+    setMessage("");
     setIsLoading(true);
     const cell = localStorage.getItem("number");
 
@@ -27,23 +29,23 @@ const ErrorModal = ({ isOpen, onClose }) => {
         setError(
           'You entered Incorrect OTP , try again.'
         );
-       
+
       } else if (response.status === 200) {
         setMessage(
           'Account Opened, go Log in.'
         );
-        
-       
-     
+
+
+
       }
     } catch (error) {
-      
-      setError("An error occurred while verifying OTP.");
-      
+
+      setError("You entered Incorrect OTP , try again.");
+
     }
 
     setIsLoading(false);
-   
+
   };
 
   return (
@@ -61,8 +63,8 @@ const ErrorModal = ({ isOpen, onClose }) => {
             placeholder="Enter the OTP you received"
           />
           <button
-           className="ok-button"
-           disabled={isLoading}
+            className="ok-button"
+            disabled={isLoading}
             onClick={handleSubmit}>
             {isLoading ?
               'Verifying...'
@@ -71,9 +73,9 @@ const ErrorModal = ({ isOpen, onClose }) => {
             }
           </button>
           {message && <p className="success-message">{message}</p>}
-            {error && <p className="error-message">{error}</p>}
+          {error && <p className="error-message">{error}</p>}
         </div>
-        
+
       </div>
     )
   );
