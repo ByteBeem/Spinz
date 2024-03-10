@@ -26,7 +26,9 @@ const ErrorModal = ({ isOpen, onClose }) => {
         setErrorMessage("You entered incorrect OTP, Try again.");
         setErrorModalOpen(true);
       } else {
-        alert("Account Opened, go Log in!");
+        
+        setErrorMessage("Account Opened, go Log in.");
+        setErrorModalOpen(true);
       }
     } catch (error) {
       console.error("Error verifying OTP:", error);
