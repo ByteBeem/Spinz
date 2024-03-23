@@ -10,6 +10,7 @@ const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   
+  const apiKey = process.env.SERVER;
   useEffect(() => {
     const token = localStorage.getItem("token");
     if(token){
@@ -23,7 +24,7 @@ const Navbar = ({ showSidebar }) => {
   const fetchUserData = (token) => {
     setLoading(true);
     axios
-      .get(`${process.env.SERVER_API}/balance`, {
+      .get(`${apiKey}/balance`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

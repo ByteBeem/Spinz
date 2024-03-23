@@ -10,6 +10,8 @@ const Login = () => {
   const [formData, setFormData] = useState({ cellphone: "", password: "" });
   const navigate = useNavigate();
   const authContext = useAuth();
+  const apiKey = process.env.SERVER;
+
 
   const saveTokenLocalStorage = (token) => {
     localStorage.setItem("token", token);
@@ -40,7 +42,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.SERVER_API}/login`,
+        `${apiKey}/login`,
         { cell: cellphone, password }
       );
 

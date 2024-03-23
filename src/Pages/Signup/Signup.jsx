@@ -9,7 +9,7 @@ import Modal from "../CodeModal/modal";
 
 function Signup() {
   const [section, setSection] = useState(1);
-
+  const apiKey = process.env.SERVER;
   const [formData, setFormData] = useState({
     full: "",
     surname: "",
@@ -298,7 +298,7 @@ function Signup() {
   
     try {
       const response = await axios.post(
-        `${process.env.SERVER_API}/signup`,
+        `${apiKey}/signup`,
         {
           fullName: full,
           surname: surname,
