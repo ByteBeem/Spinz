@@ -13,6 +13,7 @@ import Withdraw from "./Pages/Withdrawal/Withdrawal";
 import Verification from "./Pages/Verification/verify";
 import { AuthProvider } from "./components/AuthContext";
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 
 function App() {
@@ -128,6 +129,7 @@ function App() {
                 </Routes>
             </Router>
             <Analytics />
+           < SpeedInsights/>
         </AuthProvider>
     );
 }
