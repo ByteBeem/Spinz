@@ -11,6 +11,7 @@ const Navbar = ({ showSidebar }) => {
   const [loading, setLoading] = useState(true);
   
   const apiKey = process.env.SERVER;
+  console.log("apikey", apiKey);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if(token){
