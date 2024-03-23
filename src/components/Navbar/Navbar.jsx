@@ -1,37 +1,32 @@
-import "./Navbar.scss";
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { SiAmazongames } from "react-icons/si";
 import { Link } from "react-router-dom";
 
+import "./Navbar.scss";
+
 const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   
-
-  const balance = userData.balance;
-  const country = userData.country;
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if(token){
       fetchUserData(token);
-    
-    }else {
+    } else {
       alert("You first need to Log in...");
-      window.location.href = "https://spinz-three.vercel.app/login";
+      window.location.href = "https://www.spinz4bets.co.za/login";
     }
-   
   }, []);
   
   const fetchUserData = (token) => {
     setLoading(true);
     axios
-      .get("https://spinzserver-e34cd148765a.herokuapp.com/balance", {
+      .get(`${process.env.SERVER_API}/balance`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
-        
       })
       .then((response) => {
         const balance = response.data;
@@ -40,7 +35,6 @@ const Navbar = ({ showSidebar }) => {
         }
       })
       .catch((error) => {
-        console.error("Error fetching user data:", error);
         
       })
       .finally(() => {
@@ -49,29 +43,30 @@ const Navbar = ({ showSidebar }) => {
   };
   
   const getCurrencySymbol = () => {
-  const symbol = country === 'ZA' ? 'R' : '$';
-  localStorage.setItem("country", country);
-  return symbol;
-};
+    const country = userData.country;
+    const symbol = country === 'ZA' ? 'R' : '$';
+    localStorage.setItem("country", country);
+    return symbol;
+  };
 
   return (
     <header>
       
+      
       <ul className="games_filter">
         <li>
           <div className="balance">
-            {loading ? "Loading..." : `${getCurrencySymbol()}${balance.toString()}`}
+          <h6>Spinz4bets</h6>
+            {loading ? "Loading..." : `${getCurrencySymbol()}${userData.balance}`}
           </div>
         </li>
       </ul>
 
-    
       <Link className="link" to="/profile">
-          <SiAmazongames className="icon" />
-          <span>Games</span>
-        </Link>
+        <SiAmazongames className="icon" />
+        <span>Games</span>
+      </Link>
     </header>
-   
   );
 };
 
