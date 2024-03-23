@@ -12,6 +12,7 @@ import Games from "./Pages/Games/games";
 import Withdraw from "./Pages/Withdrawal/Withdrawal";
 import Verification from "./Pages/Verification/verify";
 import { AuthProvider } from "./components/AuthContext";
+import { Analytics } from '@vercel/analytics/react';
 
 
 function App() {
@@ -126,6 +127,7 @@ function App() {
                     </Route>
                 </Routes>
             </Router>
+            <Analytics />
         </AuthProvider>
     );
 }

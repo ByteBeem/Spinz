@@ -10,7 +10,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ cellphone: "", password: "" });
   const navigate = useNavigate();
   const authContext = useAuth();
-  const apiKey = process.env.SERVER;
+  const apiKey = process.env.REACT_APP_SERVER;
 
 
   const saveTokenLocalStorage = (token) => {

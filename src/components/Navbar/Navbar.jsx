@@ -10,8 +10,8 @@ const Navbar = ({ showSidebar }) => {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   
-  const apiKey = process.env.SERVER;
-  console.log("apikey", apiKey);
+  const apiKey = process.env.REACT_APP_SERVER;
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if(token){

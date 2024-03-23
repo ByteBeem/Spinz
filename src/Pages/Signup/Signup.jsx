@@ -9,7 +9,7 @@ import Modal from "../CodeModal/modal";
 
 function Signup() {
   const [section, setSection] = useState(1);
-  const apiKey = process.env.SERVER;
+  const apiKey = process.env.REACT_APP_SERVER;
   const [formData, setFormData] = useState({
     full: "",
     surname: "",
