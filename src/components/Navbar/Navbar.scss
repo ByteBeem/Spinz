@@ -13,6 +13,21 @@ header {
   .menu_btn {
     display: none;
   }
+
+  .form_btn {
+    background-color: #007bff; 
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+  }
+  
+  .form_btn:hover {
+    background-color: #0056b3; 
+  }
+  
   .balance {
     font-size: 25px;
     font-weight: 100;

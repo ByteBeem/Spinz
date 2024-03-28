@@ -4,14 +4,13 @@ import axios from "axios";
 import { useAuth } from "../../components/AuthContext";
 import "./Login.scss";
 
-const Login = () => {
+const Login = ({ isOpen, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({ cellphone: "", password: "" });
   const [formData, setFormData] = useState({ cellphone: "", password: "" });
   const navigate = useNavigate();
   const authContext = useAuth();
   const apiKey = process.env.REACT_APP_SERVER;
-
 
   const saveTokenLocalStorage = (token) => {
     localStorage.setItem("token", token);
@@ -50,7 +49,7 @@ const Login = () => {
 
       if (response.status === 200) {
         saveTokenLocalStorage(response.data.token);
-        authContext.setAuthState(true); 
+        authContext.setAuthState(true);
         navigate("/dashboard");
       } else if (response.status === 201) {
         setErrors({ cellphone: "Incorrect Cellphone number" });
@@ -67,64 +66,71 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <div className="login_container">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="cellphone">Cellphone</label>
-            <input
-              type="text"
-              id="cellphone"
-              name="cellphone"
-              value={formData.cellphone}
-              onChange={handleChange}
-              required
-              inputMode="numeric"
-            />
-            {errors.cellphone && (
-              <p className="error-message">{errors.cellphone}</p>
-            )}
+    isOpen && (
+      <div className="error-modal-overlay">
+        <div className="login">
+          <div className="login_container">
+            <button className="close-button" onClick={onClose}>
+              X
+            </button>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="cellphone">Cellphone</label>
+                <input
+                  type="text"
+                  id="cellphone"
+                  name="cellphone"
+                  value={formData.cellphone}
+                  onChange={handleChange}
+                  required
+                  inputMode="numeric"
+                />
+                {errors.cellphone && (
+                  <p className="error-message">{errors.cellphone}</p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+                {errors.password && (
+                  <p className="error-message">{errors.password}</p>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="form_btn"
+                disabled={isLoading}
+                aria-busy={isLoading}
+              >
+                {isLoading ? "Logging In..." : "Log In"}
+              </button>
+              {isLoading && <div className="loading-spinner" />}
+            </form>
+            <div className="bottom">
+              <span>
+                Don't have an account?{" "}
+                <Link className="link" to="/signup">
+                  Signup
+                </Link>
+              </span>
+              <span>
+                Forgot Password?{" "}
+                <Link className="link" to="#">
+                  Reset
+                </Link>
+              </span>
+            </div>
           </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            {errors.password && (
-              <p className="error-message">{errors.password}</p>
-            )}
-          </div>
-          <button
-            type="submit"
-            className="form_btn"
-            disabled={isLoading}
-            aria-busy={isLoading}
-          >
-            {isLoading ? "Logging In..." : "Log In"}
-          </button>
-          {isLoading && <div className="loading-spinner" />}
-        </form>
-        <div className="bottom">
-          <span>
-            Don't have an account?{" "}
-            <Link className="link" to="/signup">
-              Signup
-            </Link>
-          </span>
-          <span>
-            Forgot Password?{" "}
-            <Link className="link" to="#">
-              Reset
-            </Link>
-          </span>
         </div>
       </div>
-    </div>
+    )
   );
 };
 
