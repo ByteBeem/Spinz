@@ -16,7 +16,7 @@ const Navbar = ({ showSidebar }) => {
     if(token){
       fetchUserData(token);
     } else {
-      setLoginModalOpen(true); // Display login modal
+      setLoginModalOpen(true);
     }
   }, []);
 

@@ -75,7 +75,8 @@ const Login = ({ isOpen, onClose }) => {
       if (response.status === 200) {
         saveTokenLocalStorage(response.data.token);
        
-        window.location.href = "www.spinz4bets.co.za";
+        window.location.href = "https://www.spinz4bets.co.za";
+
       } else if (response.status === 201) {
         setErrors({ email: "Incorrect email " });
       } else if (response.status === 202) {

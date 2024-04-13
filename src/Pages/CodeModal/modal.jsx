@@ -32,7 +32,8 @@ const ErrorModal = ({ isOpen, onClose }) => {
 
       } else if (response.status === 200) {
         localStorage.setItem("token" , response.data.token);
-        window.location.href = "www.spinz4bets.co.za";
+        window.location.href = "https://www.spinz4bets.co.za";
+
 
 
 
