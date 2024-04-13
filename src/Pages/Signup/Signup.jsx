@@ -300,7 +300,7 @@ function Signup() {
         {
           fullName: full,
           surname: surname,
-          cell: email,
+          email: email,
           idNumber: ID,
           password: password,
           country: country,
@@ -475,7 +475,7 @@ function Signup() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  inputMode="numeric"
+                 
                 />
                 {errors.email && (
                   <p className="error-message">{errors.email}</p>
