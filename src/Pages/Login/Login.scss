@@ -11,6 +11,19 @@
   z-index: 9999; 
 }
 
+.error-input {
+  border: 1px solid red;
+}
+
+.valid-input {
+  border: 1px solid green;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 
 * {
   margin: 0;

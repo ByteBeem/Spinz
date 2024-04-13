@@ -13,39 +13,35 @@ function Signup() {
   const [formData, setFormData] = useState({
     full: "",
     surname: "",
-    cellphone: "",
+    email: "",
     ID: "",
     password: "",
     confirmPassword: "",
     country: "ZA",
   });
 
-  const countryOptions = [
-    { code: "ZA", name: countriesList["ZA"].name }
-  ];
+  const countryOptions = [{ code: "ZA", name: countriesList["ZA"].name }];
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); 
-  const [Age , setAge]=useState(null);
-  const [Dob , setDob]=useState(null);
-  const [Gender , setGender]=useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+  const [Age, setAge] = useState(null);
+  const [Dob, setDob] = useState(null);
+  const [Gender, setGender] = useState("");
 
   const handleShowModal = () => {
     setIsModalOpen(true);
-    
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    
   };
 
   const [errors, setErrors] = useState({
     full: "",
     surname: "",
-    cellphone: "",
+    email: "",
     ID: "",
     password: "",
     confirmPassword: "",
@@ -60,9 +56,11 @@ function Signup() {
     });
   };
 
-  const validateCellphone = (cellphone) => {
-    const phoneRegex = /^[0-9]{10}$/;
-    return phoneRegex.test(cellphone);
+  const validateemail = (email) => {
+    const emailRegex = new RegExp(
+      "^(?!\\.)[a-zA-Z0-9._%+-]+@(?!-)[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    );
+    return emailRegex.test(email);
   };
 
   const validateID = (ID) => {
@@ -250,22 +248,22 @@ function Signup() {
     setErrors({
       full: "",
       surname: "",
-      cellphone: "",
+      email: "",
       ID: "",
       password: "",
       confirmPassword: "",
       country: "",
     });
-  
-    if (!validateCellphone(formData.cellphone)) {
+
+    if (!validateemail(formData.email)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        cellphone: "Invalid cellphone number",
+        email: "Invalid email ",
       }));
       setIsLoading(false);
       return;
     }
-  
+
     if (!validateName(formData.full)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -274,7 +272,7 @@ function Signup() {
       setIsLoading(false);
       return;
     }
-  
+
     if (!validateName(formData.surname)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -283,7 +281,7 @@ function Signup() {
       setIsLoading(false);
       return;
     }
-  
+
     const passwordError = validatePassword(
       formData.password,
       formData.confirmPassword
@@ -293,16 +291,16 @@ function Signup() {
       setIsLoading(false);
       return;
     }
-  
-    const { full, surname, cellphone, ID, password, country } = formData;
-  
+
+    const { full, surname, email, ID, password, country } = formData;
+
     try {
       const response = await axios.post(
         `${apiKey}/signup`,
         {
           fullName: full,
           surname: surname,
-          cell: cellphone,
+          cell: email,
           idNumber: ID,
           password: password,
           country: country,
@@ -312,9 +310,9 @@ function Signup() {
         },
         { withCredentials: true }
       );
-  
+
       setIsLoading(false);
-  
+
       if (response.status === 200) {
         setErrorMessage("Account Opened Successfully! Login Now");
         setErrorModalOpen(true);
@@ -323,11 +321,11 @@ function Signup() {
           password: "Account Opened Successfully! Login Now",
         }));
       } else if (response.status === 201) {
-        setErrorMessage("Cellphone Already registered!");
+        setErrorMessage("email Already registered!");
         setErrorModalOpen(true);
         setErrors((prevErrors) => ({
           ...prevErrors,
-          cellphone: "Cellphone Already registered!",
+          email: "email Already registered!",
         }));
       } else if (response.status === 208) {
         setErrorMessage("ID number Already registered!");
@@ -344,7 +342,6 @@ function Signup() {
           ID: "Sorry, Your Information is not valid!",
         }));
       } else if (response.status === 406) {
-        
         setIsModalOpen(true);
       } else {
         setErrorMessage("Registration Error. Please try again later.");
@@ -356,83 +353,89 @@ function Signup() {
       setIsModalOpen(true);
     }
   };
-  
 
-const handleNext = () => {
-  setErrors({
-    full: "",
-    surname: "",
-    cellphone: "",
-    ID: "",
-    password: "",
-    confirmPassword: "",
-    country: "",
-  });
+  const handleNext = () => {
+    setErrors({
+      full: "",
+      surname: "",
+      email: "",
+      ID: "",
+      password: "",
+      confirmPassword: "",
+      country: "",
+    });
 
-  if (section === 1) {
-    if (!validateName(formData.full)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        full: "Invalid full name. Use letters and spaces only",
-      }));
-      return;
-    }
-    if (!validateName(formData.surname)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        surname: "Invalid surname. Use letters and spaces only",
-      }));
-      return;
-    }
-    if (!validateCellphone(formData.cellphone)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        cellphone: "Invalid cellphone number",
-      }));
-      return;
-    }
-  }
-
-  if (section === 2) {
-    if (formData.country === "ZA") {
-      const validationResult = idValidationService.checkNumber(formData.ID);
-      localStorage.setItem("number", formData.cellphone);
-      console.log(formData.cellphone);
-      if (!validateID(formData.ID) || !idValidationService.checkNumber(formData.ID) || !SAIDCheck(formData.ID)) {
-        setErrors((prevErrors) => ({ ...prevErrors, ID: "Invalid ID number" }));
+    if (section === 1) {
+      if (!validateName(formData.full)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          full: "Invalid full name. Use letters and spaces only",
+        }));
         return;
       }
-      
-      if (validationResult.age < 18) {
-        setGender(validationResult.gender);
-        console.log(validationResult.gender);
-        setAge(validationResult.age);
-        setDob(validationResult.dob);
-        setErrors((prevErrors) => ({ ...prevErrors, ID: " Sorry,You are Under age of 18." }));
+      if (!validateName(formData.surname)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          surname: "Invalid surname. Use letters and spaces only",
+        }));
         return;
       }
-      if (validationResult.citizenship !== 'SA Citizen') {
-        setErrors((prevErrors) => ({ ...prevErrors, ID: " Sorry,You must be an SA Citizen." }));
+      if (!validateemail(formData.email)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          email: "Invalid email ",
+        }));
         return;
       }
     }
-  }
 
-  setSection(section + 1);
-};
+    if (section === 2) {
+      if (formData.country === "ZA") {
+        const validationResult = idValidationService.checkNumber(formData.ID);
+        localStorage.setItem("number", formData.email);
+        console.log(formData.email);
+        if (
+          !validateID(formData.ID) ||
+          !idValidationService.checkNumber(formData.ID) ||
+          !SAIDCheck(formData.ID)
+        ) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            ID: "Invalid ID number",
+          }));
+          return;
+        }
 
+        if (validationResult.age < 18) {
+          setGender(validationResult.gender);
+          console.log(validationResult.gender);
+          setAge(validationResult.age);
+          setDob(validationResult.dob);
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            ID: " Sorry,You are Under age of 18.",
+          }));
+          return;
+        }
+        if (validationResult.citizenship !== "SA Citizen") {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            ID: " Sorry,You must be an SA Citizen.",
+          }));
+          return;
+        }
+      }
+    }
+
+    setSection(section + 1);
+  };
 
   const handleBack = () => {
-
     setSection(section - 1);
   };
 
-
-
   return (
     <div className="form">
-
-
       <div className="form_container">
         <form onSubmit={handleSubmit}>
           {section === 1 && (
@@ -464,18 +467,18 @@ const handleNext = () => {
                 )}
               </div>
               <div className="input-group">
-                <label htmlFor="cellphone">Cellphone: </label>
+                <label htmlFor="email">email: </label>
                 <input
                   type="text"
-                  id="cellphone"
-                  name="cellphone"
-                  value={formData.cellphone}
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                   required
                   inputMode="numeric"
                 />
-                {errors.cellphone && (
-                  <p className="error-message">{errors.cellphone}</p>
+                {errors.email && (
+                  <p className="error-message">{errors.email}</p>
                 )}
               </div>
             </>
@@ -586,10 +589,7 @@ const handleNext = () => {
           isOpen={errorModalOpen}
           onClose={() => setErrorModalOpen(false)}
         />
-        <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       </div>
     </div>
   );

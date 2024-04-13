@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../../components/AuthContext";
 import "./Login.scss";
 
 const Login = ({ isOpen, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({ cellphone: "", password: "" });
-  const [formData, setFormData] = useState({ cellphone: "", password: "" });
-  const navigate = useNavigate();
-  const authContext = useAuth();
+  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const apiKey = process.env.REACT_APP_SERVER;
 
   const saveTokenLocalStorage = (token) => {
@@ -18,47 +15,75 @@ const Login = ({ isOpen, onClose }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const isValidEmail = validateemail(value);
     setFormData((prevState) => ({ ...prevState, [name]: value }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: isValidEmail ? "" : "Invalid email",
+    }));
   };
 
-  const validateCellphone = (cellphone) => {
-    const phoneRegex = /^[0-9]{10}$/;
-    return phoneRegex.test(cellphone);
+  const handleChangePassword = (e) => {
+    const { name, value } = e.target;
+    const isValidPassword = validatePassword(value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: isValidPassword ? "" : "Password must be at least 6 characters long and contain both letters and numbers",
+    }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
+  
+  const validatePassword = (password) => {
+    return (
+      password.length >= 6 &&
+      /[0-9]/.test(password) &&
+      /[a-zA-Z]/.test(password)
+    );
+  };
+  
+
+  const validateemail = (email) => {
+    const emailRegex = new RegExp(
+      "^(?!\\.)[a-zA-Z0-9._%+-]+@(?!-)[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    );
+    return emailRegex.test(email);
+  };
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setErrors({ cellphone: "", password: "" });
+    setErrors({ email: "", password: "" });
 
-    const { cellphone, password } = formData;
+    const { email, password } = formData;
 
-    if (!validateCellphone(cellphone)) {
-      setErrors({ cellphone: "Invalid cellphone number" });
+    if (!validateemail(email)) {
+      setErrors({ email: "Invalid email " });
       setIsLoading(false);
       return;
     }
 
     try {
-      const response = await axios.post(
-        `${apiKey}/login`,
-        { cell: cellphone, password }
-      );
+      const response = await axios.post(`${apiKey}/login`, {
+        email: email,
+        password,
+      });
 
       setIsLoading(false);
 
       if (response.status === 200) {
         saveTokenLocalStorage(response.data.token);
-        authContext.setAuthState(true);
-        navigate("/dashboard");
+       
+        window.location.href = "www.spinz4bets.co.za";
       } else if (response.status === 201) {
-        setErrors({ cellphone: "Incorrect Cellphone number" });
+        setErrors({ email: "Incorrect email " });
       } else if (response.status === 202) {
         setErrors({ password: "Incorrect Password" });
       }
     } catch (error) {
       setIsLoading(false);
-      console.error("Login Error:", error);
+
       setErrors({
         password: "An error occurred. Please try again later.",
       });
@@ -75,18 +100,19 @@ const Login = ({ isOpen, onClose }) => {
             </button>
             <form onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="cellphone">Cellphone</label>
+                <label htmlFor="email">Email</label>
                 <input
                   type="text"
-                  id="cellphone"
-                  name="cellphone"
-                  value={formData.cellphone}
+                  id="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
                   required
-                  inputMode="numeric"
+                  className={errors.email ? "error-input" : "valid-input"}
                 />
-                {errors.cellphone && (
-                  <p className="error-message">{errors.cellphone}</p>
+
+                {errors.email && (
+                  <p className="error-message">{errors.email}</p>
                 )}
               </div>
               <div>
@@ -96,8 +122,9 @@ const Login = ({ isOpen, onClose }) => {
                   id="password"
                   name="password"
                   value={formData.password}
-                  onChange={handleChange}
+                  onChange={handleChangePassword}
                   required
+                  className={errors.password ? "error-input" : "valid-input"}
                 />
                 {errors.password && (
                   <p className="error-message">{errors.password}</p>
@@ -105,8 +132,12 @@ const Login = ({ isOpen, onClose }) => {
               </div>
               <button
                 type="submit"
-                className="form_btn"
-                disabled={isLoading}
+                className={`form_btn ${
+                  Object.values(errors).some((error) => error) ? "disabled" : ""
+                }`}
+                disabled={
+                  isLoading || Object.values(errors).some((error) => error)
+                }
                 aria-busy={isLoading}
               >
                 {isLoading ? "Logging In..." : "Log In"}
