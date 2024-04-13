@@ -392,7 +392,7 @@ function Signup() {
     if (section === 2) {
       if (formData.country === "ZA") {
         const validationResult = idValidationService.checkNumber(formData.ID);
-        localStorage.setItem("number", formData.email);
+        localStorage.setItem("email", formData.email);
         console.log(formData.email);
         if (
           !validateID(formData.ID) ||

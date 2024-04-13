@@ -23,7 +23,7 @@ const Wallet = ({ showSidebar, active, closeSidebar }) => {
       fetchUserData(storedToken);
     }else{
       alert("You need to Login...")
-      window.location.href = "https://spinz-three.vercel.app/login";
+      window.location.href = "www.spinz4bets.co.za";
     }
   }, [setToken]);
 

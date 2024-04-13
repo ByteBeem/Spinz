@@ -17,12 +17,12 @@ const ErrorModal = ({ isOpen, onClose }) => {
     setError("");
     setMessage("");
     setIsLoading(true);
-    const cell = localStorage.getItem("number");
+    const email = localStorage.getItem("email");
 
     try {
       const response = await axios.post(
         "https://spinzserver-e34cd148765a.herokuapp.com/confirm-otp",
-        { code, cell }
+        { code, email }
       );
 
       if (response.status === 403) {
@@ -32,7 +32,7 @@ const ErrorModal = ({ isOpen, onClose }) => {
 
       } else if (response.status === 200) {
         setMessage(
-          'Account Opened, go Log in.'
+          'Account Opened, Go Log in.'
         );
 
 
@@ -60,7 +60,7 @@ const ErrorModal = ({ isOpen, onClose }) => {
             type="number"
             value={code}
             onChange={handleOTPChange}
-            placeholder="Enter the OTP you received"
+            placeholder="Enter the OTP you received on your email"
           />
           <button
             className="ok-button"

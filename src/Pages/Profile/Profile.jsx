@@ -34,7 +34,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
     }
     else {
       alert("You need to Login first...")
-      window.location.href = "https://spinz-three.vercel.app/login";
+      window.location.href = "www.spinz4bets.co.za";
     };
 
   }, []);
