@@ -31,9 +31,8 @@ const ErrorModal = ({ isOpen, onClose }) => {
         );
 
       } else if (response.status === 200) {
-        setMessage(
-          'Account Opened, Go Log in.'
-        );
+        localStorage.setItem("token" , response.data.token);
+        window.location.href = "www.spinz4bets.co.za";
 
 
 
