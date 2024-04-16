@@ -21,7 +21,7 @@ function Profile({ showSidebar, active, closeSidebar }) {
   const navigate = useNavigate();
 
   const fullName = userData.name;
-  const cellphone = userData.cell;
+  const email = userData.email;
   const balance = userData.balance;
   const surname = userData.surname;
   const ID = "*************";
@@ -114,8 +114,8 @@ function Profile({ showSidebar, active, closeSidebar }) {
               <span>ID Number:</span>
               <div className="text_item">{ID}</div>
 
-              <span>Phone:</span>
-              <div className="text_item">{cellphone}</div>
+              <span>Email:</span>
+              <div className="text_item">{email}</div>
               <div className="verification">
                 <div className="red-dot"></div>
                 <span>Not Verified</span>
