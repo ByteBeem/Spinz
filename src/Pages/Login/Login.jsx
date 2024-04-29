@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState , useRef} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
 import "./Login.scss";
 
 const Login = ({ isOpen, onClose }) => {
@@ -8,10 +9,16 @@ const Login = ({ isOpen, onClose }) => {
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [formData, setFormData] = useState({ email: "", password: "" });
   const apiKey = process.env.REACT_APP_SERVER;
+  const [recaptcha , setRecaptcha] = useState('');
 
   const saveTokenLocalStorage = (token) => {
     localStorage.setItem("token", token);
   };
+
+  function onChange(value) {
+   
+    setRecaptcha(value);
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +39,7 @@ const Login = ({ isOpen, onClose }) => {
     }));
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
-  
+
   const validatePassword = (password) => {
     return (
       password.length >= 6 &&
@@ -40,7 +47,7 @@ const Login = ({ isOpen, onClose }) => {
       /[a-zA-Z]/.test(password)
     );
   };
-  
+
 
   const validateemail = (email) => {
     const emailRegex = new RegExp(
@@ -49,7 +56,7 @@ const Login = ({ isOpen, onClose }) => {
     return emailRegex.test(email);
   };
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,7 +81,7 @@ const Login = ({ isOpen, onClose }) => {
 
       if (response.status === 200) {
         saveTokenLocalStorage(response.data.token);
-       
+
         window.location.href = "https://www.spinz4bets.co.za";
 
       } else if (response.status === 201) {
@@ -131,11 +138,14 @@ const Login = ({ isOpen, onClose }) => {
                   <p className="error-message">{errors.password}</p>
                 )}
               </div>
+              <ReCAPTCHA
+                sitekey="6LeTx8opAAAAAHER1oOMaYEoI4OxnuCY8a_vE_pa"
+                onChange={onChange}
+              />,
               <button
                 type="submit"
-                className={`form_btn ${
-                  Object.values(errors).some((error) => error) ? "disabled" : ""
-                }`}
+                className={`form_btn ${Object.values(errors).some((error) => error) ? "disabled" : ""
+                  }`}
                 disabled={
                   isLoading || Object.values(errors).some((error) => error)
                 }
