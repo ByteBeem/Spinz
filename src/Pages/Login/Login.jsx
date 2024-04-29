@@ -10,6 +10,7 @@ const Login = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const apiKey = process.env.REACT_APP_SERVER;
   const [recaptcha , setRecaptcha] = useState('');
+  const newRecaptcha = useRef(null);;
 
   const saveTokenLocalStorage = (token) => {
     localStorage.setItem("token", token);
@@ -86,14 +87,18 @@ const Login = ({ isOpen, onClose }) => {
 
       } else if (response.status === 201) {
         setErrors({ email: "Incorrect email " });
+        newRecaptcha.current.reset();
       } else if (response.status === 202) {
         setErrors({ password: "Incorrect Password" });
+        newRecaptcha.current.reset();
       }
     } catch (error) {
       setIsLoading(false);
+      newRecaptcha.current.reset();
 
       setErrors({
         password: "An error occurred. Please try again later.",
+        
       });
     }
   };
@@ -139,6 +144,7 @@ const Login = ({ isOpen, onClose }) => {
                 )}
               </div>
               <ReCAPTCHA
+              ref={newRecaptcha}
                 sitekey="6LeTx8opAAAAAHER1oOMaYEoI4OxnuCY8a_vE_pa"
                 onChange={onChange}
               />,
